@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>PregaAI vídeos</title>
+<style>
+@font-face { font-family: Geist; src: url(node_modules/@expo-google-fonts/geist/500Medium/Geist_500Medium.ttf); font-weight: 500; }
+@font-face { font-family: Geist; src: url(node_modules/@expo-google-fonts/geist/600SemiBold/Geist_600SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: Geist; src: url(node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
+@font-face { font-family: Geist; src: url(node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
+@font-face { font-family: Lora; src: url(node_modules/@expo-google-fonts/lora/600SemiBold/Lora_600SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: Lora; src: url(node_modules/@expo-google-fonts/lora/500Medium_Italic/Lora_500Medium_Italic.ttf); font-weight: 500; font-style: italic; }
+@font-face { font-family: 'Gasoek One'; src: url(node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+@font-face { font-family: 'Geist Mono'; src: url(node_modules/@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf); font-weight: 500; }
+@font-face { font-family: 'Geist Mono'; src: url(node_modules/@expo-google-fonts/geist-mono/600SemiBold/GeistMono_600SemiBold.ttf); font-weight: 600; }
+
+/* Tokens da marca (docs/design.md): neutros do PregaAI, azul #2383E2 com a
+   escala pastel, borda 1px + sombra dura sem blur, cantos 16/12/8. Tudo
+   multiplicado por ~2,77 (o vídeo tem 1080 px, a tela medida tinha 390). */
+:root {
+  --paper: #F8F7F4; --surface: #FFFFFF; --ink: #37352F; --ink-deep: #181614; --muted: #87857F; --border: #D2D1CE;
+  --b300: #AAD1FF; --b500: #2383E2; --b600: #0675D3;
+  --d-surface: #202020; --d-border: #0C0C0C; --d-ink: #EDEDEB; --d-muted: #9B9A96;
+}
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; font-family: Geist; color: var(--ink); }
+#stage, .layer { position: absolute; inset: 0; }
+.eyebrow { font: 600 28px/1 Geist; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* rótulo do capítulo e referência */
+.label { position: absolute; left: 60px; top: 178px; padding: 12px 26px 16px; background: var(--b300); color: var(--ink-deep);
+  border: 3px solid var(--b500); border-radius: 22px; box-shadow: 0 8px 0 0 var(--b500); font: 400 46px/1.1 'Gasoek One'; white-space: nowrap; }
+.ref { position: absolute; left: 60px; top: 290px; padding: 8px 18px; background: var(--surface); color: var(--ink);
+  border: 3px solid var(--border); border-radius: 16px; box-shadow: 0 6px 0 0 var(--border); font: 600 30px/1.2 'Geist Mono'; white-space: nowrap; }
+.dark .ref { background: var(--d-surface); border-color: var(--d-border); box-shadow: 0 6px 0 0 var(--d-border); color: var(--d-ink); }
+
+/* legenda */
+.cap { position: absolute; left: 50%; top: 1238px; width: max-content; max-width: 820px; padding: 30px 44px 38px; box-sizing: border-box;
+  background: var(--surface); border: 3px solid var(--border); border-radius: 44px; box-shadow: 0 10px 0 0 var(--border);
+  font: 800 74px/1.14 Geist; letter-spacing: -0.02em; text-align: center; color: var(--ink); transform-origin: 50% 0; }
+.dark .cap { background: var(--d-surface); border-color: var(--d-border); box-shadow: 0 10px 0 0 var(--d-border); color: var(--d-ink); }
+.cap .k { display: inline-block; background: var(--b300); color: var(--ink-deep); border: 3px solid var(--b500); box-shadow: 0 6px 0 0 var(--b500);
+  border-radius: 18px; padding: 0 14px 4px; margin: 0 2px; line-height: 1.04; transform-origin: 50% 60%; }
+.cap .k.off { background: transparent; border-color: transparent; box-shadow: none; color: inherit; }
+
+/* contador (KPI da marca: 700, tabular, tracking -0.025em) */
+.kpi { position: absolute; right: 60px; top: 410px; padding: 28px 36px 26px; background: var(--surface); border: 3px solid var(--border);
+  border-radius: 40px; box-shadow: 0 10px 0 0 var(--border); text-align: right; }
+.kpi-n { font: 700 150px/1 Geist; letter-spacing: -0.025em; font-variant-numeric: tabular-nums; color: var(--ink-deep); margin-top: 10px; min-width: 300px; }
+
+.giant { position: absolute; left: 50%; top: 700px; font: 400 230px/1 'Gasoek One'; color: var(--ink-deep); white-space: nowrap; }
+.giant span { color: var(--b500); }
+
+/* selo de sucesso (verde da paleta base: fill 300, edge 600) */
+.stamp { position: absolute; left: 50%; top: 470px; display: flex; align-items: center; gap: 18px; padding: 22px 36px 26px; white-space: nowrap;
+  border-radius: 30px; font: 800 58px/1 Geist; letter-spacing: -0.02em; color: var(--ink-deep); transform-origin: 50% 50%; }
+.stamp.ok { background: #A1E0A9; border: 4px solid #319751; box-shadow: 0 10px 0 0 #319751; }
+
+/* cartão de versículo: texto bíblico em Lora (Typography.serif do app) */
+.verse { position: absolute; left: 50%; width: 930px; box-sizing: border-box; background: var(--surface); border: 3px solid var(--border);
+  border-radius: 44px; box-shadow: 0 10px 0 0 var(--border); padding: 40px 50px 44px; }
+.verse.small { top: 400px; }
+.verse.big { top: 430px; padding: 56px 60px 60px; }
+.verse .vtext { font: 600 50px/1.3 Lora; color: var(--ink-deep); margin: 18px 0 22px; }
+.verse.big .vtext { font-size: 72px; line-height: 1.24; margin: 24px 0 30px; }
+.verse .vref { font: 500 30px/1 'Geist Mono'; color: var(--muted); }
+mark { background: linear-gradient(var(--b300), var(--b300)) no-repeat; background-size: var(--p, 0%) 100%; color: inherit; padding: 0; border-radius: 0;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* lista dos valentes */
+.list { position: absolute; left: 60px; right: 60px; top: 390px; background: var(--surface); border: 3px solid var(--border); border-radius: 44px;
+  box-shadow: 0 10px 0 0 var(--border); overflow: hidden; }
+.lhead { padding: 38px 44px 30px; border-bottom: 3px solid #ECEAE6; }
+.ltitle { font: 700 52px/1.15 Geist; letter-spacing: -0.02em; color: var(--ink-deep); margin-top: 14px; }
+.lrow { display: flex; align-items: center; gap: 24px; padding: 22px 44px; border-bottom: 3px solid #F1EFEB; }
+.lrow:last-child { border-bottom: 0; }
+.lnum { width: 56px; height: 56px; flex: none; border-radius: 16px; background: #F1F0ED; display: grid; place-items: center; font: 600 28px 'Geist Mono'; color: var(--muted); }
+.lname { flex: 1; font: 600 42px/1.2 Geist; color: var(--ink); }
+.lref { flex: none; font: 500 28px 'Geist Mono'; color: var(--muted); }
+.lrow.vrow { background: #FBFAF8; }
+.lrow.vrow .vtext { flex: 1; font: 600 44px/1.3 Lora; color: var(--ink-deep); margin: 0; padding-left: 80px; }
+.lord { display: inline-block; font-weight: 600; }
+.lord.on { background: var(--b500); color: #fff; border-radius: 14px; padding: 0 12px 2px; box-shadow: 0 5px 0 0 var(--b600); }
+
+/* cartão final */
+.end { position: absolute; left: 0; right: 0; top: 640px; display: flex; flex-direction: column; align-items: center; }
+.logo { display: flex; align-items: center; gap: 36px; height: 170px; }
+.logo .fish { width: 300px; height: 150px; }
+.logo .wm { width: 560px; height: 76px; }
+.end-sub { margin-top: 120px; font: 500 46px/1 Geist; color: var(--muted); }
+.end-refs { display: flex; gap: 18px; margin-top: 30px; }
+.end-refs span { padding: 12px 22px; background: var(--surface); border: 3px solid var(--border); border-radius: 18px; box-shadow: 0 6px 0 0 var(--border);
+  font: 600 36px/1.2 'Geist Mono'; color: var(--ink); }
+.cta { margin-top: 80px; padding: 30px 52px 34px; background: var(--b500); color: #fff; border: 3px solid var(--b600); border-radius: 30px;
+  box-shadow: 0 10px 0 0 var(--b600); font: 700 52px/1 Geist; letter-spacing: -0.01em; }
+</style>
+</head>
+<body>
+<div id="root"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg><div id="scene" class="layer"></div><div id="chrome" class="layer"></div></div>
+<script src="lib.js"></script>
+<script>
+// O episódio vem da URL: index.html?ep=valentes-de-davi-2
+const EP = new URLSearchParams(location.search).get('ep');
+document.write(`<script src="episodios/${EP}/data.js"><\/script><script src="episodios/${EP}/scenes.js"><\/script>`);
+</script>
+<script>
+const CHUNKS = buildChunks(SEGS);
+const $stage = document.getElementById('stage'), $scene = document.getElementById('scene'), $chrome = document.getElementById('chrome');
+
+function activeScenes(t) {
+  const out = [];
+  SCENES.forEach((sc, i) => {
+    const a = i === 0 ? -1 : sc.a - XF / 2, b = sc.end ? 1e9 : sc.b + XF / 2;
+    if (t >= a && t < b) out.push({ sc, op: i === 0 ? 1 : E.sine(prog(t, sc.a - XF / 2, sc.a + XF / 2)) });
+  });
+  return out;
+}
+const refAt = (sc, t) => (Array.isArray(sc.ref) ? sc.ref.filter(([t0]) => t >= t0).pop() : sc.ref ? [sc.a, sc.ref] : null);
+
+function captionHTML(t) {
+  const i = CHUNKS.findIndex((c) => t >= c.t0 && t < c.t1);
+  if (i < 0) return '';
+  const c = CHUNKS[i];
+  if (c.hidden) return '';
+  const next = CHUNKS[i + 1];
+  const cut = next && Math.abs(next.t0 - c.t1) < 1e-6;
+  const pin = E.out(prog(t, c.t0, c.t0 + 0.14));
+  const pout = cut ? 1 : 1 - prog(t, c.t1 - 0.16, c.t1);
+  const op = Math.min(pin, pout);
+  let h = '', group = null;
+  const flush = () => { if (group) { h += `<span class="k${group.on ? '' : ' off'}" style="transform:scale(${group.sc})">${group.html.trim()}</span>${group.tail} `; group = null; } };
+  c.words.forEach((x, wi) => {
+    const on = 0.38 + 0.62 * E.out(prog(t, x.t, x.t + 0.1));
+    if (x.k) {
+      const m = x.w.match(/^(.*?)([”"]*)$/);
+      const lastK = !c.words[wi + 1] || !c.words[wi + 1].k;
+      if (!group) group = { html: '', tail: '', on: t >= x.t, sc: 1 };
+      if (group.on === false && t >= x.t) group.on = true;
+      if (!group.start) { group.start = x.t; const p = prog(t, x.t, x.t + 0.3); group.sc = p > 0 && p < 1 ? f1((1 + 0.12 * Math.sin(Math.PI * p)) * 100) / 100 : 1; }
+      group.html += `<span style="opacity:${f1(on * 100) / 100}">${esc(lastK ? m[1] : x.w)}</span> `;
+      if (lastK) { group.tail = m[2] ? `<span style="opacity:${f1(on * 100) / 100}">${esc(m[2])}</span>` : ''; flush(); }
+    } else {
+      h += `<span style="opacity:${f1(on * 100) / 100}">${esc(x.w)}</span> `;
+    }
+  });
+  flush();
+  return `<div class="cap" style="opacity:${f1(op * 100) / 100};transform:translateX(-50%) translateY(${f1((1 - pin) * 18)}px) scale(${f1((0.96 + 0.04 * pin) * 1000) / 1000})">${h.trim()}</div>`;
+}
+
+function chromeHTML(t, list) {
+  const top = list[list.length - 1];
+  const cur = top.op >= 0.5 || list.length === 1 ? top.sc : list[0].sc;
+  if (cur.end) return { html: '', dark: false };
+  let h = '';
+  if (cur.label) {
+    const p = E.out(prog(t, cur.a, cur.a + 0.35));
+    h += `<div class="label" style="opacity:${p};transform:translateX(${f1((1 - p) * -40)}px)">${esc(cur.label)}</div>`;
+  }
+  const r = refAt(cur, t);
+  if (r) {
+    const p = E.out(prog(t, Math.max(r[0], cur.a) + 0.08, Math.max(r[0], cur.a) + 0.43));
+    h += `<div class="ref" style="opacity:${p};transform:translateX(${f1((1 - p) * -30)}px)">${esc(r[1])}</div>`;
+  }
+  h += captionHTML(t);
+  return { html: h, dark: !!cur.dark };
+}
+
+window.renderFrame = (t) => {
+  const list = activeScenes(t);
+  let svg = DEFS, html = '';
+  list.forEach(({ sc, op }) => {
+    const r = sc.f(t);
+    svg += op < 1 ? `<g opacity="${op.toFixed(3)}">${r.svg}</g>` : r.svg;
+    if (r.html) html += `<div class="layer" style="opacity:${op.toFixed(3)}">${r.html}</div>`;
+  });
+  $stage.innerHTML = svg;
+  $scene.innerHTML = html;
+  const ch = chromeHTML(t, list);
+  $chrome.className = 'layer' + (ch.dark ? ' dark' : '');
+  $chrome.innerHTML = ch.html;
+};
+window.ready = (async () => {
+  const fams = ['500 40px Geist', '600 40px Geist', '700 40px Geist', '800 40px Geist', '600 40px Lora', 'italic 500 40px Lora', '40px "Gasoek One"', '500 40px "Geist Mono"', '600 40px "Geist Mono"'];
+  await Promise.all(fams.map((f) => document.fonts.load(f)));
+  await document.fonts.ready;
+  return true;
+})();
+</script>
+</body>
+</html>
