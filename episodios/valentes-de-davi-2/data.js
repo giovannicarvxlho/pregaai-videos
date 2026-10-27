@@ -39,4 +39,6 @@ const SEGS = [
   [77.21, 78.53, '*voltava para Deus*.'],
 ];
 const AUDIO_END = 78.76;
-const DURATION = 83.4;
+const DURATION = 85.4;
+// Acelera o vídeo inteiro no fim do build (a voz mantém o tom).
+const SPEED = 1.1;

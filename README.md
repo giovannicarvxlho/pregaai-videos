@@ -22,7 +22,7 @@ bash sheet.sh 6                        # junta prev/ numa folha só (sheet.png)
 |---|---|
 | `lib.js` | Paleta, pessoas, cenário (caverna, cidade, tenda, poço, oliveira), fundos, câmera, cartão de versículo, cartão final, legenda |
 | `index.html` | CSS dos componentes da marca e o laço que desenha cada quadro (`renderFrame(t)`) |
-| `episodios/<ep>/data.js` | A narração em frases (`SEGS`) e a duração |
+| `episodios/<ep>/data.js` | A narração em frases (`SEGS`), a duração e a velocidade final (`SPEED`) |
 | `episodios/<ep>/scenes.js` | As cenas do episódio e a linha do tempo (`SCENES`) |
 | `episodios/<ep>/narration.mp3` | Narração da ElevenLabs |
 | `episodios/<ep>/roteiro.md` | Roteiro com referências |

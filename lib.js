@@ -477,22 +477,30 @@ function verseCard(text, ref, p, size, center) {
     <div class="eyebrow">${size === 'big' ? 'A Bíblia diz' : 'Deus disse'}</div><div class="vtext">${text}</div><div class="vref">${ref}</div></div>`;
 }
 
-// Cartão final: o peixe entra nadando, o wordmark, as referências e o convite.
+// Cartão final: o peixe entra nadando, as referências e o app na Google Play.
+// O selo é o oficial em português (o mesmo de src/components/onboarding/PlayStoreCTA.tsx do app).
 function endCard(t, t0, refs) {
   const lt = t - t0;
   const s = `<rect width="${W}" height="${H}" fill="${C.paper}"/>`;
   const swim = E.out(prog(lt, 0.0, 0.9));
   const fx = lerp(-420, 0, swim), wig = Math.sin(lt * 9) * 6 * (1 - swim * 0.7);
-  const wm = E.out(prog(lt, 0.55, 1.05)), tx = E.out(prog(lt, 0.95, 1.4)), cta = pop(lt, 1.35, 0.45);
+  const wm = E.out(prog(lt, 0.55, 1.05)), hd = E.out(prog(lt, 0.85, 1.25)), rf = E.out(prog(lt, 1.0, 1.4));
+  const card = pop(lt, 1.3, 0.45), badgeIn = pop(lt, 1.65, 0.45), fol = E.out(prog(lt, 2.1, 2.5)), legal = E.out(prog(lt, 1.8, 2.2));
+  const up = (p) => `opacity:${f1(clamp(p) * 100) / 100};transform:translateY(${f1((1 - p) * 20)}px)`;
   const html = `<div class="end">
     <div class="logo">
       <svg class="fish" viewBox="0 0 400 200" style="transform:translateX(${f1(fx)}px) rotate(${f1(wig)}deg)">${fishGlyph(C.b500, C.paper)}</svg>
       <svg class="wm" viewBox="0 0 651 100" preserveAspectRatio="none" style="opacity:${wm};transform:translateX(${f1((1 - wm) * 40)}px)">${wordmark(C.ink)}</svg>
     </div>
-    <div class="end-sub" style="opacity:${tx};transform:translateY(${f1((1 - tx) * 20)}px)">A história está em</div>
-    <div class="end-refs" style="opacity:${tx};transform:translateY(${f1((1 - tx) * 20)}px)">${refs.map((r) => `<span>${r}</span>`).join('')}</div>
-    <div class="cta" style="opacity:${clamp(cta)};transform:scale(${f1(cta * 100) / 100})">Siga para a próxima história</div>
-  </div>`;
+    <div class="end-head" style="${up(hd)}">Leia essa história no app</div>
+    <div class="end-refs" style="${up(rf)}">${refs.map((r) => `<span>${r}</span>`).join('')}</div>
+    <div class="app" style="opacity:${f1(clamp(card) * 100) / 100};transform:scale(${f1(card * 100) / 100})">
+      <div class="app-row"><img class="app-icon" src="assets/icon.png"><div><div class="app-name">PregaAI</div><div class="app-desc">Plano de leitura bíblica com IA</div></div></div>
+      <img class="play" src="assets/google-play-badge.png" style="opacity:${f1(clamp(badgeIn) * 100) / 100};transform:scale(${f1(badgeIn * 100) / 100})">
+    </div>
+    <div class="follow" style="${up(fol)}">Siga para a próxima história</div>
+  </div>
+  <div class="legal" style="opacity:${legal}">Google Play e o logotipo do Google Play são marcas da Google LLC.</div>`;
   return { svg: s, html };
 }
 
