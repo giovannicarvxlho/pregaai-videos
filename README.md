@@ -14,6 +14,7 @@ npm i                                  # fontes da marca (Geist, Lora, Gasoek On
 bash build.sh valentes-de-davi-2       # gera out/valentes-de-davi-2.mp4 (~3 min em 4 núcleos)
 node preview.cjs valentes-de-davi-2 2.5 41.9   # quadros soltos em prev/, para revisar
 bash sheet.sh 6                        # junta prev/ numa folha só (sheet.png)
+node capa.cjs valentes-de-davi-2      # capa (miniatura) a partir de episodios/<ep>/capa.html, em out/
 ```
 
 ## Estrutura
@@ -26,6 +27,7 @@ bash sheet.sh 6                        # junta prev/ numa folha só (sheet.png)
 | `episodios/<ep>/scenes.js` | As cenas do episódio e a linha do tempo (`SCENES`) |
 | `episodios/<ep>/narration.mp3` | Narração da ElevenLabs |
 | `episodios/<ep>/roteiro.md` | Roteiro com referências |
+| `episodios/<ep>/capa.html` | Capa do episódio (texto do gancho no miolo 3:4, que é o recorte da grade do TikTok) |
 | `tools/` | Medir as frases no áudio e transcrever com Whisper |
 
 ## Episódio novo
