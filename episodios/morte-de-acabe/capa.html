@@ -5,58 +5,56 @@
 <title>Capa: A morte de Acabe</title>
 <style>
 @font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
-@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
-@font-face { font-family: 'Geist Mono'; src: url(../../node_modules/@expo-google-fonts/geist-mono/600SemiBold/GeistMono_600SemiBold.ttf); font-weight: 600; }
-html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #1C1715; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #FFE9D6; }
 #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
 svg { position: absolute; inset: 0; }
-/* Texto no miolo 3:4 (y 240 a 1680): é o que aparece na grade do perfil do TikTok. */
-.hook { position: absolute; left: 0; right: 0; top: 300px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.l { font: 400 150px/0.98 'Gasoek One'; color: #FFFFFF; letter-spacing: -0.01em; text-shadow: 0 12px 0 #000; white-space: nowrap; }
-.l.gold { color: #F9D779; }
-.chip { margin-top: 18px; padding: 10px 40px 26px; background: #2383E2; border: 6px solid #0B0B0B; border-radius: 34px; box-shadow: 0 16px 0 0 #0B0B0B;
-  font: 400 112px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-3deg); }
-.ref { position: absolute; left: 0; right: 0; top: 1600px; text-align: center; font: 600 40px/1 'Geist Mono'; letter-spacing: 0.12em; color: #FFC19B; }
+/* O texto contradiz o título ("Uma flecha ao acaso matou o rei Acabe") em vez de repeti-lo.
+   Tudo o que importa fica no miolo 3:4 (y 240 a 1680), o recorte da grade do TikTok. */
+.hook { position: absolute; left: 0; right: 0; top: 290px; display: flex; flex-direction: column; align-items: center; }
+.l { font: 400 200px/0.95 'Gasoek One'; color: #181614; text-shadow: 0 12px 0 #FFFFFF; white-space: nowrap; }
+.chip { margin-top: 26px; padding: 6px 46px 30px; background: #2383E2; border: 8px solid #181614; border-radius: 40px; box-shadow: 0 18px 0 0 #181614;
+  font: 400 190px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); }
 </style>
 </head>
 <body>
 <div id="root"><svg id="art" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
-  <div class="hook"><div class="l">UMA FLECHA</div><div class="l gold">SEM ALVO</div><div class="chip">MATOU UM REI</div></div>
-  <div class="ref">1 REIS 22</div>
+  <div class="hook"><div class="l">NÃO FOI</div><div class="chip">ACASO</div></div>
 </div>
 <script src="../../lib.js"></script>
 <script>
-// Capa estática: o arqueiro em silhueta contra o pôr do sol, a flecha cruzando
-// a tela e a coroa caindo. Usa as mesmas peças do vídeo (lib.js).
-const SIL = '#120E0C';
-const crown = (x, y, s, rot) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><path d="M -32 20 L -36 -22 L -18 0 L 0 -28 L 18 0 L 36 -22 L 32 20 Z" fill="${C.a300}" stroke="#0B0B0B" stroke-width="5" stroke-linejoin="round"/><circle cx="0" cy="6" r="5" fill="${C.r600}"/></g>`;
+const INK = '#181614';
 let s = `<defs>
-  ${skyGrad('sky', [[0, '#120D0B'], [0.42, '#3B2218'], [0.72, '#B3552F'], [1, '#FFB27A']])}
-  ${radial('glow', '#FFC19B', 1)}
-  <linearGradient id="trail" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0.85"/></linearGradient>
-</defs>`;
-s += `<rect width="1080" height="1920" fill="url(#sky)"/>`;
-s += `<circle cx="640" cy="1390" r="760" fill="url(#glow)" opacity="0.55"/>`;
-s += `<circle cx="640" cy="1400" r="210" fill="#FFE2C4"/>`;
-// raios de "impacto" saindo do sol
-for (let i = 0; i < 18; i++) {
-  const a = (i / 18) * Math.PI * 2;
-  s += `<path d="M ${640 + Math.cos(a) * 240} ${1400 + Math.sin(a) * 240} L ${640 + Math.cos(a - 0.05) * 1400} ${1400 + Math.sin(a - 0.05) * 1400} L ${640 + Math.cos(a + 0.05) * 1400} ${1400 + Math.sin(a + 0.05) * 1400} Z" fill="#FFC19B" opacity="0.10"/>`;
+  ${skyGrad('bg', [[0, '#FFF6EC'], [0.55, '#FFE1C6'], [1, '#FFB98A']])}
+  ${radial('burst', '#FFFFFF', 1)}
+</defs><rect width="1080" height="1920" fill="url(#bg)"/>`;
+// raios saindo do rosto: levam o olho para ele
+const FX = 690, FY = 1290;
+for (let i = 0; i < 20; i++) {
+  const a = (i / 20) * Math.PI * 2;
+  s += `<path d="M ${FX} ${FY} L ${FX + Math.cos(a - 0.07) * 1600} ${FY + Math.sin(a - 0.07) * 1600} L ${FX + Math.cos(a + 0.07) * 1600} ${FY + Math.sin(a + 0.07) * 1600} Z" fill="#FFFFFF" opacity="${i % 2 ? 0.0 : 0.55}"/>`;
 }
-s += hills(1500, 70, 0.004, 13, '#3A2117') + hills(1580, 50, 0.006, 15, '#22140F');
-s += `<rect y="1640" width="1080" height="300" fill="#140D0A"/>`;
-// exército ao longe
-for (let i = 0; i < 16; i++) s += person({ x: 470 + i * 40, y: 1585 + (i % 3) * 5, s: 0.18, sil: '#22140F', gear: { helmet: i % 2 ? 'phil' : 'isr', spear: 'r' }, armR: 28, noShadow: true });
-// rastro e flecha grande, em diagonal
-s += `<path d="M 330 1360 Q 560 980 930 1030" fill="none" stroke="url(#trail)" stroke-width="10" stroke-linecap="round" stroke-dasharray="4 22"/>`;
-s += arrow(935, 1034, 12, 1.9, SIL);
-// coroa caindo, com traços de movimento
-s += crown(940, 1200, 2.4, 28);
-for (let i = 0; i < 3; i++) s += `<line x1="${900 + i * 34}" y1="${1100 - i * 6}" x2="${880 + i * 34}" y2="${1050 - i * 6}" stroke="#F9D779" stroke-width="8" stroke-linecap="round" opacity="0.8"/>`;
-// arqueiro em primeiro plano, com borda de luz
-s += archer(210, 1780, 2.1, { aim: -38, draw: 0, nocked: false, rim: '#FFB27A', fill: SIL });
-// vinheta para o texto saltar
-s += `<radialGradient id="vig" cx="0.5" cy="0.45" r="0.8"><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.6"/></radialGradient><rect width="1080" height="1920" fill="url(#vig)"/>`;
+s += `<circle cx="${FX}" cy="${FY}" r="420" fill="url(#burst)" opacity="0.9"/>`;
+// Acabe de perto, assustado, olhando para a flecha
+s += person({ robe: C.r600, skin: '#C68B59', hair: '#2F2622', beard: true, x: FX, y: FY + 206 * 3.6, s: 3.6, mood: 'fear', t: 0.35, look: -1, armL: 14, armR: 14, gear: { crown: true }, noShadow: true });
+// flecha grande, amarela e vermelha, com contorno preto, vindo do alto à esquerda
+const ang = 32, tipX = FX - 190, tipY = FY - 150;
+for (let i = 0; i < 4; i++) {
+  const r = (ang * Math.PI) / 180, back = 560 + i * 70, off = (i - 1.5) * 34;
+  const x1 = tipX - Math.cos(r) * back - Math.sin(r) * off, y1 = tipY - Math.sin(r) * back + Math.cos(r) * off;
+  const x2 = tipX - Math.cos(r) * (back + 230) - Math.sin(r) * off, y2 = tipY - Math.sin(r) * (back + 230) + Math.cos(r) * off;
+  s += `<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(x2)}" y2="${f1(y2)}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>`;
+}
+s += `<g transform="translate(${tipX} ${tipY}) rotate(${ang})">
+  <rect x="-520" y="-20" width="500" height="40" rx="20" fill="${C.a300}" stroke="${INK}" stroke-width="10"/>
+  <path d="M 30 0 L -60 -54 L -40 0 L -60 54 Z" fill="${C.r600}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M -500 0 L -600 -70 L -560 0 L -600 70 Z" fill="${C.r600}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M -450 0 L -540 -60 L -505 0 L -540 60 Z" fill="${C.r400}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+</g>`;
+// marcas de impacto na ponta
+for (let i = 0; i < 5; i++) {
+  const a = -1.9 + i * 0.45, x = tipX + 40 + Math.cos(a) * 70, y = tipY + 30 + Math.sin(a) * 70;
+  s += `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + Math.cos(a) * 60)}" y2="${f1(y + Math.sin(a) * 60)}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>`;
+}
 document.getElementById('art').innerHTML = s;
 window.ready = document.fonts.ready;
 </script>
