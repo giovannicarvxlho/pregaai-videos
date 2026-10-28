@@ -45,14 +45,24 @@ Personagens: Jezabel de vermelho escuro, com coroa e olhos pintados; Jeú em sil
 | 10 | | Ela tinha o palácio, a coroa e a maquiagem. Mas a última palavra nunca foi dela. | O palácio, a coroa e o pote de pintura dos olhos, que somem um a um. |
 | 11 | | (sem narração) | Cartão final com o app na Google Play. |
 
-## Legenda da publicação
+## Publicação
 
-**TikTok**
-> Jezabel pintou os olhos e foi pra janela esperar quem tinha vindo matá-la. 2 Reis 9. Leia no app PregaAI (link na bio). #biblia #historiasdabiblia #jezabel #estudobiblico #devocional
-
-**YouTube Shorts**, título:
+**Título do YouTube Shorts**
 > Jezabel se maquiou antes de morrer
 
-Descrição:
-> A rainha que mandava em Israel e o fim que Elias tinha anunciado. Referências: 2 Reis 9:22-37; 1 Reis 21:23.
-> #biblia #jezabel #historiasdabiblia
+**Descrição (TikTok e YouTube)**
+```
+Jezabel pintou os olhos, arrumou o cabelo e foi pra janela. Pouco depois, estava morta.
+
+Histórias bíblicas em menos de 1 minuto: Jeú tinha acabado de matar o rei Jorão, filho de Jezabel, e estava chegando em Jezreel. Ela se arrumou, foi pra janela e ainda provocou: "Como vai, assassino?". Jeú nem respondeu. Só perguntou quem estava do lado dele. Dois ou três funcionários apareceram, e jogaram ela lá embaixo.
+
+Quando foram enterrar, só acharam o crânio, os pés e as mãos. Exatamente como Elias tinha avisado anos antes.
+
+Ela tinha o palácio, a coroa e a maquiagem. Mas a última palavra nunca foi dela.
+
+📖 Base bíblica: 2 Reis 9:30-37; 1 Reis 21:23
+
+Quem tem a última palavra na sua vida? 👇
+
+#históriasbíblicas #shorts #fé #bíblia #jezabel
+```
