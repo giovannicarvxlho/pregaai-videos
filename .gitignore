@@ -3,3 +3,5 @@ out/
 prev/
 sheet.png
 tools/modelos/
+# Local secrets written by `elevenlabs onboard`
+/.env.local
