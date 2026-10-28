@@ -1,7 +1,7 @@
 # A morte de Acabe
 
 Fonte: 1 Reis 22 (NVI, a tradução do app), com 1 Reis 21:19 para a profecia dos cães.
-Versão curta: 109 palavras, ~42 s em velocidade 1,0. O build acelera para 1,15×, então o vídeo fica com ~42 s já contando o cartão final.
+Versão curta: 109 palavras, 46 s de narração em velocidade 1,0. O build acelera para 1,25×, então o vídeo fica com ~41 s já contando o cartão final.
 
 ## Narração (cole na ElevenLabs)
 

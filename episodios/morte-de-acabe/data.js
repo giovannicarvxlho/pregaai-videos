@@ -24,4 +24,4 @@ const SEGS = [
 const AUDIO_END = 45.87;
 const DURATION = 51.6;
 // Acelera o vídeo inteiro no fim do build (a voz mantém o tom).
-const SPEED = 1.15;
+const SPEED = 1.25;
