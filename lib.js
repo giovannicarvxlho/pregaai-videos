@@ -231,6 +231,33 @@ function target(x, y, r, t, op = 1) {
   </g>`;
 }
 
+// Arqueiro de perfil, virado para a direita, em silhueta. aim = ângulo do tiro
+// (graus; negativo aponta para cima), draw = quanto a corda está puxada (0..1),
+// nocked = flecha encaixada. Pés em (x, base); ~300 de altura em s = 1.
+function archer(x, base, s, o = {}) {
+  const c = o.fill || '#16110F', aim = o.aim ?? -35, draw = o.draw ?? 0, rim = o.rim;
+  const hx = 70 - 56 * draw;
+  const body = (col, w = 0) => {
+    const k = (v) => v + w;
+    return `<line x1="0" y1="-112" x2="40" y2="0" stroke="${col}" stroke-width="${k(24)}" stroke-linecap="round"/>
+      <line x1="0" y1="-112" x2="-38" y2="0" stroke="${col}" stroke-width="${k(24)}" stroke-linecap="round"/>
+      <path d="M -24 -120 C -26 -170 -16 -226 6 -238 C 24 -232 30 -176 26 -120 Z" fill="${col}" stroke="${col}" stroke-width="${k(0) || 0.1}" stroke-linejoin="round"/>
+      <circle cx="16" cy="-266" r="${30 + w / 2}" fill="${col}"/>
+      <path d="M -14 -268 C -14 -306 46 -306 46 -268 L 50 -262 L -18 -262 Z" fill="${col}" stroke="${col}" stroke-width="${k(0) || 0.1}"/>
+      <g transform="rotate(${f1(aim)} 8 -222)">
+        <line x1="8" y1="-222" x2="104" y2="-222" stroke="${col}" stroke-width="${k(18)}" stroke-linecap="round"/>
+        <path d="M 100 -316 Q 156 -222 100 -128" fill="none" stroke="${col}" stroke-width="${k(10)}" stroke-linecap="round"/>
+        <path d="M 8 -222 L ${f1(-22 + 30 * (1 - draw))} -196 L ${f1(hx)} -222" fill="none" stroke="${col}" stroke-width="${k(17)}" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 100 -316 L ${f1(hx)} -222 L 100 -128" fill="none" stroke="${col}" stroke-width="${k(3)}"/>
+        ${o.nocked ? `<line x1="${f1(hx)}" y1="-222" x2="${f1(hx + 130)}" y2="-222" stroke="${col}" stroke-width="${k(6)}" stroke-linecap="round"/><path d="M ${f1(hx + 146)} -222 L ${f1(hx + 124)} -232 L ${f1(hx + 124)} -212 Z" fill="${col}"/>` : ''}
+      </g>`;
+  };
+  return `<g transform="translate(${f1(x)} ${f1(base)}) scale(${s})">
+    <ellipse cx="0" cy="2" rx="60" ry="10" fill="#000" opacity="0.25"/>
+    ${rim ? `<g transform="translate(-5 -3)">${body(rim, 2)}</g>` : ''}${body(c)}
+  </g>`;
+}
+
 // Flecha de lado, ponta em (x, y), apontando no ângulo ang (graus).
 function arrow(x, y, ang, s = 1, ol = C.ink) {
   return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)}) scale(${s})">

@@ -27,21 +27,14 @@ html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; backgro
 #stage, .layer { position: absolute; inset: 0; }
 .eyebrow { font: 600 28px/1 Geist; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
-/* rótulo do capítulo e referência */
-.label { position: absolute; left: 60px; top: 178px; padding: 12px 26px 16px; background: var(--b300); color: var(--ink-deep);
-  border: 3px solid var(--b500); border-radius: 22px; box-shadow: 0 8px 0 0 var(--b500); font: 400 46px/1.1 'Gasoek One'; white-space: nowrap; }
-.ref { position: absolute; left: 60px; top: 290px; padding: 8px 18px; background: var(--surface); color: var(--ink);
-  border: 3px solid var(--border); border-radius: 16px; box-shadow: 0 6px 0 0 var(--border); font: 600 30px/1.2 'Geist Mono'; white-space: nowrap; }
-.dark .ref { background: var(--d-surface); border-color: var(--d-border); box-shadow: 0 6px 0 0 var(--d-border); color: var(--d-ink); }
-
-/* legenda */
-.cap { position: absolute; left: 50%; top: 1238px; width: max-content; max-width: 820px; padding: 30px 44px 38px; box-sizing: border-box;
-  background: var(--surface); border: 3px solid var(--border); border-radius: 44px; box-shadow: 0 10px 0 0 var(--border);
-  font: 800 74px/1.14 Geist; letter-spacing: -0.02em; text-align: center; color: var(--ink); transform-origin: 50% 0; }
-.dark .cap { background: var(--d-surface); border-color: var(--d-border); box-shadow: 0 10px 0 0 var(--d-border); color: var(--d-ink); }
-.cap .k { display: inline-block; background: var(--b300); color: var(--ink-deep); border: 3px solid var(--b500); box-shadow: 0 6px 0 0 var(--b500);
-  border-radius: 18px; padding: 0 14px 4px; margin: 0 2px; line-height: 1.04; transform-origin: 50% 60%; }
-.cap .k.off { background: transparent; border-color: transparent; box-shadow: none; color: inherit; }
+/* referência discreta e legenda só com o texto */
+.ref { position: absolute; left: 0; right: 0; top: 214px; text-align: center; font: 500 30px/1 'Geist Mono'; letter-spacing: 0.06em; color: var(--muted); }
+.dark .ref { color: #A8A7A3; }
+.cap { position: absolute; left: 50%; top: 1286px; width: 900px; text-align: center; font: 800 70px/1.16 Geist; letter-spacing: -0.02em;
+  color: var(--ink); text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5); }
+.cap .now { color: var(--b500); }
+.dark .cap { color: #F4F3F0; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55); }
+.dark .cap .now { color: #6FB1FC; }
 
 /* contador (KPI da marca: 700, tabular, tracking -0.025em) */
 .kpi { position: absolute; right: 60px; top: 410px; padding: 28px 36px 26px; background: var(--surface); border: 3px solid var(--border);
@@ -124,6 +117,7 @@ function activeScenes(t) {
 }
 const refAt = (sc, t) => (Array.isArray(sc.ref) ? sc.ref.filter(([t0]) => t >= t0).pop() : sc.ref ? [sc.a, sc.ref] : null);
 
+// Legenda: só o texto; a palavra que está sendo falada fica azul.
 function captionHTML(t) {
   const i = CHUNKS.findIndex((c) => t >= c.t0 && t < c.t1);
   if (i < 0) return '';
@@ -131,45 +125,26 @@ function captionHTML(t) {
   if (c.hidden) return '';
   const next = CHUNKS[i + 1];
   const cut = next && Math.abs(next.t0 - c.t1) < 1e-6;
-  const pin = E.out(prog(t, c.t0, c.t0 + 0.14));
-  const pout = cut ? 1 : 1 - prog(t, c.t1 - 0.16, c.t1);
-  const op = Math.min(pin, pout);
-  let h = '', group = null;
-  const flush = () => { if (group) { h += `<span style="white-space:nowrap"><span class="k${group.on ? '' : ' off'}" style="transform:scale(${group.sc})">${group.html.trim()}</span>${group.tail}</span> `; group = null; } };
-  c.words.forEach((x, wi) => {
-    const on = 0.38 + 0.62 * E.out(prog(t, x.t, x.t + 0.1));
-    if (x.k) {
-      const m = x.w.match(/^(.*?)([”"]*)$/);
-      const lastK = !c.words[wi + 1] || !c.words[wi + 1].k;
-      if (!group) group = { html: '', tail: '', on: t >= x.t, sc: 1 };
-      if (group.on === false && t >= x.t) group.on = true;
-      if (!group.start) { group.start = x.t; const p = prog(t, x.t, x.t + 0.3); group.sc = p > 0 && p < 1 ? f1((1 + 0.12 * Math.sin(Math.PI * p)) * 100) / 100 : 1; }
-      group.html += `<span style="opacity:${f1(on * 100) / 100}">${esc(lastK ? m[1] : x.w)}</span> `;
-      if (lastK) { group.tail = m[2] ? `<span style="opacity:${f1(on * 100) / 100}">${esc(m[2])}</span>` : ''; flush(); }
-    } else {
-      h += `<span style="opacity:${f1(on * 100) / 100}">${esc(x.w)}</span> `;
-    }
-  });
-  flush();
-  return `<div class="cap" style="opacity:${f1(op * 100) / 100};transform:translateX(-50%) translateY(${f1((1 - pin) * 18)}px) scale(${f1((0.96 + 0.04 * pin) * 1000) / 1000})">${h.trim()}</div>`;
+  const pin = E.out(prog(t, c.t0, c.t0 + 0.12)), pout = cut ? 1 : 1 - prog(t, c.t1 - 0.16, c.t1);
+  const now = t > c.segEnd + 0.05 ? -1 : c.words.reduce((k, x, j) => (t >= x.t ? j : k), -1);
+  const h = c.words.map((x, j) => `<span${j === now ? ' class="now"' : ''}>${esc(x.w)}</span>`).join(' ');
+  return `<div class="cap" style="opacity:${f1(Math.min(pin, pout) * 100) / 100};transform:translateX(-50%) translateY(${f1((1 - pin) * 12)}px)">${h}</div>`;
 }
 
+// A referência aparece discreta no alto, por alguns segundos, quando a passagem muda.
 function chromeHTML(t, list) {
   const top = list[list.length - 1];
   const cur = top.op >= 0.5 || list.length === 1 ? top.sc : list[0].sc;
   if (cur.end) return { html: '', dark: false };
   let h = '';
-  if (cur.label) {
-    const p = E.out(prog(t, cur.a, cur.a + 0.35));
-    h += `<div class="label" style="opacity:${p};transform:translateX(${f1((1 - p) * -40)}px)">${esc(cur.label)}</div>`;
-  }
   const r = refAt(cur, t);
   if (r) {
-    const p = E.out(prog(t, Math.max(r[0], cur.a) + 0.08, Math.max(r[0], cur.a) + 0.43));
-    h += `<div class="ref" style="opacity:${p};transform:translateX(${f1((1 - p) * -30)}px)">${esc(r[1])}</div>`;
+    const t0 = Math.max(r[0], cur.a);
+    const p = E.out(prog(t, t0 + 0.2, t0 + 0.7)) * (1 - prog(t, t0 + 3.4, t0 + 4.0));
+    if (p > 0) h += `<div class="ref" style="opacity:${f1(p * 100) / 100}">${esc(r[1])}</div>`;
   }
   h += captionHTML(t);
-  return { html: h, dark: !!cur.dark };
+  return { html: h, dark: typeof cur.dark === 'function' ? cur.dark(t) : !!cur.dark };
 }
 
 window.renderFrame = (t) => {

@@ -14,25 +14,32 @@ function crownAt(x, y, s, rot = 0, fill = C.a300) {
 }
 
 // ---------------------------------------------------------------- 1. a flecha
+// Arco alto por cima da batalha: tiro para o céu, sem alvo; cai longe, no carro de um rei.
+const SHOT = { x0: 400, y0: 930, x1: 905, y1: 985, apex: 300 };
+const shotAt = (u) => [lerp(SHOT.x0, SHOT.x1, u), lerp(SHOT.y0, SHOT.y1, u) - 4 * SHOT.apex * u * (1 - u)];
+function arrowFlight(t, t0, dur, col) {
+  const u = prog(t, t0, t0 + dur);
+  if (u <= 0 || u >= 1) return '';
+  let s = '';
+  for (let k = 1; k < 16; k++) { const v = u - k * 0.02; if (v > 0) { const [x, y] = shotAt(v); s += `<circle cx="${f1(x)}" cy="${f1(y)}" r="4" fill="#fff" opacity="${f1((1 - k / 16) * 0.7 * 100) / 100}"/>`; } }
+  const [x, y] = shotAt(u), [x2, y2] = shotAt(Math.min(1, u + 0.01));
+  return s + arrow(x, y, (Math.atan2(y2 - y, x2 - x) * 180) / Math.PI, 0.8, col);
+}
 function scFlecha(t) {
-  const tr = 1.0, fly = prog(t, tr, tr + 1.7);
+  const tr = 1.1;
   let s = bgDusk(t);
-  for (let i = 0; i < 12; i++) s += person({ x: 520 + i * 52, y: 1030 + (i % 3) * 6, s: 0.22, sil: SIL, gear: { helmet: i % 2 ? 'phil' : null, spear: 'r' }, armR: 28, noShadow: true });
-  s += chariot(860, 1040, 0.32, { sil: SIL, horse: true, gallop: t * 8 });
-  // rastro e flecha numa parábola
-  const P = (u) => [lerp(360, 1240, u), 960 - 380 * u + 260 * u * u];
-  if (fly > 0 && fly < 1) {
-    for (let k = 1; k < 14; k++) { const u = fly - k * 0.025; if (u > 0) { const [x, y] = P(u); s += `<circle cx="${f1(x)}" cy="${f1(y)}" r="5" fill="#fff" opacity="${f1((1 - k / 14) * 0.8 * 100) / 100}"/>`; } }
-    const [x, y] = P(fly), [x2, y2] = P(Math.min(1, fly + 0.01));
-    s += arrow(x, y, (Math.atan2(y2 - y, x2 - x) * 180) / Math.PI, 0.9, SIL);
+  for (let i = 0; i < 9; i++) s += person({ x: 480 + i * 50, y: 1040 + (i % 3) * 6, s: 0.2, sil: SIL, gear: { helmet: i % 2 ? 'phil' : 'isr', spear: 'r' }, armR: 28, noShadow: true });
+  const hitT = tr + 1.6, hit = t > hitT;
+  const rider = person({ x: -20, y: -90, s: 0.9, sil: SIL, lean: hit ? 18 * E.out(prog(t, hitT, hitT + 0.6)) : 0, gear: { crown: hit ? null : SIL }, noShadow: true });
+  s += chariot(930, 1060, 0.42, { sil: SIL, horse: true, gallop: t * 8, rider });
+  s += arrowFlight(t, tr, 1.6, SIL);
+  if (hit) {
+    const cr = prog(t, hitT, hitT + 0.7);
+    s += crownAt(lerp(925, 960, cr), lerp(978, 1052, E.in(cr)), 0.55, cr * 140, C.a400) + dust(965, 1058, t, hitT + 0.6, 3, '#5A463B');
   }
-  const draw = t < tr ? E.out(prog(t, 0.1, 0.8)) : 0;
-  s += person({ x: 230, y: 1235, s: 1.3, sil: SIL, rim: C.p300, armR: 92, armL: lerp(40, 72, draw), gear: { bow: 'r', draw, helmet: 'phil' } });
-  if (t < tr && t > 0.1) s += arrow(230 + 1.3 * (34 + 86) + 10, 1235 - 1.3 * 156, 0, 0.75, SIL);
-  // a coroa cai ao longe em "matou um rei"
-  const cr = prog(t, seg(1) + 0.3, seg(1) + 1.0);
-  if (cr > 0) s += crownAt(lerp(880, 930, cr), lerp(860, 1030, E.in(cr)), 1.1, cr * 160) + dust(940, 1040, t, seg(1) + 1.0, 3, '#5A463B');
-  return { svg: cam(s, 540, 1000, 1.02 + 0.06 * E.sine(prog(t, 0, 5.2))), html: '' };
+  const draw = t < tr ? E.out(prog(t, 0.0, 0.9)) : 0;
+  s += archer(240, 1235, 1.3, { aim: -38, draw, nocked: t < tr, rim: C.p300 });
+  return { svg: cam(s, 540, 1000, 1.03 + 0.05 * E.sine(prog(t, 0, 5.2))), html: '' };
 }
 
 // ---------------------------------------------------------------- 2. Acabe
@@ -41,8 +48,6 @@ function scAcabe(t) {
   let s = bgDay(t, { seed: 301, sunX: 860, sunY: 430 });
   s += city(540, 975, 0.9, t);
   for (let i = 0; i < 6; i++) s += person({ x: 860 + i * 34, y: 1032, s: 0.18, sil: C.ch600, gear: { spear: 'r', helmet: 'phil' }, armR: 28, noShadow: true });
-  const ts = wordTime(2, 'Síria');
-  s += badge(930, 900, 'Síria', { size: 34, fill: C.r300, edge: C.r600, scale: pop(t, ts - 0.1), op: clamp(pop(t, ts - 0.1)) });
   s += throne(540, 1180, 0.95, C.a400);
   const pt = E.out(prog(t, a0 + 0.6, a0 + 1.2));
   s += person({ ...ACABE, x: 540, y: 1240, s: 1.32, look: 0.8 * pt, armR: lerp(14, 98, pt), gear: { crown: true } });
@@ -62,10 +67,7 @@ function scProfetas(t) {
   crowd.sort((p, q) => p.y - q.y).forEach((o) => (s += person(o)));
   const tz = seg(5) - 0.1, zp = E.out(prog(t, tz, tz + 0.5));
   if (zp > 0) s += person({ ...man(477), cover: null, robe: C.g200, x: 540, y: lerp(1320, 1250, zp), s: 1.35, op: zp, armL: 150, armR: 150, mood: 'calm', gear: { horns: true } });
-  const n = Math.round(400 * E.out(prog(t, a0 + 0.3, wordTime(3, 'profetas'))));
-  const ci = E.out(prog(t, a0, a0 + 0.35));
-  const html = `<div class="kpi" style="opacity:${ci};transform:translateY(${f1((1 - ci) * 20)}px)"><div class="eyebrow">Profetas</div><div class="kpi-n">${n}</div></div>`;
-  return { svg: cam(s, 540, 1050, 1.0 + 0.05 * prog(t, a0, at(6))), html };
+  return { svg: cam(s, 540, 1050, 1.0 + 0.05 * prog(t, a0, at(6))), html: '' };
 }
 
 // ---------------------------------------------------------------- 4. outro profeta?
@@ -75,8 +77,6 @@ function scJosafa(t) {
   s += throne(330, 1170, 0.9, C.a400) + throne(750, 1170, 0.9, C.a400);
   s += person({ ...ACABE, x: 330, y: 1240, s: 1.18, look: 0.3, gear: { crown: true } });
   s += person({ ...JOSAFA, x: 750, y: 1240, s: 1.18, look: -1, armR: lerp(14, 60, E.out(prog(t, seg(6) + 0.6, seg(6) + 1.1))), gear: { crown: true } });
-  const q = pop(t, seg(7) - 0.1, 0.4);
-  if (q > 0) s += badge(780, 760, '?', { size: 70, weight: 800, fill: C.b300, edge: C.b500, scale: q, op: clamp(q) });
   return { svg: cam(s, 540, 1000, 1.04), html: '' };
 }
 
@@ -88,10 +88,7 @@ function scMicaias(t) {
   const mi = E.out(prog(t, a0, a0 + 0.8));
   s += person({ ...MICAIAS, x: lerp(-120, 290, mi), y: 1240, s: 1.25, walk: mi < 1 ? t * 8 : null, look: 1, mood: 'calm' });
   const hate = t > seg(10) - 0.1;
-  if (hate) s += `<circle cx="800" cy="980" r="${f1(260 + 20 * Math.sin(t * 5))}" fill="${C.r400}" opacity="0.18"/>`;
   s += person({ ...ACABE, x: 800, y: 1240, s: 1.25, look: -1, mood: hate ? 'angry' : 'calm', armL: hate ? 40 : 14, armR: hate ? 40 : 14, gear: { crown: true } });
-  const nb = pop(t, wordTime(8, 'Micaías') - 0.1);
-  s += badge(290, 820, 'Micaías', { size: 36, fill: C.b300, edge: C.b500, scale: nb, op: clamp(nb) });
   return { svg: cam(s, 540, 1000, 1.0 + 0.06 * E.sine(prog(t, a0, at(12)))), html: '' };
 }
 
@@ -143,8 +140,6 @@ function scDisfarce(t) {
     : { ...ACABE, x: 420, y: 1240, s: 1.25, look: 0.6, gear: { crown: true } };
   s += person(o);
   if (t > a0 + 0.3 && xw < 715) s += `<rect x="${f1(xw - 50)}" y="760" width="100" height="520" fill="url(#gBlue)" opacity="0.5"/><rect x="${f1(xw - 4)}" y="780" width="8" height="490" rx="4" fill="${C.b500}"/>`;
-  const jg = E.out(prog(t, seg(18), seg(18) + 0.6));
-  if (jg > 0) s += `<circle cx="790" cy="980" r="${f1(220 * jg)}" fill="url(#gAmber)" opacity="0.6"/>`;
   s += person({ ...JOSAFA, x: 790, y: 1240, s: 1.22, look: -0.5, gear: { crown: true } });
   return { svg: cam(s, 600, 1000, 1.03), html: '' };
 }
@@ -158,10 +153,7 @@ function scOrdem(t) {
   s += person({ x: 280, y: 1245, s: 1.35, sil: SIL, rim: C.p300, armR: lerp(14, 96, pt), gear: { crown: '#E4B750' } });
   const tg = pop(t, wordTime(20, 'rei') - 0.1, 0.45);
   if (tg > 0) s += crownAt(790, 880, 2.2, 0) + target(790, 880, 130 * Math.min(1, tg), t, clamp(tg));
-  const ci = E.out(prog(t, a0 + 0.2, a0 + 0.6));
-  const n = Math.round(32 * E.out(prog(t, a0 + 0.3, seg(19) + 1.4)));
-  const html = `<div class="kpi" style="opacity:${ci};transform:translateY(${f1((1 - ci) * 20)}px)"><div class="eyebrow">Chefes de carros</div><div class="kpi-n">${n}</div></div>`;
-  return { svg: cam(s, 540, 1000, 1.02), html };
+  return { svg: cam(s, 540, 1000, 1.02), html: '' };
 }
 
 // ---------------------------------------------------------------- 10. Josafá cercado
@@ -179,29 +171,27 @@ function scCercado(t) {
 
 // ---------------------------------------------------------------- 11. ao acaso
 function scAcaso(t) {
-  const tr = wordTime(24, 'acaso') - 0.15, fly = prog(t, tr, tr + 0.9);
+  const tr = wordTime(24, 'acaso') - 0.15;
   let s = bgDusk(t);
   for (let i = 0; i < 10; i++) s += person({ x: 380 + i * 70, y: 1060 + (i % 2) * 14, s: 0.32, sil: SIL, walk: t * 6 + i, gear: { helmet: i % 3 ? 'phil' : 'isr', spear: 'r' }, armR: 30, noShadow: true });
   const rider = person({ ...ACABE, robe: C.g500, x: -20, y: -90, s: 0.95, look: -0.3, gear: { helmet: 'isr', armor: true }, rim: C.p300 });
   s += chariot(800, 1215, 0.85, { horse: true, gallop: t * 7, spin: t * 4, fill: C.g500, rider });
-  const draw = t < tr ? E.out(prog(t, seg(24), tr)) : 0;
-  s += person({ x: 190, y: 1240, s: 1.3, sil: SIL, rim: C.p300, armR: 80, armL: lerp(40, 70, draw), gear: { bow: 'r', draw, helmet: 'phil' } });
-  if (t < tr && draw > 0) s += arrow(190 + 1.3 * 120 + 10, 1240 - 1.3 * 171, -12, 0.75, SIL);
-  if (fly > 0 && fly < 1) {
-    const P = (u) => [lerp(360, 780, u), 1000 - 300 * u + 260 * u * u];
-    for (let k = 1; k < 12; k++) { const u = fly - k * 0.03; if (u > 0) { const [x, y] = P(u); s += `<circle cx="${f1(x)}" cy="${f1(y)}" r="5" fill="#fff" opacity="${f1((1 - k / 12) * 0.8 * 100) / 100}"/>`; } }
-    const [x, y] = P(fly), [x2, y2] = P(Math.min(1, fly + 0.01));
+  const u = prog(t, tr, tr + 0.95);
+  if (u > 0 && u < 1) {
+    const P = (v) => [lerp(400, 790, v), lerp(930, 1010, v) - 4 * 330 * v * (1 - v)];
+    for (let k = 1; k < 14; k++) { const v = u - k * 0.025; if (v > 0) { const [x, y] = P(v); s += `<circle cx="${f1(x)}" cy="${f1(y)}" r="4" fill="#fff" opacity="${f1((1 - k / 14) * 0.7 * 100) / 100}"/>`; } }
+    const [x, y] = P(u), [x2, y2] = P(Math.min(1, u + 0.01));
     s += arrow(x, y, (Math.atan2(y2 - y, x2 - x) * 180) / Math.PI, 0.8, SIL);
   }
-  return { svg: cam(s, 540, 1000, 1.0 + 0.08 * E.inOut(prog(t, seg(23), at(25)))), html: '' };
+  const draw = t < tr ? E.out(prog(t, seg(24), tr)) : 0;
+  s += archer(220, 1240, 1.3, { aim: -40, draw, nocked: t < tr, rim: C.p300 });
+  return { svg: cam(s, 540, 1000, 1.0 + 0.06 * E.inOut(prog(t, seg(23), at(25)))), html: '' };
 }
 
 // ---------------------------------------------------------------- 12. entre os encaixes
 function scEncaixes(t) {
   const a0 = at(25), hit = seg(25) + 0.15;
   let s = `<rect width="${W}" height="${H}" fill="${C.paper}"/>`;
-  for (let x = 60; x < W; x += 60) s += `<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="#EDEBE6" stroke-width="2"/>`;
-  for (let y = 60; y < H; y += 60) s += `<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="#EDEBE6" stroke-width="2"/>`;
   // peito com placas de armadura, visto de perto
   let g = `<path d="M 230 1240 L 250 520 C 400 470 680 470 830 520 L 850 1240 Z" fill="${C.g400}" ${ink(7)}/>`;
   for (let r = 0; r < 6; r++) {
@@ -219,9 +209,6 @@ function scEncaixes(t) {
   if (t > hit) {
     const pr = ((t - hit) * 1.2) % 1;
     s += `<circle cx="600" cy="${gy}" r="${f1(40 + pr * 90)}" fill="none" stroke="${C.r600}" stroke-width="7" opacity="${f1((1 - pr) * 100) / 100}"/>`;
-    const lb = pop(t, wordTime(25, 'encaixes') - 0.1);
-    s += `<line x1="600" y1="${gy}" x2="760" y2="${gy - 230}" stroke="${C.ink}" stroke-width="5" stroke-dasharray="10 10" opacity="${clamp(lb)}"/>`;
-    s += badge(800, gy - 260, 'encaixe', { size: 40, upper: true, fill: C.r300, edge: C.r600, scale: lb, op: clamp(lb) });
   }
   return { svg: cam(s, 600, gy, 1.0 + 0.1 * E.inOut(prog(t, a0, at(26)))), html: '' };
 }
@@ -245,12 +232,7 @@ function scCaes(t) {
   s += `<ellipse cx="560" cy="1190" rx="520" ry="70" fill="#1E3550" stroke="#08090A" stroke-width="6"/><ellipse cx="560" cy="1180" rx="440" ry="42" fill="#27476B" opacity="0.7"/>`;
   s += chariot(250, 1170, 0.7, { flip: true, fill: '#3A3836', ol: '#08090A' });
   s += dog(640, 1165, 0.9, '#0C0D0E', t) + dog(840, 1175, 0.8, '#0C0D0E', t + 1);
-  let html = '';
-  const vc = E.out(prog(t, seg(29) - 0.2, seg(29) + 0.25));
-  if (vc > 0) html = `<div class="verse small" style="opacity:${vc};transform:translate(-50%, ${f1((1 - vc) * 30)}px)">
-    <div class="eyebrow">A Bíblia diz</div><div class="vtext">“Os cães lamberam o seu sangue, ${hlWords('conforme a palavra do Senhor havia declarado.', prog(t, seg(29) + 0.3, seg(29) + 1.6))}”</div>
-    <div class="vref">1 Reis 22:38 · a palavra: 1 Reis 21:19</div></div>`;
-  return { svg: cam(s, 560, 1000, 1.04 - 0.04 * prog(t, a0, at(30))), html };
+  return { svg: cam(s, 560, 1000, 1.04 - 0.04 * prog(t, a0, at(30))), html: '' };
 }
 
 // ---------------------------------------------------------------- 15. 400 contra 1
@@ -271,9 +253,6 @@ function scQuatrocentos(t) {
     const x = 160 + BR[1] * 40, y = 420 + BR[0] * 38;
     s += `<g opacity="${f1(fade * 100) / 100}"><circle cx="${x}" cy="${y}" r="${f1(30 * op)}" fill="none" stroke="${C.b500}" stroke-width="5"/><circle cx="${x}" cy="${y}" r="${f1(14 * op)}" fill="${chosen > 0.5 ? C.g400 : C.b500}" stroke="${C.ink}" stroke-width="3"/></g>`;
   }
-  const b1 = pop(t, wordTime(30, 'quatrocentas') - 0.1), b2 = pop(t, one + 0.2);
-  s += badge(330, 1225 - 20, '400 vozes', { size: 38, fill: chosen > 0 ? C.r300 : '#fff', edge: chosen > 0 ? C.r600 : C.border, scale: b1, op: clamp(b1) });
-  s += badge(760, 1225 - 20, '1 verdade', { size: 38, fill: C.b300, edge: C.b500, scale: b2, op: clamp(b2) * fade });
   return { svg: s, html: '' };
 }
 
@@ -284,7 +263,7 @@ const scFim = (t) => endCard(t, AUDIO_END + 0.2, ['1 Reis 21', '1 Reis 22']);
 const SCENES = [
   { a: 0, b: at(2), f: scFlecha, label: '1 Reis 22', ref: '1 Reis 22:34', dark: true },
   { a: at(2), b: at(3), f: scAcabe, label: 'Acabe', ref: '1 Reis 22:3' },
-  { a: at(3), b: at(6), f: scProfetas, label: '400 profetas', ref: [[at(3), '1 Reis 22:6'], [seg(5) - 0.1, '1 Reis 22:11-12']] },
+  { a: at(3), b: at(6), f: scProfetas, label: '400 profetas', ref: '1 Reis 22:6' },
   { a: at(6), b: at(8), f: scJosafa, label: 'Outro profeta?', ref: '1 Reis 22:7' },
   { a: at(8), b: at(12), f: scMicaias, label: 'Micaías', ref: '1 Reis 22:8' },
   { a: at(12), b: at(14), f: scAviso, label: 'O aviso', ref: '1 Reis 22:17' },
@@ -294,7 +273,7 @@ const SCENES = [
   { a: at(21), b: at(23), f: scCercado, label: 'Josafá cercado', ref: '1 Reis 22:32-33' },
   { a: at(23), b: at(25), f: scAcaso, label: 'Ao acaso', ref: '1 Reis 22:34', dark: true },
   { a: at(25), b: at(26), f: scEncaixes, label: 'Entre os encaixes', ref: '1 Reis 22:34' },
-  { a: at(26), b: at(28), f: scTarde, label: 'Ao cair da tarde', ref: '1 Reis 22:35', dark: true },
+  { a: at(26), b: at(28), f: scTarde, label: 'Ao cair da tarde', ref: '1 Reis 22:35', dark: (t) => t > (at(26) + 0.3 + seg(27) + 0.6) / 2 },
   { a: at(28), b: at(30), f: scCaes, label: 'Como o Senhor disse', ref: '1 Reis 22:38', dark: true },
   { a: at(30), b: AUDIO_END + 0.2, f: scQuatrocentos, label: '400 contra 1', ref: '1 Reis 22:6-8' },
   { a: AUDIO_END + 0.2, b: DURATION + 1, f: scFim, label: null, ref: null, end: true },
