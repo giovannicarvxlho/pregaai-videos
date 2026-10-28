@@ -631,7 +631,8 @@ function syl(w) {
 // Monta os blocos a partir de SEGS (início, fim, texto) do episódio.
 function buildChunks(SEGS) {
   const out = [];
-  SEGS.forEach(([a, b, raw], si) => {
+  // spans (opcional): [início, fim] de cada bloco "|", quando a voz faz pausa dentro da frase.
+  SEGS.forEach(([a, b, raw, spans], si) => {
     const hidden = raw.startsWith('!');
     const text = hidden ? raw.slice(1) : raw;
     const parts = text.split('|').map((p) => p.trim());
@@ -647,13 +648,17 @@ function buildChunks(SEGS) {
       if (inK && w.includes('*')) { inK = false; w = w.replace('*', ''); }
       x.w = w;
     });
-    const weights = words.map((x, i) => syl(x.w) + 0.35 + (i < words.length - 1 && /[,:;]$/.test(x.w) ? 0.6 : 0));
-    const total = weights.reduce((s, v) => s + v, 0);
-    let acc = 0;
-    words.forEach((x, i) => { x.t = a + (acc / total) * (b - a) - 0.04; acc += weights[i]; });
+    const time = (ws, a0, b0) => {
+      const weights = ws.map((x, i) => syl(x.w) + 0.35 + (i < ws.length - 1 && /[,:;]$/.test(x.w) ? 0.6 : 0));
+      const total = weights.reduce((s, v) => s + v, 0);
+      let acc = 0;
+      ws.forEach((x, i) => { x.t = a0 + (acc / total) * (b0 - a0) - 0.04; acc += weights[i]; });
+    };
+    if (spans) parts.forEach((_, pi) => time(words.filter((x) => x.part === pi), ...spans[pi]));
+    else time(words, a, b);
     parts.forEach((_, pi) => {
       const ws = words.filter((x) => x.part === pi);
-      out.push({ seg: si, segEnd: b, t0: ws[0].t - 0.06, words: ws, hidden, last: pi === parts.length - 1 });
+      out.push({ seg: si, segEnd: spans ? spans[pi][1] : b, t0: ws[0].t - 0.06, words: ws, hidden, last: pi === parts.length - 1 });
     });
   });
   out.forEach((c, i) => {

@@ -34,7 +34,7 @@ bash sheet.sh 6                        # junta prev/ numa folha só (sheet.png)
 2. **Narração**: gere na ElevenLabs a partir do roteiro e salve em `episodios/<ep>/narration.mp3`.
 3. **Frases no tempo**: `python3 tools/segmentos.py episodios/<ep>/narration.mp3` devolve o início e o fim de cada trecho de fala.
 4. **Conferir o texto**: `python3 tools/transcrever.py episodios/<ep>/narration.mp3 "<saída do passo 3>"`. A legenda tem que bater com o que a voz falou.
-5. **`data.js`**: um item por trecho, `[início, fim, 'texto']`. Na legenda, `|` quebra em blocos (até ~28 letras cada) e `!` no começo esconde a legenda quando a cena já mostra o texto. A palavra que está sendo falada fica azul sozinha.
+5. **`data.js`**: um item por frase, `[início, fim, 'texto']`. Se a voz pausar dentro da frase (o `segmentos.py` mostra dois trechos), junte e passe o trecho de cada bloco `|` no 4º item: `[início, fim, 'texto | resto', [[a1, b1], [a2, b2]]]`. Na legenda, `|` quebra em blocos (até ~28 letras cada) e `!` no começo esconde a legenda quando a cena já mostra o texto. A palavra que está sendo falada fica azul sozinha.
 6. **`scenes.js`**: as cenas e a lista `SCENES` (início, fim, referência, `dark` para cenas noturnas). Sincronize animações com `wordTime(índiceDaFrase, 'palavra')`. Comece cada cena pelo índice da frase (`SEGS[i][0]`), assim trocar os tempos pelos do áudio real reposiciona tudo.
 7. Revise com `preview.cjs` e `sheet.sh`, depois `bash build.sh <ep>`.
 
