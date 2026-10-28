@@ -436,6 +436,12 @@ function person(o) {
       const er = mood === 'fear' ? 4.5 : 5;
       h += `<circle cx="${-12 + lx * 1.3}" cy="${ey}" r="${er}" fill="${ink}"/><circle cx="${12 + lx * 1.3}" cy="${ey}" r="${er}" fill="${ink}"/>`;
     }
+    if (o.liner) {
+      // olhos pintados (Jezabel): traço grosso com a ponta puxada para fora
+      const k = o.liner;
+      h += `<path d="M ${-22 + lx} ${ey - 2} Q ${-12 + lx} ${ey - 12} ${-2 + lx} ${ey - 3} L ${-26 + lx - 8 * k} ${ey - 12 - 6 * k}" fill="none" stroke="${ink}" stroke-width="${f1(4 * k)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+      h += `<path d="M ${22 + lx} ${ey - 2} Q ${12 + lx} ${ey - 12} ${2 + lx} ${ey - 3} M ${22 + lx} ${ey - 2} L ${26 + lx + 8 * k} ${ey - 12 - 6 * k}" fill="none" stroke="${ink}" stroke-width="${f1(4 * k)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    }
     const brow = (x1, y1, x2, y2) => `<line x1="${x1 + lx}" y1="${y1}" x2="${x2 + lx}" y2="${y2}" stroke="${ink}" stroke-width="4.5" stroke-linecap="round"/>`;
     if (mood === 'fear' || mood === 'sad') h += brow(-22, -222, -8, -228) + brow(22, -222, 8, -228);
     if (mood === 'angry') h += brow(-22, -230, -7, -222) + brow(22, -230, 7, -222);
