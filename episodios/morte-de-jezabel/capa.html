@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Capa: A morte de Jezabel</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #FFE9D6; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* O texto completa o título ("Jezabel se maquiou antes de morrer") em vez de repeti-lo:
+   o fim dela já tinha sido anunciado (1 Reis 21:23).
+   Tudo o que importa fica no miolo 3:4 (y 240 a 1680), o recorte da grade do TikTok. */
+.hook { position: absolute; left: 0; right: 0; top: 290px; display: flex; flex-direction: column; align-items: center; }
+.l { font: 400 200px/0.95 'Gasoek One'; color: #181614; text-shadow: 0 12px 0 #FFFFFF; white-space: nowrap; }
+.chip { margin-top: 26px; padding: 6px 46px 30px; background: #2383E2; border: 8px solid #181614; border-radius: 40px; box-shadow: 0 18px 0 0 #181614;
+  font: 400 190px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+  <div class="hook"><div class="l">ELIAS</div><div class="chip">AVISOU</div></div>
+</div>
+<script src="../../lib.js"></script>
+<script>
+const INK = '#181614';
+let s = `<defs>
+  ${skyGrad('bg', [[0, '#FFF6EC'], [0.55, '#FFE1C6'], [1, '#FFB98A']])}
+  ${radial('burst', '#FFFFFF', 1)}
+</defs><rect width="1080" height="1920" fill="url(#bg)"/>`;
+// raios saindo do rosto: levam o olho para ele
+const FX = 690, FY = 1290;
+for (let i = 0; i < 20; i++) {
+  const a = (i / 20) * Math.PI * 2;
+  s += `<path d="M ${FX} ${FY} L ${FX + Math.cos(a - 0.07) * 1600} ${FY + Math.sin(a - 0.07) * 1600} L ${FX + Math.cos(a + 0.07) * 1600} ${FY + Math.sin(a + 0.07) * 1600} Z" fill="#FFFFFF" opacity="${i % 2 ? 0.0 : 0.55}"/>`;
+}
+s += `<circle cx="${FX}" cy="${FY}" r="420" fill="url(#burst)" opacity="0.9"/>`;
+// Jezabel de perto, assustada, com os olhos pintados, olhando para a seta
+s += person({ robe: '#8E3B46', skin: '#C68B59', hair: '#191919', cover: '#1E1A1A', beard: false, x: FX, y: FY + 206 * 3.6, s: 3.6, mood: 'fear', liner: 1, t: 0.35, look: -1, armL: 14, armR: 14, gear: { crown: true }, noShadow: true });
+// seta grande, amarela e vermelha, com contorno preto, vindo do alto à esquerda
+const ang = 32, tipX = FX - 190, tipY = FY - 150;
+for (let i = 0; i < 4; i++) {
+  const r = (ang * Math.PI) / 180, back = 560 + i * 70, off = (i - 1.5) * 34;
+  const x1 = tipX - Math.cos(r) * back - Math.sin(r) * off, y1 = tipY - Math.sin(r) * back + Math.cos(r) * off;
+  const x2 = tipX - Math.cos(r) * (back + 230) - Math.sin(r) * off, y2 = tipY - Math.sin(r) * (back + 230) + Math.cos(r) * off;
+  s += `<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(x2)}" y2="${f1(y2)}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>`;
+}
+s += `<g transform="translate(${tipX} ${tipY}) rotate(${ang})">
+  <rect x="-520" y="-20" width="500" height="40" rx="20" fill="${C.a300}" stroke="${INK}" stroke-width="10"/>
+  <path d="M 30 0 L -60 -54 L -40 0 L -60 54 Z" fill="${C.r600}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M -500 0 L -600 -70 L -560 0 L -600 70 Z" fill="${C.r600}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M -450 0 L -540 -60 L -505 0 L -540 60 Z" fill="${C.r400}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+</g>`;
+// marcas de impacto na ponta
+for (let i = 0; i < 5; i++) {
+  const a = -1.9 + i * 0.45, x = tipX + 40 + Math.cos(a) * 70, y = tipY + 30 + Math.sin(a) * 70;
+  s += `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + Math.cos(a) * 60)}" y2="${f1(y + Math.sin(a) * 60)}" stroke="${INK}" stroke-width="12" stroke-linecap="round"/>`;
+}
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
