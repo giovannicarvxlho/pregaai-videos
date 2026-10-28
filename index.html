@@ -135,7 +135,7 @@ function captionHTML(t) {
   const pout = cut ? 1 : 1 - prog(t, c.t1 - 0.16, c.t1);
   const op = Math.min(pin, pout);
   let h = '', group = null;
-  const flush = () => { if (group) { h += `<span class="k${group.on ? '' : ' off'}" style="transform:scale(${group.sc})">${group.html.trim()}</span>${group.tail} `; group = null; } };
+  const flush = () => { if (group) { h += `<span style="white-space:nowrap"><span class="k${group.on ? '' : ' off'}" style="transform:scale(${group.sc})">${group.html.trim()}</span>${group.tail}</span> `; group = null; } };
   c.words.forEach((x, wi) => {
     const on = 0.38 + 0.62 * E.out(prog(t, x.t, x.t + 0.1));
     if (x.k) {

@@ -11,7 +11,10 @@ for k in $(seq 0 $((N - 1))); do node render.cjs "$EP" $k $N out/seg_$k.mp4 & do
 wait
 for k in $(seq 0 $((N - 1))); do echo "file 'seg_$k.mp4'"; done > out/list.txt
 read DUR SPEED < <(node -e "const fs=require('fs');eval(fs.readFileSync('$D/data.js','utf8').replace(/const /g,'var '));console.log(DURATION, typeof SPEED==='undefined'?1:SPEED)")
-ffmpeg -v error -y -f concat -safe 0 -i out/list.txt -i "$D/narration.mp3" \
+AUD="$D/narration.mp3"
+# Sem narração ainda: monta com silêncio, para ver as cenas.
+if [ ! -f "$AUD" ]; then AUD=out/silencio.wav; ffmpeg -v error -y -f lavfi -i anullsrc=r=48000:cl=mono -t "$DUR" "$AUD"; fi
+ffmpeg -v error -y -f concat -safe 0 -i out/list.txt -i "$AUD" \
   -filter_complex "[0:v]setpts=PTS/${SPEED}[v];[1:a]loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,apad=whole_dur=${DUR},atempo=${SPEED}[a]" \
   -map "[v]" -map "[a]" -t "$(node -e "console.log($DUR/$SPEED)")" -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p -profile:v high -level 4.2 -r 30 \
   -c:a aac -b:a 192k -ar 48000 -movflags +faststart "out/$EP.mp4"

@@ -169,6 +169,77 @@ function olive(x, base, s, c1 = C.olive, c2 = C.oliveDk, ol = C.ink) {
   </g>`;
 }
 
+function throne(x, base, s, fill = C.a400) {
+  return `<g transform="translate(${x} ${base}) scale(${s})">
+    <path d="M -70 0 L -70 -140 L -86 -150 L -86 -330 C -86 -360 86 -360 86 -330 L 86 -150 L 70 -140 L 70 0 Z" fill="${fill}" ${ink(6)}/>
+    <path d="M -60 -170 L -60 -320 C -60 -336 60 -336 60 -320 L 60 -170 Z" fill="${C.r600}" ${ink(5)}/>
+    <rect x="-96" y="-160" width="192" height="34" rx="10" fill="${shade(fill, 0.85)}" ${ink(5)}/>
+  </g>`;
+}
+
+// Carro de guerra de lado (voltado para a direita); horse = desenha o cavalo.
+function chariot(x, base, s, o = {}) {
+  const fill = o.fill || C.g500, ol = o.ol || C.ink, sil = o.sil, c = (v) => sil || v;
+  const wr = 70, ph = o.spin || 0;
+  let g = '';
+  if (o.horse) {
+    const gal = o.gallop, lg = (lx, k) => `<rect x="${lx - 12}" y="-124" width="24" height="126" rx="12" fill="${c('#5A4636')}" ${ink(4, ol)} transform="rotate(${gal == null ? 0 : f1(Math.sin(gal + k) * 14)} ${lx} -122)"/>`;
+    g += `<g transform="translate(250 0)">${lg(-70, 0)}${lg(-40, 2)}${lg(60, 1)}${lg(90, 3)}
+      <ellipse cx="10" cy="-166" rx="118" ry="60" fill="${c('#6B5342')}" ${ink(5, ol)}/>
+      <path d="M 70 -196 L 132 -282 L 186 -268 L 128 -150 Z" fill="${c('#6B5342')}" ${ink(5, ol)}/>
+      <path d="M 70 -200 L 128 -286 L 112 -292 L 56 -206 Z" fill="${c('#3A2E25')}" ${ink(4, ol)}/>
+      <ellipse cx="176" cy="-262" rx="44" ry="24" transform="rotate(28 176 -262)" fill="${c('#6B5342')}" ${ink(5, ol)}/>
+      <path d="M 120 -280 L 150 -300 L 150 -270 Z" fill="${c('#4A3A2E')}" ${ink(4, ol)}/>
+      <path d="M -108 -170 C -150 -160 -160 -110 -150 -80" fill="none" stroke="${c('#3A2E25')}" stroke-width="16" stroke-linecap="round"/></g>`;
+    g += `<line x1="90" y1="-110" x2="260" y2="-150" stroke="${ol}" stroke-width="14" stroke-linecap="round"/><line x1="90" y1="-110" x2="260" y2="-150" stroke="${c(C.wood)}" stroke-width="7" stroke-linecap="round"/>`;
+  }
+  if (o.rider) g += o.rider;
+  g += `<path d="M -110 -60 L -110 -170 L -96 -170 L -80 -90 L 100 -90 L 110 -60 Z" fill="${c(fill)}" ${ink(6, ol)}/>`;
+  g += `<path d="M -110 -170 L -96 -170 L -80 -90 L -110 -90 Z" fill="${c(shade(fill, 0.8))}"/>`;
+  g += `<circle cx="0" cy="-${wr}" r="${wr}" fill="${c(C.g600)}" ${ink(6, ol)}/><circle cx="0" cy="-${wr}" r="${wr - 14}" fill="none" stroke="${c(C.wood)}" stroke-width="8"/>`;
+  for (let k = 0; k < 6; k++) { const a = ph + (k * Math.PI) / 3; g += `<line x1="0" y1="-${wr}" x2="${f1(Math.cos(a) * (wr - 12))}" y2="${f1(-wr + Math.sin(a) * (wr - 12))}" stroke="${c(C.wood)}" stroke-width="6"/>`; }
+  g += `<circle cx="0" cy="-${wr}" r="12" fill="${c(C.g700)}" ${ink(4, ol)}/>`;
+  return `<g transform="translate(${f1(x)} ${f1(base)}) scale(${o.flip ? -s : s} ${s})">${g}</g>`;
+}
+
+function sheep(x, base, s, t = 0, look = 1) {
+  const blobs = [[-30, -70, 30], [0, -82, 34], [30, -70, 30], [-12, -50, 30], [18, -50, 30]];
+  return `<g transform="translate(${f1(x)} ${f1(base)}) scale(${f1(look * s * 100) / 100} ${s})">
+    <rect x="-28" y="-40" width="10" height="40" rx="5" fill="${C.g800}" ${ink(3)}/><rect x="18" y="-40" width="10" height="40" rx="5" fill="${C.g800}" ${ink(3)}/>
+    ${blobs.map(([bx, by, r]) => `<circle cx="${bx}" cy="${by}" r="${r + 5}" fill="${C.ink}"/>`).join('')}
+    ${blobs.map(([bx, by, r]) => `<circle cx="${bx}" cy="${by}" r="${r}" fill="#FBF9F8"/>`).join('')}
+    <ellipse cx="${f1(60 + Math.sin(t * 2) * 2)}" cy="-82" rx="20" ry="16" fill="${C.g700}" ${ink(4)}/>
+  </g>`;
+}
+
+function dog(x, base, s, fill = '#2B2B2B', t = 0) {
+  const lap = Math.sin(t * 9) * 3;
+  return `<g transform="translate(${f1(x)} ${f1(base)}) scale(${s})" fill="${fill}">
+    <rect x="-60" y="-70" width="12" height="70" rx="6"/><rect x="-36" y="-70" width="12" height="70" rx="6"/><rect x="34" y="-70" width="12" height="70" rx="6"/><rect x="56" y="-70" width="12" height="70" rx="6"/>
+    <ellipse cx="0" cy="-86" rx="78" ry="30"/><path d="M -72 -96 C -100 -120 -110 -130 -104 -146" stroke="${fill}" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M 60 -96 L 96 ${f1(-40 + lap)} L 122 ${f1(-30 + lap)} L 122 ${f1(-14 + lap)} L 90 ${f1(-20 + lap)} L 50 -70 Z"/><path d="M 88 ${f1(-44 + lap)} L 94 ${f1(-74 + lap)} L 108 ${f1(-46 + lap)} Z"/>
+  </g>`;
+}
+
+// Mira (alvo) vermelha.
+function target(x, y, r, t, op = 1) {
+  return `<g transform="translate(${f1(x)} ${f1(y)})" opacity="${f1(op * 100) / 100}">
+    <circle r="${r}" fill="none" stroke="${C.r600}" stroke-width="8" stroke-dasharray="${f1(r * 0.9)} ${f1(r * 0.67)}" transform="rotate(${f1(t * 60)})"/>
+    <circle r="${f1(r * 0.4)}" fill="none" stroke="${C.r600}" stroke-width="6"/>
+    <line x1="${-r - 20}" y1="0" x2="${-r * 0.55}" y2="0" stroke="${C.r600}" stroke-width="6"/><line x1="${r * 0.55}" y1="0" x2="${r + 20}" y2="0" stroke="${C.r600}" stroke-width="6"/>
+    <line y1="${-r - 20}" x1="0" y2="${-r * 0.55}" x2="0" stroke="${C.r600}" stroke-width="6"/><line y1="${r * 0.55}" x1="0" y2="${r + 20}" x2="0" stroke="${C.r600}" stroke-width="6"/>
+  </g>`;
+}
+
+// Flecha de lado, ponta em (x, y), apontando no ângulo ang (graus).
+function arrow(x, y, ang, s = 1, ol = C.ink) {
+  return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)}) scale(${s})">
+    <line x1="-150" y1="0" x2="-10" y2="0" stroke="${ol}" stroke-width="12" stroke-linecap="round"/><line x1="-150" y1="0" x2="-10" y2="0" stroke="${C.wood}" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 0 0 L -26 -12 L -26 12 Z" fill="${C.ch200}" ${ink(4, ol)}/>
+    <path d="M -150 0 L -170 -14 L -136 0 L -170 14 Z" fill="${C.r400}" ${ink(3, ol)}/>
+  </g>`;
+}
+
 function jar(x, y, s, rot = 0) {
   return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)}) scale(${s})">
     <path d="M -16 -62 L 16 -62 L 14 -46 C 40 -36 46 -6 34 18 C 26 34 -26 34 -34 18 C -46 -6 -40 -36 -14 -46 Z" fill="${C.p400}" ${ink(5)}/>
@@ -290,6 +361,17 @@ function person(o) {
     const a = gear.sword === 'l' ? aL : aR;
     b += `<path d="M ${f1(a.hx - 6)} ${f1(a.hy - 6)} L ${f1(a.hx)} ${f1(a.hy - 128)} L ${f1(a.hx + 8)} ${f1(a.hy - 6)} Z" fill="${col('#EEECE8')}" ${st(4)}/><line x1="${f1(a.hx - 20)}" y1="${f1(a.hy - 8)}" x2="${f1(a.hx + 20)}" y2="${f1(a.hy - 8)}" stroke="${col(C.g700)}" stroke-width="9" stroke-linecap="round"/>`;
   }
+  if (gear.bow) {
+    const a = gear.bow === 'l' ? aL : aR, d = gear.bow === 'l' ? -1 : 1;
+    b += `<path d="M ${f1(a.hx - d * 8)} ${f1(a.hy - 92)} Q ${f1(a.hx + d * 62)} ${f1(a.hy)} ${f1(a.hx - d * 8)} ${f1(a.hy + 92)}" fill="none" stroke="${OL}" stroke-width="14" stroke-linecap="round"/><path d="M ${f1(a.hx - d * 8)} ${f1(a.hy - 92)} Q ${f1(a.hx + d * 62)} ${f1(a.hy)} ${f1(a.hx - d * 8)} ${f1(a.hy + 92)}" fill="none" stroke="${col(C.wood)}" stroke-width="7" stroke-linecap="round"/>`;
+    b += `<line x1="${f1(a.hx - d * 8)}" y1="${f1(a.hy - 92)}" x2="${f1(a.hx - d * (8 + 40 * (gear.draw || 0)))}" y2="${f1(a.hy)}" stroke="${OL}" stroke-width="3"/><line x1="${f1(a.hx - d * (8 + 40 * (gear.draw || 0)))}" y1="${f1(a.hy)}" x2="${f1(a.hx - d * 8)}" y2="${f1(a.hy + 92)}" stroke="${OL}" stroke-width="3"/>`;
+  }
+  if (gear.horns) {
+    [aL, aR].forEach((a, i) => {
+      const d = i ? 1 : -1;
+      b += `<path d="M ${f1(a.hx)} ${f1(a.hy)} C ${f1(a.hx + d * 10)} ${f1(a.hy - 60)} ${f1(a.hx + d * 50)} ${f1(a.hy - 90)} ${f1(a.hx + d * 70)} ${f1(a.hy - 96)} C ${f1(a.hx + d * 40)} ${f1(a.hy - 70)} ${f1(a.hx + d * 22)} ${f1(a.hy - 40)} ${f1(a.hx + d * 16)} ${f1(a.hy)} Z" fill="${col(C.ch100)}" ${st(5)}/>`;
+    });
+  }
   if (gear.stone) {
     const a = gear.stone === 'l' ? aL : aR;
     b += `<circle cx="${f1(a.hx)}" cy="${f1(a.hy - 16)}" r="18" fill="${col(C.g600)}" ${st(4)}/><circle cx="${f1(a.hx - 5)}" cy="${f1(a.hy - 21)}" r="5" fill="${col(C.g400)}"/>`;
@@ -309,6 +391,10 @@ function person(o) {
   }
   if (o.beard) h += `<path d="M -34 -202 C -34 -175 -17 -162 0 -162 C 17 -162 34 -175 34 -202 C 24 -191 12 -187 0 -187 C -12 -187 -24 -191 -34 -202 Z" fill="${hair}" ${st(4)}/>`;
   if (gear.helmet === 'isr') h += `<path d="M -41 -202 C -41 -252 41 -252 41 -202 L 45 -196 L -45 -196 Z" fill="${col(C.g700)}" ${st()}/><rect x="-5" y="-260" width="10" height="16" rx="5" fill="${col(C.ch200)}" ${st(3)}/>`;
+  if (gear.crown) {
+    h += `<path d="M -32 -238 L -36 -280 L -18 -258 L 0 -286 L 18 -258 L 36 -280 L 32 -238 Z" fill="${col(gear.crown === true ? C.a300 : gear.crown)}" ${st(5)}/>`;
+    if (!sil) h += `<circle cx="0" cy="-252" r="5" fill="${C.r600}"/>`;
+  }
   if (gear.helmet === 'phil') {
     for (let i = -3; i <= 3; i++) h += `<rect x="${i * 10 - 4}" y="-292" width="8" height="${58 - Math.abs(i) * 5}" rx="4" fill="${col(C.ch100)}" transform="rotate(${i * 5} 0 -230)" ${st(3)}/>`;
     h += `<rect x="-41" y="-239" width="82" height="17" rx="6" fill="${col(C.ch400)}" ${st(4)}/>`;
