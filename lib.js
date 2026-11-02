@@ -656,7 +656,7 @@ function veil(p, X0, X1, Y0, Y1, o = {}) {
 
 function bgDay(t, o = {}) {
   const ox = o.ox || 0, seed = o.seed || 3;
-  let s = `<rect width="${W}" height="${H}" fill="url(#skyDay)"/>`;
+  let s = `<rect x="-600" width="${W + 1200}" height="${H}" fill="url(#skyDay)"/>`;
   if (o.sun !== false) s += sun(o.sunX ?? (WIDE ? 1500 : 830), o.sunY ?? (WIDE ? 250 : 520), 58, t);
   s += clouds(t, ox);
   s += hills(GROUND - 135, 80, 0.0032, seed, '#E3DBD2', ox * 0.3) + hills(GROUND - 55, 55, 0.0055, seed + 2, '#D6CBC0', ox * 0.6);
@@ -665,7 +665,7 @@ function bgDay(t, o = {}) {
 }
 function bgNight(t, o = {}) {
   const ox = o.ox || 0;
-  let s = `<rect width="${W}" height="${H}" fill="url(#${o.sky || 'skyNight'})"/>` + stars(t, WIDE ? 110 : 70, 11, GROUND - 60, o.starOp ?? 1);
+  let s = `<rect x="-600" width="${W + 1200}" height="${H}" fill="url(#${o.sky || 'skyNight'})"/>` + stars(t, WIDE ? 110 : 70, 11, GROUND - 60, o.starOp ?? 1);
   if (o.moon !== false) s += moon(o.moonX ?? (WIDE ? 1500 : 820), o.moonY ?? (WIDE ? 220 : 480), 46, '#14181D');
   s += hills(GROUND - 120, 80, 0.0032, 7, '#1F2428', ox * 0.3) + hills(GROUND - 50, 55, 0.0055, 9, '#191D21', ox * 0.6);
   s += floor('night', ox);
@@ -673,7 +673,7 @@ function bgNight(t, o = {}) {
 }
 function bgDusk(t, o = {}) {
   const ox = o.ox || 0;
-  let s = `<rect width="${W}" height="${H}" fill="url(#${o.sky || 'skyDusk'})"/>`;
+  let s = `<rect x="-600" width="${W + 1200}" height="${H}" fill="url(#${o.sky || 'skyDusk'})"/>`;
   s += `<circle cx="${(WIDE ? 1050 : 600) - ox * 0.2}" cy="${GROUND - 60}" r="${WIDE ? 760 : 520}" fill="url(#gPeach)" opacity="0.35"/>`;
   s += hills(GROUND - 115, 70, 0.0032, 13, '#3B2D26', ox * 0.3) + hills(GROUND - 45, 50, 0.0055, 15, '#30251F', ox * 0.6);
   s += floor('dusk', ox);

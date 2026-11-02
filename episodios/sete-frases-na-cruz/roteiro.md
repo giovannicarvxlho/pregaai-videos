@@ -1,6 +1,7 @@
 # A crucificação de Jesus: as 7 frases na cruz
 
-Vídeo longo para o YouTube, 16:9 (1920×1080), só narração. ~1.220 palavras, ~8,5 min de narração mais o cartão final.
+Vídeo longo para o YouTube, 16:9 (1920×1080), só narração. ~1.220 palavras; 8min09s de narração em 11 partes, 8min38s de vídeo com o cartão final.
+Miniatura: `miniatura.html` (`node capa.cjs sete-frases-na-cruz miniatura`), 1280×720, com "O VÉU RASGOU", que soma ao título.
 Estrutura: as 7 frases de Jesus na cruz, que nenhum evangelho registra juntas (Mateus e Marcos: 1; Lucas: 3; João: 3). O véu rasgado é o clímax.
 
 Fonte: NVI, a tradução do app. Fora da Bíblia, só a frase de Cícero (Contra Verres, II.5.165: "crudelissimum taeterrimumque supplicium").
@@ -246,7 +247,7 @@ E se inscreve, porque toda semana tem mais uma história da Bíblia, contada do 
 **Título**
 > A crucificação de Jesus: as 7 frases na cruz | Histórias Bíblicas
 
-**Descrição** (os tempos dos capítulos são estimados; acerto com a narração real)
+**Descrição** (capítulos nos tempos reais da narração)
 ```
 Perto do meio-dia, o sol deixou de brilhar. Por três horas, houve trevas sobre toda a terra. E no momento em que Jesus morreu, o véu do santuário se rasgou em duas partes, de alto a baixo.
 
@@ -256,15 +257,15 @@ Neste vídeo você ouve as 7 frases de Jesus na cruz, uma por uma. Nenhum evange
 
 ⏱️ Capítulos
 00:00 O sol deixou de brilhar
-00:45 A morte mais humilhante
-01:16 Do Getsêmani à cruz
-03:21 1ª frase: "Pai, perdoa-lhes"
-04:08 2ª frase: "Hoje você estará comigo no paraíso"
-05:17 3ª frase: "Aí está o seu filho"
-05:46 4ª frase: "Por que me abandonaste?"
-06:17 5ª e 6ª frases: "Tenho sede" e "Está consumado!"
-06:45 7ª frase e o véu rasgado
-07:48 O caminho está aberto
+00:44 A morte mais humilhante
+01:18 Do Getsêmani à cruz
+03:17 1ª frase: "Pai, perdoa-lhes"
+04:07 2ª frase: "Hoje você estará comigo no paraíso"
+05:11 3ª frase: "Aí está o seu filho"
+05:40 4ª frase: "Por que me abandonaste?"
+06:13 5ª e 6ª frases: "Tenho sede" e "Está consumado!"
+06:40 7ª frase e o véu rasgado
+07:40 O caminho está aberto
 
 Histórias bíblicas contadas do jeito que foram escritas, com os detalhes que a gente costuma pular. Vídeo novo toda semana.
 

@@ -62,7 +62,7 @@ const SEGS = [
   [226.42, 228.83, '“Pai, perdoa-lhes, | pois não sabem o que estão fazendo.”', [[226.42, 226.72], [227.17, 228.83]]],
   [229.41, 233.39, 'Logo depois, os soldados dividiram | as roupas dele, tirando sortes.', [[229.41, 231.58], [231.6, 233.39]]],
   [233.94, 238.99, 'João conta que isso cumpriu uma frase | do Salmo 22, escrita séculos antes:', [[233.94, 236.41], [236.43, 238.99]]],
-  [239.47, 244.07, '“Dividiram as minhas roupas entre si, | e tiraram sortes pelas minhas vestes.”', [[239.47, 241.5], [241.87, 244.07]]],
+  [239.47, 244.07, '!“Dividiram as minhas roupas entre si, | e tiraram sortes pelas minhas vestes.”', [[239.47, 241.5], [241.87, 244.07]]],
   [244.66, 246.79, 'Guarda esse salmo. Ele vai voltar.'],
   [247.91, 253.17, 'Os que passavam balançavam a cabeça e provocavam: | “Desça da cruz, se é Filho de Deus!”', [[247.91, 250.77], [251.21, 253.17]]],
   [253.74, 259.20, 'Os líderes religiosos debochavam: “Salvou os outros, | mas não é capaz de salvar a si mesmo!”', [[253.74, 256.96], [256.98, 259.2]]],
