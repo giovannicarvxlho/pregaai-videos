@@ -11,8 +11,12 @@ const FPS = 30;
   page.on('pageerror', (e) => { console.error('ERRO:', e.message); process.exit(1); });
   await page.goto('file://' + path.join(__dirname, 'index.html') + '?ep=' + ep);
   await page.evaluate(() => window.ready);
-  const total = Math.round((await page.evaluate(() => DURATION)) * FPS);
-  const per = Math.ceil(total / n), a = k * per, b = Math.min(total, a + per);
+  const [vw, vh] = await page.evaluate(() => [W, H]);
+  await page.setViewportSize({ width: vw, height: vh });
+  // T0/T1 (segundos, opcionais) renderizam só um trecho, para revisar partes de um vídeo longo.
+  const f0 = Math.round(Number(process.env.T0 || 0) * FPS);
+  const total = Math.round((process.env.T1 ? Number(process.env.T1) : await page.evaluate(() => DURATION)) * FPS) - f0;
+  const per = Math.ceil(total / n), a = f0 + k * per, b = Math.min(f0 + total, a + per);
   const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-c:v', 'mjpeg', '-framerate', String(FPS), '-i', '-',
     '-c:v', 'libx264', '-preset', 'fast', '-crf', '10', '-pix_fmt', 'yuv420p', out], { stdio: ['pipe', 'inherit', 'inherit'] });
   const t0 = Date.now();

@@ -91,17 +91,33 @@ mark { background: linear-gradient(var(--b300), var(--b300)) no-repeat; backgrou
 .play { margin-top: 34px; width: 500px; }
 .follow { margin-top: 48px; font: 600 40px/1 Geist; color: var(--b500); }
 .legal { position: absolute; left: 0; right: 0; top: 1478px; text-align: center; font: 500 22px/1.3 Geist; color: var(--muted); }
+/* vídeo longo, 1920×1080: legenda embaixo numa linha larga, referência no alto,
+   cartão final à esquerda (a direita fica livre para a tela final do YouTube) */
+html.wide, .wide body, .wide #root { width: 1920px; height: 1080px; }
+.wide .ref { top: 46px; font-size: 26px; }
+.wide .cap { top: 920px; width: 1560px; font-size: 58px; line-height: 1.18; }
+.wide .end { left: 120px; right: auto; top: 150px; width: 820px; }
+.wide .legal { top: auto; bottom: 40px; left: 120px; right: auto; width: 820px; }
 .end-refs span { padding: 12px 22px; background: var(--surface); border: 3px solid var(--border); border-radius: 18px; box-shadow: 0 6px 0 0 var(--border);
   font: 600 36px/1.2 'Geist Mono'; color: var(--ink); }
 </style>
 </head>
 <body>
 <div id="root"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg><div id="scene" class="layer"></div><div id="chrome" class="layer"></div></div>
+<script>
+// O episódio vem da URL: index.html?ep=valentes-de-davi-2. O data.js vem antes do
+// lib.js porque é ele que diz o formato (FORMAT = 'wide' no vídeo longo).
+const EP = new URLSearchParams(location.search).get('ep');
+document.write(`<script src="episodios/${EP}/data.js"><\/script>`);
+</script>
 <script src="lib.js"></script>
 <script>
-// O episódio vem da URL: index.html?ep=valentes-de-davi-2
-const EP = new URLSearchParams(location.search).get('ep');
-document.write(`<script src="episodios/${EP}/data.js"><\/script><script src="episodios/${EP}/scenes.js"><\/script>`);
+document.write(`<script src="episodios/${EP}/scenes.js"><\/script>`);
+if (WIDE) {
+  document.documentElement.classList.add('wide');
+  const st = document.getElementById('stage');
+  st.setAttribute('viewBox', `0 0 ${W} ${H}`); st.setAttribute('width', W); st.setAttribute('height', H);
+}
 </script>
 <script>
 const CHUNKS = buildChunks(SEGS);

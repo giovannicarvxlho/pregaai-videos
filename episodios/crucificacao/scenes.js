@@ -9,40 +9,6 @@ const JESUS = { robe: '#A33A44', skin: '#B97A4A', hair: '#2F2622', beard: true }
 const soldado = (seed, extra = {}) => ({ ...man(seed), cover: null, beard: false, robe: C.p600, gear: { helmet: 'rom', armor: true }, ...extra });
 const lider = (seed, extra = {}) => ({ ...man(seed), cover: COVERS[seed % 4], beard: true, ...extra });
 
-// Cruz com o corpo em silhueta. Base em (x, base); ~530 de altura em s = 1.
-// o.bow (0..1) curva a cabeça (João 19:30); o.plaque põe a placa (Mateus 27:37);
-// o.body = false desenha só a madeira; o.rot deita a cruz (graus, a partir da base).
-function crossFig(x, base, s, o = {}) {
-  const c = o.fill || SIL, b = o.bow || 0, rim = o.rim;
-  const wood = o.wood ? `fill="${C.wood}" ${ink(6)}` : `fill="${c}"`;
-  let g = `<rect x="-15" y="-530" width="30" height="530" ${wood}/><rect x="-162" y="-442" width="324" height="28" ${wood}/>`;
-  if (o.plaque) g += `<rect x="-42" y="-524" width="84" height="34" ${wood}/>`;
-  const body = (col) => `<path d="M -36 -410 Q 0 -418 36 -410 L 25 -292 L 27 -282 L 14 -150 L -14 -150 L -27 -282 L -25 -292 Z" fill="${col}"/>
-    <line x1="-28" y1="-404" x2="-146" y2="-428" stroke="${col}" stroke-width="22" stroke-linecap="round"/><line x1="28" y1="-404" x2="146" y2="-428" stroke="${col}" stroke-width="22" stroke-linecap="round"/>
-    <path d="M -9 -420 L 9 -420 L ${f1(9 + b * 10)} ${f1(-404 + b * 6)} L ${f1(-9 + b * 10)} ${f1(-404 + b * 6)} Z" fill="${col}"/>
-    <circle cx="${f1(b * 13)}" cy="${f1(-442 + b * 26)}" r="27" fill="${col}"/>`;
-  if (o.body !== false) g += (rim ? `<g transform="translate(-5 -4)">${body(rim)}</g>` : '') + body(c);
-  return `<g transform="translate(${f1(x)} ${f1(base)}) rotate(${f1(o.rot || 0)}) scale(${s})"${o.op != null ? ` opacity="${f1(o.op * 100) / 100}"` : ''}>${g}</g>`;
-}
-
-// Gólgota: o morro em primeiro plano (João 19:20: o lugar ficava perto da cidade).
-function hill(cx, top, hw, fill, ol = C.ink) {
-  const b = f1(top + hw * 0.42);
-  return `<path d="M ${cx - hw - 10} ${H + 600} L ${cx - hw} ${b} C ${cx - hw * 0.55} ${top + 30} ${cx - hw * 0.3} ${top} ${cx} ${top} C ${cx + hw * 0.3} ${top} ${cx + hw * 0.55} ${top + 30} ${cx + hw} ${b} L ${cx + hw + 10} ${H + 600} Z" fill="${fill}" ${ink(6, ol)}/>`;
-}
-
-// Céu nublado do dia da cruz.
-function bgGloom(t, o = {}) {
-  const sd = o.seed || 7;
-  let s = `<rect y="-600" width="${W}" height="${H + 1200}" fill="url(#skyGloom)"/>`;
-  if (o.sun) s += sun(o.sun[0], o.sun[1], 54, t);
-  s += cloud(((120 + t * 8) % 1400) - 200, 360, 0.9, '#ECE8E3', '#D3CCC4') + cloud(((760 + t * 5) % 1400) - 200, 280, 0.66, '#ECE8E3', '#D3CCC4');
-  s += hills(905, 80, 0.0032, sd, '#D8D0C7') + hills(985, 55, 0.0055, sd + 2, '#CDC3B8');
-  s += floor('day');
-  return s;
-}
-const bgDark = (t) => bgNight(t, { moon: false, starOp: 0 });
-
 // As três cruzes no morro. k = quanto cada cruz já está de pé (0 deitada, 1 erguida).
 function golgota(t, o = {}) {
   const dark = o.dark, k = o.k || [1, 1, 1];
@@ -78,16 +44,6 @@ function scNaoDesceu(t) {
 
 // ---------------------------------------------------------------- 3 e 4. o pretório
 // Manto vermelho e coroa de espinhos (Mateus 27:27-29). Os soldados se ajoelham de deboche.
-function thornCrown(px, py, ps, drop = 0) {
-  let g = '';
-  for (const k of [0, 1]) g += `<ellipse cx="0" cy="${-236 + k * 4}" rx="44" ry="11" transform="rotate(${k ? -5 : 5} 0 -236)" fill="none" stroke="${C.ink}" stroke-width="13"/><ellipse cx="0" cy="${-236 + k * 4}" rx="44" ry="11" transform="rotate(${k ? -5 : 5} 0 -236)" fill="none" stroke="#7A5A3A" stroke-width="6"/>`;
-  for (let i = 0; i < 13; i++) {
-    const a = (i / 12) * Math.PI * 2, x = Math.cos(a) * 44, y = -236 + Math.sin(a) * 11;
-    const dx = Math.cos(a) * 12 + (i % 2 ? 4 : -4), dy = Math.sin(a) > 0 ? 9 : -14;
-    g += `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + dx)}" y2="${f1(y + dy)}" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>`;
-  }
-  return `<g transform="translate(${f1(px)} ${f1(py - drop)}) scale(${ps})">${g}</g>`;
-}
 function pretorio(t, o) {
   let s = `<rect width="${W}" height="${H}" fill="${C.g200}"/>`;
   for (let r = 0; r < 14; r++) for (let c = 0; c < 7; c++) {
@@ -197,32 +153,8 @@ function scEntregou(t) {
 function scVeu(t) {
   const t0 = wordTime(11, 'rasgou') - 0.1, t1 = wordTime(11, 'baixo') + 0.3;
   const p = E.inOut(prog(t, t0, t1)), quake = prog(t, t0, t0 + 0.2) * (1 - prog(t, t1, t1 + 0.6));
-  const X0 = 150, X1 = 930, Y0 = 330, Y1 = 1215;
   let s = `<rect width="${W}" height="${H}" fill="#1E1A17"/>` + floor('dusk', 0, 1200);
-  s += `<circle cx="540" cy="700" r="520" fill="url(#gAmber)" opacity="${f1((0.25 + 0.6 * p) * 100) / 100}"/><rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#FFF6DF"/>`;
-  // luz que passa pelo rasgo e cai no chão
-  const q = prog(p, 0.75, 1); // a luz só chega ao chão quando o rasgo chega embaixo
-  if (q > 0) s += `<path d="M ${540 - 70 * q} ${Y1} L ${540 + 70 * q} ${Y1} L ${540 + 420 * q} 1900 L ${540 - 420 * q} 1900 Z" fill="url(#gBeam)" opacity="${f1(q * 0.7 * 100) / 100}"/>`;
-  const yf = lerp(Y0, Y1 + 30, p), r = rng(77);
-  const jag = []; for (let y = Y0; y <= Y1; y += 30) jag.push([y, (r() - 0.5) * 22]);
-  const gap = (y) => (y >= yf ? 0 : 150 * p * Math.pow((yf - y) / (yf - Y0), 0.8));
-  const half = (side) => {
-    const edge = jag.map(([y, j]) => `${f1(540 + side * gap(y) / 2 + j)} ${y}`);
-    return `M ${side < 0 ? X0 : X1} ${Y0} L ${edge.join(' L ')} L ${side < 0 ? X0 : X1} ${Y1} Z`;
-  };
-  let cloth = rect(X0, Y0, X1 - X0, Y1 - Y0, C.b500);
-  for (let x = X0 + 60; x < X1; x += 78) cloth += `<line x1="${x}" y1="${Y0}" x2="${x}" y2="${Y1}" stroke="${C.b600}" stroke-width="10"/>`;
-  [[Y0 + 40, '#5B3F7A'], [Y0 + 70, C.r600], [Y1 - 110, C.r600], [Y1 - 80, '#5B3F7A']].forEach(([y, c]) => (cloth += rect(X0, y, X1 - X0, 22, c)));
-  [-1, 1].forEach((side) => {
-    s += `<clipPath id="veu${side}"><path d="${half(side)}"/></clipPath><g clip-path="url(#veu${side})">${cloth}</g>`;
-    const torn = jag.filter(([y]) => y <= yf + 30);
-    if (p > 0 && torn.length > 1) s += `<path d="M ${torn.map(([y, j]) => `${f1(540 + side * gap(y) / 2 + j)} ${y}`).join(' L ')}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`;
-  });
-  // abaixo da ponta do rasgo o véu ainda é uma peça só (cobre a emenda das duas metades)
-  if (yf < Y1) s += `<clipPath id="veuB"><rect x="${X0}" y="${f1(yf)}" width="${X1 - X0}" height="${f1(Y1 - yf)}"/></clipPath><g clip-path="url(#veuB)">${cloth}</g>`;
-  s += `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="none" stroke="${C.ink}" stroke-width="7"/>`;
-  s += rect(X0 - 50, Y0 - 34, X1 - X0 + 100, 30, C.a400, `rx="15" ${ink(6)}`);
-  for (let x = X0 + 20; x < X1; x += 76) s += `<circle cx="${x}" cy="${Y0 - 4}" r="11" fill="none" stroke="${C.a600}" stroke-width="6"/>`;
+  s += `<circle cx="540" cy="700" r="520" fill="url(#gAmber)" opacity="${f1((0.25 + 0.6 * p) * 100) / 100}"/>` + veil(p, 150, 930, 330, 1215);
   const sh = Math.sin(t * 43) * 9 * quake, sv = Math.cos(t * 37) * 6 * quake;
   return { svg: cam(s, 540, 760, 1.02 + 0.04 * prog(t, at(11), at(12)), sh, sv), html: '' };
 }

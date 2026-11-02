@@ -1,7 +1,10 @@
 // Primitivas de desenho e animação. Tudo é função pura do tempo: o mesmo t
 // sempre gera o mesmo quadro, então o render pode pular, repetir e paralelizar.
 
-const W = 1080, H = 1920;
+// Formato: vertical 1080×1920 (Shorts) ou, com FORMAT = 'wide' no data.js do episódio,
+// horizontal 1920×1080 (vídeo longo). O data.js carrega antes deste arquivo.
+const WIDE = typeof FORMAT !== 'undefined' && FORMAT === 'wide';
+const W = WIDE ? 1920 : 1080, H = WIDE ? 1080 : 1920;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const lerp = (a, b, t) => a + (b - a) * t;
 const prog = (t, a, b) => clamp((t - a) / (b - a));
@@ -55,7 +58,7 @@ function radial(id, color, op = 1) {
 }
 
 // Morro suave: soma de senoides, fechado até o pé da tela.
-function hills(y0, amp, freq, seed, fill, ox = 0, x0 = -400, x1 = 1480) {
+function hills(y0, amp, freq, seed, fill, ox = 0, x0 = -400, x1 = W + 400) {
   const r = rng(seed); const ph1 = r() * 6.28, ph2 = r() * 6.28, ph3 = r() * 6.28;
   let d = `M ${x0} ${H + 400}`;
   for (let x = x0; x <= x1; x += 24) {
@@ -550,16 +553,16 @@ const DEFS = `<defs>
 
 const cam = (inner, cx, cy, s, tx = 0, ty = 0) => `<g transform="translate(${f1(cx + tx)} ${f1(cy + ty)}) scale(${(s).toFixed(4)}) translate(${-cx} ${-cy})">${inner}</g>`;
 const pop = (t, t0, d = 0.35) => { const p = prog(t, t0, t0 + d); return p <= 0 ? 0 : E.back(p); };
-const GROUND = 1040;
+const GROUND = WIDE ? 640 : 1040; // linha do horizonte
 
 // Chão até o pé da tela, com pedrinhas e tufos (com paralaxe quando a câmera anda).
 function floor(kind, ox = 0, y0 = GROUND) {
   const P = { day: ['gFloorDay', '#D3C7BA', C.ink], night: ['gFloorNight', '#23272B', '#060708'], dusk: ['gFloorDusk', '#3A2D26', '#0E0B09'] }[kind];
-  let s = `<rect x="-400" y="${y0}" width="1880" height="${H - y0 + 400}" fill="url(#${P[0]})"/>`;
+  let s = `<rect x="-400" y="${y0}" width="${W + 800}" height="${H - y0 + 400}" fill="url(#${P[0]})"/>`;
   const r = rng(kind.length * 31 + 7);
-  for (let i = 0; i < 24; i++) {
+  for (let i = 0; i < (WIDE ? 40 : 24); i++) {
     const depth = r(), y = y0 + 110 + depth * (H - y0 - 90), sc = 0.5 + depth * 1.2;
-    const x = ((((r() * 1700 - ox * (0.8 + depth * 0.7)) % 1700) + 1700) % 1700) - 300;
+    const span = W + 620, x = ((((r() * span - ox * (0.8 + depth * 0.7)) % span) + span) % span) - 300;
     const w = f1(2.6 * Math.min(sc, 1.3));
     if (r() < 0.5) s += `<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(13 * sc)}" ry="${f1(7 * sc)}" fill="${P[1]}" stroke="${P[2]}" stroke-width="${w}"/>`;
     else s += `<path d="M ${f1(x - 11 * sc)} ${f1(y)} Q ${f1(x - 9 * sc)} ${f1(y - 16 * sc)} ${f1(x - 16 * sc)} ${f1(y - 25 * sc)} M ${f1(x)} ${f1(y)} Q ${f1(x)} ${f1(y - 21 * sc)} ${f1(x + 3 * sc)} ${f1(y - 32 * sc)} M ${f1(x + 11 * sc)} ${f1(y)} Q ${f1(x + 10 * sc)} ${f1(y - 15 * sc)} ${f1(x + 18 * sc)} ${f1(y - 23 * sc)}" stroke="${P[2]}" stroke-width="${w}" fill="none" stroke-linecap="round" opacity="0.5"/>`;
@@ -567,28 +570,112 @@ function floor(kind, ox = 0, y0 = GROUND) {
   return s;
 }
 
+// Duas nuvens que atravessam o céu devagar (as cores mudam no céu nublado).
+function clouds(t, ox = 0, fill, edge, sp = [9, 6], x0 = [140, 760]) {
+  const wrap = W + 320, y = WIDE ? [170, 105] : [400, 320];
+  return cloud(((x0[0] + t * sp[0] - ox * 0.08) % wrap) - 200, y[0], 0.9, fill, edge) + cloud(((x0[1] + t * sp[1] - ox * 0.08) % wrap) - 200, y[1], 0.66, fill, edge);
+}
+
+// Céu nublado (o dia da cruz).
+function bgGloom(t, o = {}) {
+  const sd = o.seed || 7;
+  let s = `<rect x="-600" y="-600" width="${W + 1200}" height="${H + 1200}" fill="url(#skyGloom)"/>`;
+  if (o.sun) s += sun(o.sun[0], o.sun[1], 54, t);
+  s += WIDE ? clouds(t, 0, '#ECE8E3', '#D3CCC4', [8, 5], [120, 760])
+    : cloud(((120 + t * 8) % 1400) - 200, 360, 0.9, '#ECE8E3', '#D3CCC4') + cloud(((760 + t * 5) % 1400) - 200, 280, 0.66, '#ECE8E3', '#D3CCC4');
+  s += hills(GROUND - 135, 80, 0.0032, sd, '#D8D0C7') + hills(GROUND - 55, 55, 0.0055, sd + 2, '#CDC3B8');
+  s += floor('day');
+  return s;
+}
+const bgDark = (t) => bgNight(t, { moon: false, starOp: 0 });
+
+// Morro em primeiro plano, topo em (cx, top), meia largura hw.
+function hill(cx, top, hw, fill, ol = C.ink) {
+  const b = f1(top + hw * 0.42);
+  return `<path d="M ${cx - hw - 10} ${H + 600} L ${cx - hw} ${b} C ${cx - hw * 0.55} ${top + 30} ${cx - hw * 0.3} ${top} ${cx} ${top} C ${cx + hw * 0.3} ${top} ${cx + hw * 0.55} ${top + 30} ${cx + hw} ${b} L ${cx + hw + 10} ${H + 600} Z" fill="${fill}" ${ink(6, ol)}/>`;
+}
+
+// Cruz com o corpo em silhueta (sem sangue nem ferida). Base em (x, base); ~530 de altura em s = 1.
+// o.bow (0..1) curva a cabeça (João 19:30); o.plaque põe a placa (Mateus 27:37);
+// o.body = false desenha só a madeira; o.wood pinta a madeira; o.rot deita a cruz (graus, a partir da base).
+function crossFig(x, base, s, o = {}) {
+  const c = o.fill || '#16110F', b = o.bow || 0, rim = o.rim;
+  const wood = o.wood ? `fill="${C.wood}" ${ink(6)}` : `fill="${c}"`;
+  let g = `<rect x="-15" y="-530" width="30" height="530" ${wood}/><rect x="-162" y="-442" width="324" height="28" ${wood}/>`;
+  if (o.plaque) g += `<rect x="-42" y="-524" width="84" height="34" ${wood}/>`;
+  const body = (col) => `<path d="M -36 -410 Q 0 -418 36 -410 L 25 -292 L 27 -282 L 14 -150 L -14 -150 L -27 -282 L -25 -292 Z" fill="${col}"/>
+    <line x1="-28" y1="-404" x2="-146" y2="-428" stroke="${col}" stroke-width="22" stroke-linecap="round"/><line x1="28" y1="-404" x2="146" y2="-428" stroke="${col}" stroke-width="22" stroke-linecap="round"/>
+    <path d="M -9 -420 L 9 -420 L ${f1(9 + b * 10)} ${f1(-404 + b * 6)} L ${f1(-9 + b * 10)} ${f1(-404 + b * 6)} Z" fill="${col}"/>
+    <circle cx="${f1(b * 13)}" cy="${f1(-442 + b * 26)}" r="27" fill="${col}"/>`;
+  if (o.body !== false) g += (rim ? `<g transform="translate(-5 -4)">${body(rim)}</g>` : '') + body(c);
+  return `<g transform="translate(${f1(x)} ${f1(base)}) rotate(${f1(o.rot || 0)}) scale(${s})"${o.op != null ? ` opacity="${f1(o.op * 100) / 100}"` : ''}>${g}</g>`;
+}
+
+// Coroa de espinhos na cabeça de quem tem os pés em (px, py) e escala ps; drop a levanta.
+function thornCrown(px, py, ps, drop = 0) {
+  let g = '';
+  for (const k of [0, 1]) g += `<ellipse cx="0" cy="${-236 + k * 4}" rx="44" ry="11" transform="rotate(${k ? -5 : 5} 0 -236)" fill="none" stroke="${C.ink}" stroke-width="13"/><ellipse cx="0" cy="${-236 + k * 4}" rx="44" ry="11" transform="rotate(${k ? -5 : 5} 0 -236)" fill="none" stroke="#7A5A3A" stroke-width="6"/>`;
+  for (let i = 0; i < 13; i++) {
+    const a = (i / 12) * Math.PI * 2, x = Math.cos(a) * 44, y = -236 + Math.sin(a) * 11;
+    const dx = Math.cos(a) * 12 + (i % 2 ? 4 : -4), dy = Math.sin(a) > 0 ? 9 : -14;
+    g += `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x + dx)}" y2="${f1(y + dy)}" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>`;
+  }
+  return `<g transform="translate(${f1(px)} ${f1(py - drop)}) scale(${ps})">${g}</g>`;
+}
+
+// Véu do santuário (Mateus 27:51), azul, roxo e vermelho (Êxodo 26:31), de X0 a X1 e de Y0 a Y1,
+// com a luz atrás. p (0..1) é o rasgo, de alto a baixo; a luz só chega ao chão quando ele termina.
+// o.beamTo: até onde a luz desce; o.id: prefixo dos recortes (dois véus no mesmo quadro).
+function veil(p, X0, X1, Y0, Y1, o = {}) {
+  const cx = (X0 + X1) / 2, id = o.id || 'veu', beamTo = o.beamTo ?? H - 20, gapMax = o.gapMax ?? 150;
+  let s = `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#FFF6DF"/>`;
+  const q = prog(p, 0.75, 1);
+  if (q > 0) s += `<path d="M ${cx - 70 * q} ${Y1} L ${cx + 70 * q} ${Y1} L ${cx + 420 * q} ${beamTo} L ${cx - 420 * q} ${beamTo} Z" fill="url(#gBeam)" opacity="${f1(q * 0.7 * 100) / 100}"/>`;
+  const yf = lerp(Y0, Y1 + 30, p), r = rng(77);
+  const jag = []; for (let y = Y0; y <= Y1; y += 30) jag.push([y, (r() - 0.5) * 22]);
+  const gap = (y) => (y >= yf ? 0 : gapMax * p * Math.pow((yf - y) / (yf - Y0), 0.8));
+  const half = (side) => {
+    const edge = jag.map(([y, j]) => `${f1(cx + side * gap(y) / 2 + j)} ${y}`);
+    return `M ${side < 0 ? X0 : X1} ${Y0} L ${edge.join(' L ')} L ${side < 0 ? X0 : X1} ${Y1} Z`;
+  };
+  let cloth = rect(X0, Y0, X1 - X0, Y1 - Y0, C.b500);
+  for (let x = X0 + 60; x < X1; x += 78) cloth += `<line x1="${x}" y1="${Y0}" x2="${x}" y2="${Y1}" stroke="${C.b600}" stroke-width="10"/>`;
+  [[Y0 + 40, '#5B3F7A'], [Y0 + 70, C.r600], [Y1 - 110, C.r600], [Y1 - 80, '#5B3F7A']].forEach(([y, c]) => (cloth += rect(X0, y, X1 - X0, 22, c)));
+  [-1, 1].forEach((side) => {
+    s += `<clipPath id="${id}${side}"><path d="${half(side)}"/></clipPath><g clip-path="url(#${id}${side})">${cloth}</g>`;
+    const torn = jag.filter(([y]) => y <= yf + 30);
+    if (p > 0 && torn.length > 1) s += `<path d="M ${torn.map(([y, j]) => `${f1(cx + side * gap(y) / 2 + j)} ${y}`).join(' L ')}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`;
+  });
+  // abaixo da ponta do rasgo o véu ainda é uma peça só (cobre a emenda das duas metades)
+  if (yf < Y1) s += `<clipPath id="${id}B"><rect x="${X0}" y="${f1(yf)}" width="${X1 - X0}" height="${f1(Y1 - yf)}"/></clipPath><g clip-path="url(#${id}B)">${cloth}</g>`;
+  s += `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="none" stroke="${C.ink}" stroke-width="7"/>`;
+  s += rect(X0 - 50, Y0 - 34, X1 - X0 + 100, 30, C.a400, `rx="15" ${ink(6)}`);
+  for (let x = X0 + 20; x < X1; x += 76) s += `<circle cx="${x}" cy="${Y0 - 4}" r="11" fill="none" stroke="${C.a600}" stroke-width="6"/>`;
+  return s;
+}
+
 function bgDay(t, o = {}) {
   const ox = o.ox || 0, seed = o.seed || 3;
   let s = `<rect width="${W}" height="${H}" fill="url(#skyDay)"/>`;
-  if (o.sun !== false) s += sun(o.sunX ?? 830, o.sunY ?? 520, 58, t);
-  s += cloud(((140 + t * 9 - ox * 0.08) % 1400) - 200, 400, 0.9) + cloud(((760 + t * 6 - ox * 0.08) % 1400) - 200, 320, 0.66);
-  s += hills(905, 80, 0.0032, seed, '#E3DBD2', ox * 0.3) + hills(985, 55, 0.0055, seed + 2, '#D6CBC0', ox * 0.6);
+  if (o.sun !== false) s += sun(o.sunX ?? (WIDE ? 1500 : 830), o.sunY ?? (WIDE ? 250 : 520), 58, t);
+  s += clouds(t, ox);
+  s += hills(GROUND - 135, 80, 0.0032, seed, '#E3DBD2', ox * 0.3) + hills(GROUND - 55, 55, 0.0055, seed + 2, '#D6CBC0', ox * 0.6);
   s += floor('day', ox);
   return s;
 }
 function bgNight(t, o = {}) {
   const ox = o.ox || 0;
-  let s = `<rect width="${W}" height="${H}" fill="url(#${o.sky || 'skyNight'})"/>` + stars(t, 70, 11, 980, o.starOp ?? 1);
-  if (o.moon !== false) s += moon(o.moonX ?? 820, o.moonY ?? 480, 46, '#14181D');
-  s += hills(920, 80, 0.0032, 7, '#1F2428', ox * 0.3) + hills(990, 55, 0.0055, 9, '#191D21', ox * 0.6);
+  let s = `<rect width="${W}" height="${H}" fill="url(#${o.sky || 'skyNight'})"/>` + stars(t, WIDE ? 110 : 70, 11, GROUND - 60, o.starOp ?? 1);
+  if (o.moon !== false) s += moon(o.moonX ?? (WIDE ? 1500 : 820), o.moonY ?? (WIDE ? 220 : 480), 46, '#14181D');
+  s += hills(GROUND - 120, 80, 0.0032, 7, '#1F2428', ox * 0.3) + hills(GROUND - 50, 55, 0.0055, 9, '#191D21', ox * 0.6);
   s += floor('night', ox);
   return s;
 }
 function bgDusk(t, o = {}) {
   const ox = o.ox || 0;
   let s = `<rect width="${W}" height="${H}" fill="url(#${o.sky || 'skyDusk'})"/>`;
-  s += `<circle cx="${600 - ox * 0.2}" cy="980" r="520" fill="url(#gPeach)" opacity="0.35"/>`;
-  s += hills(925, 70, 0.0032, 13, '#3B2D26', ox * 0.3) + hills(995, 50, 0.0055, 15, '#30251F', ox * 0.6);
+  s += `<circle cx="${(WIDE ? 1050 : 600) - ox * 0.2}" cy="${GROUND - 60}" r="${WIDE ? 760 : 520}" fill="url(#gPeach)" opacity="0.35"/>`;
+  s += hills(GROUND - 115, 70, 0.0032, 13, '#3B2D26', ox * 0.3) + hills(GROUND - 45, 50, 0.0055, 15, '#30251F', ox * 0.6);
   s += floor('dusk', ox);
   return s;
 }

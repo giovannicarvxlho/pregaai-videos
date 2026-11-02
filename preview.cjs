@@ -10,6 +10,8 @@ const path = require('path');
   page.on('console', (m) => { if (m.type() === 'error') console.error('console:', m.text()); });
   await page.goto('file://' + path.join(__dirname, 'index.html') + '?ep=' + ep);
   await page.evaluate(() => window.ready);
+  const [vw, vh] = await page.evaluate(() => [W, H]);
+  await page.setViewportSize({ width: vw, height: vh });
   for (const t of times) {
     await page.evaluate((t) => window.renderFrame(t), t);
     await page.screenshot({ path: path.join(__dirname, 'prev', `t_${t.toFixed(2).padStart(6, '0')}.png`) });
