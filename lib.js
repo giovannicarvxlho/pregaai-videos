@@ -418,14 +418,15 @@ function person(o) {
   }
   if (o.beard) h += `<path d="M -34 -202 C -34 -175 -17 -162 0 -162 C 17 -162 34 -175 34 -202 C 24 -191 12 -187 0 -187 C -12 -187 -24 -191 -34 -202 Z" fill="${hair}" ${st(4)}/>`;
   if (gear.helmet === 'isr') h += `<path d="M -41 -202 C -41 -252 41 -252 41 -202 L 45 -196 L -45 -196 Z" fill="${col(C.g700)}" ${st()}/><rect x="-5" y="-260" width="10" height="16" rx="5" fill="${col(C.ch200)}" ${st(3)}/>`;
-  // romano: 'rom' com a crista de frente para trás, 'cent' (centurião) com a crista atravessada
+  // romano: 'rom' com a crista de frente para trás, 'cent' (centurião) com a crista atravessada.
+  // O casco fica acima das sobrancelhas, para os olhos não caírem em cima dele.
   if (gear.helmet === 'rom' || gear.helmet === 'cent') {
     h += gear.helmet === 'cent'
-      ? `<path d="M -52 -232 C -48 -298 48 -298 52 -232 C 34 -256 -34 -256 -52 -232 Z" fill="${col(C.r600)}" ${st(4)}/>` +
-        (sil ? '' : [-3, -2, -1, 0, 1, 2, 3].map((i) => `<line x1="${i * 12}" y1="${-254 + Math.abs(i) * 3}" x2="${i * 14}" y2="${-279 + Math.abs(i) * 6}" stroke="${shade(C.r600, 0.72)}" stroke-width="3" stroke-linecap="round"/>`).join(''))
-      : `<rect x="-10" y="-294" width="20" height="56" rx="9" fill="${col(C.r600)}" ${st(4)}/>`;
-    h += `<path d="M -45 -198 L -47 -168 Q -40 -160 -31 -168 L -30 -198 Z M 45 -198 L 47 -168 Q 40 -160 31 -168 L 30 -198 Z" fill="${col(C.a400)}" ${st(4)}/>`;
-    h += `<path d="M -41 -202 C -41 -252 41 -252 41 -202 L 47 -194 L -47 -194 Z" fill="${col(C.a400)}" ${st()}/>`;
+      ? `<path d="M -52 -248 C -48 -314 48 -314 52 -248 C 34 -272 -34 -272 -52 -248 Z" fill="${col(C.r600)}" ${st(4)}/>` +
+        (sil ? '' : [-3, -2, -1, 0, 1, 2, 3].map((i) => `<line x1="${i * 12}" y1="${-270 + Math.abs(i) * 3}" x2="${i * 14}" y2="${-295 + Math.abs(i) * 6}" stroke="${shade(C.r600, 0.72)}" stroke-width="3" stroke-linecap="round"/>`).join(''))
+      : `<rect x="-10" y="-312" width="20" height="56" rx="9" fill="${col(C.r600)}" ${st(4)}/>`;
+    h += `<path d="M -45 -230 L -47 -168 Q -40 -160 -31 -168 L -31 -230 Z M 45 -230 L 47 -168 Q 40 -160 31 -168 L 31 -230 Z" fill="${col(C.a400)}" ${st(4)}/>`;
+    h += `<path d="M -40 -232 C -40 -272 40 -272 40 -232 L 46 -228 L -46 -228 Z" fill="${col(C.a400)}" ${st()}/>`;
   }
   if (gear.crown) {
     h += `<path d="M -32 -238 L -36 -280 L -18 -258 L 0 -286 L 18 -258 L 36 -280 L 32 -238 Z" fill="${col(gear.crown === true ? C.a300 : gear.crown)}" ${st(5)}/>`;
