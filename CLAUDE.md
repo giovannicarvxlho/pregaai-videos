@@ -38,3 +38,11 @@ Um texto só para TikTok e YouTube, nesta ordem:
 6. `#históriasbíblicas #shorts #fé #bíblia` e uma do personagem. `#históriasbíblicas` vem primeiro porque o YouTube mostra as três primeiras acima do título.
 
 Mesmas regras do roteiro: sem travessão e com cada afirmação conferida na NVI.
+
+## Vídeo longo (aprovado em 02/11/2026, referência: `episodios/sete-frases-na-cruz`)
+
+- 16:9, 1920×1080 (`const FORMAT = 'wide'` no `data.js`). Mesmo traço e mesmas regras de texto dos Shorts.
+- Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar: o vídeo precisa passar de 8 min para ter anúncio no meio.
+- Cenas de explicação (cartões com os livros, versículos em cartão) valem aqui, porque são a cena inteira e não algo por cima da ilustração.
+- Quando o roteiro vier de fora, confira tudo na NVI antes de produzir e diga o que foi corrigido.
+- Miniatura 1280×720 no estilo da capa, com o texto somando ao título e nada no canto de baixo à direita (a duração do YouTube cobre).
