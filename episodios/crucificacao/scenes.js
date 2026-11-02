@@ -106,7 +106,7 @@ function pretorio(t, o) {
   return s;
 }
 function scCoroa(t) {
-  const tc = wordTime(2, 'coroa'), drop = 260 * (1 - E.in(prog(t, tc - 0.35, tc + 0.05)));
+  const tc = wordTime(2, 'coroa'), drop = 1000 * (1 - E.in(prog(t, tc - 0.35, tc + 0.05)));
   let s = pretorio(t, { drop: t < tc - 0.35 ? 2000 : drop });
   const z = lerp(1.0, 1.5, E.inOut(prog(t, tc - 0.1, wordTime(2, 'espinhos') + 0.5)));
   return { svg: cam(s, 540, 1250, z), html: '' };
@@ -197,11 +197,12 @@ function scEntregou(t) {
 function scVeu(t) {
   const t0 = wordTime(11, 'rasgou') - 0.1, t1 = wordTime(11, 'baixo') + 0.3;
   const p = E.inOut(prog(t, t0, t1)), quake = prog(t, t0, t0 + 0.2) * (1 - prog(t, t1, t1 + 0.6));
-  const X0 = 150, X1 = 930, Y0 = 250, Y1 = 1215;
+  const X0 = 150, X1 = 930, Y0 = 330, Y1 = 1215;
   let s = `<rect width="${W}" height="${H}" fill="#1E1A17"/>` + floor('dusk', 0, 1200);
   s += `<circle cx="540" cy="700" r="520" fill="url(#gAmber)" opacity="${f1((0.25 + 0.6 * p) * 100) / 100}"/><rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#FFF6DF"/>`;
   // luz que passa pelo rasgo e cai no chão
-  if (p > 0) s += `<path d="M ${540 - 70 * p} ${Y1} L ${540 + 70 * p} ${Y1} L ${540 + 420 * p} 1900 L ${540 - 420 * p} 1900 Z" fill="url(#gBeam)" opacity="${f1(p * 0.7 * 100) / 100}"/>`;
+  const q = prog(p, 0.75, 1); // a luz só chega ao chão quando o rasgo chega embaixo
+  if (q > 0) s += `<path d="M ${540 - 70 * q} ${Y1} L ${540 + 70 * q} ${Y1} L ${540 + 420 * q} 1900 L ${540 - 420 * q} 1900 Z" fill="url(#gBeam)" opacity="${f1(q * 0.7 * 100) / 100}"/>`;
   const yf = lerp(Y0, Y1 + 30, p), r = rng(77);
   const jag = []; for (let y = Y0; y <= Y1; y += 30) jag.push([y, (r() - 0.5) * 22]);
   const gap = (y) => (y >= yf ? 0 : 150 * p * Math.pow((yf - y) / (yf - Y0), 0.8));
@@ -217,6 +218,8 @@ function scVeu(t) {
     const torn = jag.filter(([y]) => y <= yf + 30);
     if (p > 0 && torn.length > 1) s += `<path d="M ${torn.map(([y, j]) => `${f1(540 + side * gap(y) / 2 + j)} ${y}`).join(' L ')}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`;
   });
+  // abaixo da ponta do rasgo o véu ainda é uma peça só (cobre a emenda das duas metades)
+  if (yf < Y1) s += `<clipPath id="veuB"><rect x="${X0}" y="${f1(yf)}" width="${X1 - X0}" height="${f1(Y1 - yf)}"/></clipPath><g clip-path="url(#veuB)">${cloth}</g>`;
   s += `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="none" stroke="${C.ink}" stroke-width="7"/>`;
   s += rect(X0 - 50, Y0 - 34, X1 - X0 + 100, 30, C.a400, `rx="15" ${ink(6)}`);
   for (let x = X0 + 20; x < X1; x += 76) s += `<circle cx="${x}" cy="${Y0 - 4}" r="11" fill="none" stroke="${C.a600}" stroke-width="6"/>`;
