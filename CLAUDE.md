@@ -6,7 +6,7 @@ Vídeos curtos do PregaAI para TikTok e Shorts. Como rodar e como montar um epis
 
 - **Narração:** o Giovanni gera o mp3 no site da ElevenLabs e manda no chat. Entregue o texto num bloco de código, uma frase por linha, pronto para colar. Ajustes aprovados: voz Carlos, modelo v4, estabilidade ~45% (35% se ainda soar locutor), similaridade 80%, clone strength no padrão (Reset values), idioma Portuguese, velocidade 1,0. Com o mp3 em mãos, sincronize como no README (`segmentos.py`, `transcrever.py`, `data.js`).
 - A chave da ElevenLabs fica no secret de rede do ambiente. Nunca peça chave no chat nem grave em arquivo.
-- **Vídeo aprovado → capa junto.** Quando o Giovanni disser que um vídeo ficou bom e pedir para salvar, faça commit e push do episódio **e** gere a capa no estilo abaixo (`episodios/<ep>/capa.html` + `node capa.cjs <ep>`), e mande os dois.
+- **Vídeo aprovado → capa junto.** Quando o Giovanni disser que um vídeo ficou bom e pedir para salvar, faça commit e push do episódio **e** gere a capa pela regra abaixo (`episodios/<ep>/capa.html` + `node capa.cjs <ep>`), e mande os dois.
 - Confira todo texto bíblico na NVI (`assets/bible/nvi.json` do repo `pregaai`). Toda afirmação do roteiro tem que estar no texto. Se for inferência, escreva de um jeito que não afirme mais do que a Bíblia diz.
 - Texto visível sem travessão (decisão de 15/10/2026). Número na tela só com fonte real.
 
@@ -17,15 +17,27 @@ Vídeos curtos do PregaAI para TikTok e Shorts. Como rodar e como montar um epis
 - Roteiro curto: ~110 palavras e cenas de 1 a 4 s. Narração gerada em velocidade 1,0, com `SPEED = 1.25` no `data.js`.
 - Narração humanizada: escreva como quem conta para um amigo ("pra", "tá", "você", pergunta direta), com frases curtas. Nada de tom de locutor.
 
-## Capa (aprovada em 28/10/2026, referência: `episodios/morte-de-acabe/capa.html`)
+## Capa e miniatura (regra de 03/11/2026: família, não molde)
 
-Sempre neste estilo:
-- Fundo claro e quente (creme para pêssego), com raios brancos saindo do rosto do personagem central.
-- O rosto do personagem bem grande, com emoção clara (medo, choque), ocupando a metade de baixo.
-- Um objeto da história (flecha, seta) em amarelo e vermelho saturados, com contorno preto grosso, apontando para o rosto. É o que guia o olho.
-- Texto em Gasoek One, de 2 a 3 palavras: a linha de cima em preto com sombra branca dura, e a palavra-chave num bloco azul `#2383E2` inclinado, com borda e sombra pretas.
+Substitui o molde de 28/10 (fundo creme com raios, rosto com medo e seta em todas), que deixou as capas iguais umas às outras. A capa vende o vídeo em menos de um segundo, quase sempre no celular.
+
+**Fica igual em todas (é o que faz o canal ser reconhecido):**
+- Texto em Gasoek One, de 0 a 3 palavras, com o azul `#2383E2` como destaque. Personagens no traço de tinta de `lib.js`.
 - **O texto soma ao título, nunca o repete.** Ele contradiz ou completa (título "Uma flecha ao acaso matou o rei Acabe", capa "NÃO FOI ACASO").
-- Tudo o que importa fica no miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil no TikTok. Sem referência bíblica e sem logo na capa.
+- A capa promete só o que o vídeo mostra.
+
+**Muda conforme a história:**
+- Fundo claro ou escuro pelo clima dela; noite, morte e juízo pedem escuro. Fundo calmo: raios só quando ajudam.
+- **Um herói só:** um rosto ou um objeto da história. Rosto só com a emoção que o conteúdo tem (não a mesma cara de susto em tudo).
+- Seta só quando aponta para algo que precisa ser visto.
+
+**Dois testes antes de entregar** (`python3 tools/testar_capa.py <imagens>`):
+- Reduzida a 168×94, o tamanho do feed no celular, dá para entender o que é.
+- Em preto e branco, o herói continua se separando do fundo.
+
+**Formatos:**
+- Vídeo longo: 1280×720, nada importante no canto de baixo à direita (a duração do YouTube cobre). Fazer 3 versões, cada uma com um motivo diferente para clicar, para o "Testar e comparar" do YouTube Studio.
+- Short e TikTok: 1080×1920, tudo o que importa no miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil. Sem referência bíblica e sem logo. No Short a capa pesa pouco: quem decide é o primeiro quadro.
 
 ## Descrição da publicação (aprovada em 28/10/2026, referência: `episodios/morte-de-jezabel/roteiro.md`)
 
@@ -45,4 +57,4 @@ Mesmas regras do roteiro: sem travessão e com cada afirmação conferida na NVI
 - Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar: o vídeo precisa passar de 8 min para ter anúncio no meio.
 - Cenas de explicação (cartões com os livros, versículos em cartão) valem aqui, porque são a cena inteira e não algo por cima da ilustração.
 - Quando o roteiro vier de fora, confira tudo na NVI antes de produzir e diga o que foi corrigido.
-- Miniatura 1280×720 no estilo da capa, com o texto somando ao título e nada no canto de baixo à direita (a duração do YouTube cobre).
+- Miniatura 1280×720 pela regra da capa acima, em 3 versões para o "Testar e comparar".
