@@ -31,7 +31,7 @@ Mas quando chegaram a Jesus, ele já estava morto.
 Não quebraram as pernas dele.
 Um dos soldados furou o lado dele com uma lança, e saiu sangue e água.
 João escreve que quem viu isso deu testemunho, pra que vocês também creiam.
-João conta que isso cumpriu duas frases das Escrituras:
+E isso cumpriu duas frases das Escrituras:
 "Nenhum dos seus ossos será quebrado."
 E: "Olharão para aquele que traspassaram."
 Até Pilatos ficou surpreso quando soube que ele já tinha morrido.
@@ -162,9 +162,8 @@ E Tomé respondeu: "Senhor meu e Deus meu!"
 
 ```
 Anos depois, Paulo escreveu uma lista: Jesus apareceu a Pedro, depois aos Doze.
-Depois, a mais de quinhentos irmãos de uma vez.
+Depois, a mais de quinhentos irmãos de uma vez, e a maioria deles ainda estava viva quando ele escreveu.
 Depois, a Tiago e a todos os apóstolos.
-E que a maioria deles ainda estava viva quando ele escreveu.
 Os guardas foram pagos pra contar outra história.
 Os discípulos, que estavam trancados de medo, saíram pra contar essa.
 Tomé precisou ver.
