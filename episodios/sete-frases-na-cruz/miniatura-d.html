@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura D: Por que rasgou?</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
+@font-face { font-family: 'Geist Mono'; src: url(../../node_modules/@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf); font-weight: 500; }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* D: pergunta + imagem que responde no vídeo (Mateus 27:51; Hebreus 9:3, 7; 10:19-20).
+   O véu ocupa o quadro inteiro, rasgado de alto a baixo, a cruz grande na luz. Azul contra âmbar. */
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg><div style="position:absolute;left:46px;top:58px;transform:rotate(-3deg)"><div style="font:400 132px/0.92 'Gasoek One';color:#fff;-webkit-text-stroke:12px #0A0706;paint-order:stroke fill;white-space:nowrap">POR QUE</div><div style="font:400 168px/0.92 'Gasoek One';color:#F9D779;-webkit-text-stroke:14px #0A0706;paint-order:stroke fill;white-space:nowrap;margin-top:6px">RASGOU?</div></div></div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="scenes.js"></script>
+<script>
+window.SIZE = [1280, 720];
+let s = DEFS + `<rect width="1920" height="1080" fill="#0B0908"/>` + `<circle cx="1060" cy="560" r="900" fill="url(#gAmber)" opacity="0.85"/>`;
+s += `<g transform="translate(1060 0)">` + veil(1, -1140, 1220, -40, 1120, { beamTo: 1300, gapMax: 1100, id: 'vD' }) + `</g>`;
+s += `<ellipse cx="1100" cy="470" rx="300" ry="560" fill="url(#gWhite)" opacity="0.7"/>`;
+s += crossFig(1100, 1150, 1.15, { fill: '#130E0B', plaque: true });
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
