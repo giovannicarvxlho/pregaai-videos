@@ -54,6 +54,8 @@ Qual dessas sete frases mais mexe com você? 👇
 #históriasbíblicas #shorts #fé #bíblia #jesus
 ```
 
+**Capa** (`capa.html`, regra de 03/11): ligada ao título, que pergunta quais foram as 7 frases; a capa responde com o detalhe do vídeo, "NENHUM EVANGELHO TEM AS 7", o mesmo gancho do primeiro quadro. Um herói só (a cruz em silhueta contra a luz), fundo escuro, azul da marca no destaque.
+
 **Ponte para o longo (o Short sozinho não leva ninguém: os dois motores são separados)**
 - YouTube Studio, nos detalhes do Short: **Vídeo relacionado** = "As últimas 7 frases de Jesus na cruz". É o único link clicável num Short.
 - Comentário fixado: `O vídeo completo, com cada frase e o véu rasgado, está no canal: "As últimas 7 frases de Jesus na cruz".` (link em comentário de Short não é clicável.)
