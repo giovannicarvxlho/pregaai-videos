@@ -1,5 +1,7 @@
 # O que aconteceu depois que Jesus morreu na cruz
 
+**Status: aguardando validação do Giovanni.** Mudaram em 04/11/2026 a parte 1 (abertura) e a parte 5 (pausa, com a chamada para o app); as outras 9 são as de 03/11. Não gravar antes do ok dele.
+
 Vídeo longo (16:9), continuação de `episodios/sete-frases-na-cruz`, que viralizou no TikTok (486 mil views em pouco mais de um dia).
 ~1.220 palavras em 11 partes: ~8 min de narração, ~8,5 min de vídeo com o cartão final. Fonte: NVI.
 Gancho: os inimigos de Jesus lembraram da promessa da ressurreição; os discípulos ainda não tinham entendido (Mt 27:62-66; Jo 20:9).

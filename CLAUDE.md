@@ -4,6 +4,7 @@ Vídeos curtos do PregaAI para TikTok e Shorts. Como rodar e como montar um epis
 
 ## Fluxo
 
+- **O Giovanni valida a história antes de tudo** (regra dele, 04/11/2026: "sempre eu PRECISO validar a história antes"). Todo roteiro novo, e toda mudança num roteiro (abertura, chamada, uma frase), vai para ele ler inteiro antes da narração e da animação, com o que mudou marcado. Só trate como aprovado depois do ok explícito dele sobre o texto; aceitar um plano ou uma estratégia não é aprovar o roteiro. Até lá, o roteiro fica marcado no topo como "aguardando validação do Giovanni".
 - **Narração:** o Giovanni gera o mp3 no site da ElevenLabs e manda no chat. Entregue o texto num bloco de código, uma frase por linha, pronto para colar. Ajustes aprovados: voz Carlos, modelo v4, estabilidade ~45% (35% se ainda soar locutor), similaridade 80%, clone strength no padrão (Reset values), idioma Portuguese, velocidade 1,0. Com o mp3 em mãos, sincronize como no README (`segmentos.py`, `transcrever.py`, `data.js`).
 - A chave da ElevenLabs fica no secret de rede do ambiente. Nunca peça chave no chat nem grave em arquivo.
 - **Vídeo aprovado → capa junto.** Quando o Giovanni disser que um vídeo ficou bom e pedir para salvar, faça commit e push do episódio **e** gere a capa pela regra abaixo (`episodios/<ep>/capa.html` + `node capa.cjs <ep>`), e mande os dois.
