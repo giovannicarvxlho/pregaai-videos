@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura E: O que ele gritou?</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
+@font-face { font-family: 'Geist Mono'; src: url(../../node_modules/@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf); font-weight: 500; }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* E: a emoção da cena, sem rosto (Jesus sempre em silhueta): a cruz de perto contra uma luz forte,
+   e a pergunta que o capítulo 8 responde ("bradou em alta voz", Mateus 27:46). */
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg><div style="position:absolute;left:56px;top:70px;transform:rotate(-3deg)"><div style="font:400 120px/0.92 'Gasoek One';color:#fff;-webkit-text-stroke:12px #0A0706;paint-order:stroke fill;white-space:nowrap">O QUE ELE</div><div style="font:400 176px/0.92 'Gasoek One';color:#F9D779;-webkit-text-stroke:14px #0A0706;paint-order:stroke fill;white-space:nowrap;margin-top:8px">GRITOU?</div></div></div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="scenes.js"></script>
+<script>
+window.SIZE = [1280, 720];
+let s = DEFS + skyGrad('rubro', [[0, '#120808'], [0.6, '#3A1714'], [1, '#6B2A1F']]) + `<rect width="1920" height="1080" fill="url(#rubro)"/>`;
+for (let i = 0; i < 16; i++) { const a = (i / 16) * Math.PI * 2; s += `<path d="M 1330 330 L ${f1(1330 + Math.cos(a - 0.06) * 2400)} ${f1(330 + Math.sin(a - 0.06) * 2400)} L ${f1(1330 + Math.cos(a + 0.06) * 2400)} ${f1(330 + Math.sin(a + 0.06) * 2400)} Z" fill="#FFD9A8" opacity="0.16"/>`; }
+s += `<circle cx="1330" cy="330" r="420" fill="url(#gAmber)" opacity="0.95"/><circle cx="1330" cy="330" r="190" fill="url(#gWhite)"/>`;
+s += crossFig(1330, 1560, 2.8, { fill: '#0E0807', rim: C.a300, plaque: true, bow: 0 });
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>

@@ -28,7 +28,7 @@ node capa.cjs valentes-de-davi-2      # capa (miniatura) a partir de episodios/<
 | `episodios/<ep>/narration.mp3` | Narração da ElevenLabs |
 | `episodios/<ep>/roteiro.md` | Roteiro com referências |
 | `episodios/<ep>/capa.html` | Capa do episódio (texto do gancho no miolo 3:4, que é o recorte da grade do TikTok) |
-| `tools/` | Medir as frases no áudio e transcrever com Whisper |
+| `tools/` | Medir as frases no áudio e transcrever com Whisper; no vídeo longo, juntar as partes da narração (`juntar.py`) e medir todas as frases de uma vez (`alinhar.py`) |
 
 ## Episódio novo
 
@@ -39,6 +39,17 @@ node capa.cjs valentes-de-davi-2      # capa (miniatura) a partir de episodios/<
 5. **`data.js`**: um item por frase, `[início, fim, 'texto']`. Se a voz pausar dentro da frase (o `segmentos.py` mostra dois trechos), junte e passe o trecho de cada bloco `|` no 4º item: `[início, fim, 'texto | resto', [[a1, b1], [a2, b2]]]`. Na legenda, `|` quebra em blocos (até ~28 letras cada) e `!` no começo esconde a legenda quando a cena já mostra o texto. A palavra que está sendo falada fica azul sozinha.
 6. **`scenes.js`**: as cenas e a lista `SCENES` (início, fim, referência, `dark` para cenas noturnas). Sincronize animações com `wordTime(índiceDaFrase, 'palavra')`. Comece cada cena pelo índice da frase (`SEGS[i][0]`), assim trocar os tempos pelos do áudio real reposiciona tudo.
 7. Revise com `preview.cjs` e `sheet.sh`, depois `bash build.sh <ep>`.
+
+## Vídeo longo (16:9)
+
+`const FORMAT = 'wide'` no `data.js` muda o quadro para 1920×1080 (o `data.js` carrega antes do `lib.js`).
+Os Shorts não mudam: sem `FORMAT`, tudo continua em 1080×1920.
+
+1. **Narração em partes**: uma por capítulo do roteiro, salvas em `episodios/<ep>/partes/01.mp3`, `02.mp3`...
+2. **Juntar**: `python3 tools/juntar.py episodios/<ep>` gera o `narration.mp3` com 0,8 s entre as partes (o `build.sh` também junta, se o arquivo não existir).
+3. **Medir**: `python3 tools/alinhar.py episodios/<ep>` corta o áudio nas pausas, transcreve com Whisper, alinha com o texto do `data.js` e reescreve o `SEGS` com os tempos reais (~6 min para 8 min de áudio). Ele avisa as frases com poucas palavras reconhecidas, para conferir.
+4. **Cenas**: `L(parte, linha)` dá o índice da frase em `SEGS` (o `PARTS` do `data.js` guarda onde cada parte começa).
+5. **Trechos**: `T0=400 T1=460 bash build.sh <ep>` gera só esse intervalo (`out/<ep>-400.mp4`), para revisar sem renderizar o vídeo todo.
 
 ## Regras
 

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura: As 7 frases na cruz</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #FFE9D6; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* O texto soma ao título ("A crucificação de Jesus: as 7 frases na cruz"): o véu não está no título.
+   Nada importante no canto de baixo à direita, onde o YouTube põe a duração. */
+.hook { position: absolute; left: 700px; top: 150px; width: 540px; display: flex; flex-direction: column; align-items: center; }
+.l { font: 400 128px/0.95 'Gasoek One'; color: #181614; text-shadow: 0 8px 0 #FFFFFF; white-space: nowrap; }
+.chip { margin-top: 18px; padding: 4px 34px 22px; background: #2383E2; border: 6px solid #181614; border-radius: 30px; box-shadow: 0 12px 0 0 #181614;
+  font: 400 118px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1280 720" width="1280" height="720"></svg>
+  <div class="hook"><div class="l">O VÉU</div><div class="chip">RASGOU</div></div>
+</div>
+<script src="../../lib.js"></script>
+<script>
+window.SIZE = [1280, 720];
+const INK = '#181614';
+let s = `<defs>
+  ${skyGrad('bg', [[0, '#FFF6EC'], [0.55, '#FFE1C6'], [1, '#FFB98A']])}
+  ${radial('burst', '#FFFFFF', 1)}${radial('gAmber', C.a300, 0.9)}
+  <linearGradient id="gBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+</defs><rect width="1280" height="720" fill="url(#bg)"/>`;
+// raios saindo do rasgo
+const FX = 360, FY = 360;
+for (let i = 0; i < 20; i++) {
+  const a = (i / 20) * Math.PI * 2;
+  s += `<path d="M ${FX} ${FY} L ${FX + Math.cos(a - 0.07) * 1600} ${FY + Math.sin(a - 0.07) * 1600} L ${FX + Math.cos(a + 0.07) * 1600} ${FY + Math.sin(a + 0.07) * 1600} Z" fill="#FFFFFF" opacity="${i % 2 ? 0.0 : 0.55}"/>`;
+}
+s += `<circle cx="${FX}" cy="${FY}" r="330" fill="url(#burst)" opacity="0.9"/>`;
+// o véu rasgado de alto a baixo, com a luz passando pelo rasgo
+s += `<g transform="translate(${FX} 380) scale(0.62) translate(-540 -560)">${veil(1, 150, 930, 120, 1000, { beamTo: 1160, gapMax: 300 })}</g>`;
+// seta amarela e vermelha apontando para o rasgo
+const ang = -142, tipX = FX + 85, tipY = 400;
+s += `<g transform="translate(${tipX} ${tipY}) rotate(${ang})">
+  <path d="M -330 -26 L -110 -26 L -110 -70 L 0 0 L -110 70 L -110 26 L -330 26 Z" fill="${C.a300}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M -110 -70 L 0 0 L -110 70 Z" fill="${C.r600}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+</g>`;
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>

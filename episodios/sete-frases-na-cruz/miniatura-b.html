@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura B: os quatro evangelhos (curiosidade)</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
+@font-face { font-family: 'Geist Mono'; src: url(../../node_modules/@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf); font-weight: 500; }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* B: a curiosidade do vídeo. Quatro evangelhos, as bolinhas espalhadas e "NENHUM TEM AS 7".
+   Completa o título ("As últimas 7 frases de Jesus na cruz") sem repetir. Azul-marinho 60, branco 30, amarelo 10. */
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg><div style="position:absolute;left:0;right:0;top:46px;text-align:center;font:400 118px/1 'Gasoek One';color:#fff;-webkit-text-stroke:10px #0A1220;paint-order:stroke fill;letter-spacing:1px">NENHUM TEM <span style="color:#F9D779">AS 7</span></div></div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="scenes.js"></script>
+<script>
+window.SIZE = [1280, 720];
+let s = DEFS + `<rect width="1920" height="1080" fill="#14233B"/>` + `<circle cx="960" cy="760" r="900" fill="url(#gBlue)" opacity="0.35"/>`;
+BOOKS.forEach((b, i) => (s += `<g transform="translate(0 250) translate(960 ${CARD.top + CARD.h / 2}) scale(1.08) translate(-960 ${-(CARD.top + CARD.h / 2)})">${bookCard(b, i, 0, { pin: 1, out: 0, hl: 0 })}</g>`));
+const pos = { 4: [[330, 0], [750, 0]], 1: [[1170, -1]], 2: [[1170, 0]], 7: [[1170, 1]], 3: [[1590, -1]], 5: [[1590, 0]], 6: [[1590, 1]] };
+Object.entries(pos).forEach(([n, ps]) => ps.forEach(([x, k]) => (s += `<g transform="translate(960 0) scale(1.08) translate(-960 0)">${dot(x + k * 104, CARD.top + 190 + 250, n, 1.2)}</g>`)));
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>

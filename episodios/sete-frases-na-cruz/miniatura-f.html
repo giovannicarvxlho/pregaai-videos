@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura F: Ele viu tudo</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
+@font-face { font-family: 'Geist Mono'; src: url(../../node_modules/@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf); font-weight: 500; }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* F: rosto com a emoção do texto: o centurião aterrorizado (Mateus 27:54), que "viu como ele morreu"
+   (Marcos 15:39). O olhar leva até a cruz na luz. */
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg><div style="position:absolute;right:60px;top:64px;text-align:right;transform:rotate(-3deg)"><div style="font:400 140px/0.92 'Gasoek One';color:#fff;-webkit-text-stroke:12px #0A0706;paint-order:stroke fill;white-space:nowrap">ELE VIU</div><div style="font:400 190px/0.92 'Gasoek One';color:#F9D779;-webkit-text-stroke:14px #0A0706;paint-order:stroke fill;white-space:nowrap;margin-top:6px">TUDO</div></div></div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="scenes.js"></script>
+<script>
+window.SIZE = [1280, 720];
+let s = DEFS + bgNight(0, { sky: 'skyDawn', moon: false, starOp: 0 });
+s += `<circle cx="1420" cy="560" r="560" fill="url(#gAmber)" opacity="0.8"/>`;
+s += hill(1420, 860, 700, '#1B1E22', '#060708') + crossFig(1420, 880, 0.95, { plaque: true, fill: '#050505', rim: C.a300, bow: 1 });
+s += person({ ...soldado(821), robe: '#8E3B46', x: 560, y: 520 + 206 * 4.4, s: 4.4, look: 1, mood: 'fear', t: 0.35, armL: 18, armR: 24, gear: { helmet: 'cent', armor: true }, rim: C.a300, noShadow: true });
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>

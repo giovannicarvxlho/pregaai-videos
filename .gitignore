@@ -5,3 +5,4 @@ sheet.png
 tools/modelos/
 # Local secrets written by `elevenlabs onboard`
 /.env.local
+episodios/sete-frases-na-cruz/narration.mp3
