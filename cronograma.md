@@ -32,6 +32,7 @@ Os números de 04/11 mudaram o plano: no TikTok, os 5 curtos medidos (41–44 s)
 - **Horário:** sábado por volta das 15 h, o do viral. Se a animação atrasar, domingo às 15 h, em vez de entregar mal feito.
 - **Chamada falada para o app** em cada longo, na pausa do meio: motivo concreto, só o que o app já faz, sem prometer "grátis", avisando que é só Android.
 - O roteiro do longo seguinte só começa depois que o anterior estiver no ar.
+- **Qualidade da animação (aprovado em 04/11):** o longo 2 sai na forma do viral, só com o primeiro quadro já em movimento. A partir do Elias (14/11) entram enquadramento variado, personagens atuando no tempo da palavra, luz e atmosfera, nenhum quadro parado por mais de 1,5 s, transições com motivo e som gerado no pipeline. Antes, quadros de referência (antes e depois) para o Giovanni aprovar. Diagnóstico e conselho em `MARK1/conselho/2026-11-04-animacoes-pregaai.md`.
 
 ## Séries
 - **Histórias bíblicas em menos de 1 minuto**: todo Short (já é o começo das descrições).
@@ -41,7 +42,8 @@ Os números de 04/11 mudaram o plano: no TikTok, os 5 curtos medidos (41–44 s)
 
 | Data | Peça | Base |
 |---|---|---|
-| qui 05 e sex 06/11 | Nada no TikTok. O tema das 7 frases está encerrado (Giovanni, 04/11: "esse tema já foi"): nada de Short, carrossel ou recorte do longo 1 | |
+| qui 05/11 | Nada no TikTok. O tema das 7 frases está encerrado (Giovanni, 04/11: "esse tema já foi") | |
+| **sex 06/11** | **Carrossel de aquecimento do longo 2** (modo foto, 5 imagens em `episodios/carrossel-depois-da-cruz/`, texto aprovado em 04/11) | Mt 27:57-66 |
 | **sáb 07/11, 15 h** | **Longo 2: O que aconteceu depois que Jesus morreu na cruz** (TikTok e YouTube), com a abertura nova | Mt 27:57-28; Lc 23:50-24; Jo 19:38-20 |
 | seg 09/11 | Leitura de 48 h do longo 2 (critérios abaixo) | |
 | dom 08 e seg 09/11 | Sem post novo: o longo 2 fica sozinho no perfil nas primeiras 48 h (proposta do Claude, a confirmar) | |
