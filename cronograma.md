@@ -26,6 +26,7 @@ Os números de 04/11 mudaram o plano: no TikTok, os 5 curtos medidos (41–44 s)
 | TikTok | só os longos (16:9, ~8 min) e, depois de lido o longo, recortes dele; nenhum curto original |
 | YouTube longo | os mesmos longos |
 | YouTube Shorts | só recortes dos longos até 28/11; nenhum Short original |
+| Instagram | fica de lado por enquanto (Giovanni, 04/11) |
 
 - **3 longos em novembro:** 07/11, 14/11 e 28/11. O 21/11 fica de folga. A cadência se decide depois dos três.
 - **Horário:** sábado por volta das 15 h, o do viral. Se a animação atrasar, domingo às 15 h, em vez de entregar mal feito.
@@ -40,10 +41,11 @@ Os números de 04/11 mudaram o plano: no TikTok, os 5 curtos medidos (41–44 s)
 
 | Data | Peça | Base |
 |---|---|---|
-| qua 04/11 | Short "Quais foram as 7 frases de Jesus na cruz?", só no YouTube (já pronto) | Mt 27; Lc 23; Jo 19 |
+| qui 05 e sex 06/11 | Nada no TikTok. O tema das 7 frases está encerrado (Giovanni, 04/11: "esse tema já foi"): nada de Short, carrossel ou recorte do longo 1 | |
 | **sáb 07/11, 15 h** | **Longo 2: O que aconteceu depois que Jesus morreu na cruz** (TikTok e YouTube), com a abertura nova | Mt 27:57-28; Lc 23:50-24; Jo 19:38-20 |
 | seg 09/11 | Leitura de 48 h do longo 2 (critérios abaixo) | |
-| depois de 09/11 | Recortes do longo 2 para TikTok e Shorts | |
+| dom 08 e seg 09/11 | Sem post novo: o longo 2 fica sozinho no perfil nas primeiras 48 h (proposta do Claude, a confirmar) | |
+| a partir de ter 10/11 | **1 recorte por dia** (70–90 s, vertical) do longo 2, depois do Elias, no TikTok e no Shorts (o Giovanni quer 1 post por dia) | |
 | **sáb 14/11, 15 h** | **Longo de 4–6 min: Elias contra os 450 profetas de Baal.** Separa tema de formato (longo sem o tema Jesus) | 1 Reis 18 |
 | sáb 21/11 | Folga | |
 | **sáb 28/11, 15 h** | **Longo 3: o nascimento de Jesus** (véspera do Advento) | |
