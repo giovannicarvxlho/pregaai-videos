@@ -1,6 +1,6 @@
 # O que aconteceu depois que Jesus morreu na cruz
 
-**Status: aguardando validação do Giovanni da parte 5.** O roteiro foi aprovado em 04/11/2026; depois disso, a pedido dele, a parte 5 mudou (versão web para iPhone e uma pergunta mais clara no lugar de "de onde você tá assistindo"). As outras 10 partes continuam aprovadas.
+**Status: aprovado pelo Giovanni em 04/11/2026**, incluindo a parte 5 nova (versão web para iPhone e a pergunta sobre a promessa) e a troca na parte 4 ("foram até Pilatos", colado em Mt 27:62). **Falta validar só a versão TikTok da parte 5** (sem o app), que está logo abaixo da parte 5.
 
 Vídeo longo (16:9), continuação de `episodios/sete-frases-na-cruz`, que viralizou no TikTok (486 mil views em pouco mais de um dia).
 ~1.220 palavras em 11 partes: ~8 min de narração, ~8,5 min de vídeo com o cartão final. Fonte: NVI.
@@ -63,7 +63,7 @@ Depois, foram pra casa e descansaram no sábado.
 ### 4. Os guardas
 
 ```
-No sábado, os chefes dos sacerdotes e os fariseus voltaram a Pilatos.
+No sábado, os chefes dos sacerdotes e os fariseus foram até Pilatos.
 Eles pediram: "Ordena que o sepulcro seja guardado até o terceiro dia, para que não venham seus discípulos e, roubando o corpo, digam ao povo que ele ressuscitou."
 E completaram: "Este último engano será pior do que o primeiro."
 Pilatos respondeu: "Levem um destacamento."
@@ -82,6 +82,17 @@ A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.
 E se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store.
 O app monta um plano de leitura pra você e tem um devocional curto pra cada dia.
 Se você usa iPhone, dá pra usar pela versão web: app ponto pregaai ponto com.
+E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
+```
+
+#### 5. Pausa, versão TikTok (sem o app), aguardando validação do Giovanni
+
+Para o TikTok, onde o vídeo entra no Programa de Recompensas: promover o próprio app pede a divulgação de conteúdo comercial, e conteúdo comercial pode ficar fora do programa (mesma precaução do cartão final `semApp` do curto do Pedro). O YouTube fica com a versão acima. Esta versão troca a chamada do app pelo lugar da história na Bíblia (Mt 27-28, Mc 15-16, Lc 23-24, Jo 19-20).
+
+```
+Se você chegou agora, essa é a parte dois.
+A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.
+E se você quer ler essa história direto na Bíblia, ela tá no fim dos quatro evangelhos: Mateus, Marcos, Lucas e João.
 E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
 ```
 

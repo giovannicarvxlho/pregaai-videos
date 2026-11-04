@@ -134,7 +134,7 @@ Aí entra um homem que ninguém esperava. José de Arimateia, um membro de desta
 
 **O que o roteiro diz:**
 
-No sábado, os chefes dos sacerdotes e os fariseus voltaram a Pilatos. Eles pediram: "Ordena que o sepulcro seja guardado até o terceiro dia, para que não venham seus discípulos e, roubando o corpo, digam ao povo que ele ressuscitou." E completaram: "Este último engano será pior do que o primeiro." Pilatos respondeu: "Levem um destacamento." Eles puseram guardas na entrada e lacraram a pedra. Repare no que eles queriam evitar: uma história de discípulos roubando o corpo. Guarda essa história. Ela vai voltar.
+No sábado, os chefes dos sacerdotes e os fariseus foram até Pilatos. Eles pediram: "Ordena que o sepulcro seja guardado até o terceiro dia, para que não venham seus discípulos e, roubando o corpo, digam ao povo que ele ressuscitou." E completaram: "Este último engano será pior do que o primeiro." Pilatos respondeu: "Levem um destacamento." Eles puseram guardas na entrada e lacraram a pedra. Repare no que eles queriam evitar: uma história de discípulos roubando o corpo. Guarda essa história. Ela vai voltar.
 
 **O que a Bíblia diz (NVI):**
 
@@ -147,7 +147,7 @@ No sábado, os chefes dos sacerdotes e os fariseus voltaram a Pilatos. Eles pedi
 > **65** "Levem um destacamento", respondeu Pilatos. "Podem ir, e mantenham o sepulcro em segurança como acharem melhor".  
 > **66** Eles foram e armaram um esquema de segurança no sepulcro; e além de deixarem um destacamento montando guarda, lacraram a pedra.
 
-**Atenção:** "Voltaram a Pilatos" é inferência: o texto diz "dirigiram-se a Pilatos" (Mt 27:62). Eles já tinham estado com ele na sexta (Jo 19:21). Se preferir ficar colado no texto, troque por "foram até Pilatos".
+**Atenção:** Trocado em 04/11/2026 de "voltaram a Pilatos" para "foram até Pilatos", colado no "dirigiram-se a Pilatos" de Mt 27:62.
 
 ## 5. Pausa
 
@@ -155,7 +155,13 @@ No sábado, os chefes dos sacerdotes e os fariseus voltaram a Pilatos. Eles pedi
 
 Se você chegou agora, essa é a parte dois. A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui. E se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store. O app monta um plano de leitura pra você e tem um devocional curto pra cada dia. Se você usa iPhone, dá pra usar pela versão web: app ponto pregaai ponto com. E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
 
-**Atenção:** Esta parte não tem texto bíblico: é a chamada para o app. **Mudou de novo hoje** (versão web para iPhone e uma pergunta mais clara no lugar de "de onde você tá assistindo").
+**Atenção:** Esta parte não tem texto bíblico: é a chamada para o app (versão do YouTube, aprovada em 04/11/2026).
+
+**Versão TikTok (sem o app), aguardando validação:**
+
+Se você chegou agora, essa é a parte dois. A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui. E se você quer ler essa história direto na Bíblia, ela tá no fim dos quatro evangelhos: Mateus, Marcos, Lucas e João. E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
+
+**Atenção:** "No fim dos quatro evangelhos" confere: a morte, o sepultamento e a ressurreição estão em Mateus 27-28, Marcos 15-16, Lucas 23-24 e João 19-20, os últimos capítulos de cada um (João ainda tem o capítulo 21, com Jesus na Galileia).
 
 ## 6. Domingo de manhã
 
