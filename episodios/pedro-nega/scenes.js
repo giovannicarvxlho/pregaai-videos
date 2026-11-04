@@ -159,7 +159,8 @@ function scSabado(t) {
 }
 
 // ---------------------------------------------------------------- 13. fim
-const scFim = (t) => endCard(t, AUDIO_END + 0.2, ['Lucas 22', 'João 21']);
+// Sem o cartão do app: o vídeo entra no Programa de Recompensas sem divulgação comercial.
+const scFim = (t) => endCard(t, AUDIO_END + 0.2, ['Lucas 22', 'João 21'], { semApp: true });
 
 // ---------------------------------------------------------------- linha do tempo
 const SCENES = [

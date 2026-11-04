@@ -695,7 +695,9 @@ function verseCard(text, ref, p, size, center) {
 
 // Cartão final: o peixe entra nadando, as referências e o app na Google Play.
 // O selo é o oficial em português (o mesmo de src/components/onboarding/PlayStoreCTA.tsx do app).
-function endCard(t, t0, refs) {
+// o.semApp: versão sem promoção do app (sem o cartão da Play), para vídeos que entram no
+// Programa de Recompensas do TikTok sem divulgação comercial (decisão de 04/11/2026).
+function endCard(t, t0, refs, o = {}) {
   const lt = t - t0;
   const s = `<rect width="${W}" height="${H}" fill="${C.paper}"/>`;
   const swim = E.out(prog(lt, 0.0, 0.9));
@@ -708,15 +710,15 @@ function endCard(t, t0, refs) {
       <svg class="fish" viewBox="0 0 400 200" style="transform:translateX(${f1(fx)}px) rotate(${f1(wig)}deg)">${fishGlyph(C.b500, C.paper)}</svg>
       <svg class="wm" viewBox="0 0 651 100" preserveAspectRatio="none" style="opacity:${wm};transform:translateX(${f1((1 - wm) * 40)}px)">${wordmark(C.ink)}</svg>
     </div>
-    <div class="end-head" style="${up(hd)}">Leia essa história no app</div>
+    <div class="end-head" style="${up(hd)}">${o.semApp ? 'Leia essa história na Bíblia' : 'Leia essa história no app'}</div>
     <div class="end-refs" style="${up(rf)}">${refs.map((r) => `<span>${r}</span>`).join('')}</div>
-    <div class="app" style="opacity:${f1(clamp(card) * 100) / 100};transform:scale(${f1(card * 100) / 100})">
+    ${o.semApp ? '' : `<div class="app" style="opacity:${f1(clamp(card) * 100) / 100};transform:scale(${f1(card * 100) / 100})">
       <div class="app-row"><img class="app-icon" src="assets/icon.png"><div><div class="app-name">PregaAI</div><div class="app-desc">Plano de leitura bíblica com IA</div></div></div>
       <img class="play" src="assets/google-play-badge.png" style="opacity:${f1(clamp(badgeIn) * 100) / 100};transform:scale(${f1(badgeIn * 100) / 100})">
-    </div>
+    </div>`}
     <div class="follow" style="${up(fol)}">Siga para a próxima história</div>
   </div>
-  <div class="legal" style="opacity:${legal}">Google Play e o logotipo do Google Play são marcas da Google LLC.</div>`;
+  ${o.semApp ? '' : `<div class="legal" style="opacity:${legal}">Google Play e o logotipo do Google Play são marcas da Google LLC.</div>`}`;
   return { svg: s, html };
 }
 
