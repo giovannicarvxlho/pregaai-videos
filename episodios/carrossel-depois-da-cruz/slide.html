@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Carrossel: depois da cruz</title>
+<style>
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/600SemiBold/Geist_600SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: Lora; src: url(../../node_modules/@expo-google-fonts/lora/500Medium_Italic/Lora_500Medium_Italic.ttf); font-weight: 500; font-style: italic; }
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* Texto no miolo de cima (y 280 a ~820): fora da barra do topo e da legenda e dos ícones do TikTok. */
+.txt { position: absolute; left: 90px; right: 90px; top: 300px; text-align: center; font: 800 82px/1.16 Geist; letter-spacing: -1px; }
+.txt b { color: #2383E2; font-weight: 800; }
+.light { color: #FFFFFF; text-shadow: 0 4px 18px rgba(0,0,0,.45); }
+.dark { color: #181614; }
+.quote { display: block; margin-top: 34px; font: italic 500 92px/1.12 Lora; color: #FFFFFF; }
+.big { font: 400 170px/0.95 'Gasoek One'; color: #FFFFFF; text-shadow: 0 10px 0 #181614; }
+.chip { display: inline-block; margin-top: 34px; padding: 10px 44px 26px; background: #2383E2; border: 8px solid #181614; border-radius: 40px; box-shadow: 0 16px 0 0 #181614; font: 400 96px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-3deg); }
+.sub { margin-top: 70px; font: 600 54px/1.2 Geist; color: #FFFFFF; text-shadow: 0 4px 18px rgba(0,0,0,.5); }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1080 1920" width="1080" height="1920"></svg><div id="txt" class="txt"></div></div>
+<script src="../../lib.js"></script>
+<script>
+// Cinco imagens do carrossel (modo foto do TikTok). Texto aprovado pelo Giovanni em 04/11/2026; base: Mateus 27:57-66.
+const n = +(new URLSearchParams(location.search).get('n') || 1);
+const INK = C.inkDeep, BASE = 1330, CX = 540, S = 1.35;
+const soldier = (seed, x, flip) => person({ ...man(seed), cover: null, beard: false, robe: C.p600, gear: { helmet: 'rom', armor: true, spear: 'r' }, x, y: BASE + 30, s: 1.25, flip, armR: 26 });
+// Pedra redonda com traço de tinta; aberta = ao lado da entrada, fechada = cobrindo a entrada.
+function stone(closed, seal) {
+  const x = closed ? CX - 10 : CX + 230, y = BASE - 150 * S / 1.35, r = 150 * S / 1.35;
+  let s = `<circle cx="${x}" cy="${y}" r="${r}" fill="${C.g600}" ${ink(7, INK)}/>`;
+  s += `<path d="M ${x - r * 0.55} ${y - r * 0.35} C ${x - r * 0.2} ${y - r * 0.6} ${x + r * 0.25} ${y - r * 0.55} ${x + r * 0.5} ${y - r * 0.25}" stroke="${C.g700}" stroke-width="8" fill="none" stroke-linecap="round"/>`;
+  if (seal) s += `<path d="M ${x - r * 1.15} ${y - 10} L ${x + r * 1.15} ${y - 10}" stroke="${C.r600}" stroke-width="9" stroke-linecap="round"/><circle cx="${x}" cy="${y - 10}" r="22" fill="${C.r600}" ${ink(6, INK)}/>`;
+  return s;
+}
+let s = DEFS, html = '';
+if (n === 1) {
+  s += bgDusk(0) + cave(CX, BASE, S, 'day') + stone(false);
+  html = `<div class="light">Sexta à tarde, o corpo de Jesus foi colocado num <b>túmulo</b> cavado na rocha.</div>`;
+} else if (n === 2) {
+  s += bgDay(0, { sun: false }) + cave(CX, BASE, S, 'day') + stone(true, true) + soldier(881, 200, false) + soldier(887, 880, true);
+  html = `<div class="dark">No sábado, os inimigos dele puseram <b>guardas</b> na porta.</div>`;
+} else if (n === 3) {
+  s += bgNight(0, { moon: false }) + cave(CX, BASE, S, 'night') + stone(true, true) + soldier(881, 200, false) + soldier(887, 880, true);
+  html = `<div class="light">Eles lembraram de uma promessa:<span class="quote">“Depois de três dias ressuscitarei.”</span></div>`;
+} else if (n === 4) {
+  s += bgDusk(0) + `<circle cx="${CX}" cy="${BASE - 200}" r="560" fill="url(#gPeach)" opacity="0.55"/>` + cave(CX, BASE, S, 'day') + stone(true, false);
+  html = `<div class="light" style="font-size:120px;margin-top:120px">E no <b>domingo</b>?</div>`;
+} else {
+  s += bgNight(0, { moon: false, starOp: 0.8 }) + cave(CX, BASE, S, 'night') + stone(true, true);
+  html = `<div class="big">PARTE 2</div><div class="chip">SÁBADO, 15 H</div><div class="sub">O que aconteceu depois que Jesus morreu na cruz</div>`;
+}
+document.getElementById('art').innerHTML = s;
+document.getElementById('txt').innerHTML = html;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
