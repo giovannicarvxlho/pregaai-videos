@@ -1,6 +1,6 @@
 # O que aconteceu depois que Jesus morreu na cruz
 
-**Status: aprovado pelo Giovanni em 04/11/2026** ("tudo aprovado"), com a parte 1 (abertura) e a parte 5 (pausa, com a chamada para o app) reescritas nesse dia. Pode gravar.
+**Status: aguardando validação do Giovanni da parte 5.** O roteiro foi aprovado em 04/11/2026; depois disso, a pedido dele, a parte 5 mudou (versão web para iPhone e uma pergunta mais clara no lugar de "de onde você tá assistindo"). As outras 10 partes continuam aprovadas.
 
 Vídeo longo (16:9), continuação de `episodios/sete-frases-na-cruz`, que viralizou no TikTok (486 mil views em pouco mais de um dia).
 ~1.220 palavras em 11 partes: ~8 min de narração, ~8,5 min de vídeo com o cartão final. Fonte: NVI.
@@ -74,15 +74,15 @@ Guarda essa história. Ela vai voltar.
 
 ### 5. Pausa
 
-Com a chamada falada para o app (decisão de 04/11/2026): motivo concreto, só o que o app já faz, sem prometer "grátis" e avisando que é só Android.
+Com a chamada falada para o app (decisão de 04/11/2026): motivo concreto, só o que o app já faz, sem prometer "grátis". Android pela Play Store; iPhone pela versão web (app.pregaai.com, no ar). Na legenda, o endereço aparece escrito como app.pregaai.com.
 
 ```
 Se você chegou agora, essa é a parte dois.
 A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.
 E se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store.
 O app monta um plano de leitura pra você e tem um devocional curto pra cada dia.
-Por enquanto, é só pra Android.
-Me conta nos comentários de onde você tá assistindo.
+Se você usa iPhone, dá pra usar pela versão web: app ponto pregaai ponto com.
+E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
 ```
 
 ### 6. Domingo de manhã
