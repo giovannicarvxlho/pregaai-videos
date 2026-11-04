@@ -42,6 +42,7 @@ Os números de 04/11 mudaram o plano: no TikTok, os 5 curtos medidos (41–44 s)
 
 | Data | Peça | Base |
 |---|---|---|
+| **qua 04/11, ~19 h–20 h** | **Curto "Pedro negou Jesus três vezes" (88 s, sem acelerar).** Primeiro vídeo depois da aprovação no Programa de Recompensas (04/11), para ver a monetização funcionando; o Giovanni pediu para publicar hoje | Lc 22:33-34, 54-62; Jo 21:15-17 |
 | qui 05/11 | Nada no TikTok. O tema das 7 frases está encerrado (Giovanni, 04/11: "esse tema já foi") | |
 | **sex 06/11** | **Carrossel de aquecimento do longo 2** (modo foto, 5 imagens em `episodios/carrossel-depois-da-cruz/`, texto aprovado em 04/11) | Mt 27:57-66 |
 | **sáb 07/11, 15 h** | **Longo 2: O que aconteceu depois que Jesus morreu na cruz** (TikTok e YouTube), com a abertura nova | Mt 27:57-28; Lc 23:50-24; Jo 19:38-20 |
