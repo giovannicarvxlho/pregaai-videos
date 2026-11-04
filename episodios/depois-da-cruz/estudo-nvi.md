@@ -6,7 +6,7 @@ Cada parte do roteiro, com os versículos da NVI (a mesma tradução do app) log
 
 **O que o roteiro diz:**
 
-Na sexta à tarde, o corpo de Jesus foi colocado num túmulo cavado na rocha. Uma pedra enorme fechou a entrada. No dia seguinte, os inimigos dele foram até Pilatos e pediram guardas na porta. Porque eles lembraram de uma promessa: "Depois de três dias ressuscitarei." E tem um detalhe que quase ninguém percebe: os próprios discípulos ainda não tinham entendido essa promessa. Hoje você vai ver o que aconteceu entre aquela sexta e o domingo.
+Na sexta à tarde, o corpo de Jesus foi colocado num túmulo cavado na rocha. Uma pedra enorme fechou a entrada. No dia seguinte, os inimigos dele foram até Pilatos e pediram guardas na porta. Porque eles lembraram de uma promessa: "Depois de três dias ressuscitarei." E tem um detalhe que quase ninguém percebe: os próprios discípulos ainda não tinham entendido essa promessa. **No domingo, alguns desses guardas foram até a cidade. E receberam uma grande soma de dinheiro pra contar uma história. Hoje você vai ver que história era essa. E o que eles viram naquele túmulo.** *(mudou em 04/11, conselho)*
 
 **O que a Bíblia diz (NVI):**
 
@@ -28,12 +28,34 @@ Na sexta à tarde, o corpo de Jesus foi colocado num túmulo cavado na rocha. Um
 > **63** e disseram: "Senhor, lembramos que, enquanto ainda estava vivo, aquele impostor disse: ‘Depois de três dias ressuscitarei’.  
 > **64** Ordena, pois, que o sepulcro dele seja guardado até o terceiro dia, para que não venham seus discípulos e, roubando o corpo, digam ao povo que ele ressuscitou dentre os mortos. Este último engano será pior do que o primeiro".
 
-*Os discípulos ainda não tinham entendido*
+*Os discípulos ainda não tinham entendido a promessa*
+
+> **Lucas 18:33-34**  
+> **33** No terceiro dia ele ressuscitará".  
+> **34** Os discípulos não entenderam nada dessas coisas. O significado dessas palavras lhes estava oculto, e eles não sabiam do que ele estava falando.
+
+> **Marcos 9:31-32**  
+> **31** porque estava ensinando os seus discípulos. E lhes dizia: "O Filho do homem está para ser entregue nas mãos dos homens. Eles o matarão, e três dias depois ele ressuscitará".  
+> **32** Mas eles não entendiam o que ele queria dizer e tinham receio de perguntar-lhe.
 
 > **João 20:9**  
 > **9** ( Eles ainda não haviam compreendido que, conforme a Escritura, era necessário que Jesus ressuscitasse dos mortos. )
 
-**Atenção:** "Os inimigos dele" é a nossa forma de dizer "os chefes dos sacerdotes e os fariseus" (Mt 27:62). A ordem também foi adaptada: o pedido dos guardas é no sábado, depois do sepultamento, e a abertura conta junto para criar o gancho.
+*No domingo, os guardas vão à cidade e recebem dinheiro para contar uma história; o que viram no túmulo*
+
+> **Mateus 28:2-4**  
+> **2** E eis que sobreveio um grande terremoto, pois um anjo do Senhor desceu do céu e, chegando ao sepulcro, rolou a pedra da entrada e assentou-se sobre ela.  
+> **3** Sua aparência era como um relâmpago, e suas vestes eram brancas como a neve.  
+> **4** Os guardas tremeram de medo e ficaram como mortos.
+
+> **Mateus 28:11-15**  
+> **11** Enquanto as mulheres estavam a caminho, alguns dos guardas dirigiram-se à cidade e contaram aos chefes dos sacerdotes tudo o que havia acontecido.  
+> **12** Quando os chefes dos sacerdotes se reuniram com os líderes religiosos, elaboraram um plano. Deram aos soldados grande soma de dinheiro,  
+> **13** dizendo-lhes: "Vocês devem declarar o seguinte: ‘Os discípulos dele vieram durante a noite e furtaram o corpo, enquanto estávamos dormindo’.  
+> **14** Se isso chegar aos ouvidos do governador, nós lhe daremos explicações e livraremos vocês de qualquer problema".  
+> **15** Assim, os soldados receberam o dinheiro e fizeram como tinham sido instruídos. E esta versão se divulgou entre os judeus até o dia de hoje.
+
+**Atenção:** "Os inimigos dele" é a nossa forma de dizer "os chefes dos sacerdotes e os fariseus" (Mt 27:62). A ordem também foi adaptada: o pedido dos guardas é no sábado, depois do sepultamento, e a abertura conta junto para criar o gancho. A base de "não tinham entendido essa promessa" é Lc 18:34 e Mc 9:32, em que Jesus anuncia que ressuscitaria e eles não entendem; Jo 20:9 fala da Escritura. "No domingo" vem de Mt 28:11 ("enquanto as mulheres estavam a caminho"); o texto não diz a hora em que o dinheiro foi entregue, só que veio depois da reunião dos chefes.
 
 ## 2. O corpo na cruz
 
@@ -151,17 +173,15 @@ No sábado, os chefes dos sacerdotes e os fariseus foram até Pilatos. Eles pedi
 
 ## 5. Pausa
 
-**O que o roteiro diz:**
+**O que o roteiro diz (YouTube):**
 
-Se você chegou agora, essa é a parte dois. A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui. E se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store. O app monta um plano de leitura pra você e tem um devocional curto pra cada dia. Se você usa iPhone, dá pra usar pela versão web: app ponto pregaai ponto com. E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
+Se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store. O app monta um plano de leitura pra você e tem um devocional curto pra cada dia. Se você usa iPhone, dá pra usar pela versão web: app ponto pregaai ponto com. E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
 
-**Atenção:** Esta parte não tem texto bíblico: é a chamada para o app (versão do YouTube, aprovada em 04/11/2026).
+**O que o roteiro diz (TikTok):**
 
-**Versão TikTok (sem o app), aguardando validação:**
+Se você gosta de ouvir a Bíblia assim, com os detalhes que a gente costuma pular, segue o canal. E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
 
-Se você chegou agora, essa é a parte dois. A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui. E se você quer ler essa história direto na Bíblia, ela tá no fim dos quatro evangelhos: Mateus, Marcos, Lucas e João. E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
-
-**Atenção:** "No fim dos quatro evangelhos" confere: a morte, o sepultamento e a ressurreição estão em Mateus 27-28, Marcos 15-16, Lucas 23-24 e João 19-20, os últimos capítulos de cada um (João ainda tem o capítulo 21, com Jesus na Galileia).
+**Atenção:** Esta parte não tem texto bíblico. Mudou em 04/11 (conselho): saíram "se você chegou agora, essa é a parte dois" e a parte um, que foi para o fechamento. A pergunta vale para o sábado (Mt 27:62-63): no domingo, as mulheres também se lembraram das palavras de Jesus, mas só depois que os anjos as lembraram (Lc 24:6-8).
 
 ## 6. Domingo de manhã
 
@@ -300,7 +320,7 @@ No mesmo dia, dois discípulos estavam indo pra um povoado chamado Emaús, a onz
 
 **O que o roteiro diz:**
 
-Anos depois, Paulo escreveu uma lista: Jesus apareceu a Pedro, depois aos Doze. Depois, a mais de quinhentos irmãos de uma vez, e a maioria deles ainda estava viva quando ele escreveu. Depois, a Tiago e a todos os apóstolos. Os guardas foram pagos pra contar outra história. Os discípulos, que estavam trancados de medo, saíram pra contar essa. Tomé precisou ver. Mas Jesus deixou uma frase pra quem nunca ia ver: "Felizes os que não viram e creram." Se essa história falou com você, comenta aqui embaixo. E segue o canal, porque toda semana tem mais uma história da Bíblia, contada do jeito que ela foi escrita.
+Anos depois, Paulo escreveu uma lista: Jesus apareceu a Pedro, depois aos Doze. Depois, a mais de quinhentos irmãos de uma vez, e a maioria deles ainda estava viva quando ele escreveu. Depois, a Tiago e a todos os apóstolos. Os guardas foram pagos pra contar outra história. Os discípulos, que estavam trancados de medo, saíram pra contar essa. Tomé precisou ver. Mas Jesus deixou uma frase pra quem nunca ia ver: "Felizes os que não viram e creram." **Você também não viu. Então a pergunta que fica é: você crê? Me conta aqui embaixo. A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.** *(mudou em 04/11, conselho)* E segue o canal, porque toda semana tem mais uma história da Bíblia, contada do jeito que ela foi escrita.
 
 **O que a Bíblia diz (NVI):**
 
@@ -321,5 +341,5 @@ Anos depois, Paulo escreveu uma lista: Jesus apareceu a Pedro, depois aos Doze. 
 > **João 20:29**  
 > **29** Então Jesus lhe disse: "Porque me viu, você creu? Felizes os que não viram e creram".
 
-**Atenção:** "Saíram pra contar essa" resume Atos 4:20 ("não podemos deixar de falar do que vimos e ouvimos"); não é citação.
+**Atenção:** "Você também não viu" se apoia em Jo 20:29: quem assiste não viu Jesus ressuscitado, como os "que não viram" do versículo. "Saíram pra contar essa" resume Atos 4:20 ("não podemos deixar de falar do que vimos e ouvimos"); não é citação.
 

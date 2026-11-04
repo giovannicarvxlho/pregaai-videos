@@ -1,6 +1,6 @@
 # O que aconteceu depois que Jesus morreu na cruz
 
-**Status: aprovado pelo Giovanni em 04/11/2026**, incluindo a parte 5 nova (versão web para iPhone e a pergunta sobre a promessa) e a troca na parte 4 ("foram até Pilatos", colado em Mt 27:62). **Falta validar só a versão TikTok da parte 5** (sem o app), que está logo abaixo da parte 5.
+**Status: aprovado pelo Giovanni em 04/11/2026**, com as três mudanças do conselho de 04/11 (transcrição no MARK1, `conselho/2026-11-04-roteiro-longo2-conversao.md`) (abertura com o dinheiro dos guardas, pausa sem mandar o espectador sair, fechamento com pergunta pessoal), a parte 5 com a versão web para iPhone e "foram até Pilatos" na parte 4. A parte 5 tem duas versões: YouTube (com o app) e TikTok (sem o app). Se em 06/11 o RPM do curto do Pedro ficar abaixo de ~R$ 45 por milhão de views, ou se a regra oficial não excluir conteúdo comercial, o TikTok usa a versão do YouTube e o cartão final com o app.
 
 Vídeo longo (16:9), continuação de `episodios/sete-frases-na-cruz`, que viralizou no TikTok (486 mil views em pouco mais de um dia).
 ~1.220 palavras em 11 partes: ~8 min de narração, ~8,5 min de vídeo com o cartão final. Fonte: NVI.
@@ -12,7 +12,7 @@ Uma parte por mp3, na ordem, com a mesma voz e os mesmos ajustes do longo 1, vel
 
 ### 1. Abertura
 
-Reescrita em 04/11/2026 para quem nunca viu o canal: 99% de quem viu o longo 1 no TikTok era espectador novo. Abre com uma imagem e uma lacuna de curiosidade, como o longo 1; a menção ao vídeo das sete frases foi para a pausa.
+Reescrita em 04/11/2026 para quem nunca viu o canal: 99% de quem viu o longo 1 no TikTok era espectador novo. Abre com uma imagem e uma lacuna de curiosidade, como o longo 1. A última frase (conselho de 04/11) troca a promessa genérica pelo dinheiro pago aos guardas, sem contar qual era a história: a virada fica para a parte 9. A menção ao vídeo das sete frases foi para o fechamento.
 
 ```
 Na sexta à tarde, o corpo de Jesus foi colocado num túmulo cavado na rocha.
@@ -20,7 +20,9 @@ Uma pedra enorme fechou a entrada.
 No dia seguinte, os inimigos dele foram até Pilatos e pediram guardas na porta.
 Porque eles lembraram de uma promessa: "Depois de três dias ressuscitarei."
 E tem um detalhe que quase ninguém percebe: os próprios discípulos ainda não tinham entendido essa promessa.
-Hoje você vai ver o que aconteceu entre aquela sexta e o domingo.
+No domingo, alguns desses guardas foram até a cidade.
+E receberam uma grande soma de dinheiro pra contar uma história.
+Hoje você vai ver que história era essa. E o que eles viram naquele túmulo.
 ```
 
 ### 2. O corpo na cruz
@@ -72,27 +74,23 @@ Repare no que eles queriam evitar: uma história de discípulos roubando o corpo
 Guarda essa história. Ela vai voltar.
 ```
 
-### 5. Pausa
+### 5. Pausa, versão YouTube
 
-Com a chamada falada para o app (decisão de 04/11/2026): motivo concreto, só o que o app já faz, sem prometer "grátis". Android pela Play Store; iPhone pela versão web (app.pregaai.com, no ar). Na legenda, o endereço aparece escrito como app.pregaai.com.
+Com a chamada falada para o app (decisão de 04/11/2026): motivo concreto, só o que o app já faz, sem prometer "grátis". Android pela Play Store; iPhone pela versão web (app.pregaai.com, no ar). Na legenda, o endereço aparece escrito como app.pregaai.com. Sem "se você chegou agora" nem a parte um (conselho de 04/11): no minuto 3, essas duas frases mandavam embora um público 99% novo; a parte um foi para o fechamento.
 
 ```
-Se você chegou agora, essa é a parte dois.
-A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.
-E se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store.
+Se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store.
 O app monta um plano de leitura pra você e tem um devocional curto pra cada dia.
 Se você usa iPhone, dá pra usar pela versão web: app ponto pregaai ponto com.
 E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
 ```
 
-#### 5. Pausa, versão TikTok (sem o app), aguardando validação do Giovanni
+#### 5. Pausa, versão TikTok (sem o app)
 
-Para o TikTok, onde o vídeo entra no Programa de Recompensas: promover o próprio app pede a divulgação de conteúdo comercial, e conteúdo comercial pode ficar fora do programa (mesma precaução do cartão final `semApp` do curto do Pedro). O YouTube fica com a versão acima. Esta versão troca a chamada do app pelo lugar da história na Bíblia (Mt 27-28, Mc 15-16, Lc 23-24, Jo 19-20).
+Para o TikTok, onde o vídeo entra no Programa de Recompensas: promover o próprio app pode exigir a divulgação de conteúdo comercial, e conteúdo comercial pode ficar fora do programa (mesma precaução do cartão final `semApp` do curto do Pedro). Pede para seguir, como a pausa do longo 1 (o pico de curtidas de ~5:00 caiu nesse pedido).
 
 ```
-Se você chegou agora, essa é a parte dois.
-A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.
-E se você quer ler essa história direto na Bíblia, ela tá no fim dos quatro evangelhos: Mateus, Marcos, Lucas e João.
+Se você gosta de ouvir a Bíblia assim, com os detalhes que a gente costuma pular, segue o canal.
 E me conta aqui embaixo: você sabia que foram os inimigos de Jesus que lembraram da promessa?
 ```
 
@@ -188,7 +186,10 @@ Os discípulos, que estavam trancados de medo, saíram pra contar essa.
 Tomé precisou ver.
 Mas Jesus deixou uma frase pra quem nunca ia ver:
 "Felizes os que não viram e creram."
-Se essa história falou com você, comenta aqui embaixo.
+Você também não viu.
+Então a pergunta que fica é: você crê?
+Me conta aqui embaixo.
+A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.
 E segue o canal, porque toda semana tem mais uma história da Bíblia, contada do jeito que ela foi escrita.
 ```
 
@@ -198,7 +199,8 @@ E segue o canal, porque toda semana tem mais uma história da Bíblia, contada d
 |---|---|
 | Na sexta à tarde, o corpo num túmulo cavado na rocha; a grande pedra na entrada (abertura) | Marcos 15:42, 46; Mateus 27:60 |
 | No dia seguinte, os chefes dos sacerdotes lembram: "Depois de três dias ressuscitarei"; pedem guardas | Mateus 27:62-64 |
-| Os discípulos ainda não tinham entendido | João 20:9 |
+| Os discípulos ainda não tinham entendido a promessa | Lucas 18:33-34; Marcos 9:31-32 (João 20:9 fala da Escritura) |
+| No domingo, alguns guardas vão à cidade; recebem grande soma de dinheiro para contar uma história; o que viram no túmulo (abertura) | Mateus 28:2-4, 11-15 |
 | Dia da Preparação, véspera do sábado, sexta-feira | Marcos 15:42; João 19:31 |
 | Pernas dos criminosos quebradas; Jesus já morto; a lança, sangue e água | João 19:31-34 |
 | Quem viu deu testemunho; "Nenhum dos seus ossos será quebrado"; "Olharão para aquele que traspassaram" | João 19:35-37 |
@@ -225,7 +227,7 @@ E segue o canal, porque toda semana tem mais uma história da Bíblia, contada d
 | Tomé: "Se eu não vir as marcas dos pregos..."; uma semana depois; "Pare de duvidar e creia"; "Senhor meu e Deus meu!" | João 20:24-28 |
 | A lista de Paulo: Pedro, os Doze, mais de 500 de uma vez, a maioria viva; Tiago e todos os apóstolos | 1 Coríntios 15:5-7 |
 | Os discípulos saíram para contar | Atos 4:20 |
-| "Felizes os que não viram e creram" | João 20:29 |
+| "Felizes os que não viram e creram"; "você também não viu" (quem assiste não viu, como diz o versículo) | João 20:29 |
 
 Cenas: Jesus ressuscitado em pé, com rosto (não está mais na cruz); o corpo envolto em linho só de longe, sem ferida na tela; a lança só sugerida, sem sangue.
 
