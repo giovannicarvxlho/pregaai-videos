@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Capa: Pedro nega Jesus</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #14110F; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* Título: "Pedro negou Jesus três vezes". A capa completa, não repete: "E JESUS OLHOU".
+   Noite (fundo escuro), um herói só: Pedro de perto, triste, com a luz da fogueira. Tudo no miolo 3:4. */
+.hook { position: absolute; left: 0; right: 0; top: 300px; display: flex; flex-direction: column; align-items: center; }
+.l { font: 400 170px/0.95 'Gasoek One'; color: #FFFFFF; text-shadow: 0 12px 0 #181614; white-space: nowrap; }
+.chip { margin-top: 26px; padding: 6px 46px 30px; background: #2383E2; border: 8px solid #181614; border-radius: 40px; box-shadow: 0 18px 0 0 #181614;
+  font: 400 170px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+  <div class="hook"><div class="l">E JESUS</div><div class="chip">OLHOU</div></div>
+</div>
+<script src="../../lib.js"></script>
+<script>
+let s = DEFS + `<rect width="1080" height="1920" fill="#14110F"/>`;
+s += `<circle cx="760" cy="1500" r="760" fill="url(#gAmber)" opacity="0.55"/>`;
+s += flames(820, 1700, 1.4, 0.4, 3);
+s += person({ robe: C.p500, skin: '#C68B59', hair: '#5A3A28', beard: true, x: 460, y: 1680 + 206 * 0, s: 3.1, mood: 'sad', look: 0.6, rim: C.a300, ol: '#0E0D0C', noShadow: true });
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
