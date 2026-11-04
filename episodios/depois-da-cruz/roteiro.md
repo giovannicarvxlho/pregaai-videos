@@ -10,15 +10,15 @@ Uma parte por mp3, na ordem, com a mesma voz e os mesmos ajustes do longo 1, vel
 
 ### 1. Abertura
 
+Reescrita em 04/11/2026 para quem nunca viu o canal: 99% de quem viu o longo 1 no TikTok era espectador novo. Abre com uma imagem e uma lacuna de curiosidade, como o longo 1; a menção ao vídeo das sete frases foi para a pausa.
+
 ```
-No vídeo das sete frases, a gente parou na cruz.
-Hoje, a história continua.
-E começa com um detalhe que quase ninguém percebe: os inimigos de Jesus lembraram de uma promessa que ele tinha feito.
-Os chefes dos sacerdotes foram até Pilatos e disseram: "Aquele impostor disse: Depois de três dias ressuscitarei."
-E pediram guardas na porta do túmulo.
-Os próprios discípulos ainda não tinham entendido essa promessa.
-Hoje você vai ver o que aconteceu do fim da tarde de sexta até aquele domingo.
-E se você ainda não viu o vídeo das sete frases, ele tá no canal.
+Na sexta à tarde, o corpo de Jesus foi colocado num túmulo cavado na rocha.
+Uma pedra enorme fechou a entrada.
+No dia seguinte, os inimigos dele foram até Pilatos e pediram guardas na porta.
+Porque eles lembraram de uma promessa: "Depois de três dias ressuscitarei."
+E tem um detalhe que quase ninguém percebe: os próprios discípulos ainda não tinham entendido essa promessa.
+Hoje você vai ver o que aconteceu entre aquela sexta e o domingo.
 ```
 
 ### 2. O corpo na cruz
@@ -72,9 +72,15 @@ Guarda essa história. Ela vai voltar.
 
 ### 5. Pausa
 
+Com a chamada falada para o app (decisão de 04/11/2026): motivo concreto, só o que o app já faz, sem prometer "grátis" e avisando que é só Android.
+
 ```
-Se você chegou agora pelo vídeo das sete frases, segue o canal: essa é a parte dois.
-E me conta nos comentários de onde você tá assistindo.
+Se você chegou agora, essa é a parte dois.
+A parte um, sobre as sete frases de Jesus na cruz, já tá publicada aqui.
+E se você quer ler essa história direto na Bíblia, um pouco por dia, procura PregaAI na Play Store.
+O app monta um plano de leitura pra você e tem um devocional curto pra cada dia.
+Por enquanto, é só pra Android.
+Me conta nos comentários de onde você tá assistindo.
 ```
 
 ### 6. Domingo de manhã
@@ -177,7 +183,8 @@ E segue o canal, porque toda semana tem mais uma história da Bíblia, contada d
 
 | Trecho | Fonte |
 |---|---|
-| Os chefes dos sacerdotes lembram: "Depois de três dias ressuscitarei"; pedem guardas | Mateus 27:62-64 |
+| Na sexta à tarde, o corpo num túmulo cavado na rocha; a grande pedra na entrada (abertura) | Marcos 15:42, 46; Mateus 27:60 |
+| No dia seguinte, os chefes dos sacerdotes lembram: "Depois de três dias ressuscitarei"; pedem guardas | Mateus 27:62-64 |
 | Os discípulos ainda não tinham entendido | João 20:9 |
 | Dia da Preparação, véspera do sábado, sexta-feira | Marcos 15:42; João 19:31 |
 | Pernas dos criminosos quebradas; Jesus já morto; a lança, sangue e água | João 19:31-34 |

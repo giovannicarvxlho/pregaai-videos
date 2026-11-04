@@ -17,58 +17,57 @@ Revisar todo mês com os números da última leitura.
 - **Longo:** o conteúdo segura; o que falta é clique. Testar miniatura e título antes de mexer no vídeo.
 - **Tema:** o único Short sobre Jesus teve o dobro de curtidas dos outros. É um vídeo só: hipótese para testar, não conclusão.
 
-## Ritmo (pela capacidade, não pelo máximo)
+## Ritmo (decisão de 04/11/2026, depois do conselho)
 
-| Plataforma | Cadência | Mínimo numa semana ruim |
-|---|---|---|
-| YouTube Shorts | 4 por semana (seg, qua, sex, sáb) | 3 |
-| TikTok | os mesmos 4, enviados no mesmo dia, sem marca d'água | 3 |
-| YouTube longo | 1 a cada 2 semanas (sábado) | 1 por mês |
+Os números de 04/11 mudaram o plano: no TikTok, os 5 curtos medidos (41–44 s) pararam em ~200–400 views do Para Você, inclusive o do véu, que é sobre Jesus; o longo das sete frases teve ~1,08 mi. Transcrição em `MARK1/conselho/2026-11-04-plano-pos-viral-pregaai.md`.
 
-- **Um Short por dia, no máximo.** Acabe e Jezabel saíram no mesmo dia e Acabe teve 22 views; não dá para provar a causa, mas não custa evitar.
-- **Horário fixo.** A primeira hora decide se o Short se espalha. Veja em YouTube Studio > Público > "Quando seus espectadores estão no YouTube" e poste uma hora antes do pico. Mantenha o mesmo horário por duas semanas antes de comparar.
-- **Sem acelerar o longo** (precisa passar de 8 min). Os Shorts seguem a 1,25×.
+| Plataforma | O quê |
+|---|---|
+| TikTok | só os longos (16:9, ~8 min) e, depois de lido o longo, recortes dele; nenhum curto original |
+| YouTube longo | os mesmos longos |
+| YouTube Shorts | só recortes dos longos até 28/11; nenhum Short original |
 
-## Esqueleto da semana
-
-| Dia | O quê | Pilar |
-|---|---|---|
-| Segunda | Short novo | **Vida de Jesus** (o tema que mais engajou) |
-| Quarta | Short **"O detalhe que quase ninguém percebe"**, cortado do último longo (reaproveita a narração; nada para gravar) | O ângulo de informação nova |
-| Sexta | Short novo | **Reis, profetas e quedas** (Antigo Testamento: Jezabel, Davi, Sansão) |
-| Sábado | Semana A: **vídeo longo**. Semana B: **vaga livre** (pedido de comentário, data, ou repetir o tema que mais reteve) | 20 a 30% reservado para o que surgir |
-
-Cada longo rende pelo menos 3 Shorts: o resumo (como o de 04/11) e dois detalhes. O longo vive de busca; o Short que sai dele leva gente até ele.
+- **3 longos em novembro:** 07/11, 14/11 e 28/11. O 21/11 fica de folga. A cadência se decide depois dos três.
+- **Horário:** sábado por volta das 15 h, o do viral. Se a animação atrasar, domingo às 15 h, em vez de entregar mal feito.
+- **Chamada falada para o app** em cada longo, na pausa do meio: motivo concreto, só o que o app já faz, sem prometer "grátis", avisando que é só Android.
+- O roteiro do longo seguinte só começa depois que o anterior estiver no ar.
 
 ## Séries
 - **Histórias bíblicas em menos de 1 minuto**: todo Short (já é o começo das descrições).
-- **O detalhe que quase ninguém percebe**: toda quarta. Exemplos com fonte: a placa em três línguas (Jo 19:19-22), "tetélestai" (Jo 19:30), os magos entraram numa casa (Mt 2:11), a Bíblia não diz que eram três magos (Mt 2:1, 11: três presentes).
+- **O detalhe que quase ninguém percebe**: recortes dos longos (desde 04/11, nada de Short original). Exemplos com fonte: a placa em três línguas (Jo 19:19-22), "tetélestai" (Jo 19:30), os magos entraram numa casa (Mt 2:11), a Bíblia não diz que eram três magos (Mt 2:1, 11: três presentes).
 
-## Próximas duas semanas
+## Próximas semanas
 
 | Data | Peça | Base |
 |---|---|---|
-| qua 04/11 | Short: **Quais foram as 7 frases de Jesus na cruz?** (pronto; teste do gancho no 1º quadro) | Mt 27; Lc 23; Jo 19 |
-| sex 06/11 | Short: Elias contra os 450 profetas de Baal | 1 Reis 18 |
-| sáb 07/11 | Vaga livre (sugestão: "O que escrevi, escrevi", cortado do longo) | Jo 19:19-22 |
-| seg 09/11 | Short: Pedro nega Jesus três vezes, e Jesus olha para ele | Lucas 22:54-62 |
-| qua 11/11 | Short detalhe: "Está consumado" é uma palavra só (cortado do longo) | Jo 19:30 |
-| sex 13/11 | Short: Davi poupa Saul na caverna | 1 Samuel 24 |
-| sáb 14/11 | **Longo 2: o que aconteceu depois da cruz** (sepultamento, túmulo vazio, aparições). Continua a história de quem viu o longo 1 | Mt 27:57-28; Lc 23:50-24; Jo 19:38-20 |
+| qua 04/11 | Short "Quais foram as 7 frases de Jesus na cruz?", só no YouTube (já pronto) | Mt 27; Lc 23; Jo 19 |
+| **sáb 07/11, 15 h** | **Longo 2: O que aconteceu depois que Jesus morreu na cruz** (TikTok e YouTube), com a abertura nova | Mt 27:57-28; Lc 23:50-24; Jo 19:38-20 |
+| seg 09/11 | Leitura de 48 h do longo 2 (critérios abaixo) | |
+| depois de 09/11 | Recortes do longo 2 para TikTok e Shorts | |
+| **sáb 14/11, 15 h** | **Longo de 4–6 min: Elias contra os 450 profetas de Baal.** Separa tema de formato (longo sem o tema Jesus) | 1 Reis 18 |
+| sáb 21/11 | Folga | |
+| **sáb 28/11, 15 h** | **Longo 3: o nascimento de Jesus** (véspera do Advento) | |
 
-Os temas são sugestões: cada roteiro passa pela conferência na NVI antes de ir para a narração.
+## Critérios do longo 2 (combinados antes, em 04/11)
+
+- **Replicou:** ≥100 mil views do Para Você em 48 h, com compartilhamentos ≥0,5% e salvamentos ≥1,5% por view.
+- **Parcial:** de 10 mil a 100 mil. **Não replicou:** menos de 10 mil.
+- **Junto, o app:** contas e testes por 100 mil views. A base do viral é ~20 contas e ~1 teste por 100 mil views.
+- Conte as views do Para Você em número absoluto: os ~42 mil seguidores novos puxam views pela aba Seguindo.
+- A régua é baixa (o viral fez ~600 mil views em 24 h): bater 100 mil prova que o formato funciona, não que o viral se repetiu. O formato se julga depois do Elias; a cadência, depois dos três longos.
 
 ## Datas que puxam o calendário
 - **sáb 28/11: longo 3, o nascimento de Jesus** (o que a Bíblia diz e o que não diz), na véspera do Advento (dom 29/11). Dezembro inteiro com Shorts do nascimento até o Natal (sex 25/12).
 - **Páscoa, 28/03/2027:** reciclar a crucificação e o "depois da cruz" com gancho e capa novos (repost idêntico não).
 
 ## Rotina de produção
-- **Segunda:** entrego os roteiros da semana seguinte (os Shorts novos em blocos de código e, na quinzena, o longo em partes). Você grava tudo numa sessão só na ElevenLabs.
-- **Terça a quinta:** animo e mando para aprovar. Capa junto com o vídeo aprovado.
+- **Até segunda:** entrego o roteiro do longo da semana em partes, conferido na NVI. Você grava tudo numa sessão só na ElevenLabs.
+- **Terça a sexta:** animo e mando para aprovar. Capa e miniaturas junto com o vídeo aprovado. Sábado às 15 h, publica; se atrasar, domingo às 15 h.
+- **Esta semana é a exceção:** o longo 2 grava em 04/11 e anima de 05 a 07/11.
 - **Fila de uma semana pronta**, para uma semana ruim não quebrar a sequência.
 
 ## Leitura dos números
-- **24 h depois de cada Short:** "continuaram assistindo" (YouTube Studio > Engajamento).
+- **48 h depois de cada longo:** a leitura pelos critérios acima (TikTok Studio: views do Para Você, compartilhamentos, salvamentos, seguidores; banco do app: contas e testes).
 - **Toda sexta:** os Shorts da semana anterior com 7 dias (views, % que continuou, curtidas) e o longo (impressões, CTR, duração média). Mande os prints; eu devolvo três decisões.
 - **Um teste por vez:** esta semana, gancho no primeiro quadro. Depois, título em pergunta contra afirmação.
 - **Instalações:** link do app com `referrer` na descrição dos longos e no perfil; o Play Console separa por campanha.
