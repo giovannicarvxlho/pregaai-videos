@@ -22,6 +22,8 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 `out/`, `prev/`, `sheet.png` e `tools/modelos/` ficam fora do git.
 
+**Git:** mudança no repo vai por PR e o próprio agente faz o merge na `main`, sem perguntar (autorização do Giovanni em 06/11/2026). Sem o merge, a próxima sessão e o PC dele não recebem a mudança.
+
 ## Metas de produção (Giovanni, 06/11/2026)
 
 - **2 vídeos longos por dia**, cada um com **pelo menos 5 minutos**. Com 8 min ou mais, o YouTube põe anúncio no meio.
