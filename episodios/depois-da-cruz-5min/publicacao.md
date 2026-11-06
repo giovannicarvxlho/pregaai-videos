@@ -11,7 +11,7 @@
 | 2026-11-06 19:00 | `youtube/longo.mp4` (4:39, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
 | 2026-11-06 21:00 | `youtube/curto-01.mp4` (Shorts, 1:16) | quadro de ~1 s, escolhido no app |
 | 2026-11-07 12:00 | `youtube/curto-02.mp4` (Shorts, 1:02) | quadro de ~10 s, escolhido no app |
-| 2026-11-07 19:00 | `youtube/curto-03.mp4` (Shorts, 1:11) | quadro de ~45 s, escolhido no app |
+| 2026-11-07 19:00 | `youtube/curto-03.mp4` (Shorts, 1:11) | quadro de ~36 s, escolhido no app |
 
 ### Vídeo longo: `youtube/longo.mp4`
 
@@ -129,7 +129,7 @@ Você também não viu. Você crê? 👇
 #históriasbíblicas #shorts #fé #bíblia #tomé
 ```
 
-**Capa:** escolha no app o quadro de ~45 s (Tomé diante de Jesus). **Vídeo relacionado:** o longo. **Comentário fixado:** "O vídeo completo, com o que aconteceu depois, está no canal."
+**Capa:** escolha no app o quadro de ~36 s (Tomé diante de Jesus). **Vídeo relacionado:** o longo. **Comentário fixado:** "O vídeo completo, com o que aconteceu depois, está no canal."
 
 ## TikTok
 
