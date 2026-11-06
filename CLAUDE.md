@@ -38,6 +38,27 @@ Substitui o molde de 28/10 (fundo creme com raios, rosto com medo e seta em toda
 - Reduzida a 168×94, o tamanho do feed no celular, dá para entender o que é.
 - Em preto e branco, o herói continua se separando do fundo.
 
+### Estilo da miniatura do vídeo longo (aprovado pelo Giovanni em 06/11/2026; referência: `episodios/depois-da-cruz/miniatura-a.html`, `-b`, `-c`)
+
+Giovanni: "crave esse estilo", mas "não pode ficar SEMPRE igual, tem um padrão, mas nunca 100% igual". Vale a regra da família acima: o padrão abaixo é o que se repete, e a lista "Varia" é obrigatória.
+
+**O padrão (repete em todas):**
+- A arte sai das funções do próprio episódio (`data.js`, `lib.js` e `scenes.js` carregados na página da miniatura), para a miniatura mostrar só o que o vídeo mostra.
+- Pouca luz no fundo e **uma fonte de luz quente** (gradiente radial dourado ou âmbar) atrás do herói, com vinheta escura nas bordas. É o que separa o herói do fundo no feed.
+- **Herói grande:** um rosto em close com a emoção da história (medo, choro, espanto), ou uma figura central grande. Nada de cena aberta com personagens pequenos.
+- **Texto:** Gasoek One, de 1 a 3 palavras, branco com contorno escuro grosso e sombra; a palavra-chave numa etiqueta azul `#2383E2` com borda preta, sombra dura e inclinada. De preferência, uma pergunta ou um mistério que o vídeo responde.
+- Texto de um lado e herói do outro; o canto de baixo à direita fica livre (duração).
+- Render: `ESCALA=2 node capa.cjs <ep> miniatura-<x>` (2560×1440). O JPG fica abaixo de 2 MB, para subir pelo celular.
+- Antes de entregar: `tools/testar_capa.py` (168×94 e preto e branco) e uma folha com a miniatura no meio de miniaturas do nicho na busca do YouTube, para ver se ela se destaca.
+
+**Varia (nunca 100% igual):** cada miniatura nova muda pelo menos 2 destes itens em relação às 3 últimas do canal (critério sugerido pelo Claude).
+- A cor da luz e do fundo, pelo clima da história: noite azul-escura, madrugada dourada, nascer do sol quente, entardecer, escuro total.
+- O lado do texto (esquerda ou direita) e a linha da etiqueta azul (primeira ou segunda), com inclinação para um lado ou para o outro.
+- O enquadramento: close de rosto, plano médio, objeto em primeiro plano.
+- O herói: uma pessoa, um objeto (bolsa de moedas, pedra, véu, cruz) ou um lugar.
+- Os detalhes de emoção: suor, lágrimas, moedas no ar, poeira, raios de luz.
+- O tipo de texto: pergunta ("QUEM ABRIU?"), afirmação forte ("PAGOS PRA MENTIR") ou contradição do título.
+
 **Formatos:**
 - Vídeo longo: 1280×720, nada importante no canto de baixo à direita (a duração do YouTube cobre). Fazer 3 versões, cada uma com um motivo diferente para clicar, para o "Testar e comparar" do YouTube Studio.
 - Short e TikTok: 1080×1920, tudo o que importa no miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil. Sem referência bíblica e sem logo. No Short a capa pesa pouco: quem decide é o primeiro quadro.

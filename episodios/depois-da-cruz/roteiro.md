@@ -1,6 +1,6 @@
 # O que aconteceu depois que Jesus morreu na cruz
 
-**Status: aprovado pelo Giovanni em 05/11/2026** ("está ótimo"), na revisão feita com a retenção segundo a segundo do longo 1 (MARK1, `projetos/pregaai-canais.md`, Notas e Playbook de 05/11). Mudanças sobre a versão de 04/11: abertura nova com o domingo (o anjo, o terremoto e os guardas nos primeiros ~10 s); as partes 2 e 3 viraram uma só ("Sexta à tarde"), só com o contexto que volta depois; a pausa foi para depois de "Eu vi o Senhor!", terminando num gancho para o dinheiro; e, no TikTok, o vídeo termina em "Me conta aqui embaixo." (corte na edição, sem as duas últimas frases e sem cartão final). A versão de 04/11 trazia as três mudanças do conselho (`conselho/2026-11-04-roteiro-longo2-conversao.md` no MARK1). No TikTok, o vídeo sai sem o app (decisão de 05/11; chamada no comentário fixado e na bio).
+**Status: roteiro aprovado pelo Giovanni em 05/11/2026 ("está ótimo"); vídeo aprovado em 06/11/2026**, na revisão feita com a retenção segundo a segundo do longo 1 (MARK1, `projetos/pregaai-canais.md`, Notas e Playbook de 05/11). Mudanças sobre a versão de 04/11: abertura nova com o domingo (o anjo, o terremoto e os guardas nos primeiros ~10 s); as partes 2 e 3 viraram uma só ("Sexta à tarde"), só com o contexto que volta depois; a pausa foi para depois de "Eu vi o Senhor!", terminando num gancho para o dinheiro; e, no TikTok, o vídeo termina em "Me conta aqui embaixo." (corte na edição, sem as duas últimas frases e sem cartão final). A versão de 04/11 trazia as três mudanças do conselho (`conselho/2026-11-04-roteiro-longo2-conversao.md` no MARK1). **No TikTok, o vídeo usa a mesma pausa do YouTube, com o app** (decisão de 06/11, que revê a de 05/11: das 17 primeiras aberturas do app depois da troca do link da bio, nenhuma veio pela bio; todas vieram da busca do nome na Play). Ao publicar no TikTok, ligar a divulgação de conteúdo comercial (regra oficial: conteúdo que promove produto precisa dela; sem ela, o vídeo pode ficar fora do Para Você). A pausa sem o app ficou gravada em `episodios/depois-da-cruz-tiktok/pausa-sem-app.mp3`. Na animação, a lança da parte 2 fica parada ao pé da cruz (ajuste de 06/11).
 
 Vídeo longo (16:9), continuação de `episodios/sete-frases-na-cruz`, que viralizou no TikTok (1,2 mi de views).
 ~1.150 palavras em 10 partes (11 mp3s, contando a pausa do TikTok): ~7:40 no TikTok e ~8:20 no YouTube, com a pausa do app e o cartão final. Fonte: NVI.
@@ -128,7 +128,7 @@ Porque agora vem a história que eles pagaram pra contar.
 
 #### 7. Pausa, versão TikTok (sem o app)
 
-Sem o app, para o vídeo não virar conteúdo comercial no Programa de Recompensas. Pede para seguir o perfil, como a pausa do longo 1 (9% das curtidas caíram nesse pedido).
+**Não usada na publicação de 07/11** (decisão de 06/11: o TikTok também leva a pausa com o app). Sem o app, para o vídeo não virar conteúdo comercial no Programa de Recompensas. Pede para seguir o perfil, como a pausa do longo 1 (9% das curtidas caíram nesse pedido).
 
 ```
 Se você gosta de ouvir a Bíblia assim, com os detalhes que a gente costuma pular, segue o perfil.
@@ -222,9 +222,65 @@ E segue o canal, porque toda semana tem mais uma história da Bíblia, contada d
 
 Cenas: Jesus ressuscitado em pé, com rosto (não está mais na cruz); o corpo envolto em linho só de longe, sem ferida na tela; a lança só sugerida, sem sangue.
 
-## Publicação (rascunho)
+## Publicação
+
+**Vídeo aprovado pelo Giovanni em 06/11/2026.** Sai no sábado, 07/11, às 15 h, no YouTube (`out/depois-da-cruz.mp4`, 8:13, com o cartão final) e no TikTok (`out/depois-da-cruz-tiktok.mp4`, 7:43, sem cartão final). No TikTok, ligar a divulgação de conteúdo comercial, porque a pausa fala do app.
 
 **Título**
 > O que aconteceu depois que Jesus morreu na cruz | Histórias Bíblicas
 
-As 3 miniaturas saem com o vídeo pronto, ligadas a este título.
+**Miniaturas (Testar e comparar, nesta ordem):** `miniatura-a` (PAGOS PRA MENTIR), `miniatura-b` (QUEM ABRIU?), `miniatura-c` (QUEM VIU PRIMEIRO?). Gerar com `ESCALA=2 node capa.cjs depois-da-cruz miniatura-<x>`. A primeira sobe como principal: sem vencedora clara, é ela que fica.
+
+**Descrição do YouTube** (capítulos nos tempos reais da narração)
+```
+No domingo, bem cedo, a terra tremeu. Um anjo desceu do céu, rolou a pedra do túmulo de Jesus e sentou em cima dela. Os guardas ficaram como mortos. Depois, alguns desses guardas receberam uma grande soma de dinheiro pra contar uma história.
+
+Neste vídeo você vê o que aconteceu entre a sexta e o domingo, e depois dele: o corpo na cruz, José de Arimateia e Nicodemos, os guardas na porta do túmulo, o túmulo vazio, Maria Madalena e o "jardineiro", a história que os chefes pagaram pra espalhar, o caminho de Emaús e Tomé. E um detalhe que quase ninguém percebe: foram os inimigos de Jesus que lembraram da promessa "Depois de três dias ressuscitarei".
+
+📖 Base bíblica: Mateus 27 e 28; Marcos 15; Lucas 23 e 24; João 19 e 20; 1 Coríntios 15
+
+⏱️ Capítulos
+00:00 A terra tremeu
+00:42 Sexta à tarde
+01:46 Os guardas na porta
+02:21 Domingo de manhã
+03:17 O túmulo vazio
+04:04 Maria e o jardineiro
+05:20 O dinheiro dos guardas
+05:50 Emaús e Tomé
+07:02 Felizes os que não viram
+
+📱 Quer ler essa história direto na Bíblia, um pouco por dia? Baixe o PregaAI: pregaai.com/?utm_source=youtube&utm_medium=descricao
+
+Parte 1: As últimas 7 frases de Jesus na cruz.
+Histórias bíblicas contadas do jeito que foram escritas, com os detalhes que a gente costuma pular. Vídeo novo toda semana.
+
+#históriasbíblicas #ressurreição #bíblia
+```
+
+**Tags do YouTube**
+```
+histórias bíblicas, o que aconteceu depois que jesus morreu, ressurreição de jesus, túmulo vazio, guardas do túmulo de jesus, josé de arimateia, nicodemos, maria madalena, jardineiro, caminho de emaús, tomé, mateus 28, joão 20, lucas 24, 1 coríntios 15, páscoa, estudo bíblico, histórias da bíblia, bíblia
+```
+
+**Legenda do TikTok**
+```
+Os guardas viram o túmulo se abrir. Depois, receberam dinheiro pra contar outra história.
+
+O que aconteceu depois que Jesus morreu na cruz: o anjo na pedra, os guardas como mortos, o túmulo vazio, Maria Madalena e o "jardineiro", o caminho de Emaús e Tomé. Parte 2 do vídeo das 7 frases.
+
+📖 Base bíblica: Mateus 27 e 28; Marcos 15; Lucas 23 e 24; João 19 e 20; 1 Coríntios 15
+
+Você também não viu. Você crê? 👇
+
+#históriasbíblicas #fé #bíblia #ressurreição #jesus
+```
+
+**Comentário fixado no TikTok**
+```
+📱 Quer ler essa história direto na Bíblia, um pouco por dia? O PregaAI monta um plano de leitura pra você e tem um devocional curto pra cada dia. Android: procura PregaAI na Play Store. iPhone: app.pregaai.com (link na bio).
+```
+
+**Capa do TikTok:** o quadro de ~0:05 (o anjo sentado na pedra), com "QUEM ABRIU?" no editor de capa.
+
+Conferência da descrição na NVI: o terremoto, o anjo e os guardas como mortos (Mateus 28:1-4); os guardas e o dinheiro (Mateus 28:11-12); "Depois de três dias ressuscitarei" (Mateus 27:63); José de Arimateia e Nicodemos (Marcos 15:43; João 19:38-39); Maria Madalena e o "jardineiro" (João 20:14-15); Emaús (Lucas 24:13-16); Tomé (João 20:24-28); "Felizes os que não viram e creram" (João 20:29). O app monta plano de leitura e tem devocional diário (`PRODUCT.md` do app).

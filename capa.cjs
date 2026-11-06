@@ -7,7 +7,7 @@ const path = require('path');
 (async () => {
   const ep = process.argv[2], file = process.argv[3] || 'capa';
   const br = await chromium.launch();
-  const page = await br.newPage({ viewport: { width: 1080, height: 1920 } });
+  const page = await br.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: Number(process.env.ESCALA || 1) }); // ESCALA=2: miniatura em 2560×1440 (o YouTube pede a maior resolução possível)
   page.on('pageerror', (e) => { console.error('ERRO:', e.message); process.exit(1); });
   await page.goto('file://' + path.join(__dirname, 'episodios', ep, `${file}.html`));
   await page.evaluate(() => window.ready);
