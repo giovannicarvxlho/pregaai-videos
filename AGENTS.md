@@ -22,6 +22,13 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 `out/`, `prev/`, `sheet.png` e `tools/modelos/` ficam fora do git.
 
+## Metas de produção (Giovanni, 06/11/2026)
+
+- **2 vídeos longos por dia**, cada um com **pelo menos 5 minutos**. Com 8 min ou mais, o YouTube põe anúncio no meio.
+- **6 vídeos curtos por dia**, ligados aos longos do dia. Sugestão do Claude, a confirmar: tirar os curtos da narração do próprio longo, como no Reel das 7 frases. Assim eles não gastam crédito da ElevenLabs.
+- **Banner de CTA a cada 30 segundos**, para trazer downloads e testes do app. O componente ainda não existe no `lib.js`. O primeiro vídeo que precisar dele cria um `ctaBanner()` lá, na marca (cartão branco, borda de 3 px, sombra dura, azul `#2383E2`, ícone do app e selo da Play de `assets/`), sem cobrir a legenda nem as zonas que o app cobre; depois disso, todos usam o mesmo.
+- A confirmar com o Giovanni: o banner vale também para os curtos? No TikTok, a promoção do app pode tirar o vídeo do Programa de Recompensas (regra de 04/11 e decisão de 06/11 no MARK1).
+
 ## Fluxo
 
 - **O Giovanni valida a história antes de tudo** (regra dele, 04/11/2026: "sempre eu PRECISO validar a história antes"). Todo roteiro novo, e toda mudança num roteiro (abertura, chamada, uma frase), vai para ele ler inteiro antes da narração e da animação, com o que mudou marcado. Só trate como aprovado depois do ok explícito dele sobre o texto; aceitar um plano ou uma estratégia não é aprovar o roteiro. Até lá, o roteiro fica marcado no topo como "aguardando validação do Giovanni".
@@ -35,7 +42,7 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 ## Vídeo (aprovado em 28/10/2026, referência: `episodios/morte-de-acabe`)
 
-- Desenho com traço de tinta e os personagens de `lib.js`. **Poucos elementos por cena**: sem contadores, selos, brilhos ou cartões por cima da ilustração. O cartão final com a Google Play é a exceção.
+- Desenho com traço de tinta e os personagens de `lib.js`. **Poucos elementos por cena**: sem contadores, selos, brilhos ou cartões por cima da ilustração. O cartão final com a Google Play e o banner de CTA (06/11) são as exceções.
 - Legenda só com o texto, sem cartão. A palavra que está sendo falada fica azul. A referência bíblica aparece pequena no alto, só quando a passagem muda.
 - Roteiro curto: ~110 palavras e cenas de 1 a 4 s. Narração gerada em velocidade 1,0, com `SPEED = 1.25` no `data.js`.
 - Narração humanizada: escreva como quem conta para um amigo ("pra", "tá", "você", pergunta direta), com frases curtas. Nada de tom de locutor.
@@ -98,7 +105,7 @@ Mesmas regras do roteiro: sem travessão e com cada afirmação conferida na NVI
 ## Vídeo longo (aprovado em 02/11/2026, referência: `episodios/sete-frases-na-cruz`)
 
 - 16:9, 1920×1080 (`const FORMAT = 'wide'` no `data.js`). Mesmo traço e mesmas regras de texto dos Shorts.
-- Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar: o vídeo precisa passar de 8 min para ter anúncio no meio.
+- Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar. Mínimo de 5 min (meta de 06/11); com 8 min ou mais o YouTube põe anúncio no meio.
 - Cenas de explicação (cartões com os livros, versículos em cartão) valem aqui, porque são a cena inteira e não algo por cima da ilustração.
 - Quando o roteiro vier de fora, confira tudo na NVI antes de produzir e diga o que foi corrigido.
 - Miniatura 1280×720 pela regra da capa acima, em 3 versões para o "Testar e comparar".

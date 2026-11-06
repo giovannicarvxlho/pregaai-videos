@@ -3,6 +3,8 @@
 Feito com as skills `youtube-shorts`, `content-calendar` e `analytics-and-reporting`, em cima dos números de 03/11.
 Revisar todo mês com os números da última leitura.
 
+**Meta nova de 06/11/2026:** 2 longos (5 min ou mais) e 6 curtos ligados a eles por dia, com banner de CTA a cada 30 s (`AGENTS.md`, "Metas de produção"). O calendário abaixo é o de 04/11.
+
 ## O que os números dizem (YouTube Studio e vidIQ, 03/11)
 
 | | Short da crucificação | Vídeo longo |
