@@ -49,6 +49,10 @@ const roda = (cmd, args) => {
     const arq = ['small-encoder.int8.onnx', 'small-decoder.int8.onnx', 'small-tokens.txt'];
     if (arq.every((f) => fs.existsSync(path.join(mdir, f)))) ok('modelo do Whisper (tools/modelos)');
     else erro('modelo do Whisper (tools/modelos)', `${py} tools/baixar_modelo.py`);
+    const el = spawnSync(py, [path.join('tools', 'narrar.py'), '--checar'], { cwd: R, encoding: 'utf8' });
+    const linha = ((el.stdout || '') + (el.stderr || '')).trim().split('\n')[0].replace(/^[✔✘] /, '');
+    if (el.status === 0) ok(linha);
+    else erro(linha || 'ElevenLabs', 'plano pago e ELEVENLABS_API_KEY=... no .env.local da raiz (veja o README)');
   }
 
   if (fs.existsSync(path.join(R, '..', 'pregaai', 'assets', 'bible', 'nvi.json'))) ok('NVI (../pregaai/assets/bible/nvi.json)');

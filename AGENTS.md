@@ -6,28 +6,30 @@ Este arquivo vale para qualquer agente que trabalhe neste repo (Claude Code, Ant
 
 ## Como o vídeo é feito (leia antes de começar)
 
+**Modo automático** (decisão do Giovanni, 06/11/2026): o agente faz tudo sozinho e entrega o vídeo pronto. A única parada é a aprovação do roteiro. No Antigravity, isso é a skill `/episodio` (`.agents/skills/episodio`).
+
 O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG desenhado por `episodios/<ep>/scenes.js` com as peças de `lib.js`; o Playwright fotografa cada quadro e o ffmpeg junta tudo com a narração. Não use Veo, Imagen, Nano Banana, Canva nem banco de imagens, e não monte outro pipeline (Remotion, MoviePy, editor de vídeo).
 
 1. **Ambiente:** `npm i` e depois `npm run checar`. Só siga com tudo ✔; cada ✘ vem com o comando que resolve.
 2. **Leia** o `README.md` inteiro (principalmente "Como escrever o `scenes.js`") e o episódio de referência inteiro, `data.js` e `scenes.js`: `episodios/morte-de-acabe` para Short, `episodios/sete-frases-na-cruz` para vídeo longo.
-3. **Roteiro** em `episodios/<ep>/roteiro.md`, conferido na NVI, marcado "aguardando validação do Giovanni". Entregue nos dois formatos do Fluxo abaixo e **pare** até o ok dele sobre o texto.
-4. **Narração:** só a do Giovanni, gerada na ElevenLabs, em `episodios/<ep>/narration.mp3` (longo: `partes/01.mp3`...). Não gere voz com outro TTS nem com a API.
+3. **Roteiro** em `episodios/<ep>/roteiro.md`, conferido na NVI, marcado "aguardando validação do Giovanni", e o texto que a voz vai ler em `episodios/<ep>/narracao.txt` (uma frase por linha, `---` entre as partes, grafia para a voz: "Prega aí" em vez de PregaAI). Mostre o roteiro no formato de leitura e **pare** até o ok dele sobre o texto. É a única parada.
+4. **Narração:** `python3 tools/narrar.py episodios/<ep>` gera o `narration.mp3` (longo: `partes/01.mp3`...) com a voz e os ajustes aprovados. Não use outro TTS nem outra voz. Se o Giovanni mandar um mp3 dele, use o dele.
 5. **Tempos:** `segmentos.py` + `transcrever.py` e monte o `data.js` (Short), ou `juntar.py` + `alinhar.py` (longo), como no README. A legenda tem que bater com o que a voz falou.
 6. **Cenas:** comece copiando o `scenes.js` da referência e troque as cenas uma a uma. Use as peças do `lib.js`; peça nova entra no `lib.js` no mesmo traço. Cada cena começa em `at(i)` ou `wordTime(i, 'palavra')`, nunca num segundo fixo.
 7. **Revise vendo:** `node preview.cjs <ep>` (um quadro de cada cena), `bash sheet.sh 6`, abra o `sheet.png` e olhe de verdade: personagem inteiro e dentro do quadro, legenda sem cobrir rosto, nada nas zonas que o app cobre (README), nenhum `ERRO:` no terminal. Corrija e repita até ficar limpo.
-8. **Render:** `bash build.sh <ep>` gera `out/<ep>.mp4`. Mande o vídeo para o Giovanni avaliar.
-9. **Aprovado:** commit e push do episódio e a capa (regra "Vídeo aprovado → capa junto").
+8. **Render, capa e descrição:** `bash build.sh <ep>` gera `out/<ep>.mp4`; faça também a capa (regra da capa abaixo) e a descrição da publicação no `roteiro.md`.
+9. **Entrega:** vídeo, capa, `sheet.png` e descrição numa mensagem só. Com o ok dele no vídeo, commit e push.
 
 `out/`, `prev/`, `sheet.png` e `tools/modelos/` ficam fora do git.
 
 ## Fluxo
 
 - **O Giovanni valida a história antes de tudo** (regra dele, 04/11/2026: "sempre eu PRECISO validar a história antes"). Todo roteiro novo, e toda mudança num roteiro (abertura, chamada, uma frase), vai para ele ler inteiro antes da narração e da animação, com o que mudou marcado. Só trate como aprovado depois do ok explícito dele sobre o texto; aceitar um plano ou uma estratégia não é aprovar o roteiro. Até lá, o roteiro fica marcado no topo como "aguardando validação do Giovanni".
-- **Entrega do roteiro em dois formatos** (pedido dele, 04/11/2026), sempre: (1) **para ler e validar:** a história em parágrafos de texto corrido, uma parte por título, com o que mudou marcado; (2) **para colar na ElevenLabs:** um bloco de código por parte (um mp3 por parte), uma frase por linha, sem nenhuma marcação dentro do bloco. Primeiro o formato de leitura; os blocos para colar vão junto ou logo depois do ok, já com os ajustes.
-- **Narração:** o Giovanni gera o mp3 no site da ElevenLabs e manda no chat (ou salva direto em `episodios/<ep>/`). Entregue nos dois formatos da regra acima (leitura e blocos para colar). Ajustes aprovados: voz Carlos, modelo v4, estabilidade ~45% (35% se ainda soar locutor), similaridade 80%, clone strength no padrão (Reset values), idioma Portuguese, velocidade 1,0. Com o mp3 em mãos, sincronize como no README (`segmentos.py`, `transcrever.py`, `data.js`).
-- **Custo da ElevenLabs no mínimo** (Giovanni, 04/11/2026: "devem ser mínimos, utilizar o máximo por aqui"): a ElevenLabs fica só para a narração. Trilha e efeitos sonoros são gerados aqui, no próprio pipeline (síntese no ffmpeg), sem custo e sem problema de direitos.
-- A chave da ElevenLabs fica no secret de rede do ambiente (Claude Code na nuvem). Em qualquer ferramenta: nunca peça chave no chat nem grave em arquivo versionado.
-- **Vídeo aprovado → capa junto.** Quando o Giovanni disser que um vídeo ficou bom e pedir para salvar, faça commit e push do episódio **e** gere a capa pela regra abaixo (`episodios/<ep>/capa.html` + `node capa.cjs <ep>`), e mande os dois.
+- **Entrega do roteiro em dois formatos** (pedido dele, 04/11/2026), sempre: (1) **para ler e validar:** a história em parágrafos de texto corrido, uma parte por título, com o que mudou marcado; (2) **para a voz:** desde 06/11/2026 a narração sai pela API, então esse formato vira o `narracao.txt` do episódio (uma frase por linha, sem marcação, `---` entre as partes), que o `tools/narrar.py` lê. Só mostre os blocos no chat se ele pedir.
+- **Narração:** sai pela API da ElevenLabs com `tools/narrar.py`, depois do ok no roteiro (decisão de 06/11/2026; a API exige plano pago e a chave no `.env.local`). Ajustes, gravados no `narrar.py`: voz Marcelo Costa (a dos curtos de 04 e 05/11, `pedro-nega` e `mulher-do-fluxo`), modelo v4, estabilidade 50%, similaridade 80%, clone strength no padrão, Portuguese, velocidade 1,0. Antes era a voz Carlos com estabilidade ~45%. Com o mp3 em mãos, sincronize como no README (`segmentos.py`, `transcrever.py`, `data.js`).
+- **Custo da ElevenLabs no mínimo** (Giovanni, 04/11/2026: "devem ser mínimos, utilizar o máximo por aqui"): a ElevenLabs fica só para a narração, gerada uma vez por roteiro aprovado (o `narrar.py` não sobrescreve mp3; `--refazer` só se o Giovanni pedir). Trilha e efeitos sonoros são gerados aqui, no próprio pipeline (síntese no ffmpeg), sem custo e sem problema de direitos.
+- A chave da ElevenLabs fica no secret de rede do ambiente (Claude Code na nuvem) ou no `.env.local` da raiz (computador, fora do git). Nunca peça chave no chat nem grave em arquivo versionado.
+- **Vídeo e capa juntos.** No modo automático a capa (`episodios/<ep>/capa.html` + `node capa.cjs <ep>`) já vai na entrega com o vídeo. Quando o Giovanni disser que ficou bom, faça commit e push do episódio com a capa.
 - Confira todo texto bíblico na NVI (`assets/bible/nvi.json` do repo `pregaai`; no computador, clone o `pregaai` na mesma pasta deste repo, em `../pregaai`). Toda afirmação do roteiro tem que estar no texto. Se for inferência, escreva de um jeito que não afirme mais do que a Bíblia diz.
 - Texto visível sem travessão (decisão de 15/10/2026). Número na tela só com fonte real.
 

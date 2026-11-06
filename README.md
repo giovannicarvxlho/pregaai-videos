@@ -21,6 +21,14 @@ npm run checar                               # confere tudo e diz o comando de c
 
 No Windows, se `python3` não existir, use `python`. O `checar` avisa.
 
+**Narração pela API:** precisa de plano pago na ElevenLabs (no Free, a API não usa vozes da Voice Library). Crie uma chave em elevenlabs.io (Developers > API Keys) e salve num arquivo `.env.local` na raiz do repo, que fica fora do git:
+
+```
+ELEVENLABS_API_KEY=sua-chave
+```
+
+Na nuvem do Claude Code a chave vem do ambiente e não precisa disso.
+
 **No dia a dia:**
 
 ```bash
@@ -39,15 +47,16 @@ node capa.cjs valentes-de-davi-2      # capa (miniatura) a partir de episodios/<
 | `index.html` | CSS dos componentes da marca e o laço que desenha cada quadro (`renderFrame(t)`) |
 | `episodios/<ep>/data.js` | A narração em frases (`SEGS`), a duração e a velocidade final (`SPEED`) |
 | `episodios/<ep>/scenes.js` | As cenas do episódio e a linha do tempo (`SCENES`) |
+| `episodios/<ep>/narracao.txt` | O texto que a voz lê (o `narrar.py` gera o mp3 a partir dele) |
 | `episodios/<ep>/narration.mp3` | Narração da ElevenLabs |
 | `episodios/<ep>/roteiro.md` | Roteiro com referências |
 | `episodios/<ep>/capa.html` | Capa do episódio (texto do gancho no miolo 3:4, que é o recorte da grade do TikTok) |
-| `tools/` | Conferir a máquina (`checar.cjs`) e abrir o navegador (`navegador.cjs`); medir as frases no áudio e transcrever com Whisper; no vídeo longo, juntar as partes da narração (`juntar.py`) e medir todas as frases de uma vez (`alinhar.py`) |
+| `tools/` | Conferir a máquina (`checar.cjs`), abrir o navegador (`navegador.cjs`) e gerar a narração na ElevenLabs (`narrar.py`); medir as frases no áudio e transcrever com Whisper; no vídeo longo, juntar as partes da narração (`juntar.py`) e medir todas as frases de uma vez (`alinhar.py`) |
 
 ## Episódio novo
 
 1. **Roteiro**: cada frase com a referência bíblica. Confira cada afirmação no texto (`assets/bible/nvi.json` do app tem a NVI).
-2. **Narração**: gere na ElevenLabs a partir do roteiro e salve em `episodios/<ep>/narration.mp3`.
+2. **Narração**: escreva o texto aprovado em `episodios/<ep>/narracao.txt` (uma frase por linha, do jeito que a voz deve ler) e rode `python3 tools/narrar.py episodios/<ep>`. Ele gera o `narration.mp3` com a voz e os ajustes aprovados, mostra quantos caracteres vai gastar e não sobrescreve mp3 que já existe (`--refazer` gera de novo).
 3. **Frases no tempo**: `python3 tools/segmentos.py episodios/<ep>/narration.mp3` devolve o início e o fim de cada trecho de fala.
 4. **Conferir o texto**: `python3 tools/transcrever.py episodios/<ep>/narration.mp3 "<saída do passo 3>"`. A legenda tem que bater com o que a voz falou.
 5. **`data.js`**: um item por frase, `[início, fim, 'texto']`. Se a voz pausar dentro da frase (o `segmentos.py` mostra dois trechos), junte e passe o trecho de cada bloco `|` no 4º item: `[início, fim, 'texto | resto', [[a1, b1], [a2, b2]]]`. Na legenda, `|` quebra em blocos (até ~28 letras cada) e `!` no começo esconde a legenda quando a cena já mostra o texto. A palavra que está sendo falada fica azul sozinha.
@@ -75,7 +84,7 @@ O jeito mais rápido de acertar é copiar o `scenes.js` de `episodios/morte-de-a
 `const FORMAT = 'wide'` no `data.js` muda o quadro para 1920×1080 (o `data.js` carrega antes do `lib.js`).
 Os Shorts não mudam: sem `FORMAT`, tudo continua em 1080×1920.
 
-1. **Narração em partes**: uma por capítulo do roteiro, salvas em `episodios/<ep>/partes/01.mp3`, `02.mp3`...
+1. **Narração em partes**: uma por capítulo do roteiro, salvas em `episodios/<ep>/partes/01.mp3`, `02.mp3`... O `narrar.py` faz isso quando o `narracao.txt` tem as partes separadas por uma linha `---`.
 2. **Juntar**: `python3 tools/juntar.py episodios/<ep>` gera o `narration.mp3` com 0,8 s entre as partes (o `build.sh` também junta, se o arquivo não existir).
 3. **Medir**: `python3 tools/alinhar.py episodios/<ep>` corta o áudio nas pausas, transcreve com Whisper, alinha com o texto do `data.js` e reescreve o `SEGS` com os tempos reais (~6 min para 8 min de áudio). Ele avisa as frases com poucas palavras reconhecidas, para conferir.
 4. **Cenas**: `L(parte, linha)` dá o índice da frase em `SEGS` (o `PARTS` do `data.js` guarda onde cada parte começa).
