@@ -1,15 +1,15 @@
 // Render de um trecho do vídeo: node render.cjs <episódio> <worker> <workers> <out.mp4>
 // Cada worker pega um bloco contíguo de quadros e manda JPEGs para o ffmpeg.
-const { chromium } = require('playwright');
+const { abrir, url } = require('./tools/navegador.cjs');
 const { spawn } = require('child_process');
 const path = require('path');
 const FPS = 30;
 (async () => {
   const [ep, k, n, out] = [process.argv[2], Number(process.argv[3]), Number(process.argv[4]), process.argv[5]];
-  const browser = await chromium.launch();
+  const browser = await abrir();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
   page.on('pageerror', (e) => { console.error('ERRO:', e.message); process.exit(1); });
-  await page.goto('file://' + path.join(__dirname, 'index.html') + '?ep=' + ep);
+  await page.goto(url(path.join(__dirname, 'index.html'), '?ep=' + ep));
   await page.evaluate(() => window.ready);
   const [vw, vh] = await page.evaluate(() => [W, H]);
   await page.setViewportSize({ width: vw, height: vh });

@@ -1,9 +1,6 @@
 # Transcreve cada trecho com Whisper (sherpa-onnx) para conferir a legenda contra o áudio.
 # Uso: python3 tools/transcrever.py <narration.mp3> "<saída do segmentos.py>"
-# Modelo (uma vez):
-#   pip install sherpa-onnx
-#   mkdir -p tools/modelos && curl -sSL https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-small.tar.bz2 \
-#     | tar xjf - -C tools/modelos --wildcards '*int8*' '*tokens*'
+# Uma vez: pip install -r tools/requirements.txt e python3 tools/baixar_modelo.py
 import array, os, subprocess, sys
 import sherpa_onnx
 
