@@ -51,7 +51,8 @@ node capa.cjs valentes-de-davi-2      # capa (miniatura) a partir de episodios/<
 | `episodios/<ep>/narration.mp3` | Narração da ElevenLabs |
 | `episodios/<ep>/roteiro.md` | Roteiro com referências |
 | `episodios/<ep>/capa.html` | Capa do episódio (texto do gancho no miolo 3:4, que é o recorte da grade do TikTok) |
-| `tools/` | Conferir a máquina (`checar.cjs`), abrir o navegador (`navegador.cjs`) e gerar a narração na ElevenLabs (`narrar.py`); medir as frases no áudio e transcrever com Whisper; no vídeo longo, juntar as partes da narração (`juntar.py`) e medir todas as frases de uma vez (`alinhar.py`) |
+| `modelos/publicacao.md` | Modelo do documento de publicação (título, descrição, tags, hashtags e configurações por plataforma) |
+| `tools/` | Conferir a máquina (`checar.cjs`), abrir o navegador (`navegador.cjs`), gerar a narração na ElevenLabs (`narrar.py`) e montar a pasta de entrega para o Drive (`pacote.py`); medir as frases no áudio e transcrever com Whisper; no vídeo longo, juntar as partes da narração (`juntar.py`) e medir todas as frases de uma vez (`alinhar.py`) |
 
 ## Episódio novo
 
