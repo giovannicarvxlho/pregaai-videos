@@ -1,10 +1,11 @@
 # Monta a pasta de entrega de um episódio, uma subpasta por rede social, pronta para subir no Drive:
 #   python3 tools/pacote.py <ep>
-# Junta o que já foi renderizado em out/ e o episodios/<ep>/publicacao.md e gera um .zip para subir de uma vez.
-# Não renderiza nada: rode antes o build.sh e o capa.cjs.
+# Cada pasta (youtube/, tiktok/, instagram/) leva os vídeos e as capas daquela rede e um documento .docx só dela,
+# que o Drive abre como Google Docs. Gera também um .zip para subir tudo de uma vez.
+# Não renderiza nada: rode antes o build.sh e o capa.cjs. Precisa do pandoc (o npm run checar confere).
 #
 # O que ele procura (os nomes que o build.sh e o capa.cjs geram):
-#   out/<ep>.mp4                    o longo (YouTube). Se o episódio for um curto, é o curto 01.
+#   out/<ep>.mp4                    o longo. Se o episódio for um curto, é o curto 01.
 #   out/<ep>-tiktok.mp4             a versão do longo para o TikTok (episódio <ep>-tiktok); sem ela, vai a do YouTube
 #   out/<ep>-miniatura-*.jpg        miniaturas do YouTube (Testar e comparar)  <- episodios/<ep>/miniatura-*.html
 #   out/<ep>-capa-tiktok.jpg        capa do longo no TikTok, 1080×1920         <- episodios/<ep>/capa-tiktok.html
@@ -12,13 +13,14 @@
 #   out/<ep>-curto-<n>-capa.jpg     capa de cada curto, 1080×1920              <- episodios/<ep>/curto-<n>-capa.html
 #   out/<ep>-capa.jpg               capa, quando o episódio é um curto          <- episodios/<ep>/capa.html
 #   episodios/<ep>/legenda.srt      legenda do longo no YouTube, se houver
-#   episodios/<ep>/publicacao.md    o documento (obrigatório; modelo em modelos/publicacao.md)
+#   episodios/<ep>/publicacao.md    o texto de tudo, com uma seção por rede (modelo em modelos/publicacao.md)
 #
-# Saída: out/pacote/<AAAA-MM-DD>-<ep>/{youtube,youtube-shorts,tiktok,instagram}/ + publicacao.md/.docx + .zip
-# O longo vai para o YouTube e o TikTok; os curtos para o Shorts, o TikTok e o Instagram (o mesmo arquivo nas
-# três pastas, para cada pasta ter tudo o que se posta naquela rede). O Shorts não recebe capa: ela não sobe
-# por arquivo, e o documento diz qual quadro escolher.
-import datetime, glob, os, re, shutil, subprocess, sys, zipfile
+# O longo vai para o YouTube e o TikTok; os curtos para o YouTube (Shorts), o TikTok e o Instagram, o mesmo arquivo
+# nas três pastas. O Shorts não recebe capa: ela não sobe por arquivo, e o documento diz qual quadro escolher.
+# Saída: out/pacote/<AAAA-MM-DD>-<ep>/ e out/pacote/<AAAA-MM-DD>-<ep>.zip
+import datetime, glob, os, re, shutil, subprocess, sys, tempfile, zipfile
+
+REDES = {'youtube': 'YouTube', 'tiktok': 'TikTok', 'instagram': 'Instagram'}
 
 if len(sys.argv) < 2:
     sys.exit('uso: python3 tools/pacote.py <ep>')
@@ -30,6 +32,9 @@ if not os.path.isdir(epd):
 pub = os.path.join(epd, 'publicacao.md')
 if not os.path.exists(pub):
     sys.exit(f'✘ falta episodios/{ep}/publicacao.md (copie de modelos/publicacao.md e preencha)')
+if not shutil.which('pandoc'):
+    sys.exit('✘ falta o pandoc, que gera os .docx. Windows: winget install -e --id JohnMacFarlane.Pandoc'
+             ' · Mac: brew install pandoc · Linux: sudo apt install pandoc')
 
 try:
     from zoneinfo import ZoneInfo
@@ -41,6 +46,7 @@ dest = os.path.join(out, 'pacote', nome)
 shutil.rmtree(dest, ignore_errors=True)
 os.makedirs(dest)
 
+# ---------------------------------------------------------------- vídeos e capas
 dados = os.path.join(epd, 'data.js')
 longo = os.path.exists(dados) and "FORMAT = 'wide'" in open(dados, encoding='utf-8').read()
 o = lambda f: os.path.join(out, f)
@@ -62,27 +68,37 @@ if longo:
 else:
     curtos.append((o(f'{ep}.mp4'), o(f'{ep}-capa.jpg')))
 for n, (video, capa) in enumerate(curtos, 1):
-    pega(video, *(f'{rede}/curto-{n:02d}.mp4' for rede in ('youtube-shorts', 'tiktok', 'instagram')))
+    pega(video, *(f'{rede}/curto-{n:02d}.mp4' for rede in REDES))
     pega(capa, f'tiktok/curto-{n:02d}-capa.jpg', f'instagram/curto-{n:02d}-capa.jpg')
-pega(pub, 'publicacao.md')
 
 for origem, rel in copias:
     os.makedirs(os.path.dirname(os.path.join(dest, rel)), exist_ok=True)
     shutil.copy2(origem, os.path.join(dest, rel))
     print('  ', rel)
 
-# Documento também em .docx, que o Drive abre como Google Docs (só se o pandoc estiver instalado;
-# sem ele, o .md também abre: "Abrir com > Documentos Google").
-if shutil.which('pandoc'):
-    subprocess.run(['pandoc', pub, '-o', os.path.join(dest, 'publicacao.docx')], check=True)
-    print('   publicacao.docx')
-
-# Conferência: o documento cita só arquivos que estão no pacote, e todo vídeo e capa do pacote aparece no documento.
+# ---------------------------------------------------------------- um documento por rede
 texto = open(pub, encoding='utf-8').read()
+texto_limpo = re.sub(r'<!--.*?-->', '', texto, flags=re.S)
+cabecalho = re.split(r'^## ', texto_limpo, maxsplit=1, flags=re.M)[0]
+secoes = {m.group(1).strip(): m.group(2) for m in re.finditer(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', texto_limpo, flags=re.M | re.S)}
 avisos = []
-if '<!--' in texto or re.search(r'<[a-zà-ú][^>]*>', texto):
+for pasta, titulo in REDES.items():
+    corpo = next((v for k, v in secoes.items() if k.lower().startswith(titulo.lower())), None)
+    if corpo is None:
+        avisos.append(f'o publicacao.md não tem a seção "## {titulo}"')
+        continue
+    os.makedirs(os.path.join(dest, pasta), exist_ok=True)
+    with tempfile.NamedTemporaryFile('w', suffix='.md', delete=False, encoding='utf-8') as tmp:
+        tmp.write(cabecalho.rstrip() + f'\n\n## {titulo}\n' + corpo)
+    docx = os.path.join(dest, pasta, f'publicacao-{pasta}.docx')
+    subprocess.run(['pandoc', tmp.name, '-f', 'markdown', '-o', docx], check=True)
+    os.unlink(tmp.name)
+    print(f'   {pasta}/publicacao-{pasta}.docx')
+
+# ---------------------------------------------------------------- conferência
+if '<!--' in texto or re.search(r'<[^<>\n]{1,60}>', texto_limpo):
     avisos.append('o publicacao.md ainda tem comentários do modelo ou campos <...> por preencher')
-citados = set(re.findall(r'`((?:youtube|youtube-shorts|tiktok|instagram)/[^`]+)`', texto))
+citados = set(re.findall(r'`((?:youtube|tiktok|instagram)/[^`]+)`', texto))
 no_pacote = {rel for _, rel in copias}
 for f in sorted(citados - no_pacote):
     avisos.append(f'o documento cita {f}, que não está no pacote')

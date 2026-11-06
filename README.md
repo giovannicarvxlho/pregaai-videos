@@ -16,6 +16,7 @@ npm i                                        # Playwright e fontes da marca (Gei
 npx playwright install chromium              # o navegador que fotografa os quadros
 python3 -m pip install -r tools/requirements.txt   # Whisper (sherpa-onnx) e Pillow
 python3 tools/baixar_modelo.py               # modelo do Whisper em tools/modelos
+# pandoc, que gera os .docx da entrega: Windows: winget install -e --id JohnMacFarlane.Pandoc · Mac: brew install pandoc
 npm run checar                               # confere tudo e diz o comando de cada item faltando
 ```
 
