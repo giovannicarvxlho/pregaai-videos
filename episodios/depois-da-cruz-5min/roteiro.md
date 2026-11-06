@@ -86,4 +86,12 @@ Cada curto começa numa frase forte e termina na última fala, sem "segue" falad
 3. Ferramenta de recorte vertical para os 3 curtos (cena no meio, título em cima, legenda embaixo).
 4. Capas por rede (as 3 miniaturas do longo 2 já existem), `publicacao.md` e o pacote.
 
-Conferência na NVI: a mesma do `episodios/depois-da-cruz/roteiro.md`; nenhuma frase nova entrou.
+## Conferência na NVI (06/11/2026, frase por frase e com script contra o `nvi.json`)
+
+Nenhum fato inventado e nada que contradiga o texto. As fontes de cada parte: abertura (Mateus 27:62-63; 28:1-4, 11-15), sexta (Marcos 15:42-43, 46; Mateus 27:60; João 19:41-42), guardas (Mateus 27:62-66), domingo (Mateus 28:1-6; João 20:9), ponte (João 20:2), Maria (João 20:11-18; Mateus 28:9; Marcos 16:9), dinheiro (Mateus 28:11-15), Tomé (João 20:19-29) e fechamento (João 20:25, 29; Atos 4:20).
+
+Pontos de atenção, todos no áudio já gravado (mudar pede regravar a frase):
+- **Citações encurtadas, sem mudar o sentido:** o pedido dos chefes (Mateus 27:64; faltam "pois", "dele" e "dentre os mortos"), a fala do anjo (Mateus 28:5-6; falta "Sei que vocês estão procurando Jesus, que foi crucificado"), Tomé (João 20:25; falta "não colocar o meu dedo... e não puser a minha mão no seu lado") e Jesus a Tomé (João 20:27; falta "Estenda a mão e coloque-a no meu lado").
+- **"Ela correu e anunciou":** João 20:18 diz "foi e anunciou"; quem corre para anunciar é Mateus 28:8 (as mulheres, Maria Madalena entre elas). Tem base, mas junta os dois relatos.
+- **"Naquela mesma manhã"** (os guardas) e **"No sábado"** (os chefes) são deduções seguras: Mateus 28:11 diz "enquanto as mulheres estavam a caminho", e Mateus 27:62, "o dia seguinte ao da Preparação".
+- **A publicação do longo 2 cita Emaús** (descrição do YouTube, capítulos e legenda do TikTok). Emaús saiu do corte, então esses textos são refeitos no `publicacao.md`: o texto só promete o que o vídeo mostra.
