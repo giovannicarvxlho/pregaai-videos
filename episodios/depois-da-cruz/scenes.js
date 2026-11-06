@@ -439,9 +439,10 @@ function scJaMorto(t) {
   s += silT({ x: 470, y: FLOOR_Y, s: 1.45, gear: { helmet: 'rom', armor: true }, armR: 20, armL: 14 });
   return { svg: cam(s, 960, 600, 1.0 + 0.06 * E.inOut(prog(t, at(L(2, 3)), at(L(2, 4))))), html: '' };
 }
-// A lança só sugerida: a ponta para antes do corpo e a câmera sobe para o céu (João 19:34). Sem sangue na tela.
+// A lança só sugerida (João 19:34): o soldado fica parado ao pé da cruz, com a lança em pé; nada de golpe nem sangue na tela
+// (ajuste de 06/11: a versão com a lança inclinando até perto do corpo ficou próxima demais).
 function scLanca(t) {
-  const tf = wordTime(L(2, 4), 'furou'), th = E.inOut(prog(t, tf - 0.3, tf + 0.3));
+  const th = 0; // lança parada, em pé
   let s = cruzTarde(t, 1260, 1.3, { sunX: 1700, sunY: 230 });
   const so = { x: 640, y: FLOOR_Y, s: 1.5, gear: { helmet: 'rom', armor: true }, armR: lerp(120, 150, th), armL: 14 };
   const [hx, hy] = mao(so, 1), a = (lerp(8, 34, th) * Math.PI) / 180, push = 24 * th;
