@@ -779,3 +779,21 @@ function wordTime(segIndex, word) {
   for (const c of CHUNKS) if (c.seg === segIndex) for (const x of c.words) if (x.w.replace(/[^\p{L}]/gu, '').toLowerCase() === word.toLowerCase()) return x.t;
   return SEGS[segIndex][0];
 }
+
+// ---------- banner de CTA do app ----------
+// Decisão do Giovanni (06/11/2026): banner a cada 30 s, para trazer downloads e testes. tv é o tempo do
+// vídeo final (num vídeo cortado, não é o tempo da narração). Entra aos 30 s, fica ~4,5 s e alterna
+// Android (Play Store) e iPhone (versão web). Fica no canto de cima, fora da legenda; o cartão final já
+// tem o app, então ele não aparece ali (o chromeHTML não roda no cartão final).
+function ctaBanner(tv, o = {}) {
+  const ciclo = o.ciclo || 30, dura = o.dura || 4.5;
+  if (tv < ciclo) return '';
+  const n = Math.floor(tv / ciclo), lt = tv - n * ciclo;
+  if (lt > dura) return '';
+  const p = E.out(prog(lt, 0, 0.35)) * (1 - E.in(prog(lt, dura - 0.35, dura)));
+  const ios = n % 2 === 0;
+  const linha = ios ? 'No iPhone: <b>app.pregaai.com</b>' : 'Android: procure na <b>Play Store</b>';
+  return `<div class="cta" style="opacity:${f1(p * 100) / 100};transform:translateY(${f1((1 - p) * -16)}px)">
+    <img class="cta-icon" src="assets/icon.png"><div><div class="cta-nome">PregaAI</div><div class="cta-txt">${linha}</div></div></div>`;
+}
+

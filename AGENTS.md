@@ -28,8 +28,8 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 - **2 vídeos longos por dia**, cada um com **4 a 5 minutos, nunca mais de 5**, contando o cartão final do YouTube (Giovanni, 06/11/2026 à tarde: "o tempo limite é 5 minutos, logo os vídeos serão de 4-5 minutos"; revê o "pelo menos 5 minutos" da manhã). O anúncio no meio do YouTube, que pede 8 min, fica de fora; o canal ainda não está no Programa de Parcerias.
 - **6 vídeos curtos por dia**, ligados aos longos do dia. Sugestão do Claude, a confirmar: tirar os curtos da narração do próprio longo, como no Reel das 7 frases. Assim eles não gastam crédito da ElevenLabs.
-- **Banner de CTA a cada 30 segundos**, para trazer downloads e testes do app. O componente ainda não existe no `lib.js`. O primeiro vídeo que precisar dele cria um `ctaBanner()` lá, na marca (cartão branco, borda de 3 px, sombra dura, azul `#2383E2`, ícone do app e selo da Play de `assets/`), sem cobrir a legenda nem as zonas que o app cobre; depois disso, todos usam o mesmo.
-- A confirmar com o Giovanni: o banner vale também para os curtos? No TikTok, a promoção do app pode tirar o vídeo do Programa de Recompensas (regra de 04/11 e decisão de 06/11 no MARK1).
+- **Banner de CTA a cada 30 segundos**, para trazer downloads e testes do app: `ctaBanner()` no `lib.js` (cartão branco da marca com o ícone; alterna "Android: procure na Play Store" e "No iPhone: app.pregaai.com"), ligado com `cta: true` no `corte.json` ou `?cta=1` na URL. Entra aos 30 s, fica ~4,5 s, no canto de cima, e some no cartão final, que já tem o app. Feito em 06/11/2026, no longo da ressurreição.
+- O banner foi também nos curtos da ressurreição (escolha do Claude para soltar no mesmo dia, a confirmar com o Giovanni). No TikTok, todo vídeo com o banner sai com a divulgação de conteúdo comercial ligada, o que pode tirar o vídeo do Programa de Recompensas (regra de 04/11 e decisão de 06/11 no MARK1).
 
 ## Ciclo do episódio e entrega (Giovanni, 06/11/2026)
 
@@ -43,7 +43,7 @@ O Giovanni quer o ciclo sempre assim, e no fim tudo de uma vez, separado, para s
 
 **Onde vai cada vídeo:** o longo vai para o YouTube e o TikTok; os curtos vão para o TikTok, o YouTube (Shorts, na mesma pasta `youtube/`) e o Instagram. O Instagram não recebe o longo: ele aceita vídeo maior, mas Reel com mais de 3 min não é recomendado a quem não segue a conta.
 
-**Curtos:** a ferramenta de recorte vertical (cena do longo no meio, título em cima, legenda embaixo) ainda não existe no repo. O primeiro episódio que precisar de curtos recortados cria essa ferramenta, gerando `out/<ep>-curto-<n>.mp4` e `out/<ep>-curto-<n>-capa.jpg`, que é o que o `pacote.py` procura.
+**Curtos e cortes:** `node tools/corte.cjs episodios/<ep>/corte.json` monta vídeos a partir de um longo já narrado e animado, sem narração nova: para cada saída, as frases que ficam (índices do `SEGS` da origem). Serve para o longo de 4 a 5 min recortado de um maior (com o cartão final e a versão do TikTok sem ele) e para os curtos verticais (`layout: "vertical"`: cena 16:9 no meio, título fixo em cima, legenda embaixo). Cada quadro chama as cenas e a legenda da origem no tempo certo, e o áudio é a mesma narração, cortada nos mesmos pontos. Saem `out/<ep>.mp4`, `out/<ep>-tiktok.mp4` e `out/<ep>-curto-<n>.mp4`; as capas dos curtos saem de `episodios/<ep>/curto-<n>-capa.html`. Referência: `episodios/depois-da-cruz-5min`. Para revisar quadros antes: `SO_MAPA=1 node tools/corte.cjs ...` e `CORTE=out/<nome>.corte.json node preview.cjs <origem> <tempos>`.
 
 ## Fluxo
 

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Capa do curto 2: QUEM VIU PRIMEIRO?</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* Curto 2 (Maria Madalena e o jardineiro, João 20:11-18): Maria chorando na frente, Jesus em pé atrás, na luz.
+   Capa vertical 1080×1920 no estilo das miniaturas do longo 2 (luz quente atrás do herói, vinheta, Gasoek One com a
+   etiqueta azul). Texto e herói dentro do miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil. */
+.hook { position: absolute; left: 0; right: 0; top: 290px; display: flex; flex-direction: column; align-items: center; }
+.l { font: 400 130px/0.95 'Gasoek One'; color: #FFFFFF; white-space: nowrap;
+  text-shadow: -6px -6px 0 #181614, 6px -6px 0 #181614, -6px 6px 0 #181614, 6px 6px 0 #181614, 0 -7px 0 #181614, 0 7px 0 #181614, -7px 0 0 #181614, 7px 0 0 #181614, 0 15px 0 #181614; }
+.chip { margin-top: 22px; padding: 6px 36px 24px; background: #2383E2; border: 8px solid #181614; border-radius: 32px; box-shadow: 0 14px 0 0 #181614;
+  font: 400 130px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(3deg); }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="760 0 607.5 1080" width="1080" height="1920" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="hook"><div class="l">QUEM VIU</div><div class="chip">PRIMEIRO?</div></div>
+</div>
+<script src="../depois-da-cruz/data.js"></script>
+<script src="../../lib.js"></script>
+<script src="../depois-da-cruz/scenes.js"></script>
+<script>
+const t = 1.3;
+const VIN = (o = 0.55) => `<defs><radialGradient id="vin" cx="50%" cy="55%" r="40%"><stop offset="45%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${o}"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#vin)"/>`;
+let s = tumulo(t, { tone: 'sunrise', open: 1, seal: 1, back: jardim(t, { trees: [[150, GROUND + 140, 1.5], [430, GROUND + 90, 1.1]] }) });
+s += `<rect width="1920" height="1080" fill="#3A2418" opacity="0.28"/>`;
+s += `<defs>${radial('gOuro', '#FFA53A', 0.95)}</defs><circle cx="1150" cy="620" r="560" fill="url(#gOuro)" opacity="0.85"/><circle cx="1150" cy="620" r="260" fill="url(#gWhite)" opacity="0.9"/>`;
+s += person({ ...VIVO, x: 1170, y: 980, s: 1.7, look: -1, mood: 'calm', armL: 40, armR: 14, rim: C.a300 });
+s += person({ ...MADALENA, x: 950, y: 1420, s: 3.0, look: 1, mood: 'sad', armL: 24, armR: 70 }) + lagrimas(950, 1420, 3.0, t, 1) + lagrimas(950, 1420, 3.0, t + 0.5, 1);
+s += VIN(0.6);
+document.getElementById('art').innerHTML = DEFS + s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>

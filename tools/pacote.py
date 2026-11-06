@@ -49,6 +49,11 @@ os.makedirs(dest)
 # ---------------------------------------------------------------- vídeos e capas
 dados = os.path.join(epd, 'data.js')
 longo = os.path.exists(dados) and "FORMAT = 'wide'" in open(dados, encoding='utf-8').read()
+# Episódio montado por corte (tools/corte.cjs) a partir de um longo: tem corte.json com uma saída horizontal.
+corte = os.path.join(epd, 'corte.json')
+if not longo and os.path.exists(corte):
+    import json
+    longo = any(not x.get('layout') for x in json.load(open(corte, encoding='utf-8'))['saidas'])
 o = lambda f: os.path.join(out, f)
 copias = []  # (origem, destino relativo)
 def pega(origem, *rels):

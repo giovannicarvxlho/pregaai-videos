@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Capa do longo no TikTok: QUEM ABRIU?</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* Longo no TikTok: o anjo sentado na pedra (Mateus 28:2), como a miniatura B.
+   Capa vertical 1080×1920 no estilo das miniaturas do longo 2 (luz quente atrás do herói, vinheta, Gasoek One com a
+   etiqueta azul). Texto e herói dentro do miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil. */
+.hook { position: absolute; left: 0; right: 0; top: 290px; display: flex; flex-direction: column; align-items: center; }
+.l { font: 400 170px/0.95 'Gasoek One'; color: #FFFFFF; white-space: nowrap;
+  text-shadow: -6px -6px 0 #181614, 6px -6px 0 #181614, -6px 6px 0 #181614, 6px 6px 0 #181614, 0 -7px 0 #181614, 0 7px 0 #181614, -7px 0 0 #181614, 7px 0 0 #181614, 0 15px 0 #181614; }
+.chip { margin-top: 22px; padding: 6px 36px 24px; background: #2383E2; border: 8px solid #181614; border-radius: 32px; box-shadow: 0 14px 0 0 #181614;
+  font: 400 170px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="1026 0 607.5 1080" width="1080" height="1920" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="hook"><div class="l">QUEM</div><div class="chip">ABRIU?</div></div>
+</div>
+<script src="../depois-da-cruz/data.js"></script>
+<script src="../../lib.js"></script>
+<script src="../depois-da-cruz/scenes.js"></script>
+<script>
+const t = 3.0;
+const VIN = (o = 0.55) => `<defs><radialGradient id="vin" cx="50%" cy="55%" r="40%"><stop offset="45%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${o}"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#vin)"/>`;
+let s = tumulo(t, { tone: 'dawn', open: 1, seal: 1, inside: `<circle cx="${TB.x}" cy="${TB.base - 120}" r="560" fill="url(#gWhite)" opacity="1"/><circle cx="${TB.x}" cy="${TB.base - 120}" r="320" fill="url(#gWhite)" opacity="1"/>`,
+  angel: ANJO_PEDRA(t, { glow: 1, mood: 'calm' }) });
+s += `<rect width="1920" height="1080" fill="#0B1426" opacity="0.45"/><defs>${radial('gOuro', '#FFB938', 0.95)}</defs><circle cx="${TB.x}" cy="${TB.base - 140}" r="470" fill="url(#gOuro)" opacity="0.9"/><circle cx="${PEDRA_ABERTA}" cy="${PEDRA_Y - 140}" r="300" fill="url(#gWhite)" opacity="0.9"/>` + pedra(PEDRA_ABERTA, ((PEDRA_ABERTA - PEDRA_FECHADA) / PR) * 57.3, 'dawn') + anjo(ANJO_PEDRA(t, { glow: 0.6, mood: 'calm' }));
+const cx = PEDRA_ABERTA, cy = PEDRA_Y - 70;
+s = cam(s, cx, cy, 1.35, 1330 - cx, 790 - cy);
+s += VIN(0.7);
+document.getElementById('art').innerHTML = DEFS + s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
