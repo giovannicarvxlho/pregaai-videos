@@ -1,6 +1,6 @@
 # Pedro, você me ama? (João 21)
 
-**Status: aguardando validação do Giovanni.** Vídeo longo 16:9, ~5,7 min de narração (o mínimo é 5), sem acelerar. Primeira versão: o texto inteiro é novo. Fonte: NVI.
+**Status: aguardando validação do Giovanni.** Vídeo longo 16:9, ~5,7 min de narração, sem acelerar. **Passa do limite de 5 min decidido em 06/11 à tarde: cortar ~1 min antes de produzir.** Primeira versão: o texto inteiro é novo. Fonte: NVI.
 
 **Por que essa história** (sugestão aceita em 06/11/2026): continua a série (o longo 2 termina em Tomé, João 20; aqui é João 21); o curto do Pedro foi o melhor curto do canal (91,5% de Para Você e 13,4% de curtidas em 2 h); e o autocompletar do YouTube mostra busca real por "jesus pedro tu me amas", "como pedro morreu" e "153 peixes" / "porque 153 peixes".
 

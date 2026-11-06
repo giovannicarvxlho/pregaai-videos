@@ -26,7 +26,7 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 ## Metas de produção (Giovanni, 06/11/2026)
 
-- **2 vídeos longos por dia**, cada um com **pelo menos 5 minutos**. Com 8 min ou mais, o YouTube põe anúncio no meio.
+- **2 vídeos longos por dia**, cada um com **4 a 5 minutos, nunca mais de 5**, contando o cartão final do YouTube (Giovanni, 06/11/2026 à tarde: "o tempo limite é 5 minutos, logo os vídeos serão de 4-5 minutos"; revê o "pelo menos 5 minutos" da manhã). O anúncio no meio do YouTube, que pede 8 min, fica de fora; o canal ainda não está no Programa de Parcerias.
 - **6 vídeos curtos por dia**, ligados aos longos do dia. Sugestão do Claude, a confirmar: tirar os curtos da narração do próprio longo, como no Reel das 7 frases. Assim eles não gastam crédito da ElevenLabs.
 - **Banner de CTA a cada 30 segundos**, para trazer downloads e testes do app. O componente ainda não existe no `lib.js`. O primeiro vídeo que precisar dele cria um `ctaBanner()` lá, na marca (cartão branco, borda de 3 px, sombra dura, azul `#2383E2`, ícone do app e selo da Play de `assets/`), sem cobrir a legenda nem as zonas que o app cobre; depois disso, todos usam o mesmo.
 - A confirmar com o Giovanni: o banner vale também para os curtos? No TikTok, a promoção do app pode tirar o vídeo do Programa de Recompensas (regra de 04/11 e decisão de 06/11 no MARK1).
@@ -128,7 +128,7 @@ Mesmas regras do roteiro: sem travessão e com cada afirmação conferida na NVI
 ## Vídeo longo (aprovado em 02/11/2026, referência: `episodios/sete-frases-na-cruz`)
 
 - 16:9, 1920×1080 (`const FORMAT = 'wide'` no `data.js`). Mesmo traço e mesmas regras de texto dos Shorts.
-- Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar. Mínimo de 5 min (meta de 06/11); com 8 min ou mais o YouTube põe anúncio no meio.
+- Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar. De 4 a 5 min, nunca mais de 5, contando o cartão final (regra de 06/11/2026). Na prática: ~3.300 a 3.900 caracteres de narração (~830 por minuto).
 - Cenas de explicação (cartões com os livros, versículos em cartão) valem aqui, porque são a cena inteira e não algo por cima da ilustração.
 - Quando o roteiro vier de fora, confira tudo na NVI antes de produzir e diga o que foi corrigido.
 - Miniatura 1280×720 pela regra da capa acima, em 3 versões para o "Testar e comparar".
