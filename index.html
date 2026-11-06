@@ -133,6 +133,7 @@ html.recorte, .recorte body, .recorte #root { width: 1080px; height: 1920px; bac
 const Q = new URLSearchParams(location.search), EP = Q.get('ep');
 // Recorte vertical de um longo (curtos), título fixo e banner de CTA vêm da URL (tools/corte.cjs).
 const RECORTE = Q.get('layout') === 'vertical', TITULO = Q.get('titulo') || '', CTA = Q.get('cta') === '1';
+const REFS = Q.get('refs') ? JSON.parse(Q.get('refs')) : null; // referências do cartão final num corte
 document.write(`<script src="episodios/${EP}/data.js"><\/script>`);
 </script>
 <script src="lib.js"></script>
@@ -144,6 +145,8 @@ if (WIDE) {
   st.setAttribute('viewBox', `0 0 ${W} ${H}`); st.setAttribute('width', W); st.setAttribute('height', H);
   if (RECORTE) { document.documentElement.classList.add('recorte'); st.setAttribute('width', 1080); st.setAttribute('height', 607.5); }
 }
+// Num corte que tirou capítulos, o cartão final cita só as referências que ficaram.
+if (REFS) { const cartao = endCard; endCard = (t, t0, refs, o) => cartao(t, t0, REFS, o); }
 // Tamanho do quadro que sai no vídeo (o render e o preview usam isto).
 window.VW = RECORTE ? 1080 : W; window.VH = RECORTE ? 1920 : H;
 </script>

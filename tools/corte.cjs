@@ -8,7 +8,8 @@
 // Campos de cada saída: nome (sai em out/<nome>.mp4), frases, cartao (segundos do cartão final, sem áudio),
 // SO_MAPA=1 só escreve out/<nome>.corte.json, para revisar quadros com CORTE=... node preview.cjs.
 // tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão), layout ("vertical" para curto), titulo (texto fixo
-// em cima, no curto; *palavra* sai em azul) e cta (banner do app a cada 30 s).
+// em cima, no curto; *palavra* sai em azul), cta (banner do app a cada 30 s) e refs (as referências do cartão final,
+// quando o corte tira capítulos que o cartão da origem citava).
 const { execFileSync, spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -69,7 +70,7 @@ const roda = (cmd, args, env = {}) => new Promise((ok, erro) => {
     }
     const total = video.reduce((acc, [a, b]) => acc + b - a, 0);
     const mapaPath = path.join(OUT, `${s.nome}.corte.json`);
-    fs.writeFileSync(mapaPath, JSON.stringify({ trechos: video, layout: s.layout || null, titulo: s.titulo || null, cta: !!s.cta }));
+    fs.writeFileSync(mapaPath, JSON.stringify({ trechos: video, layout: s.layout || null, titulo: s.titulo || null, cta: !!s.cta, refs: s.refs || null }));
     console.log(`\n== ${s.nome}: ${fala.length} trechos, fala ${tFala.toFixed(1)} s, vídeo ${total.toFixed(1)} s`);
     if (process.env.SO_MAPA) continue; // só escreve o mapa (para o preview.cjs com CORTE)
 

@@ -10,7 +10,7 @@ const FPS = 30;
 (async () => {
   const [ep, k, n, out] = [process.argv[2], Number(process.argv[3]), Number(process.argv[4]), process.argv[5]];
   const corte = process.env.CORTE ? JSON.parse(fs.readFileSync(process.env.CORTE, 'utf8')) : null;
-  const q = corte ? (corte.layout ? '&layout=' + corte.layout : '') + (corte.titulo ? '&titulo=' + encodeURIComponent(corte.titulo) : '') + (corte.cta ? '&cta=1' : '') : '';
+  const q = corte ? (corte.layout ? '&layout=' + corte.layout : '') + (corte.titulo ? '&titulo=' + encodeURIComponent(corte.titulo) : '') + (corte.cta ? '&cta=1' : '') + (corte.refs ? '&refs=' + encodeURIComponent(JSON.stringify(corte.refs)) : '') : '';
   const mapa = (tv) => {
     if (!corte) return tv;
     let acc = 0;
