@@ -1,6 +1,6 @@
 # O que aconteceu depois que Jesus morreu na cruz
 
-**Status: aprovado pelo Giovanni em 05/11/2026** ("está ótimo"), na revisão feita com a retenção segundo a segundo do longo 1 (MARK1, `projetos/pregaai-canais.md`, Notas e Playbook de 05/11). Mudanças sobre a versão de 04/11: abertura nova com o domingo (o anjo, o terremoto e os guardas nos primeiros ~10 s); as partes 2 e 3 viraram uma só ("Sexta à tarde"), só com o contexto que volta depois; a pausa foi para depois de "Eu vi o Senhor!", terminando num gancho para o dinheiro; e, no TikTok, o vídeo termina em "Me conta aqui embaixo." (corte na edição, sem as duas últimas frases e sem cartão final). A versão de 04/11 trazia as três mudanças do conselho (`conselho/2026-11-04-roteiro-longo2-conversao.md` no MARK1). No TikTok, o vídeo sai sem o app (decisão de 05/11; chamada no comentário fixado e na bio).
+**Status: aprovado pelo Giovanni em 05/11/2026** ("está ótimo"), na revisão feita com a retenção segundo a segundo do longo 1 (MARK1, `projetos/pregaai-canais.md`, Notas e Playbook de 05/11). Mudanças sobre a versão de 04/11: abertura nova com o domingo (o anjo, o terremoto e os guardas nos primeiros ~10 s); as partes 2 e 3 viraram uma só ("Sexta à tarde"), só com o contexto que volta depois; a pausa foi para depois de "Eu vi o Senhor!", terminando num gancho para o dinheiro; e, no TikTok, o vídeo termina em "Me conta aqui embaixo." (corte na edição, sem as duas últimas frases e sem cartão final). A versão de 04/11 trazia as três mudanças do conselho (`conselho/2026-11-04-roteiro-longo2-conversao.md` no MARK1). **No TikTok, o vídeo usa a mesma pausa do YouTube, com o app** (decisão de 06/11, que revê a de 05/11: das 17 primeiras aberturas do app depois da troca do link da bio, nenhuma veio pela bio; todas vieram da busca do nome na Play). Ao publicar no TikTok, ligar a divulgação de conteúdo comercial (regra oficial: conteúdo que promove produto precisa dela; sem ela, o vídeo pode ficar fora do Para Você). A pausa sem o app ficou gravada em `episodios/depois-da-cruz-tiktok/pausa-sem-app.mp3`. Na animação, a lança da parte 2 fica parada ao pé da cruz (ajuste de 06/11).
 
 Vídeo longo (16:9), continuação de `episodios/sete-frases-na-cruz`, que viralizou no TikTok (1,2 mi de views).
 ~1.150 palavras em 10 partes (11 mp3s, contando a pausa do TikTok): ~7:40 no TikTok e ~8:20 no YouTube, com a pausa do app e o cartão final. Fonte: NVI.
@@ -128,7 +128,7 @@ Porque agora vem a história que eles pagaram pra contar.
 
 #### 7. Pausa, versão TikTok (sem o app)
 
-Sem o app, para o vídeo não virar conteúdo comercial no Programa de Recompensas. Pede para seguir o perfil, como a pausa do longo 1 (9% das curtidas caíram nesse pedido).
+**Não usada na publicação de 07/11** (decisão de 06/11: o TikTok também leva a pausa com o app). Sem o app, para o vídeo não virar conteúdo comercial no Programa de Recompensas. Pede para seguir o perfil, como a pausa do longo 1 (9% das curtidas caíram nesse pedido).
 
 ```
 Se você gosta de ouvir a Bíblia assim, com os detalhes que a gente costuma pular, segue o perfil.
