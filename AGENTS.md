@@ -22,6 +22,8 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 `out/`, `prev/`, `sheet.png` e `tools/modelos/` ficam fora do git.
 
+**Git:** mudança no repo vai por PR e o próprio agente faz o merge na `main`, sem perguntar (autorização do Giovanni em 06/11/2026). Sem o merge, a próxima sessão e o PC dele não recebem a mudança.
+
 ## Metas de produção (Giovanni, 06/11/2026)
 
 - **2 vídeos longos por dia**, cada um com **pelo menos 5 minutos**. Com 8 min ou mais, o YouTube põe anúncio no meio.
@@ -37,9 +39,9 @@ O Giovanni quer o ciclo sempre assim, e no fim tudo de uma vez, separado, para s
 2. **Roteiro:** o longo, com os trechos que viram curtos marcados. É a única parada: ele valida o texto.
 3. **Produção:** narração, cenas, render do longo (YouTube e, quando a versão for diferente, TikTok), curtos, capas e miniaturas.
 4. **Publicação:** o `episodios/<ep>/publicacao.md`, a partir de `modelos/publicacao.md`, com título, descrição ou legenda, hashtags, tags, capa, comentário fixado, configurações e calendário de cada plataforma. Os textos seguem as regras do modelo, que vêm das skills de publicação (`social-media-skills:youtube-publishing-and-metadata`, `tiktok-video-publishing`, `instagram-reels-publishing`, `hashtag-strategy`) e do playbook do canal. Use as skills quando estiverem disponíveis; quando discordarem dos dados do canal ou da regra oficial da plataforma, valem os dados e a regra oficial.
-5. **Pacote:** `python3 tools/pacote.py <ep>` monta `out/pacote/<AAAA-MM-DD>-<ep>/`, com `longo/` (YouTube, TikTok, miniaturas, legenda), `curtos/` (vídeos e capas), `publicacao.md` e `.docx`, e um `.zip` da pasta. Ele avisa se o documento cita arquivo que não está no pacote, ou se tem vídeo sem destino. Na nuvem, mande o .zip; no computador, diga o caminho da pasta.
+5. **Pacote:** `python3 tools/pacote.py <ep>` monta `out/pacote/<AAAA-MM-DD>-<ep>/` com **três pastas, `youtube/`, `tiktok/` e `instagram/`**, cada uma com os vídeos e as capas daquela rede e **um documento só dela em .docx** (`publicacao-<rede>.docx`, que o Drive abre como Google Docs), e um `.zip` de tudo. Nenhum .md vai para a entrega (pedido do Giovanni em 06/11/2026): o `publicacao.md` fica no repositório, com uma seção por rede, e o pacote corta cada seção num .docx. Precisa do pandoc. Ele avisa se o documento cita arquivo que não está no pacote, se tem vídeo ou capa sem uso, ou se falta capa (curto sem capa, longo sem miniaturas ou sem a capa do TikTok). Na nuvem, mande o .zip; no computador, diga o caminho da pasta.
 
-**Onde vai cada vídeo:** o longo vai para o YouTube e o TikTok; os curtos vão para o TikTok, o YouTube Shorts e o Instagram. O Instagram não recebe o longo: ele aceita vídeo maior, mas Reel com mais de 3 min não é recomendado a quem não segue a conta.
+**Onde vai cada vídeo:** o longo vai para o YouTube e o TikTok; os curtos vão para o TikTok, o YouTube (Shorts, na mesma pasta `youtube/`) e o Instagram. O Instagram não recebe o longo: ele aceita vídeo maior, mas Reel com mais de 3 min não é recomendado a quem não segue a conta.
 
 **Curtos:** a ferramenta de recorte vertical (cena do longo no meio, título em cima, legenda embaixo) ainda não existe no repo. O primeiro episódio que precisar de curtos recortados cria essa ferramenta, gerando `out/<ep>-curto-<n>.mp4` e `out/<ep>-curto-<n>-capa.jpg`, que é o que o `pacote.py` procura.
 
@@ -103,6 +105,13 @@ Giovanni: "crave esse estilo", mas "não pode ficar SEMPRE igual, tem um padrão
 **Formatos:**
 - Vídeo longo: 1280×720, nada importante no canto de baixo à direita (a duração do YouTube cobre). Fazer 3 versões, cada uma com um motivo diferente para clicar, para o "Testar e comparar" do YouTube Studio.
 - Short e TikTok: 1080×1920, tudo o que importa no miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil. Sem referência bíblica e sem logo. No Short a capa pesa pouco: quem decide é o primeiro quadro.
+
+**Capas por rede, em toda entrega** (pedido do Giovanni em 06/11/2026; arquivo, tamanho e de onde sai):
+- **YouTube, longo:** 3 miniaturas 16:9 para o "Testar e comparar" (`episodios/<ep>/miniatura-a.html`, `-b`, `-c`; `ESCALA=2 node capa.cjs <ep> miniatura-a` gera 2560×1440).
+- **TikTok, longo:** uma capa 1080×1920 (`episodios/<ep>/capa-tiktok.html` → `node capa.cjs <ep> capa-tiktok`), com o herói da miniatura e o texto no miolo 3:4. O longo é 16:9, mas a grade do perfil é vertical.
+- **TikTok e Instagram, curtos:** uma capa 1080×1920 por curto (`episodios/<ep>/curto-<n>-capa.html` → `node capa.cjs <ep> curto-<n>-capa`), a mesma nas duas redes. No Instagram ela sobe como capa personalizada e não dá para trocar depois.
+- **YouTube Shorts:** não sobe capa por arquivo. O documento diz qual quadro escolher no app.
+- Todas passam pelos dois testes (`tools/testar_capa.py`) antes de entrar no pacote.
 
 ## Descrição da publicação (aprovada em 28/10/2026, referência: `episodios/morte-de-jezabel/roteiro.md`)
 

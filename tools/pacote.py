@@ -1,84 +1,116 @@
-# Monta a pasta de entrega de um episódio, pronta para subir no Drive: python3 tools/pacote.py <ep>
-# Junta o que já foi renderizado em out/ e o episodios/<ep>/publicacao.md numa pasta só, por tipo,
-# e gera um .zip para subir de uma vez. Não renderiza nada: rode antes o build.sh e o capa.cjs.
+# Monta a pasta de entrega de um episódio, uma subpasta por rede social, pronta para subir no Drive:
+#   python3 tools/pacote.py <ep>
+# Cada pasta (youtube/, tiktok/, instagram/) leva os vídeos e as capas daquela rede e um documento .docx só dela,
+# que o Drive abre como Google Docs. Gera também um .zip para subir tudo de uma vez.
+# Não renderiza nada: rode antes o build.sh e o capa.cjs. Precisa do pandoc (o npm run checar confere).
 #
-# Nomes que ele procura em out/ (os mesmos que o build.sh e o capa.cjs geram):
-#   out/<ep>.mp4                 o longo (YouTube); se o episódio for um curto, vira curtos/curto-01.mp4
-#   out/<ep>-tiktok.mp4          a versão do longo para o TikTok (episódio <ep>-tiktok), se existir
-#   out/<ep>-miniatura-*.jpg     as miniaturas do longo (Testar e comparar)
-#   out/<ep>-curto-<n>.mp4       os curtos recortados do longo, com out/<ep>-curto-<n>-capa.jpg
-#   out/<ep>-capa.jpg            a capa, quando o episódio é um curto
-# E em episodios/<ep>/: publicacao.md (obrigatório) e legenda.srt (se houver).
+# O que ele procura (os nomes que o build.sh e o capa.cjs geram):
+#   out/<ep>.mp4                    o longo. Se o episódio for um curto, é o curto 01.
+#   out/<ep>-tiktok.mp4             a versão do longo para o TikTok (episódio <ep>-tiktok); sem ela, vai a do YouTube
+#   out/<ep>-miniatura-*.jpg        miniaturas do YouTube (Testar e comparar)  <- episodios/<ep>/miniatura-*.html
+#   out/<ep>-capa-tiktok.jpg        capa do longo no TikTok, 1080×1920         <- episodios/<ep>/capa-tiktok.html
+#   out/<ep>-curto-<n>.mp4          curtos recortados do longo
+#   out/<ep>-curto-<n>-capa.jpg     capa de cada curto, 1080×1920              <- episodios/<ep>/curto-<n>-capa.html
+#   out/<ep>-capa.jpg               capa, quando o episódio é um curto          <- episodios/<ep>/capa.html
+#   episodios/<ep>/legenda.srt      legenda do longo no YouTube, se houver
+#   episodios/<ep>/publicacao.md    o texto de tudo, com uma seção por rede (modelo em modelos/publicacao.md)
 #
+# O longo vai para o YouTube e o TikTok; os curtos para o YouTube (Shorts), o TikTok e o Instagram, o mesmo arquivo
+# nas três pastas. O Shorts não recebe capa: ela não sobe por arquivo, e o documento diz qual quadro escolher.
 # Saída: out/pacote/<AAAA-MM-DD>-<ep>/ e out/pacote/<AAAA-MM-DD>-<ep>.zip
-import datetime, glob, os, re, shutil, subprocess, sys, zipfile
+import datetime, glob, os, re, shutil, subprocess, sys, tempfile, zipfile
+
+REDES = {'youtube': 'YouTube', 'tiktok': 'TikTok', 'instagram': 'Instagram'}
 
 if len(sys.argv) < 2:
     sys.exit('uso: python3 tools/pacote.py <ep>')
-ep = sys.argv[1].strip('/\\').split('/')[-1].split('\\')[-1]
+ep = re.split(r'[\\/]', sys.argv[1].strip('/\\'))[-1]
 raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 out, epd = os.path.join(raiz, 'out'), os.path.join(raiz, 'episodios', ep)
 if not os.path.isdir(epd):
     sys.exit(f'✘ não existe episodios/{ep}')
+pub = os.path.join(epd, 'publicacao.md')
+if not os.path.exists(pub):
+    sys.exit(f'✘ falta episodios/{ep}/publicacao.md (copie de modelos/publicacao.md e preencha)')
+if not shutil.which('pandoc'):
+    sys.exit('✘ falta o pandoc, que gera os .docx. Windows: winget install -e --id JohnMacFarlane.Pandoc'
+             ' · Mac: brew install pandoc · Linux: sudo apt install pandoc')
 
 try:
     from zoneinfo import ZoneInfo
     hoje = datetime.datetime.now(ZoneInfo('America/Sao_Paulo')).date()
 except Exception:  # Windows sem tzdata: usa a data do computador
     hoje = datetime.date.today()
-
 nome = f'{hoje:%Y-%m-%d}-{ep}'
 dest = os.path.join(out, 'pacote', nome)
 shutil.rmtree(dest, ignore_errors=True)
 os.makedirs(dest)
-longo = "FORMAT = 'wide'" in open(os.path.join(epd, 'data.js'), encoding='utf-8').read() if os.path.exists(os.path.join(epd, 'data.js')) else False
 
+# ---------------------------------------------------------------- vídeos e capas
+dados = os.path.join(epd, 'data.js')
+longo = os.path.exists(dados) and "FORMAT = 'wide'" in open(dados, encoding='utf-8').read()
+o = lambda f: os.path.join(out, f)
 copias = []  # (origem, destino relativo)
-def pega(origem, rel):
+def pega(origem, *rels):
     if os.path.exists(origem):
-        copias.append((origem, rel))
+        copias.extend((origem, r) for r in rels)
 
+curtos = []  # (vídeo, capa)
 if longo:
-    pega(os.path.join(out, f'{ep}.mp4'), 'longo/youtube.mp4')
-    pega(os.path.join(out, f'{ep}-tiktok.mp4'), 'longo/tiktok.mp4')
-    pega(os.path.join(epd, 'legenda.srt'), 'longo/legenda.srt')
-    for m in sorted(glob.glob(os.path.join(out, f'{ep}-miniatura*.jpg'))):
-        pega(m, 'longo/' + os.path.basename(m)[len(ep) + 1:])
-    for c in sorted(glob.glob(os.path.join(out, f'{ep}-curto-*.mp4'))):
-        n = int(re.search(r'-curto-(\d+)\.mp4$', c).group(1))
-        pega(c, f'curtos/curto-{n:02d}.mp4')
-        pega(c[:-4] + '-capa.jpg', f'curtos/curto-{n:02d}-capa.jpg')
+    pega(o(f'{ep}.mp4'), 'youtube/longo.mp4')
+    pega(o(f'{ep}-tiktok.mp4') if os.path.exists(o(f'{ep}-tiktok.mp4')) else o(f'{ep}.mp4'), 'tiktok/longo.mp4')
+    pega(o(f'{ep}-capa-tiktok.jpg'), 'tiktok/longo-capa.jpg')
+    pega(os.path.join(epd, 'legenda.srt'), 'youtube/legenda.srt')
+    for m in sorted(glob.glob(o(f'{ep}-miniatura*.jpg'))):
+        pega(m, 'youtube/' + os.path.basename(m)[len(ep) + 1:])
+    for c in sorted(glob.glob(o(f'{ep}-curto-*.mp4')), key=lambda c: int(re.search(r'-curto-(\d+)\.mp4$', c).group(1))):
+        curtos.append((c, c[:-4] + '-capa.jpg'))
 else:
-    pega(os.path.join(out, f'{ep}.mp4'), 'curtos/curto-01.mp4')
-    pega(os.path.join(out, f'{ep}-capa.jpg'), 'curtos/curto-01-capa.jpg')
-
-pub = os.path.join(epd, 'publicacao.md')
-if not os.path.exists(pub):
-    sys.exit(f'✘ falta episodios/{ep}/publicacao.md (copie de modelos/publicacao.md e preencha)')
-pega(pub, 'publicacao.md')
+    curtos.append((o(f'{ep}.mp4'), o(f'{ep}-capa.jpg')))
+for n, (video, capa) in enumerate(curtos, 1):
+    pega(video, *(f'{rede}/curto-{n:02d}.mp4' for rede in REDES))
+    pega(capa, f'tiktok/curto-{n:02d}-capa.jpg', f'instagram/curto-{n:02d}-capa.jpg')
 
 for origem, rel in copias:
     os.makedirs(os.path.dirname(os.path.join(dest, rel)), exist_ok=True)
     shutil.copy2(origem, os.path.join(dest, rel))
     print('  ', rel)
 
-# Documento também em .docx, que o Drive abre como Google Docs (só se o pandoc estiver instalado;
-# sem ele, o .md também abre: "Abrir com > Documentos Google").
-if shutil.which('pandoc'):
-    subprocess.run(['pandoc', pub, '-o', os.path.join(dest, 'publicacao.docx')], check=True)
-    print('   publicacao.docx')
-
-# Conferência: o documento cita só arquivos que estão no pacote, e todo vídeo do pacote aparece no documento.
+# ---------------------------------------------------------------- um documento por rede
 texto = open(pub, encoding='utf-8').read()
+texto_limpo = re.sub(r'<!--.*?-->', '', texto, flags=re.S)
+cabecalho = re.split(r'^## ', texto_limpo, maxsplit=1, flags=re.M)[0]
+secoes = {m.group(1).strip(): m.group(2) for m in re.finditer(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', texto_limpo, flags=re.M | re.S)}
 avisos = []
-if '<!--' in texto or re.search(r'<[a-zà-ú][^>]*>', texto):
+for pasta, titulo in REDES.items():
+    corpo = next((v for k, v in secoes.items() if k.lower().startswith(titulo.lower())), None)
+    if corpo is None:
+        avisos.append(f'o publicacao.md não tem a seção "## {titulo}"')
+        continue
+    os.makedirs(os.path.join(dest, pasta), exist_ok=True)
+    with tempfile.NamedTemporaryFile('w', suffix='.md', delete=False, encoding='utf-8') as tmp:
+        tmp.write(cabecalho.rstrip() + f'\n\n## {titulo}\n' + corpo)
+    docx = os.path.join(dest, pasta, f'publicacao-{pasta}.docx')
+    subprocess.run(['pandoc', tmp.name, '-f', 'markdown', '-o', docx], check=True)
+    os.unlink(tmp.name)
+    print(f'   {pasta}/publicacao-{pasta}.docx')
+
+# ---------------------------------------------------------------- conferência
+if '<!--' in texto or re.search(r'<[^<>\n]{1,60}>', texto_limpo):
     avisos.append('o publicacao.md ainda tem comentários do modelo ou campos <...> por preencher')
-citados = set(re.findall(r'`((?:longo|curtos)/[^`]+)`', texto))
+citados = set(re.findall(r'`((?:youtube|tiktok|instagram)/[^`]+)`', texto))
 no_pacote = {rel for _, rel in copias}
 for f in sorted(citados - no_pacote):
     avisos.append(f'o documento cita {f}, que não está no pacote')
-for f in sorted(r for r in no_pacote if r.endswith('.mp4') and r not in citados):
-    avisos.append(f'{f} está no pacote, mas o documento não diz onde publicar')
+for f in sorted(r for r in no_pacote if r.endswith(('.mp4', '.jpg')) and r not in citados):
+    avisos.append(f'{f} está no pacote, mas o documento não diz como usar')
+for n, (video, capa) in enumerate(curtos, 1):
+    if os.path.exists(video) and not os.path.exists(capa):
+        avisos.append(f'curto {n:02d} sem capa (TikTok e Instagram): gere {os.path.relpath(capa, raiz)}')
+if longo and not glob.glob(o(f'{ep}-miniatura*.jpg')):
+    avisos.append('longo sem miniaturas do YouTube: gere as 3 do Testar e comparar')
+if longo and not os.path.exists(o(f'{ep}-capa-tiktok.jpg')):
+    avisos.append(f'longo sem capa do TikTok: gere out/{ep}-capa-tiktok.jpg (episodios/{ep}/capa-tiktok.html)')
 if not any(r.endswith('.mp4') for r in no_pacote):
     avisos.append('nenhum vídeo encontrado em out/: rode o build.sh antes')
 
