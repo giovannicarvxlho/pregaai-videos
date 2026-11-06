@@ -25,19 +25,33 @@ Regras que valem para todas as plataformas:
 <!-- Horários do playbook do TikTok: 12 h e 19 h de Brasília (pico às 21 h). Instagram e YouTube não têm dado
 por hora ainda; usar os mesmos. O longo sai primeiro; os curtos levam para ele. -->
 
-| Quando | Plataforma | Arquivo |
-|---|---|---|
-| AAAA-MM-DD 12:00 | YouTube | `longo/youtube.mp4` |
-| AAAA-MM-DD 12:00 | TikTok | `longo/tiktok.mp4` |
-| AAAA-MM-DD 19:00 | TikTok, Shorts e Instagram | `curtos/curto-01.mp4` |
+| Quando | Rede | Vídeo | Capa |
+|---|---|---|---|
+| AAAA-MM-DD 12:00 | YouTube | `youtube/longo.mp4` | `youtube/miniatura-a.jpg` (+ b e c no Testar e comparar) |
+| AAAA-MM-DD 12:00 | TikTok | `tiktok/longo.mp4` | `tiktok/longo-capa.jpg` |
+| AAAA-MM-DD 19:00 | TikTok | `tiktok/curto-01.mp4` | `tiktok/curto-01-capa.jpg` |
+| AAAA-MM-DD 19:00 | Instagram | `instagram/curto-01.mp4` | `instagram/curto-01-capa.jpg` |
+| AAAA-MM-DD 19:00 | YouTube Shorts | `youtube-shorts/curto-01.mp4` | quadro de ~<s> s, escolhido no app |
 
-## Arquivos
+## Capas por rede
 
-| Arquivo | Duração | YouTube | Shorts | TikTok | Instagram |
-|---|---|---|---|---|---|
-| `longo/youtube.mp4` | m:ss | ✔ | | | |
-| `longo/tiktok.mp4` | m:ss | | | ✔ | |
-| `curtos/curto-01.mp4` | m:ss | | ✔ | ✔ | ✔ |
+<!-- Uma capa para cada lugar onde ela aparece. Regras de estilo no AGENTS.md ("Capa e miniatura").
+- YouTube (longo): 3 miniaturas 16:9 em 2560×1440, cada uma com um motivo diferente para clicar, para o
+  "Testar e comparar"; nada importante no canto de baixo à direita (a duração cobre). JPG abaixo de 2 MB.
+- TikTok (longo e curtos): 1080×1920, tudo o que importa no miolo 3:4 (y 240 a 1680), que é o recorte do perfil.
+  Sobe como imagem no editor de capa; se o app não deixar, use o quadro indicado e escreva o texto no editor.
+- Instagram (curtos): a mesma capa do TikTok, enviada como capa personalizada. Não dá para trocar depois de
+  publicar, e o perfil corta em 3:4.
+- YouTube Shorts: não sobe capa por arquivo; quem decide é o primeiro quadro. Indique o quadro para escolher no app. -->
+
+| Rede | Arquivo | Texto da capa | Por que esse texto |
+|---|---|---|---|
+| YouTube | `youtube/miniatura-a.jpg` | <TEXTO> | <motivo para clicar> |
+| YouTube | `youtube/miniatura-b.jpg` | <TEXTO> | <outro motivo> |
+| YouTube | `youtube/miniatura-c.jpg` | <TEXTO> | <outro motivo> |
+| TikTok | `tiktok/longo-capa.jpg` | <TEXTO> | <...> |
+| TikTok e Instagram | `tiktok/curto-01-capa.jpg` e `instagram/curto-01-capa.jpg` | <TEXTO> | <...> |
+| Shorts | quadro de ~<s> s do `youtube-shorts/curto-01.mp4` | (sem texto) | <...> |
 
 ## YouTube: vídeo longo
 
@@ -45,7 +59,7 @@ por hora ainda; usar os mesmos. O longo sai primeiro; os curtos levam para ele. 
 > <título>
 
 **Miniaturas para o "Testar e comparar"** <!-- 3 versões, cada uma com um motivo diferente para clicar; a primeira fica se não houver vencedora. Regra de estilo no AGENTS.md. -->
-`longo/miniatura-a.jpg` (<TEXTO>), `longo/miniatura-b.jpg` (<TEXTO>), `longo/miniatura-c.jpg` (<TEXTO>)
+na ordem da tabela de capas: a, b e c.
 
 **Descrição** <!-- até 5.000 caracteres. 1ª linha: o gancho. Linhas 2 e 3: a palavra-chave, natural. Depois: o que o vídeo mostra,
 📖 Base bíblica, capítulos (começam em 00:00, pelo menos 3, cada um com 10 s ou mais, com nomes que alguém buscaria),
@@ -70,7 +84,7 @@ por hora ainda; usar os mesmos. O longo sai primeiro; os curtos levam para ele. 
 <palavra-chave principal>, <personagem>, <livro capítulo>, histórias bíblicas, histórias da bíblia, bíblia
 ```
 
-**Configurações:** categoria Educação (sugestão); "Conteúdo para crianças": Não (é regra legal, marcar com verdade; o público do canal é adulto); "Conteúdo alterado ou sintético": Sim; legenda `longo/legenda.srt`, se houver.
+**Configurações:** categoria Educação (sugestão); "Conteúdo para crianças": Não (é regra legal, marcar com verdade; o público do canal é adulto); "Conteúdo alterado ou sintético": Sim; legenda `youtube/legenda.srt`, se houver.
 
 **Comentário fixado**
 ```
@@ -83,7 +97,7 @@ por hora ainda; usar os mesmos. O longo sai primeiro; os curtos levam para ele. 
 bloqueado no mundo todo: a música só vem do pipeline. Descrição no modelo aprovado em 28/10 (ver AGENTS.md);
 "Histórias bíblicas em menos de 1 minuto:" só quando o curto tiver menos de 1 min. -->
 
-### Curto 1: `curtos/curto-01.mp4`
+### Curto 1: `youtube-shorts/curto-01.mp4`
 
 **Título** <!-- até 100 caracteres; o gancho com a palavra-chave -->
 > <título>
@@ -103,7 +117,7 @@ bloqueado no mundo todo: a música só vem do pipeline. Descrição no modelo ap
 #históriasbíblicas #shorts #fé #bíblia #<personagem>
 ```
 
-**Vídeo relacionado:** o longo, depois de publicado. **Comentário fixado:** <...>
+**Capa:** escolha no app o quadro de ~<s> s. **Vídeo relacionado:** o longo, depois de publicado. **Comentário fixado:** <...>
 
 ## TikTok
 
@@ -112,7 +126,7 @@ Ela também tem que estar no texto da tela e na fala (o TikTok lê os três). 3 
 Configurações: divulgação de conteúdo comercial LIGADA quando o vídeo fala do app ou tem o banner de CTA (regra oficial);
 rótulo de IA opcional, porque a animação não é realista; comentários, dueto e costura ligados. -->
 
-### Longo: `longo/tiktok.mp4`
+### Longo: `tiktok/longo.mp4`
 
 **Legenda**
 ```
@@ -127,7 +141,7 @@ rótulo de IA opcional, porque a animação não é realista; comentários, duet
 #históriasbíblicas #<tema> #<personagem> #fé #bíblia
 ```
 
-**Capa:** o quadro de ~<s> s, com "<TEXTO>" no editor de capa.
+**Capa:** `tiktok/longo-capa.jpg` (se o app não aceitar imagem: o quadro de ~<s> s, com "<TEXTO>" no editor de capa).
 
 **Comentário fixado** <!-- funciona como segunda legenda para a busca -->
 ```
@@ -136,14 +150,14 @@ rótulo de IA opcional, porque a animação não é realista; comentários, duet
 
 **Configurações:** divulgação de conteúdo comercial <ligada ou desligada, e por quê>; rótulo de IA <sim ou não>.
 
-### Curto 1: `curtos/curto-01.mp4`
+### Curto 1: `tiktok/curto-01.mp4`
 
 **Legenda**
 ```
 <...>
 ```
 
-**Capa:** `curtos/curto-01-capa.jpg` ou o quadro de ~<s> s. **Comentário fixado:** <...>
+**Capa:** `tiktok/curto-01-capa.jpg`. **Comentário fixado:** <...>
 
 ## Instagram: Reels (só os curtos)
 
@@ -152,7 +166,7 @@ por isso o longo não vai para lá. Legenda até 2.200 caracteres, com a palavra
 No máximo 5 hashtags (limite do Instagram desde dez/2025). A capa é escolhida antes de publicar e não dá para trocar
 depois; o perfil corta em 3:4, então o texto fica no miolo. -->
 
-### Curto 1: `curtos/curto-01.mp4`
+### Curto 1: `instagram/curto-01.mp4`
 
 **Legenda**
 ```
@@ -167,7 +181,7 @@ depois; o perfil corta em 3:4, então o texto fica no miolo. -->
 #históriasbíblicas #fé #bíblia #<personagem>
 ```
 
-**Capa:** `curtos/curto-01-capa.jpg`. **Configurações:** "Informação de IA" ligado (obrigatório: a narração tem voz realista); "Compartilhar no feed" ligado. Link da bio: `pregaai.com/?utm_source=instagram&utm_medium=bio`.
+**Capa:** `instagram/curto-01-capa.jpg`. **Configurações:** "Informação de IA" ligado (obrigatório: a narração tem voz realista); "Compartilhar no feed" ligado. Link da bio: `pregaai.com/?utm_source=instagram&utm_medium=bio`.
 
 ## Conferência na NVI
 
