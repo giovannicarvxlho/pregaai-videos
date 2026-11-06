@@ -10,7 +10,8 @@
 import json, os, sys, urllib.error, urllib.request
 
 VOZ = 'bJrNspxJVFovUxNBQ0wh'  # Marcelo Costa - Articulate and Balanced (Voice Library)
-AJUSTES = {'model_id': 'eleven_v4', 'language_code': 'pt',
+# v4 Turbo: metade do crédito do v4 (0,5 por caractere); aprovado pelo Giovanni no teste de 06/11/2026.
+AJUSTES = {'model_id': 'eleven_v4_turbo', 'language_code': 'pt',
            'voice_settings': {'stability': 0.5, 'similarity_boost': 0.8, 'speed': 1.0}}
 API = 'https://api.elevenlabs.io'
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
