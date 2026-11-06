@@ -15,7 +15,8 @@ read DUR SPEED < <(node -e "const fs=require('fs');eval(fs.readFileSync('$D/data
 if [ -n "$T1" ]; then OUT="out/$EP-${T0:-0}.mp4"; DUR=$(node -e "console.log($T1-${T0:-0})"); SS=${T0:-0}; else OUT="out/$EP.mp4"; SS=0; fi
 AUD="$D/narration.mp3"
 # Vídeo longo: a narração vem em partes (partes/01.mp3...) e é juntada aqui.
-if [ ! -f "$AUD" ] && [ -d "$D/partes" ]; then python3 tools/juntar.py "$D"; fi
+PY=python3; $PY --version >/dev/null 2>&1 || PY=python  # no Windows o Python costuma ser "python"
+if [ ! -f "$AUD" ] && [ -d "$D/partes" ]; then $PY tools/juntar.py "$D"; fi
 # Sem narração ainda: monta com silêncio, para ver as cenas.
 if [ ! -f "$AUD" ]; then SS=0; AUD=out/silencio.wav; ffmpeg -v error -y -f lavfi -i anullsrc=r=48000:cl=mono -t "$DUR" "$AUD"; fi
 ffmpeg -v error -y -f concat -safe 0 -i out/list.txt -ss "$SS" -i "$AUD" \
