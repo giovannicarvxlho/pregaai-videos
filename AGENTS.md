@@ -17,8 +17,8 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 5. **Tempos:** `segmentos.py` + `transcrever.py` e monte o `data.js` (Short), ou `juntar.py` + `alinhar.py` (longo), como no README. A legenda tem que bater com o que a voz falou.
 6. **Cenas:** comece copiando o `scenes.js` da referência e troque as cenas uma a uma. Use as peças do `lib.js`; peça nova entra no `lib.js` no mesmo traço. Cada cena começa em `at(i)` ou `wordTime(i, 'palavra')`, nunca num segundo fixo.
 7. **Revise vendo:** `node preview.cjs <ep>` (um quadro de cada cena), `bash sheet.sh 6`, abra o `sheet.png` e olhe de verdade: personagem inteiro e dentro do quadro, legenda sem cobrir rosto, nada nas zonas que o app cobre (README), nenhum `ERRO:` no terminal. Corrija e repita até ficar limpo.
-8. **Render, capa e descrição:** `bash build.sh <ep>` gera `out/<ep>.mp4`; faça também a capa (regra da capa abaixo) e a descrição da publicação no `roteiro.md`.
-9. **Entrega:** vídeo, capa, `sheet.png` e descrição numa mensagem só. Com o ok dele no vídeo, commit e push.
+8. **Render, capa e publicação:** `bash build.sh <ep>` gera `out/<ep>.mp4`; faça também a capa ou as miniaturas (regras abaixo) e o `episodios/<ep>/publicacao.md` a partir de `modelos/publicacao.md`.
+9. **Entrega:** `python3 tools/pacote.py <ep>` monta a pasta e o .zip (ver "Ciclo do episódio e entrega"). Entregue tudo de uma vez, com o `sheet.png`. Com o ok dele, commit e push.
 
 `out/`, `prev/`, `sheet.png` e `tools/modelos/` ficam fora do git.
 
@@ -28,6 +28,20 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 - **6 vídeos curtos por dia**, ligados aos longos do dia. Sugestão do Claude, a confirmar: tirar os curtos da narração do próprio longo, como no Reel das 7 frases. Assim eles não gastam crédito da ElevenLabs.
 - **Banner de CTA a cada 30 segundos**, para trazer downloads e testes do app. O componente ainda não existe no `lib.js`. O primeiro vídeo que precisar dele cria um `ctaBanner()` lá, na marca (cartão branco, borda de 3 px, sombra dura, azul `#2383E2`, ícone do app e selo da Play de `assets/`), sem cobrir a legenda nem as zonas que o app cobre; depois disso, todos usam o mesmo.
 - A confirmar com o Giovanni: o banner vale também para os curtos? No TikTok, a promoção do app pode tirar o vídeo do Programa de Recompensas (regra de 04/11 e decisão de 06/11 no MARK1).
+
+## Ciclo do episódio e entrega (Giovanni, 06/11/2026)
+
+O Giovanni quer o ciclo sempre assim, e no fim tudo de uma vez, separado, para subir no Drive e publicar depois.
+
+1. **História:** ele escolhe, ou pede uma sugestão. Na sugestão, traga 3 opções, cada uma com o motivo e o dado que a sustenta: o que funcionou no placar e no playbook (MARK1, `projetos/pregaai-canais.md`), o calendário cristão (Advento em 29/11, Natal) e o que está em alta na busca. Não invente número: diga de onde veio.
+2. **Roteiro:** o longo, com os trechos que viram curtos marcados. É a única parada: ele valida o texto.
+3. **Produção:** narração, cenas, render do longo (YouTube e, quando a versão for diferente, TikTok), curtos, capas e miniaturas.
+4. **Publicação:** o `episodios/<ep>/publicacao.md`, a partir de `modelos/publicacao.md`, com título, descrição ou legenda, hashtags, tags, capa, comentário fixado, configurações e calendário de cada plataforma. Os textos seguem as regras do modelo, que vêm das skills de publicação (`social-media-skills:youtube-publishing-and-metadata`, `tiktok-video-publishing`, `instagram-reels-publishing`, `hashtag-strategy`) e do playbook do canal. Use as skills quando estiverem disponíveis; quando discordarem dos dados do canal ou da regra oficial da plataforma, valem os dados e a regra oficial.
+5. **Pacote:** `python3 tools/pacote.py <ep>` monta `out/pacote/<AAAA-MM-DD>-<ep>/`, com `longo/` (YouTube, TikTok, miniaturas, legenda), `curtos/` (vídeos e capas), `publicacao.md` e `.docx`, e um `.zip` da pasta. Ele avisa se o documento cita arquivo que não está no pacote, ou se tem vídeo sem destino. Na nuvem, mande o .zip; no computador, diga o caminho da pasta.
+
+**Onde vai cada vídeo:** o longo vai para o YouTube e o TikTok; os curtos vão para o TikTok, o YouTube Shorts e o Instagram. O Instagram não recebe o longo: ele aceita vídeo maior, mas Reel com mais de 3 min não é recomendado a quem não segue a conta.
+
+**Curtos:** a ferramenta de recorte vertical (cena do longo no meio, título em cima, legenda embaixo) ainda não existe no repo. O primeiro episódio que precisar de curtos recortados cria essa ferramenta, gerando `out/<ep>-curto-<n>.mp4` e `out/<ep>-curto-<n>-capa.jpg`, que é o que o `pacote.py` procura.
 
 ## Fluxo
 
