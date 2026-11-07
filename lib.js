@@ -782,18 +782,35 @@ function wordTime(segIndex, word) {
 
 // ---------- banner de CTA do app ----------
 // Decisão do Giovanni (06/11/2026): banner a cada 30 s, para trazer downloads e testes. tv é o tempo do
-// vídeo final (num vídeo cortado, não é o tempo da narração). Entra aos 30 s, fica ~4,5 s e alterna
-// Android (Play Store) e iPhone (versão web). Fica no canto de cima, fora da legenda; o cartão final já
-// tem o app, então ele não aparece ali (o chromeHTML não roda no cartão final).
-function ctaBanner(tv, o = {}) {
+// vídeo final (num vídeo cortado, não é o tempo da narração). Entra aos 30 s, fica ~4,5 s e alterna:
+// 1ª, 3ª, 5ª vez o Android, com o selo oficial "Disponível no Google Play" (pedido do Giovanni em
+// 07/11/2026); 2ª, 4ª, 6ª o iPhone, com o endereço da versão web. O cartão final já tem o app, então o
+// banner não aparece ali (o chromeHTML não roda no cartão final).
+// Regras do selo (Partner Marketing Hub do Google Play, "Lockups, icons, & badges"): o selo vai inteiro,
+// sem mudar cor, proporção nem elementos, sobre fundo sólido com contraste, com respiro de 1/4 da altura
+// dele em volta e altura mínima de 28 px. O ícone do Play (o triângulo) sozinho não pode ir em material de
+// marketing, e escrever "Android" pede a linha "Android é uma marca da Google LLC"; por isso o selo fala pelo Android.
+// O selo anima só junto com o cartão (entra e sai inteiro), nunca por dentro.
+// Onde fica: no longo (16:9), no canto de cima à direita; no curto vertical (recorte), no lugar do
+// título, que some enquanto o banner está na tela (ctaFase dá o quanto, para o index.html).
+function ctaFase(tv, o = {}) {
   const ciclo = o.ciclo || 30, dura = o.dura || 4.5;
-  if (tv < ciclo) return '';
+  if (tv < ciclo) return null;
   const n = Math.floor(tv / ciclo), lt = tv - n * ciclo;
-  if (lt > dura) return '';
-  const p = E.out(prog(lt, 0, 0.35)) * (1 - E.in(prog(lt, dura - 0.35, dura)));
-  const ios = n % 2 === 0;
-  const linha = ios ? 'No iPhone: <b>app.pregaai.com</b>' : 'Android: procure na <b>Play Store</b>';
-  return `<div class="cta" style="opacity:${f1(p * 100) / 100};transform:translateY(${f1((1 - p) * -16)}px)">
-    <img class="cta-icon" src="assets/icon.png"><div><div class="cta-nome">PregaAI</div><div class="cta-txt">${linha}</div></div></div>`;
+  if (lt > dura) return null;
+  // p: o cartão; titulo: quanto o título do recorte some. Um sai antes de o outro entrar, para não se misturarem.
+  return {
+    n, ios: n % 2 === 0,
+    p: E.out(prog(lt, 0.12, 0.42)) * (1 - E.in(prog(lt, dura - 0.52, dura - 0.22))),
+    titulo: E.out(prog(lt, 0, 0.15)) * (1 - E.in(prog(lt, dura - 0.2, dura))),
+  };
+}
+function ctaBanner(tv, o = {}) {
+  const f = ctaFase(tv, o);
+  if (!f) return '';
+  const linha = f.ios ? 'No iPhone: <b>app.pregaai.com</b>' : 'Plano de leitura bíblica';
+  const selo = f.ios ? '' : '<img class="cta-selo" src="assets/google-play-badge.png" alt="Disponível no Google Play">';
+  return `<div class="cta${f.ios ? ' ios' : ''}" style="opacity:${f1(f.p * 100) / 100};translate:0 ${f1((1 - f.p) * -16)}px">
+    <img class="cta-icon" src="assets/icon.png"><div class="cta-app"><div class="cta-nome">PregaAI</div><div class="cta-txt">${linha}</div></div>${selo}</div>`;
 }
 
