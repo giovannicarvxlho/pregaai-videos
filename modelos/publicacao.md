@@ -15,6 +15,17 @@ Regras que valem para todas as redes:
 - Cada número e cada promessa do texto tem que estar no vídeo. A capa e o título prometem só o que o vídeo mostra.
 - Horários do playbook do TikTok: 12 h e 19 h de Brasília (pico às 21 h). Instagram e YouTube ainda não têm dado
   por hora; usar os mesmos. O longo sai primeiro; os curtos levam para ele.
+- Regras da análise de 07/11/2026 (o Giovanni decidiu seguir as recomendações; dados no MARK1, projetos/pregaai-canais.md):
+  - TikTok: os curtos saem a partir de 24 h depois do longo, nunca no mesmo dia, e sem "parte N" no título (teste:
+    depois do viral, os vídeos vão quase só para quem já segue, e tudo no mesmo dia vai para o mesmo público).
+  - TikTok: o vídeo termina na última fala, sem cartão final e sem pedido falado depois dela (com cartão, 1,8% a 5,3%
+    assistiram inteiro; sem, 10,5% e 12,5%).
+  - Cada curto abre com a própria frase de gancho e tem o próprio título fixo; nenhum curto começa no meio da narração.
+  - Instagram: 1 curto de cada pack em tela cheia, sem as faixas escuras, para comparar o alcance com os outros (o
+    Instagram diz que evita recomendar Reels com bordas). Marque no calendário qual é.
+  - App: o texto diz "Na Google Play: procure PregaAI", nunca "Android" nem "Play Store" (regra de marca do Google).
+    Vídeo com o banner do selo e sem cartão final (o longo do TikTok e todos os curtos) leva, na última linha da
+    legenda ou da descrição: "Google Play e o logotipo do Google Play são marcas da Google LLC."
 - Capas: regras de estilo e tamanhos em "Capa e miniatura" e "Capas por rede" no AGENTS.md.
 - Referências: episodios/depois-da-cruz/roteiro.md (seção Publicação, longo aprovado em 06/11) e
   episodios/morte-de-jezabel/roteiro.md (descrição de curto aprovada em 28/10).
@@ -102,6 +113,8 @@ tiver menos de 1 min. -->
 <pergunta para quem assiste> 👇
 
 #históriasbíblicas #shorts #fé #bíblia #<personagem>
+
+Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
 **Capa:** escolha no app o quadro de ~<s> s. **Vídeo relacionado:** o longo, depois de publicado. **Comentário fixado:** <...>
@@ -120,7 +133,7 @@ realista; comentários, dueto e costura ligados. -->
 | Quando | Vídeo | Capa |
 |---|---|---|
 | AAAA-MM-DD 12:00 | `tiktok/longo.mp4` | `tiktok/longo-capa.jpg` |
-| AAAA-MM-DD 19:00 | `tiktok/curto-01.mp4` | `tiktok/curto-01-capa.jpg` |
+| AAAA-MM-DD (dia seguinte ou depois) 19:00 | `tiktok/curto-01.mp4` | `tiktok/curto-01-capa.jpg` |
 
 ### Longo: `tiktok/longo.mp4`
 
@@ -135,13 +148,15 @@ realista; comentários, dueto e costura ligados. -->
 <pergunta> 👇
 
 #históriasbíblicas #<tema> #<personagem> #fé #bíblia
+
+Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
 **Capa:** `tiktok/longo-capa.jpg`, com o texto "<TEXTO>" (se o app não aceitar imagem: o quadro de ~<s> s, com esse texto no editor de capa).
 
 **Comentário fixado** <!-- funciona como segunda legenda para a busca -->
 ```
-📱 Quer ler essa história direto na Bíblia, um pouco por dia? O PregaAI monta um plano de leitura pra você e tem um devocional curto pra cada dia. Android: procura PregaAI na Play Store. iPhone: app.pregaai.com (link na bio).
+📱 Quer ler essa história direto na Bíblia, um pouco por dia? O PregaAI monta um plano de leitura pra você e tem um devocional curto pra cada dia. Na Google Play: procure PregaAI. No iPhone: app.pregaai.com (link na bio).
 ```
 
 **Configurações:** divulgação de conteúdo comercial <ligada ou desligada, e por quê>; rótulo de IA <sim ou não>.
@@ -181,6 +196,8 @@ depois; o perfil corta em 3:4, então o texto fica no miolo. -->
 <pergunta> 👇
 
 #históriasbíblicas #fé #bíblia #<personagem>
+
+Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
 **Capa:** `instagram/curto-01-capa.jpg`. **Configurações:** "Informação de IA" ligado (obrigatório: a narração tem voz realista); "Compartilhar no feed" ligado. Link da bio: `pregaai.com/?utm_source=instagram&utm_medium=bio`.

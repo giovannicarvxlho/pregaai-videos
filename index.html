@@ -101,13 +101,25 @@ html.wide, .wide body, .wide #root { width: 1920px; height: 1080px; }
 .wide .verse.big { top: 190px; width: 1320px; }
 .wide .verse.big .vtext { font-size: 68px; }
 
-/* banner de CTA (ctaBanner no lib.js): cartão branco, borda e sombra dura da marca, nome do app em azul */
-.cta { position: absolute; top: 34px; right: 40px; display: flex; align-items: center; gap: 18px; padding: 14px 26px 14px 14px;
-  background: var(--surface); border: 3px solid var(--border); border-radius: 28px; box-shadow: 0 7px 0 0 var(--border); }
-.cta-icon { width: 76px; height: 76px; border-radius: 20px; border: 3px solid var(--b600); }
-.cta-nome { font: 700 34px/1.05 Geist; letter-spacing: -0.02em; color: var(--b500); }
-.cta-txt { margin-top: 4px; font: 500 26px/1.2 Geist; color: var(--ink); }
+/* banner de CTA (ctaBanner no lib.js): cartão branco, borda e sombra dura da marca, nome do app em azul e,
+   na vez do Android, o selo oficial da Google Play. --selo é a altura visível do selo (o PNG oficial tem
+   29 px transparentes em cima e embaixo, de 250); o respiro em volta dele é 1/4 dessa altura (regra do Google)
+   e o ícone do app tem a mesma altura do selo, para o selo não ser o elemento mais forte. */
+.cta { --selo: 92px; position: absolute; top: 34px; right: 40px; display: flex; align-items: center; box-sizing: border-box;
+  padding: calc(var(--selo) / 4) calc(var(--selo) / 4 + 4px) calc(var(--selo) / 4) 18px;
+  background: var(--surface); border: 3px solid var(--border); border-radius: 30px; box-shadow: 0 7px 0 0 var(--border); white-space: nowrap; }
+.cta-icon { flex: none; width: var(--selo); height: var(--selo); box-sizing: border-box; border-radius: 24%; border: 3px solid var(--b600); }
+.cta-app { margin-left: 20px; }
+.cta-nome { font: 700 calc(var(--selo) * 0.44)/1.05 Geist; letter-spacing: -0.02em; color: var(--b500); }
+.cta-txt { margin-top: 6px; font: 500 calc(var(--selo) * 0.29)/1.2 Geist; color: var(--ink); }
 .cta-txt b { font-weight: 700; color: var(--ink-deep); }
+.cta.ios .cta-txt { font-size: calc(var(--selo) * 0.34); }
+.cta-selo { flex: none; display: block; height: calc(var(--selo) * 250 / 192); margin: calc(var(--selo) * -29 / 192) 0 calc(var(--selo) * -29 / 192) calc(var(--selo) / 4 + 10px); }
+/* longo 16:9: sem a linha "Plano de leitura bíblica" na vez do Android, para o cartão caber à direita sem
+   encostar na referência do alto (centralizada) e cobrir menos céu; o iPhone mantém a linha, que é o endereço */
+.wide:not(.recorte) .cta:not(.ios) .cta-txt { display: none; }
+/* vertical nativo (1080×1920, sem recorte): centralizado logo abaixo da faixa que o app cobre e da referência */
+html:not(.wide) .cta { --selo: 100px; top: 262px; right: auto; left: 50%; transform: translateX(-50%); }
 
 /* recorte vertical de um longo (?layout=vertical): cena 16:9 no meio, título em cima, legenda embaixo.
    Tudo o que importa fica no miolo 3:4 (y 240 a 1680), fora das bordas que o app cobre. */
@@ -117,7 +129,8 @@ html.recorte, .recorte body, .recorte #root { width: 1080px; height: 1920px; bac
 .recorte .ref { top: 592px; font-size: 26px; color: #A8A7A3; }
 .recorte .cap { top: 1290px; width: 840px; font-size: 64px; color: #F4F3F0; text-shadow: none; }
 .recorte .cap .now { color: #6FB1FC; }
-.recorte .cta { top: 662px; right: auto; left: 22px; transform-origin: 0 0; scale: 0.78; }
+/* no recorte, o banner ocupa o lugar do título (que some enquanto ele aparece): não cobre a cena nem a legenda */
+.recorte .cta { --selo: 100px; top: 425px; right: auto; left: 50%; transform: translate(-50%, -50%); }
 .titulo { position: absolute; left: 70px; right: 70px; top: 300px; height: 250px; display: flex; align-items: center; justify-content: center;
   text-align: center; font: 400 86px/1.02 'Gasoek One'; color: #FFFFFF; }
 .titulo span { color: #6FB1FC; }
@@ -207,8 +220,12 @@ window.renderFrame = (t, tv = t) => {
   $scene.innerHTML = html;
   const ch = chromeHTML(t, list);
   $chrome.className = 'layer' + (ch.dark ? ' dark' : '');
-  const titulo = RECORTE && TITULO ? `<div class="titulo"><div>${esc(TITULO).replace(/\*(.+?)\*/g, '<span>$1</span>')}</div></div>` : '';
-  $chrome.innerHTML = titulo + ch.html + (CTA && !ch.end ? ctaBanner(tv) : '');
+  // No recorte, o banner de CTA entra no lugar do título: o título sai antes de o banner entrar e volta depois que ele sai.
+  const cta = CTA && !ch.end ? ctaFase(tv) : null;
+  const tituloOp = cta ? f1((1 - cta.titulo) * 100) / 100 : 1;
+  const titulo = RECORTE && TITULO && tituloOp > 0
+    ? `<div class="titulo" style="opacity:${tituloOp}"><div>${esc(TITULO).replace(/\*(.+?)\*/g, '<span>$1</span>')}</div></div>` : '';
+  $chrome.innerHTML = titulo + ch.html + (cta ? ctaBanner(tv) : '');
 };
 window.ready = (async () => {
   const fams = ['500 40px Geist', '600 40px Geist', '700 40px Geist', '800 40px Geist', '600 40px Lora', 'italic 500 40px Lora', '40px "Gasoek One"', '500 40px "Geist Mono"', '600 40px "Geist Mono"'];
