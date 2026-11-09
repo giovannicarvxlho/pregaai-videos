@@ -61,13 +61,6 @@ function aguaEm(y, hz, tom = 'day') {
   const [a, b] = MAR_COR[tom].map((h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))), k = clamp((y - hz) / (H - hz + 600)); // o mar() pinta até H + 600
   return '#' + a.map((v, i) => Math.round(lerp(v, b[i], k)).toString(16).padStart(2, '0')).join('');
 }
-// Número com fonte (João 21:11): conta até n.
-function contador(t, t0, t1, n, x, y, size = 150, fill = '#FFFFFF') {
-  const p = prog(t, t0, t1);
-  if (p <= 0) return '';
-  const k = Math.max(1, Math.round(E.out(p) * n)), sc = pop(t, t0, 0.3);
-  return `<g transform="translate(${x} ${y}) scale(${f1(sc * 100) / 100})"><text x="0" y="0" text-anchor="middle" font-family="Gasoek One" font-size="${size}" fill="${fill}" stroke="${C.inkDeep}" stroke-width="${f1(size / 12)}" paint-order="stroke" stroke-linejoin="round">${k}</text></g>`;
-}
 
 // ---------------------------------------------------------------- cenários
 // Praia do mar da Galileia: céu (amanhecer ou dia), a outra margem, o mar e a areia (sh).
@@ -176,11 +169,10 @@ function tripulacao(t, bx, by, bs, o = {}) {
 }
 
 // ================================================================ 1. abertura
-// "Cento e cinquenta e três peixes numa rede só. Alguém contou." A rede cheia na areia; o número conta até 153.
+// "Cento e cinquenta e três peixes numa rede só. Alguém contou." A rede cheia na areia.
 function scPeixes(t) {
   let s = praia(t, { sunX: 1500, sunY: 470, ceu: 'sun' });
   s += rede(260, 660, 1660, 660, 300, 46, { id: 'r1', t, fs: 1.15, seed: 11, bg: '#3E5A70', bgOp: 0.25 });
-  s += contador(t, wordTime(0, 'alguém') - 0.1, fim(0) - 0.1, 153, 960, 330, 170);
   return { svg: cam(s, 960, 700, 1.04 + 0.06 * E.inOut(prog(t, 0, at(1)))), html: '' };
 }
 // "Foi numa praia, depois que Jesus ressuscitou." Jesus de pé na beira, o sol nascendo.
@@ -423,7 +415,6 @@ function scArrasta(t) {
   s += person({ ...PEDRO, x: nx - 300, y: FLOOR_Y, s: 1.3, flip: true, look: -1, lean: -14, mood: 'happy', armL: 70, armR: 70, walk: drag < 1 ? t * 4 : null });
   s += `<path d="M ${f1(nx - 230)} 720 L ${f1(nx + 40)} 760" stroke="${C.wood}" stroke-width="7"/>`;
   s += rede(nx, 700, nx + 960, 690, 200, 44, { id: 'r7', t, fs: 1.15, seed: 13, bgOp: 0.15 });
-  s += contador(t, tc - 0.1, wordTime(24, 'grandes'), 153, 960, 330, 160);
   return { svg: cam(s, 960, 640, 1.0 + 0.05 * E.inOut(prog(t, a0, at(25)))), html: '' };
 }
 // "E a rede não rasgou." "Da primeira vez, as redes começaram a rasgar." (a rede de Lucas 5, em sépia)
@@ -524,16 +515,11 @@ function scMagoado(t) {
 }
 // "Três perguntas. Pedro tinha negado três vezes." De um lado a manhã na praia; do outro, a noite no pátio.
 function scTres(t) {
-  const a0 = at(38), tq = wordTime(38, 'perguntas'), tn = wordTime(38, 'negado');
+  const a0 = at(38);
   const dia = praia(t, { sunX: 1700, sunY: 360, sh: 690, hz: 520, agua: 'day' }) + person({ ...VIVO, x: 1240, y: FLOOR_Y, s: 1.1, look: 1, mood: 'calm' }) + person({ ...PEDRO, x: 1560, y: FLOOR_Y, s: 1.1, flip: true, look: 1, mood: 'sad' });
   const noite = patio(t, 480, 860) + fogueira(480, 860, 0.7, t) + person({ ...PEDRO, x: 600, y: FLOOR_Y, s: 1.1, look: -1, mood: 'fear', rim: C.a300, ol: NIGHT_OL }) + person({ ...CRIADA, x: 300, y: FLOOR_Y, s: 1.05, look: 1, mood: 'angry', armR: 80, rim: C.a300, ol: NIGHT_OL });
   let s = `<clipPath id="cDia"><rect x="960" y="-200" width="${W}" height="${H + 400}"/></clipPath><clipPath id="cNoite"><rect x="-200" y="-200" width="1160" height="${H + 400}"/></clipPath>`;
   s += `<g clip-path="url(#cNoite)">${noite}</g><g clip-path="url(#cDia)">${dia}</g><line x1="960" y1="-50" x2="960" y2="${H + 50}" stroke="${C.inkDeep}" stroke-width="10"/>`;
-  for (let k = 0; k < 3; k++) {
-    const pd = pop(t, tq - 0.5 + k * 0.18, 0.3), pn = pop(t, tn + 0.1 + k * 0.18, 0.3);
-    if (pd > 0) s += `<circle cx="${1340 + k * 70}" cy="260" r="${f1(20 * pd)}" fill="${C.b500}" ${ink(5)}/>`;
-    if (pn > 0) s += `<circle cx="${420 + k * 70}" cy="260" r="${f1(20 * pn)}" fill="${C.a300}" ${ink(5, NIGHT_OL)}/>`;
-  }
   return { svg: cam(s, 960, 540, 1.0 + 0.03 * E.inOut(prog(t, a0, at(39)))), html: '' };
 }
 // "Senhor, tu sabes todas as coisas e sabes que te amo." "Cuide das minhas ovelhas."

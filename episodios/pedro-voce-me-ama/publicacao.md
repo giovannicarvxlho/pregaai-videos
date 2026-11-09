@@ -87,7 +87,7 @@ Você já tinha reparado nesse número? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** escolha no app o quadro de ~3 s (a rede cheia, com o 153 na tela). **Vídeo relacionado:** o longo, depois de publicado. **Comentário fixado:** "O vídeo completo, com as três perguntas na praia, está no canal."
+**Capa:** escolha no app o quadro de ~3 s (a rede cheia na areia). **Vídeo relacionado:** o longo, depois de publicado. **Comentário fixado:** "O vídeo completo, com as três perguntas na praia, está no canal."
 
 #### Curto 2: `youtube/curto-02.mp4`
 
