@@ -1,0 +1,55 @@
+{
+ "fonte": "pedro-voce-me-ama",
+ "saidas": [
+  {
+   "nome": "pedro-voce-me-ama",
+   "frases": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60],
+   "cartao": 12,
+   "tiktok": 59,
+   "refs": ["João 21", "João 13", "Lucas 22", "2 Pedro 1"],
+   "cta": true
+  },
+  {
+   "nome": "pedro-voce-me-ama-curto-1",
+   "layout": "vertical",
+   "titulo": "*153* peixes numa rede só",
+   "cta": true,
+   "frases": [0, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+  },
+  {
+   "nome": "pedro-voce-me-ama-curto-2",
+   "layout": "vertical",
+   "titulo": "Pedro, você me *ama*?",
+   "cta": true,
+   "frases": [3, 4, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 55, 56, 57, 58, 59]
+  },
+  {
+   "nome": "pedro-voce-me-ama-curto-3",
+   "layout": "vertical",
+   "titulo": "Jesus previu a *morte* de Pedro",
+   "cta": true,
+   "frases": [5, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
+  },
+  {
+   "nome": "pedro-voce-me-ama-curto-1-ig",
+   "layout": "cheia",
+   "titulo": "*153* peixes numa rede só",
+   "cta": true,
+   "frases": [0, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+  },
+  {
+   "nome": "pedro-voce-me-ama-curto-2-ig",
+   "layout": "cheia",
+   "titulo": "Pedro, você me *ama*?",
+   "cta": true,
+   "frases": [3, 4, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 55, 56, 57, 58, 59]
+  },
+  {
+   "nome": "pedro-voce-me-ama-curto-3-ig",
+   "layout": "cheia",
+   "titulo": "Jesus previu a *morte* de Pedro",
+   "cta": true,
+   "frases": [5, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
+  }
+ ]
+}

@@ -7,7 +7,8 @@
 //
 // Campos de cada saída: nome (sai em out/<nome>.mp4), frases, cartao (segundos do cartão final, sem áudio),
 // SO_MAPA=1 só escreve out/<nome>.corte.json, para revisar quadros com CORTE=... node preview.cjs.
-// tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão), layout ("vertical" para curto), titulo (texto fixo
+// tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão; com um índice de frase, termina nela), layout ("vertical" para curto; "cheia" para o curto do
+// Instagram, sem faixas escuras: a cena maior no meio e a mesma cena desfocada em volta), titulo (texto fixo
 // em cima, no curto; *palavra* sai em azul), cta (banner do app a cada 30 s) e refs (as referências do cartão final,
 // quando o corte tira capítulos que o cartão da origem citava).
 const { execFileSync, spawn } = require('child_process');
@@ -93,10 +94,17 @@ const roda = (cmd, args, env = {}) => new Promise((ok, erro) => {
     [...partes, lista, wav].forEach((f) => fs.rmSync(f, { force: true }));
     console.log(mp4);
 
-    // TikTok: o mesmo vídeo terminando na última fala, sem o cartão final.
+    // TikTok: o mesmo vídeo terminando na última fala, sem o cartão final. Com um número (tiktok: 59), termina
+    // na pausa depois dessa frase (ex.: na pergunta final, sem a frase que manda ler o capítulo).
     if (s.tiktok) {
       const tk = path.join(OUT, `${s.nome}-tiktok.mp4`);
-      execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', mp4, '-t', tFala.toFixed(3), '-c:v', 'libx264', '-preset', 'slow', '-crf', '17',
+      let tFim = tFala;
+      if (typeof s.tiktok === 'number') {
+        const n = s.tiktok, alvo = SEGS[n][1] + (n + 1 < SEGS.length ? Math.min(0.6, SEGS[n + 1][0] - SEGS[n][1]) : 0.6);
+        let acc = 0;
+        for (const [a, b] of fala) { if (alvo <= b) { tFim = acc + Math.max(0, alvo - a); break; } acc += b - a; }
+      }
+      execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', mp4, '-t', tFim.toFixed(3), '-c:v', 'libx264', '-preset', 'slow', '-crf', '17',
         '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', tk]);
       console.log(tk);
     }

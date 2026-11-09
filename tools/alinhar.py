@@ -64,12 +64,18 @@ print(f'{len(match)}/{len(sw)} palavras do roteiro achadas no áudio', file=sys.
 SYL = 1 / 5.35
 def word_time(i, edge):
     # início (edge 0) ou fim (edge 1) da palavra i do roteiro; sem par, anda até a vizinha com par
+    # (primeiro na direção natural; se chegar ao fim do roteiro sem achar, na outra)
     if i in match: return tw[match[i]][1 + edge]
-    step = 1 if edge == 0 else -1
-    j, gap = i, 0
-    while 0 <= j < len(sw) and j not in match: gap += sw[j][3]; j += step
-    if not (0 <= j < len(sw)): return None
-    return tw[match[j]][1] - gap * SYL if edge == 0 else tw[match[j]][2] + gap * SYL
+    for step in ((1, -1) if edge == 0 else (-1, 1)):
+        j, gap = i, 0
+        while 0 <= j < len(sw) and j not in match: gap += sw[j][3]; j += step
+        if not (0 <= j < len(sw)): continue
+        if step == 1:  # vizinha com par depois: a palavra i começa gap sílabas antes dela
+            ini = tw[match[j]][1] - gap * SYL
+            return ini if edge == 0 else ini + sw[i][3] * SYL
+        fim = tw[match[j]][2] + gap * SYL  # vizinha com par antes: a palavra i acaba gap sílabas depois
+        return fim if edge == 1 else fim - sw[i][3] * SYL
+    return None
 
 out, prev_end = [], 0.0
 for li, raw in enumerate(lines):
