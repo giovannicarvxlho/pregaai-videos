@@ -21,11 +21,15 @@ Regras que valem para todas as redes:
   - TikTok: o vídeo termina na última fala, sem cartão final e sem pedido falado depois dela (com cartão, 1,8% a 5,3%
     assistiram inteiro; sem, 10,5% e 12,5%).
   - Cada curto abre com a própria frase de gancho e tem o próprio título fixo; nenhum curto começa no meio da narração.
-  - Instagram: 1 curto de cada pack em tela cheia, sem as faixas escuras, para comparar o alcance com os outros (o
-    Instagram diz que evita recomendar Reels com bordas). Marque no calendário qual é.
+  - Instagram: os curtos saem em tela cheia, sem as faixas escuras (layout "cheia" do tools/corte.cjs, saída
+    <ep>-curto-<n>-ig; o pacote.py põe essa versão na pasta instagram/). Os recortes com faixas tiveram o pior alcance
+    da conta, e o Instagram diz que evita recomendar Reels com bordas (pedido do Giovanni em 09/11/2026).
   - App: o texto diz "Na Google Play: procure PregaAI", nunca "Android" nem "Play Store" (regra de marca do Google).
     Vídeo com o banner do selo e sem cartão final (o longo do TikTok e todos os curtos) leva, na última linha da
     legenda ou da descrição: "Google Play e o logotipo do Google Play são marcas da Google LLC."
+- TikTok: não dá mais para fixar comentário (o Giovanni tentou de várias formas em 09/11/2026; a opção sumiu para a
+  maioria das contas). O texto que ia fixado vai como resposta do perfil ao primeiro comentário. YouTube e Instagram
+  continuam fixando.
 - Capas: regras de estilo e tamanhos em "Capa e miniatura" e "Capas por rede" no AGENTS.md.
 - Referências: episodios/depois-da-cruz/roteiro.md (seção Publicação, longo aprovado em 06/11) e
   episodios/morte-de-jezabel/roteiro.md (descrição de curto aprovada em 28/10).
@@ -154,7 +158,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 **Capa:** `tiktok/longo-capa.jpg`, com o texto "<TEXTO>" (se o app não aceitar imagem: o quadro de ~<s> s, com esse texto no editor de capa).
 
-**Comentário fixado** <!-- funciona como segunda legenda para a busca -->
+**Resposta do perfil ao primeiro comentário** <!-- o TikTok não deixa mais fixar comentário (09/11/2026) -->
 ```
 📱 Quer ler essa história direto na Bíblia, um pouco por dia? O PregaAI monta um plano de leitura pra você e tem um devocional curto pra cada dia. Na Google Play: procure PregaAI. No iPhone: app.pregaai.com (link na bio).
 ```
@@ -168,7 +172,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 <...>
 ```
 
-**Capa:** `tiktok/curto-01-capa.jpg`. **Comentário fixado:** <...> **Configurações:** <...>
+**Capa:** `tiktok/curto-01-capa.jpg`. **Resposta ao primeiro comentário:** <...> **Configurações:** <...>
 
 ## Instagram
 

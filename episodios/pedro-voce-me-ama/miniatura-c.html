@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura C: Pedro, você me ama? (ele sabia)</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* C: Pedro velho, de mãos estendidas (João 21:18); ele sabia como ia morrer (2 Pedro 1:14). Mistério. Céu fechado com luz fria. Texto à direita, etiqueta na 2ª linha, inclinada para a direita. */
+.hook { position: absolute; right: 52px; top: 90px; display: flex; flex-direction: column; align-items: flex-end; }
+.l { font: 400 150px/0.95 'Gasoek One'; color: #FFFFFF; white-space: nowrap;
+  text-shadow: -5px -5px 0 #181614, 5px -5px 0 #181614, -5px 5px 0 #181614, 5px 5px 0 #181614, 0 -6px 0 #181614, 0 6px 0 #181614, -6px 0 0 #181614, 6px 0 0 #181614, 0 13px 0 #181614; }
+.chip { margin: 16px 0 0; padding: 4px 30px 20px; background: #2383E2; border: 7px solid #181614; border-radius: 28px; box-shadow: 0 12px 0 0 #181614;
+  font: 400 160px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(4deg); }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="hook"><div class="l">ELE</div><div class="chip">SABIA</div></div>
+</div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="scenes.js"></script>
+<script src="capas.js"></script>
+<script>
+window.SIZE = [1280, 720];
+document.getElementById('art').innerHTML = DEFS + artC({ x: 640, s: 5.4, y: 1650 });
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>

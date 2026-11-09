@@ -98,6 +98,8 @@ html.wide, .wide body, .wide #root { width: 1920px; height: 1080px; }
 .wide .cap { top: 920px; width: 1560px; font-size: 58px; line-height: 1.18; }
 .wide .end { left: 120px; right: auto; top: 150px; width: 820px; }
 .wide .legal { top: auto; bottom: 40px; left: 120px; right: auto; width: 820px; }
+/* no longo, com 4 referências, os botões não cabem em 820 px no tamanho do vertical: ficam menores e sem quebrar linha */
+.wide .end-refs span { white-space: nowrap; font-size: 30px; padding: 10px 18px; }
 .wide .verse.big { top: 190px; width: 1320px; }
 .wide .verse.big .vtext { font-size: 68px; }
 
@@ -131,6 +133,15 @@ html.recorte, .recorte body, .recorte #root { width: 1080px; height: 1920px; bac
 .recorte .cap .now { color: #6FB1FC; }
 /* no recorte, o banner ocupa o lugar do título (que some enquanto ele aparece): não cobre a cena nem a legenda */
 .recorte .cta { --selo: 100px; top: 425px; right: auto; left: 50%; transform: translate(-50%, -50%); }
+/* tela cheia (?layout=cheia), para o Instagram: sem faixas escuras. A cena 16:9 fica maior no meio (corta ~7% de
+   cada lado) e o resto do quadro é a mesma cena ampliada e desfocada, mais escura, para o título e a legenda lerem. */
+.cheia #fundo { display: block; position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; filter: blur(34px) brightness(0.45) saturate(1.15); transform: scale(1.12); }
+.cheia .titulo { text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55); }
+.cheia #stage { top: 600px; left: -94px; width: 1268px; height: 713.25px; }
+.cheia #scene { top: 600px; left: -94px; transform: scale(0.6604); }
+.cheia .ref { top: 556px; }
+.cheia .cap { top: 1340px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); }
+#fundo { display: none; }
 .titulo { position: absolute; left: 70px; right: 70px; top: 300px; height: 250px; display: flex; align-items: center; justify-content: center;
   text-align: center; font: 400 86px/1.02 'Gasoek One'; color: #FFFFFF; }
 .titulo span { color: #6FB1FC; }
@@ -139,13 +150,13 @@ html.recorte, .recorte body, .recorte #root { width: 1080px; height: 1920px; bac
 </style>
 </head>
 <body>
-<div id="root"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg><div id="scene" class="layer"></div><div id="chrome" class="layer"></div></div>
+<div id="root"><svg id="fundo" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg><div id="scene" class="layer"></div><div id="chrome" class="layer"></div></div>
 <script>
 // O episódio vem da URL: index.html?ep=valentes-de-davi-2. O data.js vem antes do
 // lib.js porque é ele que diz o formato (FORMAT = 'wide' no vídeo longo).
 const Q = new URLSearchParams(location.search), EP = Q.get('ep');
 // Recorte vertical de um longo (curtos), título fixo e banner de CTA vêm da URL (tools/corte.cjs).
-const RECORTE = Q.get('layout') === 'vertical', TITULO = Q.get('titulo') || '', CTA = Q.get('cta') === '1';
+const CHEIA = Q.get('layout') === 'cheia', RECORTE = Q.get('layout') === 'vertical' || CHEIA, TITULO = Q.get('titulo') || '', CTA = Q.get('cta') === '1';
 const REFS = Q.get('refs') ? JSON.parse(Q.get('refs')) : null; // referências do cartão final num corte
 document.write(`<script src="episodios/${EP}/data.js"><\/script>`);
 </script>
@@ -157,6 +168,7 @@ if (WIDE) {
   const st = document.getElementById('stage');
   st.setAttribute('viewBox', `0 0 ${W} ${H}`); st.setAttribute('width', W); st.setAttribute('height', H);
   if (RECORTE) { document.documentElement.classList.add('recorte'); st.setAttribute('width', 1080); st.setAttribute('height', 607.5); }
+  if (CHEIA) { document.documentElement.classList.add('cheia'); st.setAttribute('width', 1268); st.setAttribute('height', 713.25); }
 }
 // Num corte que tirou capítulos, o cartão final cita só as referências que ficaram.
 if (REFS) { const cartao = endCard; endCard = (t, t0, refs, o) => cartao(t, t0, REFS, o); }
@@ -165,7 +177,7 @@ window.VW = RECORTE ? 1080 : W; window.VH = RECORTE ? 1920 : H;
 </script>
 <script>
 const CHUNKS = buildChunks(SEGS);
-const $stage = document.getElementById('stage'), $scene = document.getElementById('scene'), $chrome = document.getElementById('chrome');
+const $fundo = document.getElementById('fundo'), $stage = document.getElementById('stage'), $scene = document.getElementById('scene'), $chrome = document.getElementById('chrome');
 
 function activeScenes(t) {
   const out = [];
@@ -217,6 +229,7 @@ window.renderFrame = (t, tv = t) => {
     if (r.html) html += `<div class="layer" style="opacity:${op.toFixed(3)}">${r.html}</div>`;
   });
   $stage.innerHTML = svg;
+  if (CHEIA) $fundo.innerHTML = svg;
   $scene.innerHTML = html;
   const ch = chromeHTML(t, list);
   $chrome.className = 'layer' + (ch.dark ? ' dark' : '');

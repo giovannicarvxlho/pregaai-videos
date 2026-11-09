@@ -215,6 +215,81 @@ function sheep(x, base, s, t = 0, look = 1) {
   </g>`;
 }
 
+// ---------- mar da Galileia, barco, rede e peixes (João 21; Lucas 5) ----------
+// Mar: água do y0 até o pé da tela, com ondinhas que andam devagar. tom: 'day', 'dawn' (amanhecer) ou 'night'.
+function mar(t, y0, tom = 'day', ox = 0) {
+  const P = { day: [C.b400, C.b500, '#FFFFFF'], dawn: ['#6F8FA6', '#3E5A70', '#FBE3CF'], night: ['#202C38', '#121A22', '#56677A'] }[tom];
+  let s = `<linearGradient id="gMar_${tom}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${P[0]}"/><stop offset="1" stop-color="${P[1]}"/></linearGradient>`;
+  s += `<rect x="-600" y="${f1(y0)}" width="${W + 1200}" height="${f1(H - y0 + 600)}" fill="url(#gMar_${tom})"/>`;
+  const r = rng(91);
+  for (let i = 0; i < (WIDE ? 30 : 20); i++) {
+    const d = r(), y = y0 + 14 + d * Math.max(40, H - y0 - 10), len = 34 + d * 80, sp = 8 + d * 22;
+    const span = W + 400, x = ((((r() * span + t * sp - ox * (0.5 + d)) % span) + span) % span) - 200;
+    s += `<path d="M ${f1(x)} ${f1(y)} q ${f1(len / 2)} ${f1(-8 - d * 6)} ${f1(len)} 0" stroke="${P[2]}" stroke-width="${f1(3 + d * 3)}" fill="none" opacity="${f1((0.3 + d * 0.3) * 100) / 100}" stroke-linecap="round"/>`;
+  }
+  return s;
+}
+// Peixe de lado (não é o peixe da marca): corpo, rabo e olho, no traço de tinta.
+function peixe(x, y, s = 1, ang = 0, col = '#9DB3BF', ol = C.ink) {
+  return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(ang)}) scale(${f1(s * 100) / 100})">
+    <path d="M -28 0 L -54 -17 L -51 17 Z" fill="${shade(col, 0.82)}" ${ink(4, ol)}/>
+    <path d="M -36 0 C -20 -21 22 -21 40 0 C 22 21 -20 21 -36 0 Z" fill="${col}" ${ink(4, ol)}/>
+    <path d="M 8 -14 C 2 -6 2 6 8 14" stroke="${shade(col, 0.75)}" stroke-width="3" fill="none"/>
+    <circle cx="26" cy="-4" r="3.6" fill="${ol}"/>
+  </g>`;
+}
+const PEIXES = ['#9DB3BF', '#B8C7CF', '#8FA3AE', '#C9B8A6'];
+// Barco de pesca de lado, com a linha d'água em y. o.inside: o que vai dentro (pessoas com os pés em y - 46*s),
+// desenhado antes do casco e balançando junto; o.water: cor da água que cobre o fundo; o.t: balanço; o.mast: mastro.
+function barco(x, y, s = 1, o = {}) {
+  const ol = o.ol || C.ink, rock = o.t == null ? 0 : Math.sin(o.t * 1.3) * 1.6, bob = o.t == null ? 0 : Math.sin(o.t * 1.7) * 4;
+  const hull = `<path d="M -330 -96 C -300 -96 300 -96 330 -96 C 318 -30 250 18 160 26 L -160 26 C -250 18 -318 -30 -330 -96 Z" fill="${o.fill || '#7A563B'}" ${ink(7, ol)}/>
+    <path d="M -318 -66 C -200 -62 200 -62 318 -66" stroke="${shade(o.fill || '#7A563B', 0.75)}" stroke-width="7" fill="none"/>
+    <path d="M -300 -30 C -200 -24 200 -24 300 -30" stroke="${shade(o.fill || '#7A563B', 0.75)}" stroke-width="6" fill="none"/>
+    <path d="M 318 -94 C 340 -120 352 -150 346 -176" stroke="${ol}" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M 318 -94 C 340 -120 352 -150 346 -176" stroke="${o.fill || '#7A563B'}" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M -318 -94 C -336 -116 -344 -140 -340 -160" stroke="${ol}" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M -318 -94 C -336 -116 -344 -140 -340 -160" stroke="${o.fill || '#7A563B'}" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+  const mast = o.mast ? `<line x1="-40" y1="-96" x2="-40" y2="-520" stroke="${ol}" stroke-width="16" stroke-linecap="round"/><line x1="-40" y1="-96" x2="-40" y2="-520" stroke="${C.wood}" stroke-width="8" stroke-linecap="round"/>` : '';
+  const water = o.water ? `<path d="M -360 0 q 45 -9 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 L 360 44 C 200 50 -200 50 -360 44 Z" fill="${o.water}"/>` : '';
+  return `<g transform="translate(${f1(x)} ${f1(y + bob)}) rotate(${f1(rock)}) scale(${f1(s * 1000) / 1000})">${mast}<g transform="scale(${f1(1000 / s) / 1000})">${o.inside ? `<g transform="translate(${f1(-x)} ${f1(-y)})">${o.inside}</g>` : ''}</g>${hull}${water}</g>`;
+}
+// Rede de pesca: um saco de malha preso de (x0, y0) a (x1, y1), com o fundo d abaixo; n peixes dentro.
+// o.id: prefixo do recorte (cada rede do quadro com o seu); o.t: os peixes mexem; o.fs: tamanho dos peixes;
+// o.rasga (0..1): o fundo começa a abrir e um peixe escapa (Lucas 5:6); o.boias: boias na borda de cima.
+function rede(x0, y0, x1, y1, d, n = 0, o = {}) {
+  const id = o.id || 'rede', ol = o.ol || C.ink, my = Math.max(y0, y1), t = o.t || 0;
+  const path = `M ${f1(x0)} ${f1(y0)} C ${f1(x0 + (x1 - x0) * 0.04)} ${f1(my + d)} ${f1(x1 - (x1 - x0) * 0.04)} ${f1(my + d)} ${f1(x1)} ${f1(y1)} Z`;
+  const r = rng(o.seed || 5);
+  let f = '';
+  for (let i = 0; i < n; i++) {
+    const u = 0.08 + 0.84 * r(), v = r(), top = lerp(y0, y1, u), bot = my + d * 0.7 * (1 - Math.pow(2 * u - 1, 2)) + 10;
+    const fy = top + (bot - top) * (0.2 + 0.75 * v), wig = Math.sin(t * 9 + i * 1.7);
+    f += peixe(lerp(x0, x1, u), fy + wig * 3, (o.fs || 0.8) * (0.8 + 0.4 * r()), (r() - 0.5) * 60 + wig * 10, PEIXES[i % 4], ol);
+  }
+  const xa = Math.min(x0, x1) - d - 60, xb = Math.max(x0, x1) + 60, ya = Math.min(y0, y1) - 20, L = (my + d) - ya + Math.abs(x1 - x0) + 120;
+  let m = '';
+  for (let x = xa; x < xb + d; x += o.step || 32) m += `M ${f1(x)} ${f1(ya)} l ${f1(L)} ${f1(L)} M ${f1(x + L)} ${f1(ya)} l ${f1(-L)} ${f1(L)} `;
+  let s = `<clipPath id="${id}"><path d="${path}"/></clipPath>`;
+  s += `<g clip-path="url(#${id})"><path d="${path}" fill="${o.bg || '#000'}" opacity="${o.bgOp ?? 0.12}"/>${f}<path d="${m}" stroke="${o.col || '#EDE6DC'}" stroke-width="${o.w || 3}" fill="none" opacity="0.85"/></g>`;
+  s += `<path d="${path}" fill="none" stroke="${ol}" stroke-width="5" stroke-linejoin="round"/>`;
+  if (o.rasga) {
+    const cx = (x0 + x1) / 2, cy = my + d * 0.75, k = o.rasga;
+    s += `<path d="M ${f1(cx - 40 * k)} ${f1(cy - 4)} L ${f1(cx - 14 * k)} ${f1(cy + 16 * k)} L ${f1(cx + 6)} ${f1(cy + 2)} L ${f1(cx + 26 * k)} ${f1(cy + 18 * k)} L ${f1(cx + 44 * k)} ${f1(cy - 2)}" stroke="${o.hole || '#2A2420'}" stroke-width="${f1(8 + 6 * k)}" fill="none" stroke-linecap="round"/>`;
+    for (let j = 0; j < 4; j++) s += `<path d="M ${f1(cx - 30 + j * 20)} ${f1(cy + 6)} q ${f1(6 - j * 3)} ${f1(30 * k)} ${f1(-4 + j * 2)} ${f1(56 * k)}" stroke="${o.col || '#EDE6DC'}" stroke-width="3" fill="none" opacity="0.9"/>`;
+    s += peixe(cx + 6, cy + 30 + 70 * k, (o.fs || 0.8), 80, PEIXES[1], ol);
+  }
+  if (o.boias !== false) for (let k = 0; k <= 6; k++) s += `<circle cx="${f1(lerp(x0, x1, k / 6))}" cy="${f1(lerp(y0, y1, k / 6))}" r="9" fill="${C.a400}" ${ink(4, ol)}/>`;
+  return s;
+}
+// Pães redondos (n), lado a lado, com o pé em (x, y).
+function paes(x, y, s = 1, n = 3, ol = C.ink) {
+  let g = '';
+  for (let i = 0; i < n; i++) {
+    const px = x + (i - (n - 1) / 2) * 62 * s;
+    g += `<ellipse cx="${f1(px)}" cy="${f1(y - 18 * s)}" rx="${f1(34 * s)}" ry="${f1(22 * s)}" fill="#C98E52" ${ink(4, ol)}/><path d="M ${f1(px - 16 * s)} ${f1(y - 26 * s)} q ${f1(16 * s)} ${f1(-8 * s)} ${f1(32 * s)} 0" stroke="#8C5A2E" stroke-width="${f1(4 * s)}" fill="none" stroke-linecap="round"/>`;
+  }
+  return g;
+}
+
 function dog(x, base, s, fill = '#2B2B2B', t = 0) {
   const lap = Math.sin(t * 9) * 3;
   return `<g transform="translate(${f1(x)} ${f1(base)}) scale(${s})" fill="${fill}">

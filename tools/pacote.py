@@ -10,6 +10,7 @@
 #   out/<ep>-miniatura-*.jpg        miniaturas do YouTube (Testar e comparar)  <- episodios/<ep>/miniatura-*.html
 #   out/<ep>-capa-tiktok.jpg        capa do longo no TikTok, 1080×1920         <- episodios/<ep>/capa-tiktok.html
 #   out/<ep>-curto-<n>.mp4          curtos recortados do longo
+#   out/<ep>-curto-<n>-ig.mp4       o mesmo curto em tela cheia, para o Instagram (layout "cheia" do corte.cjs), se houver
 #   out/<ep>-curto-<n>-capa.jpg     capa de cada curto, 1080×1920              <- episodios/<ep>/curto-<n>-capa.html
 #   out/<ep>-capa.jpg               capa, quando o episódio é um curto          <- episodios/<ep>/capa.html
 #   episodios/<ep>/legenda.srt      legenda do longo no YouTube, se houver
@@ -68,12 +69,15 @@ if longo:
     pega(os.path.join(epd, 'legenda.srt'), 'youtube/legenda.srt')
     for m in sorted(glob.glob(o(f'{ep}-miniatura*.jpg'))):
         pega(m, 'youtube/' + os.path.basename(m)[len(ep) + 1:])
-    for c in sorted(glob.glob(o(f'{ep}-curto-*.mp4')), key=lambda c: int(re.search(r'-curto-(\d+)\.mp4$', c).group(1))):
+    vert = [c for c in glob.glob(o(f'{ep}-curto-*.mp4')) if re.search(r'-curto-\d+\.mp4$', c)]
+    for c in sorted(vert, key=lambda c: int(re.search(r'-curto-(\d+)\.mp4$', c).group(1))):
         curtos.append((c, c[:-4] + '-capa.jpg'))
 else:
     curtos.append((o(f'{ep}.mp4'), o(f'{ep}-capa.jpg')))
 for n, (video, capa) in enumerate(curtos, 1):
-    pega(video, *(f'{rede}/curto-{n:02d}.mp4' for rede in REDES))
+    ig = video[:-4] + '-ig.mp4'  # tela cheia, sem faixas escuras: o Instagram evita recomendar Reels com bordas
+    pega(video, f'youtube/curto-{n:02d}.mp4', f'tiktok/curto-{n:02d}.mp4')
+    pega(ig if os.path.exists(ig) else video, f'instagram/curto-{n:02d}.mp4')
     pega(capa, f'tiktok/curto-{n:02d}-capa.jpg', f'instagram/curto-{n:02d}-capa.jpg')
 
 for origem, rel in copias:
