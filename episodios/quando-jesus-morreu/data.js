@@ -69,6 +69,6 @@ const SEGS = [
   [249.10, 253.44, 'Só uma pessoa podia passar por | aquela cortina. Uma vez por ano.', [[249.1, 250.86], [250.88, 253.44]]],
 ];
 const AUDIO_END = 248.10; // fim da fala do longo (frase 60); a frase 61 é só do curto 1
-const CARTAO_INICIO = 253.80; // na origem, o cartão final vem depois da abertura do curto 1 (corte.json: cartao_inicio)
-const DURATION = 263.80; // origem: fala + abertura do curto + 10 s de cartão. O longo publicado sai do corte.json: 248,1 s de fala + 10 s = 4:18
+const CARTAO_INICIO = 254.20; // na origem, o cartão final vem depois da abertura do curto 1 (corte.json: cartao_inicio)
+const DURATION = 264.20; // origem: fala + abertura do curto + 10 s de cartão. O longo publicado sai do corte.json: 248,1 s de fala + 10 s = 4:18
 const SPEED = 1;

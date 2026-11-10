@@ -698,9 +698,38 @@ function thornCrown(px, py, ps, drop = 0) {
   return `<g transform="translate(${f1(px)} ${f1(py - drop)}) scale(${ps})">${g}</g>`;
 }
 
+// Querubim bordado no véu (Êxodo 26:31; 2 Crônicas 3:14): figura de pé com as asas abertas para cima
+// (Êxodo 25:20), feita só de linha, como bordado em fio de ouro sobre o tecido. Pés em (x, y); ~215 de altura
+// em s = 1. o.p (0..1) borda o desenho aos poucos (uma linha depois da outra); o.col: cor do fio.
+const QUERUBIM = [
+  'M -22 -118 C -28 -76 -34 -36 -38 0 L 38 0 C 34 -36 28 -76 22 -118 Z', // veste
+  'M -26 -84 L 26 -84', // cinto
+  'M 0 -156 C 9 -156 16 -149 16 -140 C 16 -131 9 -124 0 -124 C -9 -124 -16 -131 -16 -140 C -16 -149 -9 -156 0 -156 Z', // cabeça
+  'M -20 -112 C -62 -118 -98 -158 -92 -214 C -74 -196 -54 -178 -32 -166 C -40 -150 -34 -132 -22 -124', // asa esquerda
+  'M 20 -112 C 62 -118 98 -158 92 -214 C 74 -196 54 -178 32 -166 C 40 -150 34 -132 22 -124', // asa direita
+  'M -38 -128 L -74 -156 M -52 -152 L -84 -190 M 38 -128 L 74 -156 M 52 -152 L 84 -190', // penas
+];
+function querubim(x, y, s = 1, o = {}) {
+  const p = o.p ?? 1, n = QUERUBIM.length;
+  if (p <= 0) return '';
+  const col = o.col || '#F3DC9A', sh = o.sombra || C.a600;
+  let fio = '', sombra = '';
+  QUERUBIM.forEach((d, k) => {
+    const q = clamp(p * n - k);
+    if (q <= 0) return;
+    const dash = q < 1 ? ` pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${f1((1 - q) * 1000) / 1000}"` : '';
+    sombra += `<path d="${d}" fill="none" stroke="${sh}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"${dash}/>`;
+    fio += `<path d="${d}" fill="none" stroke="${col}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"${dash}/>`;
+  });
+  return `<g transform="translate(${f1(x)} ${f1(y)}) scale(${f1(s * 1000) / 1000})"><g transform="translate(2 3)" opacity="0.75">${sombra}</g>${fio}</g>`;
+}
+
 // Véu do santuário (Mateus 27:51), azul, roxo e vermelho (Êxodo 26:31), de X0 a X1 e de Y0 a Y1,
 // com a luz atrás. p (0..1) é o rasgo, de alto a baixo; a luz só chega ao chão quando ele termina.
 // o.beamTo: até onde a luz desce; o.id: prefixo dos recortes (dois véus no mesmo quadro).
+// Opcionais (sem eles o véu sai como sempre saiu): o.querubins (0..1) borda os querubins (2 Crônicas 3:14),
+// o.linho põe as faixas de linho fino, o.realce {azul, roxo, vermelho, linho} (0..1) acende cada cor quando a
+// narração fala dela, o.fios solta fiapos nas bordas do rasgo e o.metades abre o contorno junto com o rasgo.
 function veil(p, X0, X1, Y0, Y1, o = {}) {
   const cx = (X0 + X1) / 2, id = o.id || 'veu', beamTo = o.beamTo ?? H - 20, gapMax = o.gapMax ?? 150;
   let s = `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#FFF6DF"/>`;
@@ -713,20 +742,89 @@ function veil(p, X0, X1, Y0, Y1, o = {}) {
     const edge = jag.map(([y, j]) => `${f1(cx + side * gap(y) / 2 + j)} ${y}`);
     return `M ${side < 0 ? X0 : X1} ${Y0} L ${edge.join(' L ')} L ${side < 0 ? X0 : X1} ${Y1} Z`;
   };
+  const re = o.realce || {}, acende = (v, svg) => (v > 0 ? `<g opacity="${f1(clamp(v) * 0.42 * 100) / 100}">${svg}</g>` : '');
   let cloth = rect(X0, Y0, X1 - X0, Y1 - Y0, C.b500);
   for (let x = X0 + 60; x < X1; x += 78) cloth += `<line x1="${x}" y1="${Y0}" x2="${x}" y2="${Y1}" stroke="${C.b600}" stroke-width="10"/>`;
-  [[Y0 + 40, '#5B3F7A'], [Y0 + 70, C.r600], [Y1 - 110, C.r600], [Y1 - 80, '#5B3F7A']].forEach(([y, c]) => (cloth += rect(X0, y, X1 - X0, 22, c)));
+  if (re.azul) cloth += acende(re.azul, rect(X0, Y0, X1 - X0, Y1 - Y0, '#FFFFFF'));
+  const faixas = [[Y0 + 40, '#5B3F7A'], [Y0 + 70, C.r600], [Y1 - 110, C.r600], [Y1 - 80, '#5B3F7A']];
+  faixas.forEach(([y, c]) => (cloth += rect(X0, y, X1 - X0, 22, c)));
+  faixas.forEach(([y, c]) => (cloth += acende(c === C.r600 ? re.vermelho : re.roxo, rect(X0, y, X1 - X0, 22, '#FFFFFF'))));
+  if (o.linho) [Y0 + 100, Y1 - 130].forEach((y) => (cloth += rect(X0, y, X1 - X0, 12, '#F1E8D6') + acende(re.linho, rect(X0, y, X1 - X0, 12, '#FFFFFF'))));
+  if (o.querubins) {
+    // duas fileiras de quatro, longe do meio (por onde o rasgo passa)
+    const top = Y0 + (o.linho ? 118 : 98), bot = Y1 - (o.linho ? 140 : 120), Wv = X1 - X0;
+    const sc = Math.min(((bot - top) / 2 - 18) / 216, (Wv * 0.19) / 200);
+    [0, 1].forEach((row) => [-0.37, -0.15, 0.15, 0.37].forEach((u, k) => {
+      cloth += querubim(cx + u * Wv, top + ((row + 1) * (bot - top)) / 2 - 8, sc, { p: clamp(o.querubins * 1.7 - (row * 4 + k) * 0.09) });
+    }));
+  }
   [-1, 1].forEach((side) => {
     s += `<clipPath id="${id}${side}"><path d="${half(side)}"/></clipPath><g clip-path="url(#${id}${side})">${cloth}</g>`;
     const torn = jag.filter(([y]) => y <= yf + 30);
     if (p > 0 && torn.length > 1) s += `<path d="M ${torn.map(([y, j]) => `${f1(cx + side * gap(y) / 2 + j)} ${y}`).join(' L ')}" fill="none" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`;
+    // fiapos soltos na borda rasgada, para dentro do rasgo
+    if (o.fios && p > 0) torn.forEach(([y, j], k) => {
+      if (k % 2 || y > yf - 10 || gap(y) < 14) return;
+      const ex = cx + side * gap(y) / 2 + j, len = 10 + ((k * 7) % 5) * 4;
+      s += `<path d="M ${f1(ex)} ${y} q ${f1(-side * len * 0.6)} 4 ${f1(-side * len)} ${f1(10 + (k % 3) * 4)}" fill="none" stroke="${k % 4 ? C.b400 : '#F1E8D6'}" stroke-width="3" stroke-linecap="round"/>`;
+    });
   });
   // abaixo da ponta do rasgo o véu ainda é uma peça só (cobre a emenda das duas metades)
   if (yf < Y1) s += `<clipPath id="${id}B"><rect x="${X0}" y="${f1(yf)}" width="${X1 - X0}" height="${f1(Y1 - yf)}"/></clipPath><g clip-path="url(#${id}B)">${cloth}</g>`;
-  s += `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="none" stroke="${C.ink}" stroke-width="7"/>`;
+  if (o.metades) {
+    // contorno de cada metade: em cima e embaixo ele para onde o pano rasgou
+    const jb = jag[jag.length - 1][1];
+    [-1, 1].forEach((side) => (s += `<path d="M ${f1(cx + side * gap(Y0) / 2 + jag[0][1])} ${Y0} L ${side < 0 ? X0 : X1} ${Y0} L ${side < 0 ? X0 : X1} ${Y1} L ${f1(cx + side * gap(Y1) / 2 + jb)} ${Y1}" fill="none" stroke="${C.ink}" stroke-width="7" stroke-linejoin="round"/>`));
+  } else s += `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="none" stroke="${C.ink}" stroke-width="7"/>`;
   s += rect(X0 - 50, Y0 - 34, X1 - X0 + 100, 30, C.a400, `rx="15" ${ink(6)}`);
   for (let x = X0 + 20; x < X1; x += 76) s += `<circle cx="${x}" cy="${Y0 - 4}" r="11" fill="none" stroke="${C.a600}" stroke-width="6"/>`;
   return s;
+}
+
+// Sepulcro cavado na rocha, com a pedra redonda na entrada (o mesmo desenho de cave() e da pedra do longo da
+// ressurreição). Pé da rocha em (x, base). o.rola (0..1): a pedra rola para a direita; o.racha (0..1): uma
+// rachadura atravessa a pedra; o.parte (0..1): a pedra se parte em duas metades que se afastam e tombam;
+// o.luz (0..1): luz suave saindo da entrada, sem ninguém dentro; o.tom: 'dia', 'escuro' (a tarde das
+// trevas) ou 'amanhecer'; o.id: prefixo dos recortes (um por sepulcro no mesmo quadro).
+const TOM_SEPULCRO = {
+  dia: [C.g500, C.g600, C.g700, C.ink, C.g600, C.g700, C.g800],
+  escuro: ['#4A4643', '#3F3B38', '#2C2927', '#0E0D0C', '#625C57', '#46413D', '#151312'],
+  amanhecer: ['#A39488', '#938478', '#74675D', '#2A2420', '#AE9F93', '#857669', '#2E2723'],
+};
+function sepulcro(x, base, s = 1, o = {}) {
+  const [rock, facet, crack, ol, stone, mark, mouth] = TOM_SEPULCRO[o.tom || 'dia'];
+  const id = o.id || 'sep', R = 111, luz = clamp(o.luz || 0), racha = clamp(o.racha || 0), parte = clamp(o.parte || 0), rola = clamp(o.rola || 0);
+  let g = `<path d="M -330 0 C -340 -170 -250 -380 -60 -440 C 120 -490 300 -360 330 -170 C 340 -90 336 -30 340 0 Z" fill="${rock}" ${ink(6, ol)}/>
+    <path d="M 64 -452 C 200 -428 308 -330 327 -170 C 337 -90 333 -30 337 -3 L 152 -3 C 192 -150 172 -330 64 -452 Z" fill="${facet}"/>
+    <path d="M -230 -250 C -200 -300 -160 -330 -110 -350" stroke="${crack}" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M 200 -300 C 230 -260 250 -220 256 -170" stroke="${crack}" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M -270 -60 C -250 -80 -220 -84 -196 -70" stroke="${crack}" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M -120 0 L -120 -150 C -120 -270 110 -270 110 -150 L 110 0 Z" fill="${mouth}" ${ink(6, ol)}/>
+    <path d="M -80 0 L -80 -140 C -80 -220 70 -220 70 -140 L 70 0 Z" fill="${shade(mouth, 0.7)}"/>`;
+  if (luz > 0) {
+    g += `<clipPath id="${id}M"><path d="M -120 0 L -120 -150 C -120 -270 110 -270 110 -150 L 110 0 Z"/></clipPath>`;
+    g += `<g clip-path="url(#${id}M)"><rect x="-130" y="-280" width="250" height="290" fill="#FFF3D6" opacity="${f1(luz * 0.85 * 100) / 100}"/><circle cx="-5" cy="-90" r="150" fill="url(#gWhite)" opacity="${f1(luz * 100) / 100}"/></g>`;
+    g += `<circle cx="-5" cy="-110" r="${f1(230 + 60 * luz)}" fill="url(#gAmber)" opacity="${f1(luz * 0.45 * 100) / 100}"/>`;
+    g += `<ellipse cx="-5" cy="6" rx="${f1(170 + 90 * luz)}" ry="26" fill="url(#gWhite)" opacity="${f1(luz * 0.6 * 100) / 100}"/>`;
+  }
+  // a pedra: inteira (rolando) ou partida ao meio pela rachadura
+  const dx = 221 * rola, sx = -9 + dx, sy = -R, rot = (dx / R) * 57.3;
+  const marcas = `<path d="M ${f1(-R * 0.55)} ${f1(-R * 0.35)} C ${f1(-R * 0.2)} ${f1(-R * 0.6)} ${f1(R * 0.25)} ${f1(-R * 0.55)} ${f1(R * 0.5)} ${f1(-R * 0.25)}" stroke="${mark}" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M ${f1(-R * 0.3)} ${f1(R * 0.45)} C ${f1(-R * 0.1)} ${f1(R * 0.55)} ${f1(R * 0.12)} ${f1(R * 0.52)} ${f1(R * 0.28)} ${f1(R * 0.4)}" stroke="${mark}" stroke-width="7" fill="none" stroke-linecap="round"/>`;
+  const disco = `<circle cx="0" cy="0" r="${R}" fill="${stone}" ${ink(7, ol)}/>${marcas}`;
+  const fenda = 'L 6 -118 L -8 -74 L 10 -36 L -6 4 L 8 42 L -6 80 L 4 118', risco = 'M' + fenda.slice(1);
+  if (parte > 0) {
+    [-1, 1].forEach((side) => {
+      const clip = `M ${side * 200} -200 ${fenda} L ${side * 200} 200 Z`;
+      g += `<clipPath id="${id}${side}"><path d="${clip}"/></clipPath>`;
+      g += `<g transform="translate(${f1(sx + side * 78 * parte)} ${f1(sy + 10 * parte)}) rotate(${f1(side * 24 * parte)} ${f1(side * R * 0.55)} ${R})"><g clip-path="url(#${id}${side})">${disco}</g><path d="${risco}" fill="none" stroke="${ol}" stroke-width="7" stroke-linejoin="round"/></g>`;
+    });
+  } else {
+    g += `<g transform="translate(${f1(sx)} ${f1(sy)})"><g transform="rotate(${f1(rot)})">${disco}</g>`;
+    if (racha > 0) g += `<path d="${risco}" fill="none" stroke="${ol}" stroke-width="7" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${f1((1 - racha) * 1000) / 1000}"/>`;
+    g += `</g>`;
+  }
+  return `<g transform="translate(${f1(x)} ${f1(base)}) scale(${f1(s * 1000) / 1000})">${g}</g>`;
 }
 
 function bgDay(t, o = {}) {
