@@ -10,10 +10,10 @@ Calendário (sugestão, para agendar tudo de uma vez no YouTube Studio, no TikTo
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-12 19:00 | `youtube/longo.mp4` (⟨DUR_LONGO⟩, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
-| 2026-11-13 12:00 | `youtube/curto-01.mp4` (Shorts, ⟨DUR_C1⟩) | quadro de ~⟨Q1⟩ s, escolhido no app |
-| 2026-11-14 12:00 | `youtube/curto-02.mp4` (Shorts, ⟨DUR_C2⟩) | quadro de ~⟨Q2⟩ s, escolhido no app |
-| 2026-11-15 12:00 | `youtube/curto-03.mp4` (Shorts, ⟨DUR_C3⟩) | quadro de ~⟨Q3⟩ s, escolhido no app |
+| 2026-11-12 19:00 | `youtube/longo.mp4` (4:57, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
+| 2026-11-13 12:00 | `youtube/curto-01.mp4` (Shorts, 0:49) | quadro de ~5 s, escolhido no app |
+| 2026-11-14 12:00 | `youtube/curto-02.mp4` (Shorts, 0:49) | quadro de ~48 s, escolhido no app |
+| 2026-11-15 12:00 | `youtube/curto-03.mp4` (Shorts, 0:28) | quadro de ~27 s, escolhido no app |
 
 ### Vídeo longo: `youtube/longo.mp4`
 
@@ -24,9 +24,9 @@ Calendário (sugestão, para agendar tudo de uma vez no YouTube Studio, no TikTo
 
 | Ordem | Arquivo | Texto | Motivo para clicar |
 |---|---|---|---|
-| 1 | `youtube/miniatura-a.jpg` | ⟨MA_TXT⟩ | ⟨MA_MOT⟩ |
-| 2 | `youtube/miniatura-b.jpg` | ⟨MB_TXT⟩ | ⟨MB_MOT⟩ |
-| 3 | `youtube/miniatura-c.jpg` | ⟨MC_TXT⟩ | ⟨MC_MOT⟩ |
+| 1 | `youtube/miniatura-a.jpg` | DUAS PALAVRAS | a curiosidade: que duas palavras eram essas (o vídeo responde: "Sou eu", João 18:5-6) |
+| 2 | `youtube/miniatura-b.jpg` | NÃO QUEIMAVA | o mistério: a sarça em chamas que não se consumia, onde Deus disse "Eu Sou o que Sou" (Êxodo 3:2, 3:14) |
+| 3 | `youtube/miniatura-c.jpg` | MORTO 4 DIAS | o choque: Lázaro estava morto havia quatro dias e saiu do túmulo (João 11:17, 11:44) |
 
 **Descrição**
 ```
@@ -88,7 +88,7 @@ Você já tinha reparado nesse detalhe do olival? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** escolha no app o quadro de ~⟨Q1⟩ s. **Vídeo relacionado:** o longo, depois de publicado. **Comentário fixado:** "O vídeo completo, com os sete 'Eu sou' de Jesus, está no canal."
+**Capa:** escolha no app o quadro de ~5 s (os soldados no chão e Jesus de pé). **Vídeo relacionado:** o longo, depois de publicado. **Comentário fixado:** "O vídeo completo, com os sete 'Eu sou' de Jesus, está no canal."
 
 #### Curto 2: `youtube/curto-02.mp4`
 
@@ -112,7 +112,7 @@ Se Jesus te perguntasse hoje "Você crê nisso?", o que você responderia? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** escolha no app o quadro de ~⟨Q2⟩ s. **Vídeo relacionado:** o longo. **Comentário fixado:** "O vídeo completo, com os sete 'Eu sou' de Jesus, está no canal."
+**Capa:** escolha no app o quadro de ~48 s (Lázaro fora do túmulo; outra opção: ~4 s, na entrada do túmulo). **Vídeo relacionado:** o longo. **Comentário fixado:** "O vídeo completo, com os sete 'Eu sou' de Jesus, está no canal."
 
 #### Curto 3: `youtube/curto-03.mp4`
 
@@ -136,7 +136,7 @@ Você já tinha lido essa resposta de Jesus? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** escolha no app o quadro de ~⟨Q3⟩ s. **Vídeo relacionado:** o longo. **Comentário fixado:** "O vídeo completo, com os sete 'Eu sou' de Jesus, está no canal."
+**Capa:** escolha no app o quadro de ~27 s (o homem no tanque de Siloé, de braços erguidos). **Vídeo relacionado:** o longo. **Comentário fixado:** "O vídeo completo, com os sete 'Eu sou' de Jesus, está no canal."
 
 ## TikTok
 
@@ -144,10 +144,10 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-12 19:00 | `tiktok/longo.mp4` (⟨DUR_TK⟩; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
-| 2026-11-13 19:00 | `tiktok/curto-01.mp4` (⟨DUR_C1⟩) | `tiktok/curto-01-capa.jpg` |
-| 2026-11-14 19:00 | `tiktok/curto-02.mp4` (⟨DUR_C2⟩) | `tiktok/curto-02-capa.jpg` |
-| 2026-11-15 19:00 | `tiktok/curto-03.mp4` (⟨DUR_C3⟩) | `tiktok/curto-03-capa.jpg` |
+| 2026-11-12 19:00 | `tiktok/longo.mp4` (4:47; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
+| 2026-11-13 19:00 | `tiktok/curto-01.mp4` (0:49) | `tiktok/curto-01-capa.jpg` |
+| 2026-11-14 19:00 | `tiktok/curto-02.mp4` (0:49) | `tiktok/curto-02-capa.jpg` |
+| 2026-11-15 19:00 | `tiktok/curto-03.mp4` (0:28) | `tiktok/curto-03-capa.jpg` |
 
 **Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto. Rótulo de IA opcional, porque a animação não é realista. Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
 
@@ -168,7 +168,7 @@ Das sete, qual você mais precisa ouvir hoje? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `tiktok/longo-capa.jpg`, com o texto "⟨CAPA_TK_TXT⟩". Se o app não aceitar imagem, use o quadro de ~⟨Q_TK⟩ s e escreva esse texto no editor de capa.
+**Capa:** `tiktok/longo-capa.jpg`, com o texto "NÃO QUEIMAVA". Se o app não aceitar imagem, use o quadro de ~262 (4:22, a sarça) s e escreva esse texto no editor de capa.
 
 **Resposta do perfil ao primeiro comentário**
 ```
@@ -192,7 +192,7 @@ Você já tinha reparado nesse detalhe do olival? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `tiktok/curto-01-capa.jpg` ("⟨C1_TXT⟩"). **Resposta ao primeiro comentário:** "O vídeo completo está no perfil: os sete 'Eu sou' de Jesus."
+**Capa:** `tiktok/curto-01-capa.jpg` ("DUAS PALAVRAS"). **Resposta ao primeiro comentário:** "O vídeo completo está no perfil: os sete 'Eu sou' de Jesus."
 
 ### Curto 2: `tiktok/curto-02.mp4`
 
@@ -211,7 +211,7 @@ Se Jesus te perguntasse hoje "Você crê nisso?", o que você responderia? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `tiktok/curto-02-capa.jpg` ("⟨C2_TXT⟩"). **Resposta ao primeiro comentário:** "O vídeo completo está no perfil: os sete 'Eu sou' de Jesus."
+**Capa:** `tiktok/curto-02-capa.jpg` ("MORTO 4 DIAS"). **Resposta ao primeiro comentário:** "O vídeo completo está no perfil: os sete 'Eu sou' de Jesus."
 
 ### Curto 3: `tiktok/curto-03.mp4`
 
@@ -230,7 +230,7 @@ Você já tinha lido essa resposta de Jesus? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `tiktok/curto-03-capa.jpg` ("⟨C3_TXT⟩"). **Resposta ao primeiro comentário:** "O vídeo completo está no perfil: os sete 'Eu sou' de Jesus."
+**Capa:** `tiktok/curto-03-capa.jpg` ("VOLTOU VENDO"). **Resposta ao primeiro comentário:** "O vídeo completo está no perfil: os sete 'Eu sou' de Jesus."
 
 ## Instagram
 
@@ -240,9 +240,9 @@ Os três curtos vão em **tela cheia**: sem as faixas escuras, com a cena maior 
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-13 12:00 | `instagram/curto-01.mp4` (⟨DUR_C1⟩, tela cheia) | `instagram/curto-01-capa.jpg` |
-| 2026-11-14 12:00 | `instagram/curto-02.mp4` (⟨DUR_C2⟩, tela cheia) | `instagram/curto-02-capa.jpg` |
-| 2026-11-15 12:00 | `instagram/curto-03.mp4` (⟨DUR_C3⟩, tela cheia) | `instagram/curto-03-capa.jpg` |
+| 2026-11-13 12:00 | `instagram/curto-01.mp4` (0:49, tela cheia) | `instagram/curto-01-capa.jpg` |
+| 2026-11-14 12:00 | `instagram/curto-02.mp4` (0:49, tela cheia) | `instagram/curto-02-capa.jpg` |
+| 2026-11-15 12:00 | `instagram/curto-03.mp4` (0:28, tela cheia) | `instagram/curto-03-capa.jpg` |
 
 **Configurações de todos:**
 - Capa personalizada: a imagem da pasta. Não dá para trocar depois de publicar.
@@ -267,7 +267,7 @@ Você já tinha reparado nesse detalhe do olival? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `instagram/curto-01-capa.jpg` ("⟨C1_TXT⟩").
+**Capa:** `instagram/curto-01-capa.jpg` ("DUAS PALAVRAS").
 
 ### Curto 2: `instagram/curto-02.mp4`
 
@@ -286,7 +286,7 @@ Se Jesus te perguntasse hoje "Você crê nisso?", o que você responderia? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `instagram/curto-02-capa.jpg` ("⟨C2_TXT⟩").
+**Capa:** `instagram/curto-02-capa.jpg` ("MORTO 4 DIAS").
 
 ### Curto 3: `instagram/curto-03.mp4`
 
@@ -305,7 +305,7 @@ Você já tinha lido essa resposta de Jesus? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `instagram/curto-03-capa.jpg` ("⟨C3_TXT⟩").
+**Capa:** `instagram/curto-03-capa.jpg` ("VOLTOU VENDO").
 
 ## Conferência na NVI
 
