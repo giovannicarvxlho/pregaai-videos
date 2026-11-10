@@ -64,6 +64,8 @@ function xcut(t, tc, A, B) {
   if (p >= 1) return B(t);
   return A(t) + `<g opacity="${p.toFixed(3)}">${B(t)}</g>`;
 }
+// Sombra na faixa da legenda (em coordenadas da tela), para a legenda clara ler em cima do véu azul de perto.
+const sombraBaixo = (op) => (op <= 0 ? '' : `<linearGradient id="gBaixo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.7"/></linearGradient><rect x="-200" y="700" width="${W + 400}" height="400" fill="url(#gBaixo)" opacity="${f1(op * 100) / 100}"/>`);
 // Acende e apaga (realce de um instante).
 const bump = (t, t0, d = 0.9) => Math.sin(Math.PI * prog(t, t0, t0 + d));
 const fala = (t, t0, t1, base = 20, amp = 30) => base + amp * Math.abs(Math.sin(t * 5.5)) * (t > t0 && t < t1 ? 1 : 0);
@@ -325,7 +327,7 @@ function scVeuRasga(t) {
   const z = lerp(lerp(1.04 + 0.03 * prog(t, at(3), t0), 1.6, k1), 1.03, k2);
   const q = 0.45 * prog(t, t0, t0 + 0.2) * (1 - prog(t, t1, t1 + 0.6));
   const s = veuCena(t, p, { id: 'v3' }) + poeiraAlto(t, t0, 960, VEU.Y0);
-  return { svg: camQ(s, 960, fy, z, 960, sy, q, t), html: '' };
+  return { svg: camQ(s, 960, fy, z, 960, sy, q, t) + sombraBaixo(k1 * (1 - k2)), html: '' };
 }
 
 // "Separei sete coisas que os evangelhos contam daquela hora. E a última, só um deles conta."
@@ -942,6 +944,82 @@ function scTestemunha(t) {
   return { svg: cam(s, 900, 600, 1.08 + 0.06 * prog(t, a0, at(58))), html: '' };
 }
 
+// ================================================================ fecho
+// "Essa tarde inteira está em Mateus 27 e em João 19. Se você quer ler direto na Bíblia, um pouco por dia, procura
+// Prega aí na Google Play." Alguém lê a Bíblia ao amanhecer (como no longo dos "Eu sou"). Durante a frase 59, o
+// cartão do app: "PregaAI", o ícone e o selo oficial da Google Play, que entra e sai inteiro com o cartão, sobre
+// fundo branco sólido e com respiro em volta (regras do selo no AGENTS.md). Fica mais baixo que no longo anterior
+// para não encostar no banner do app, que passa no canto de cima à direita aos 240 s.
+function flores(x, y, s, t, seed) {
+  const r = rng(seed); let g = '';
+  for (let i = 0; i < 6; i++) {
+    const dx = (r() - 0.5) * 120, h = 30 + r() * 40, sw = Math.sin(t * 1.6 + i + seed) * 3, col = pick(r, [C.a300, C.r300, '#FFFFFF', C.b300]);
+    g += `<line x1="${f1(dx)}" y1="0" x2="${f1(dx + sw)}" y2="${f1(-h)}" stroke="#3E4A3A" stroke-width="5" stroke-linecap="round"/><circle cx="${f1(dx + sw)}" cy="${f1(-h)}" r="10" fill="${col}" ${ink(3)}/>`;
+  }
+  return `<g transform="translate(${f1(x)} ${f1(y)}) scale(${s})">${g}</g>`;
+}
+function livro(x, y, s, t, turn) {
+  const pg = (side) => `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + side * 112 * s)} ${f1(y - 10 * s)} L ${f1(x + side * 104 * s)} ${f1(y - 74 * s)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FBF9F4" ${ink(4)}/>`;
+  let g = `<path d="M ${f1(x - 120 * s)} ${f1(y - 6 * s)} L ${f1(x)} ${f1(y + 8 * s)} L ${f1(x + 120 * s)} ${f1(y - 6 * s)} L ${f1(x + 116 * s)} ${f1(y + 4 * s)} L ${f1(x)} ${f1(y + 18 * s)} L ${f1(x - 116 * s)} ${f1(y + 4 * s)} Z" fill="${C.r600}" ${ink(4)}/>`;
+  g += pg(-1) + pg(1);
+  for (let k = 0; k < 4; k++) [-1, 1].forEach((sd) => (g += `<line x1="${f1(x + sd * 18 * s)}" y1="${f1(y - (50 - k * 11) * s)}" x2="${f1(x + sd * 92 * s)}" y2="${f1(y - (58 - k * 11) * s)}" stroke="${C.g400}" stroke-width="4" stroke-linecap="round"/>`));
+  if (turn > 0 && turn < 1) {
+    const k = Math.cos(Math.PI * turn), lift = Math.sin(Math.PI * turn) * 30 * s;
+    g += `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + k * 112 * s)} ${f1(y - 10 * s - lift)} L ${f1(x + k * 104 * s)} ${f1(y - 74 * s - lift)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FFFFFF" ${ink(4)}/>`;
+  }
+  return g;
+}
+function leitor(t, o = {}) {
+  const x = o.x ?? 640;
+  let s = bgSunrise(t, { sunX: o.sunX ?? 1460, sunY: o.sunY ?? 400, seed: 31 });
+  s += city(1700, GROUND + 4, 0.42, t);
+  s += olive(x - 330, GROUND + 250, 2.2) + flores(x + 350, 860, 1.0, t, 12) + flores(x - 560, 850, 0.9, t, 13);
+  const rd = { ...LEITOR, x, y: 764, s: 1.3, armL: 32, armR: 32, mood: o.mood || 'closed', look: o.look ?? 0, rock: C.g500 };
+  s += sentado(rd);
+  const [, hy] = mao(rd, 1);
+  s += livro(x, hy + 34, 0.72, t, prog((t % 7) / 7, 0.86, 1));
+  return s;
+}
+function appCard(t, t0, t1) {
+  const p = pop(t, t0, 0.45), q = 1 - E.in(prog(t, t1 - 0.3, t1)), k = clamp(p) * q;
+  if (k <= 0) return '';
+  return `<div class="app" style="position:absolute;left:1010px;top:236px;margin:0;opacity:${f1(k * 100) / 100};transform:scale(${f1(Math.min(p, 1.06) * 100) / 100});transform-origin:50% 50%">
+    <div class="app-row"><img class="app-icon" src="assets/icon.png"><div><div class="app-name">PregaAI</div><div class="app-desc">Plano de leitura bíblica</div></div></div>
+    <img class="play" src="assets/google-play-badge.png" alt="Disponível no Google Play">
+  </div>`;
+}
+function scLer(t) {
+  return { svg: cam(leitor(t, { mood: 'closed' }), 900, 620, 1.02 + 0.04 * prog(t, at(58), at(59))), html: '' };
+}
+function scApp(t) {
+  return { svg: cam(leitor(t, { mood: 'calm', look: 0.3 }), 900, 620, 1.06 + 0.03 * prog(t, at(59), at(60))), html: appCard(t, seg(59) + 0.1, at(60) + 0.3) };
+}
+// "Das sete, qual mexeu mais com você? Me conta aqui embaixo." A lista inteira, com as referências.
+function scAsSete(t) {
+  const a0 = at(60);
+  let s = `<rect x="-300" y="-300" width="${W + 600}" height="${H + 600}" fill="${C.paper}"/><circle cx="960" cy="520" r="760" fill="url(#gAmber)" opacity="0.22"/>`;
+  for (let n = 1; n <= 7; n++) {
+    const y = 196 + (n - 1) * 94, p = E.out(prog(t, a0 + 0.08 * n, a0 + 0.08 * n + 0.4));
+    s += `<g opacity="${f1(p * 100) / 100}" transform="translate(${f1((1 - p) * -30)} 0)">`;
+    s += dot(330, y, n, 0.78) + label(400, y + 16, SETE[n].titulo, { anchor: 'start', fam: 'Lora', w: 600, size: 52 }) + label(1620, y + 14, SETE[n].ref, { anchor: 'end', fam: 'Geist Mono', w: 500, size: 32, fill: C.muted });
+    s += `</g>`;
+  }
+  return { svg: cam(s, 960, 520, 1.0 + 0.03 * prog(t, a0, at(61))), html: '' };
+}
+
+// ================================================================ abertura do curto 1 (só nos curtos)
+// "Só uma pessoa podia passar por aquela cortina. Uma vez por ano." (Hebreus 9:7) A cortina fechada, inteira; o
+// sumo sacerdote chega andando e para diante dela, com a bacia.
+function scCortina(t) {
+  const a0 = at(61), w = E.out(prog(t, a0 - 0.4, a0 + 2.0));
+  let s = veuCena(t, 0, { id: 'v61', glow: 0.2 });
+  s += sumoSacerdote({ x: lerp(330, 690, w), y: 884, s: 1.3, look: 1, walk: w < 0.98 ? t * 5 : null });
+  return { svg: cam(s, 900, 520, 1.06 + 0.06 * prog(t, a0, FIM_A), 0, -30), html: '' };
+}
+
+// ================================================================ fim
+const scFim = (t) => endCard(t, FIM_A, ['Mateus 27', 'João 19']);
+
 // ================================================================ linha do tempo
 const SCENES = [
   // abertura
@@ -991,4 +1069,13 @@ const SCENES = [
   { a: at(52), b: at(54), f: scLanca, ref: 'João 19:34', dark: true },
   { a: at(54), b: at(57), f: scEscritura, ref: null },
   { a: at(57), b: at(58), f: scTestemunha, ref: 'João 19:35', dark: true },
+  // fecho
+  { a: at(58), b: at(59), f: scLer, ref: null },
+  { a: at(59), b: at(60), f: scApp, ref: null },
+  { a: at(60), b: at(61), f: scAsSete, ref: null },
+  // abertura do curto 1 (só no curto): entra seca, sem a lista por baixo. O longo termina em 248,62 s (corte.json)
+  // e o trecho do curto começa em 248,95 s; at(61) fica entre os dois.
+  { a: at(61), b: FIM_A, f: scCortina, ref: 'Hebreus 9:7', dark: true, cut: true },
+  // cartão final (o longo pula das frases direto para cá: corte.json, cartao_inicio)
+  { a: FIM_A, b: DURATION + 1, f: scFim, ref: null, end: true, cut: true },
 ];
