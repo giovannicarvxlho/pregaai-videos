@@ -1,6 +1,6 @@
 # Os sete "Eu sou" de Jesus (João 6, 8, 9, 10, 11, 14, 15 e 18; Êxodo 3:14)
 
-**Status: texto aprovado pelo Giovanni em 2026-11-10 ("Aprovado o texto, ficou ótimo"); o fecho com o CTA está sendo refeito a pedido dele.** No texto para ler e na legenda, o nome é **PregaAI**; no `narracao.txt`, que é só para a voz, fica "Prega aí", para a ElevenLabs pronunciar certo. Versão 3 (2026-11-10), depois de cinco rodadas de revisão bíblica e teológica, as três últimas sem erro (ver "Revisão"). Vídeo longo 16:9. 3789 caracteres de narração, ~4:35 (830 por minuto); com o cartão final do YouTube, ~4:50 (limite: 5:00). No TikTok, termina na última fala, sem cartão.
+**Status: texto aprovado pelo Giovanni em 2026-11-10 ("Aprovado o texto, ficou ótimo"); o fecho com o CTA e as aberturas dos 3 curtos aprovados no mesmo dia ("aprovado os três"). Publicação: quinta, 2026-11-12, às 15 h ("pode publicar quinta").** No texto para ler e na legenda, o nome é **PregaAI**; no `narracao.txt`, que é só para a voz, fica "Prega aí", para a ElevenLabs pronunciar certo. Versão 3 (2026-11-10), depois de cinco rodadas de revisão bíblica e teológica, as três últimas sem erro (ver "Revisão"). Vídeo longo 16:9. 3857 caracteres de narração; pela velocidade real da voz no Pedro (853 por minuto), ~4:36 de fala e ~4:48 com o cartão final do YouTube (limite: 5:00). No TikTok, termina na última fala, sem cartão.
 
 **Por que este tema:** o Giovanni pediu em 10/11 um conteúdo diferente, "não queria algo repetitivo", depois de três vídeos seguidos sobre a cruz; os 7 "Eu sou" estavam no banco de temas (`projetos/pregaai-roteiros.md` do MARK1) como o mais parecido com o viral sem ser a cruz: lista fechada, falas de Jesus, cada uma com uma imagem. O autocompletar do YouTube e do Google trazem "os 7 eu sou de jesus" (consulta de 10/11).
 
@@ -11,7 +11,7 @@
 - **Momento para mandar a alguém:** os soldados caindo no chão quando Jesus diz "Sou eu", seguido de "Eu Sou o que Sou".
 - **Se errar, o que isso ensina:** 30 s acima de 28% diz que a lista segura fora da cruz; abaixo de 20%, que a cruz era o motor do viral.
 
-**Curtos tirados deste longo (cada um com abertura própria, nova, a validar junto):**
+**Curtos tirados deste longo (cada um com abertura própria, aprovada pelo Giovanni em 2026-11-10):**
 1. **O olival** (parte final, sem o fecho). Abertura: "Ele disse duas palavras, e os soldados e os guardas caíram no chão."
 2. **Lázaro** (parte 5). Abertura: "Lázaro estava no sepulcro havia quatro dias. E saiu."
 3. **O cego** (parte 2). Abertura: "Os discípulos perguntaram quem tinha pecado para um homem nascer cego."
@@ -42,8 +42,10 @@ A sétima, ele disse na mesma noite. "Eu sou a videira; vocês são os ramos." E
 ### O olival
 Depois, Jesus atravessou um vale e entrou num olival com os discípulos. Judas chegou com um destacamento de soldados e guardas, levando tochas, lanternas e armas. Jesus saiu e perguntou: "A quem vocês estão procurando?" "A Jesus de Nazaré." "Sou eu." Quando Jesus disse "Sou eu", eles recuaram e caíram por terra. O texto não explica por quê. No templo, ele tinha dito: "antes de Abraão nascer, Eu Sou!" E, na sarça que não se queimava, quando Moisés perguntou que nome devia dizer ao povo, Deus respondeu: "Eu Sou o que Sou. É isto que você dirá aos israelitas: Eu Sou me enviou a vocês."
 
-### Fecho
-As sete estão no evangelho de João. Dá pra ler no app PregaAI. Das sete, qual você mais precisa ouvir hoje? Me conta aqui embaixo.
+### Fecho (aprovado em 2026-11-10)
+As sete estão no evangelho de João. Se você quer ler essas sete direto na Bíblia, um pouco por dia, procura PregaAI na Play Store. Das sete, qual você mais precisa ouvir hoje? Me conta aqui embaixo.
+
+Na tela, durante a chamada: "PregaAI" escrito, com o selo da Google Play. iPhone (app.pregaai.com) no banner, na descrição e na resposta ao primeiro comentário, para não passar de 5 min. Como medir: contas por 100 mil views em 48 h, contra a base de ~20 (análise do CTA de 2026-11-10 no MARK1, `projetos/pregaai-roteiros.md`).
 
 ## Conferência na NVI
 As citações entre aspas foram conferidas por script contra o `assets/bible/nvi.json` do repo `pregaai`: todas exatas (João 6:26, 6:33, 6:34, 6:35, 8:12, 8:57, 8:58, 9:2, 9:3, 9:5, 9:7, 10:9, 10:11, 11:21, 11:25, 11:26, 11:27, 11:43, 14:5, 14:6, 15:5, 18:4, 18:5, 18:6, 20:28; Êxodo 3:14). O resto, frase a frase:
