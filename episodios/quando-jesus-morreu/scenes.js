@@ -600,6 +600,103 @@ function scLugar(t) {
   return { svg: cam(s, 960, 500, 1.02 + 0.1 * E.inOut(prog(t, at(25), depois(25)))), html: '' };
 }
 
+// ================================================================ 3 e 4. o terremoto e os túmulos (Mateus 27:51-53)
+// Desenho do cartão 3: uma rocha se parte e uma rachadura corre pelo chão. t0: quando o cartão entra.
+const artTerra = (t0) => (t) => {
+  const sp = E.out(prog(t, t0 + 0.35, t0 + 0.95)), q = bump(t, t0 + 0.3, 0.9);
+  let g = `<rect x="1160" y="260" width="680" height="540" fill="url(#skyDawn)"/>` + hill(1500, 600, 520, '#1B1E22', '#060708');
+  g += racha(1160, 1840, 712, E.out(prog(t, t0 + 0.3, t0 + 1.0)), 9, { w: 9, amp: 24 });
+  g += rocha(1500, 760, 1.05, sp, 'rM3');
+  return MOLDURA('mTerra', `<g transform="translate(${f1(Math.sin(t * 43) * 6 * q)} ${f1(Math.cos(t * 37) * 4 * q)})">${g}</g>`, '#1E2530');
+};
+// Desenho do cartão 4: um sepulcro aberto, com luz suave na entrada.
+function artTumulos(t) {
+  let g = `<rect x="1160" y="260" width="680" height="540" fill="url(#skyDawn)"/>` + `<rect x="1160" y="700" width="680" height="100" fill="#15181B"/>`;
+  g += sepulcro(1500, 760, 0.82, { tom: 'escuro', rola: 1, luz: 0.85, id: 'sM4' }) + motas(t, 1496, 710, 160, 8, 7, 0.9);
+  return MOLDURA('mTum', g, '#1E2530');
+}
+// "A terceira: a terra tremeu, e as rochas se partiram." O cartão 3 e, na palavra "terra", o terremoto.
+const tCorte26 = () => wordTime(26, 'terra') - 0.2;
+function scTerceira(t) {
+  const a0 = depois(25), tc = tCorte26();
+  const k = { tq: wordTime(26, 'tremeu') - 0.15, tr: wordTime(26, 'rochas') - 0.05, q1: fim(26) - 0.2 };
+  const A = (u) => cam(cartao(u, a0 + 0.05, 3, artTerra(a0 + 0.05)), 960, 540, 1.0 + 0.03 * prog(u, a0, tc));
+  const B = (u) => { const { svg, q } = terremoto(u, k, { id: 'r26' }); return camQ(svg, 960, 600, 1.08 - 0.04 * prog(u, tc, at(27)), 960, 600, q, u); };
+  return { svg: xcut(t, tc, A, B), html: '' };
+}
+const scCartao4 = cenaCartao(4, () => at(27), artTumulos);
+// "Os sepulcros se abriram. E os corpos de muitos santos que tinham morrido foram ressuscitados." (Mateus 27:52)
+// As pedras rolam e sai só luz das entradas, sem ninguém.
+function scSepulcros(t) {
+  const ta = wordTime(28, 'abriram'), tr = wordTime(29, 'ressuscitados');
+  const est = [0, 1, 2].map((i) => ({ rola: E.inOut(prog(t, ta - 0.4 + i * 0.25, ta + 0.9 + i * 0.25)), luz: E.inOut(prog(t, ta + 0.5 + i * 0.3, tr + i * 0.3)) }));
+  const q = 0.3 * prog(t, ta - 0.6, ta - 0.4) * (1 - prog(t, ta + 0.9, ta + 1.5));
+  const z = 1.04 + 0.1 * E.inOut(prog(t, at(28), antes(30)));
+  return { svg: camQ(encosta(t, { est, q, id: 'b' }), 960, 600, z, 960, 600, q, t), html: '' };
+}
+
+// O amanhecer (o domingo da ressurreição).
+function bgSunrise(t, o = {}) {
+  let s = `<rect x="-600" width="${W + 1200}" height="${H}" fill="url(#skySunrise)"/>`;
+  s += sun(o.sunX ?? 1500, o.sunY ?? 330, 58, t) + `<circle cx="${o.sunX ?? 1500}" cy="${o.sunY ?? 330}" r="520" fill="url(#gPeach)" opacity="0.35"/>`;
+  s += clouds(t, o.ox || 0, '#FFF6EE', '#F1DCCB');
+  s += hills(GROUND - 135, 80, 0.0032, o.seed || 5, '#EBDCCF', (o.ox || 0) * 0.3) + hills(GROUND - 55, 55, 0.0055, (o.seed || 5) + 2, '#E0CFC0', (o.ox || 0) * 0.6);
+  s += floor('day', o.ox || 0);
+  return s;
+}
+// Eles, de roupa clara, gente comum; andam sem pressa.
+const SANTOS = [[0, 2101, 1.0], [185, 2102, 0.97], [370, 2103, 1.02], [550, 2104, 0.96], [740, 2105, 1.0]];
+// "Mateus diz que eles saíram dos sepulcros depois da ressurreição de Jesus." (Mateus 27:53) Ao amanhecer, os
+// sepulcros abertos à esquerda; eles vão pelo caminho até a cidade.
+function scSaem(t) {
+  const a0 = antes(30), w = prog(t, a0, at(31) + 0.4), ox = 120 * w;
+  let s = bgSunrise(t, { sunX: 1480, sunY: 420, seed: 41, ox });
+  s += city(1580 - ox * 0.5, GROUND + 40, 0.95, t);
+  s += `<path d="M -400 ${GROUND + 90} L -400 360 C -100 330 200 340 420 400 C 600 450 700 560 780 ${GROUND + 90} Z" fill="#C9BBAE" ${ink(6)}/>`;
+  s += sepulcro(140, 700, 0.5, { tom: 'amanhecer', rola: 1, id: 'sD' }) + sepulcro(470, 708, 0.42, { tom: 'amanhecer', rola: 1, id: 'sE' });
+  s += `<path d="M -400 ${FLOOR_Y + 40} C 300 ${FLOOR_Y - 20} 1000 ${GROUND + 110} 1590 ${GROUND + 44} L 1640 ${GROUND + 50} C 1100 ${GROUND + 150} 500 ${FLOOR_Y + 70} -400 ${FLOOR_Y + 160} Z" fill="#F3EADF" stroke="${C.ink}" stroke-width="4"/>`;
+  SANTOS.forEach(([dx, seed, sc], i) => (s += person({ ...santo(seed), x: lerp(420, 1240, w) - dx, y: FLOOR_Y - 6 - (i % 2) * 8, s: sc * 1.1, look: 1, mood: 'calm', walk: t * 4.5 + i * 1.3 })));
+  return { svg: cam(s, 960, 560, 1.03), html: '' };
+}
+// A porta da cidade, de manhã (o muro de Jerusalém, grande).
+function portaCidade(t, o = {}) {
+  let s = bgSunrise(t, { sunX: 1720, sunY: 260, seed: 43 });
+  s += city(960, 770, 2.2, t);
+  if (o.luz) s += `<circle cx="960" cy="680" r="${f1(160 + 120 * o.luz)}" fill="url(#gWhite)" opacity="${f1(o.luz * 0.9 * 100) / 100}"/>`;
+  return s;
+}
+// "Entraram na cidade santa e apareceram a muitos." Eles passam pela porta; os moradores veem.
+function scCidade(t) {
+  const ta = wordTime(31, 'apareceram'), aponta = E.out(prog(t, ta - 0.3, ta + 0.2));
+  let s = portaCidade(t);
+  [[1340, 2201, 0], [1500, 2202, 1], [1660, 2203, 2]].forEach(([x, seed, i]) => (s += person({ ...(i === 1 ? mulher(seed) : povo(seed)), x, y: FLOOR_Y, s: 1.15, look: -1, mood: 'calm', armL: i === 0 ? lerp(16, 110, aponta) : 16, armR: i === 2 ? lerp(16, 60, aponta) : 16 })));
+  SANTOS.slice(0, 4).forEach(([, seed, sc], i) => {
+    const u = prog(t, at(31) - 0.6 + i * 0.5, at(31) + 2.4 + i * 0.5), ida = E.inOut(clamp(u / 0.75)), entra = E.inOut(prog(u, 0.72, 1));
+    if (u >= 1) return;
+    s += person({ ...santo(seed), x: lerp(lerp(90, 920, ida), 960, entra), y: lerp(FLOOR_Y, 776, entra), s: sc * lerp(1.12, 0.78, entra), look: 1, mood: 'calm', walk: t * 4.5 + i, op: 1 - prog(u, 0.86, 1) });
+  });
+  return { svg: cam(s, 960, 560, 1.02 + 0.04 * prog(t, at(31), at(32))), html: '' };
+}
+// "Só Mateus conta isso." Os quatro evangelhos; só o de Mateus acende.
+function scSoMateus(t) {
+  const a0 = at(32);
+  let s = `<rect x="-300" y="-300" width="${W + 600}" height="${H + 600}" fill="${C.paper}"/><circle cx="960" cy="440" r="760" fill="url(#gAmber)" opacity="0.24"/>`;
+  const p = E.out(prog(t, a0 + 0.05, a0 + 0.45));
+  s += `<g opacity="${f1(p * 100) / 100}" transform="translate(0 ${f1((1 - p) * 24)})">${label(960, 380, '', { fam: 'Lora', w: 600, size: 110, html: `Só <tspan fill="${C.b500}">Mateus</tspan> conta isso.` })}</g>`;
+  s += label(960, 460, 'Mateus 27:52-53', { fam: 'Geist Mono', w: 500, size: 36, fill: C.muted, op: E.out(prog(t, a0 + 0.3, a0 + 0.7)) });
+  LIVROS.forEach((b, i) => { const q = pop(t, a0 + 0.35 + i * 0.1, 0.4); if (q > 0) s += pilula(960 + (i - 1.5) * 250, 620, b, { sc: q, on: i === 0, op: i === 0 ? 1 : 0.5, fill: C.muted }); });
+  return { svg: cam(s, 960, 500, 1.0 + 0.03 * prog(t, a0, at(33))), html: '' };
+}
+// "E ele não diz quem eram, nem o que aconteceu com eles depois." A porta, com luz; uma interrogação suave.
+function scQuemEram(t) {
+  const a0 = at(33), q = E.out(prog(t, wordTime(33, 'quem') - 0.3, wordTime(33, 'quem') + 0.5));
+  let s = portaCidade(t, { luz: 0.6 + 0.2 * Math.sin(t * 1.5) });
+  const u = prog(t, a0 - 0.4, a0 + 1.4);
+  if (u < 1) s += person({ ...santo(2105), x: lerp(900, 960, u), y: lerp(800, 776, u), s: lerp(0.86, 0.78, u), look: 1, mood: 'calm', walk: t * 4.5, op: 1 - u });
+  s += `<g opacity="${f1(q * 0.75 * 100) / 100}" transform="translate(960 215) scale(${f1((0.9 + 0.1 * q) * 100) / 100})">${label(0, 0, '?', { fam: 'Lora', w: 600, size: 210, fill: C.b500 })}</g>`;
+  return { svg: cam(s, 960, 560, 1.03 + 0.08 * E.inOut(prog(t, a0, at(34)))), html: '' };
+}
+
 // ================================================================ linha do tempo
 const SCENES = [
   // abertura
@@ -624,4 +721,12 @@ const SCENES = [
   { a: depois(19), b: antes(24), f: scSumo, ref: [[depois(19), 'Hebreus 9:7'], [at(23), 'Mateus 27:51']] },
   { a: antes(24), b: at(25), f: scHebreus, ref: null },
   { a: at(25), b: depois(25), f: scLugar, ref: null, dark: true },
+  // 3 e 4. o terremoto e os túmulos
+  { a: depois(25), b: at(27), f: scTerceira, ref: [[seg(26) + 0.9, 'Mateus 27:51']], dark: (t) => t > tCorte26() },
+  { a: at(27), b: at(28), f: scCartao4, ref: null },
+  { a: at(28), b: antes(30), f: scSepulcros, ref: 'Mateus 27:52', dark: true },
+  { a: antes(30), b: at(31), f: scSaem, ref: 'Mateus 27:53' },
+  { a: at(31), b: at(32), f: scCidade, ref: null },
+  { a: at(32), b: at(33), f: scSoMateus, ref: null },
+  { a: at(33), b: at(34), f: scQuemEram, ref: null },
 ];
