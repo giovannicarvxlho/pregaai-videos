@@ -1,6 +1,6 @@
 # Os sete "Eu sou" de Jesus (João 6, 8, 9, 10, 11, 14, 15 e 18; Êxodo 3:14)
 
-**Status: aguardando validação do Giovanni.** Versão 2 (2026-11-10), depois de três rodadas de revisão bíblica e teológica (ver "Revisão"). Vídeo longo 16:9. 3764 caracteres de narração, ~4:30 (830 por minuto); com o cartão final do YouTube, ~4:45 (limite: 5:00). No TikTok, termina na última fala, sem cartão.
+**Status: aguardando validação do Giovanni.** Versão 3 (2026-11-10), depois de cinco rodadas de revisão bíblica e teológica, as três últimas sem erro (ver "Revisão"). Vídeo longo 16:9. 3789 caracteres de narração, ~4:35 (830 por minuto); com o cartão final do YouTube, ~4:50 (limite: 5:00). No TikTok, termina na última fala, sem cartão.
 
 **Por que este tema:** o Giovanni pediu em 10/11 um conteúdo diferente, "não queria algo repetitivo", depois de três vídeos seguidos sobre a cruz; os 7 "Eu sou" estavam no banco de temas (`projetos/pregaai-roteiros.md` do MARK1) como o mais parecido com o viral sem ser a cruz: lista fechada, falas de Jesus, cada uma com uma imagem. O autocompletar do YouTube e do Google trazem "os 7 eu sou de jesus" (consulta de 10/11).
 
@@ -13,13 +13,13 @@
 
 **Curtos tirados deste longo (cada um com abertura própria, nova, a validar junto):**
 1. **O olival** (parte final, sem o fecho). Abertura: "Ele disse duas palavras, e os soldados e os guardas caíram no chão."
-2. **Lázaro** (parte 5). Abertura: "Ele estava no sepulcro havia quatro dias. E saiu."
-3. **O cego** (parte 2). Abertura: "Os discípulos perguntaram de quem era a culpa por um homem ter nascido cego."
+2. **Lázaro** (parte 5). Abertura: "Lázaro estava no sepulcro havia quatro dias. E saiu."
+3. **O cego** (parte 2). Abertura: "Os discípulos perguntaram quem tinha pecado para um homem nascer cego."
 
 ## Para ler
 
 ### Abertura
-Jesus disse uma frase no templo, e os que discutiam com ele pegaram pedras para apedrejá-lo. Ele estava falando de Abraão. E responderam: "Você ainda não tem cinquenta anos, e viu Abraão?" Jesus disse: "Eu lhes afirmo que antes de Abraão nascer, Eu Sou!" Eles apanharam pedras. Jesus se escondeu e saiu do templo. Eu Sou. No evangelho de João, Jesus diz "Eu sou" muitas vezes. Separei as sete mais conhecidas. E, numa noite, quando ele disse "Sou eu", os soldados e os guardas que vieram prendê-lo caíram no chão.
+Jesus disse uma frase no templo, e os que discutiam com ele pegaram pedras para apedrejá-lo. Ele tinha dito que Abraão viu o dia dele e se alegrou. E responderam: "Você ainda não tem cinquenta anos, e viu Abraão?" Jesus disse: "Eu lhes afirmo que antes de Abraão nascer, Eu Sou!" Eles apanharam pedras. Jesus se escondeu e saiu do templo. Eu Sou. No evangelho de João, Jesus diz "Eu sou" muitas vezes. Separei as sete mais conhecidas. E, numa noite, quando ele disse "Sou eu", os soldados e os guardas que vieram prendê-lo caíram no chão.
 
 ### 1. O pão da vida
 A primeira veio depois que ele deu de comer a cerca de cinco mil homens com cinco pães e dois peixinhos. No dia seguinte, a multidão atravessou o mar atrás dele. E Jesus disse o motivo: "vocês estão me procurando, não porque viram os sinais miraculosos, mas porque comeram os pães e ficaram satisfeitos". E disse que "o pão de Deus é aquele que desceu do céu e dá vida ao mundo". Eles pediram: "Senhor, dá-nos sempre desse pão!" E ele respondeu: "Eu sou o pão da vida. Aquele que vem a mim nunca terá fome".
@@ -47,7 +47,7 @@ As sete estão no evangelho de João. Dá pra ler no app Prega aí. Das sete, qu
 
 ## Conferência na NVI
 As citações entre aspas foram conferidas por script contra o `assets/bible/nvi.json` do repo `pregaai`: todas exatas (João 6:26, 6:33, 6:34, 6:35, 8:12, 8:57, 8:58, 9:2, 9:3, 9:5, 9:7, 10:9, 10:11, 11:21, 11:25, 11:26, 11:27, 11:43, 14:5, 14:6, 15:5, 18:4, 18:5, 18:6, 20:28; Êxodo 3:14). O resto, frase a frase:
-- "Os que discutiam com ele": os interlocutores de João 8:52-57. Pedras, Jesus se escondeu e saiu do templo: João 8:59; no templo: João 8:20.
+- "Abraão viu o dia dele e se alegrou": João 8:56. "Os que discutiam com ele": os interlocutores de João 8:52-57. Pedras, Jesus se escondeu e saiu do templo: João 8:59; no templo: João 8:20.
 - Cinco pães de cevada e dois peixinhos, cerca de cinco mil homens: João 6:9-10. No dia seguinte, a multidão foi de barco atrás dele: João 6:22-24.
 - "Sou a luz do mundo" na segunda vez: João 9:5. Cuspiu no chão, misturou terra com saliva, nos olhos; lavou-se e voltou vendo: João 9:6-7.
 - A conversa sobre ovelhas: João 10:1-16.
@@ -67,4 +67,6 @@ As citações entre aspas foram conferidas por script contra o `assets/bible/nvi
 - **Rodada 1** (dois revisores independentes, fidelidade à NVI e teologia evangélica): 0 erros, 4 imprecisões ("o povo" no gancho; a luz do mundo citada como se fosse a mesma frase diante do cego; Marta respondida pela fala errada; o fim que sugeria por que os soldados caíram). Corrigidas.
 - **Rodada 2:** 1 erro (a contagem de "Eu sou"). Corrigido.
 - **Rodada 3:** sem erro; 5 sugestões, 4 aplicadas (a contagem "a segunda" ambígua, "quando ele falava de ovelhas", Êxodo 3:14 com quem responde, o gênero de "as sete"). Saiu João 10:10, para caber nos 5 minutos.
-- **Rodadas 4 e 5:** no texto final (ver o fim deste arquivo, quando terminarem).
+- **Rodadas 4 e 5** (dois revisores independentes, em paralelo, no texto final; um deles lendo como um católico, um pentecostal unicista e uma Testemunha de Jeová): sem erro e sem imprecisão. Três sugestões aplicadas depois, todas paráfrases propostas pelos revisores e sem mexer em citação: a abertura passa a dizer o que Jesus tinha dito de Abraão (João 8:56), para a réplica não parecer resposta a outra coisa; o curto de Lázaro nomeia Lázaro (sem o nome, "ele estava no sepulcro" soava como Jesus); o curto do cego usa o verbo do texto, "quem tinha pecado".
+- **Resultado:** três rodadas seguidas sem erro (3, 4 e 5), como o Giovanni pediu em 2026-11-09.
+- **Resposta pronta para a objeção do olival** (Testemunha de Jeová): "Sou eu" também é dito pelo cego curado em João 9:9 e é identificação em João 18:8; o vídeo não diz que os soldados caíram por causa do nome. O "Eu Sou" que a NVI escreve como em Êxodo 3:14 é o de João 8:58 (também 8:24, 8:28 e 13:19).
