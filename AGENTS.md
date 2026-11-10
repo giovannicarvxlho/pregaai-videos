@@ -59,6 +59,7 @@ Pedido dele: o roteiro, o gancho e o vídeo têm que melhorar a cada episódio. 
 - **Gancho:** "<primeira frase>" (tipo: <tipo do quadro do MARK1>)
 - **O que muda em relação ao último vídeo do mesmo formato:** <uma coisa só, se possível>
 - **Previsão (TikTok, 48 h):** 3 s __% (faixa) · 10 s __% · 30 s __% · tempo médio __ s · views __ (faixa). Confiança: alta | média | baixa
+- **Momento para mandar a alguém:** <a frase ou cena que alguém enviaria>
 - **Se errar, o que isso ensina:** <uma linha>
 ```
 - A previsão sai dos vídeos do mesmo grupo no banco (mesmo formato, distribuídos pelo Para Você). Sem acesso ao MARK1, escreva o gancho e o tipo e deixe a previsão como "a preencher no MARK1".
