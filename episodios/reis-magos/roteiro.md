@@ -2,6 +2,12 @@
 
 **Status: aguardando validação do Giovanni.** Versão 2 (2026-11-09), depois da revisão bíblica do mesmo dia. 911 caracteres, **~67 s** (estimativa pela velocidade real do Pedro v4). Curto original vertical, sem acelerar, com narração própria. No TikTok, termina na última fala, sem cartão.
 
+## Aposta
+- **Gancho:** "A Bíblia nunca chama os reis magos de reis." (tipo: contradição de crença, o primeiro do banco)
+- **O que muda em relação ao último curto:** abre contradizendo o que o público acha que sabe, em vez de contar um fato ou uma cena.
+- **Previsão (TikTok, 48 h):** 3 s 56% (50 a 62) · 10 s 30% (24 a 36) · 30 s 21% (16 a 26) · tempo médio 21 s (17 a 25) · views 1.500 (900 a 4.000). Confiança: baixa. Base: os 3 curtos com gancho próprio distribuídos pelo Para Você (48% a 58% em 3 s).
+- **Se errar, o que isso ensina:** abaixo de 50% em 3 s, a contradição soa como polêmica e afasta; se acertar os 3 s e cair nos 10 s, a resposta em ~0:23 chega tarde.
+
 **Por que este curto** (decisão do Giovanni em 2026-11-09: "65 s, e o longo continua pra 28/11"): ele pediu um vídeo bem curto para viralizar no TikTok. Abaixo de 1 min, os curtos do canal ficaram com 3% a 6% das views vindas do Para Você; acima, com 92% a 99% (Pedro, mulher do fluxo, Madalena com 1:02), e o Programa de Recompensas só paga vídeo com mais de 1 min. Por isso, ~65 s. O tema é o curto 2 do longo do nascimento, aprovado no mesmo dia, e tem busca real (autocompletar do Google Brasil em 09/11: "os reis magos eram reis", "quantos eram os reis magos na bíblia"). O longo segue para 28/11.
 
 **Forma:** o gancho é a primeira frase ("A Bíblia nunca chama os reis magos de reis."), sem contexto antes. A resposta honesta ao título vem em ~0:23: "Se os magos eram reis, o texto não diz." A pergunta final pede o comentário, que no viral concentrou ~23% de curtidas de quem ainda estava assistindo. Banner de CTA com o selo da Google Play, como nos outros curtos (no TikTok, com a divulgação de conteúdo comercial ligada).

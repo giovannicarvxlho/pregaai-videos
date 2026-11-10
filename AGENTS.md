@@ -12,7 +12,7 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 1. **Ambiente:** `npm i` e depois `npm run checar`. Só siga com tudo ✔; cada ✘ vem com o comando que resolve.
 2. **Leia** o `README.md` inteiro (principalmente "Como escrever o `scenes.js`") e o episódio de referência inteiro, `data.js` e `scenes.js`: `episodios/morte-de-acabe` para Short, `episodios/sete-frases-na-cruz` para vídeo longo.
-3. **Roteiro** em `episodios/<ep>/roteiro.md`, conferido na NVI, marcado "aguardando validação do Giovanni", e o texto que a voz vai ler em `episodios/<ep>/narracao.txt` (uma frase por linha, `---` entre as partes, grafia para a voz: "Prega aí" em vez de PregaAI). Mostre o roteiro no formato de leitura e **pare** até o ok dele sobre o texto. É a única parada.
+3. **Roteiro** em `episodios/<ep>/roteiro.md`, conferido na NVI, marcado "aguardando validação do Giovanni", com o bloco **Aposta** no topo (ver "Aposta e aprendizado"), e o texto que a voz vai ler em `episodios/<ep>/narracao.txt` (uma frase por linha, `---` entre as partes, grafia para a voz: "Prega aí" em vez de PregaAI). Mostre o roteiro no formato de leitura e **pare** até o ok dele sobre o texto. É a única parada.
 4. **Narração:** `python3 tools/narrar.py episodios/<ep>` gera o `narration.mp3` (longo: `partes/01.mp3`...) com a voz e os ajustes aprovados. Não use outro TTS nem outra voz. Se o Giovanni mandar um mp3 dele, use o dele.
 5. **Tempos:** `segmentos.py` + `transcrever.py` e monte o `data.js` (Short), ou `juntar.py` + `alinhar.py` (longo), como no README. A legenda tem que bater com o que a voz falou.
 6. **Cenas:** comece copiando o `scenes.js` da referência e troque as cenas uma a uma. Use as peças do `lib.js`; peça nova entra no `lib.js` no mesmo traço. Cada cena começa em `at(i)` ou `wordTime(i, 'palavra')`, nunca num segundo fixo.
@@ -47,6 +47,23 @@ O Giovanni quer o ciclo sempre assim, e no fim tudo de uma vez, separado, para s
 **Onde vai cada vídeo:** o longo vai para o YouTube e o TikTok; os curtos vão para o TikTok, o YouTube (Shorts, na mesma pasta `youtube/`) e o Instagram. No TikTok não dá mais para fixar comentário (o Giovanni tentou de várias formas em 09/11/2026): o texto do app vai como resposta do perfil ao primeiro comentário. O Instagram não recebe o longo: ele aceita vídeo maior, mas Reel com mais de 3 min não é recomendado a quem não segue a conta.
 
 **Curtos e cortes:** `node tools/corte.cjs episodios/<ep>/corte.json` monta vídeos a partir de um longo já narrado e animado, sem narração nova: para cada saída, as frases que ficam (índices do `SEGS` da origem). Serve para o longo de 4 a 5 min recortado de um maior (com o cartão final e a versão do TikTok sem ele) e para os curtos verticais (`layout: "vertical"`: cena 16:9 no meio, título fixo em cima, legenda embaixo). Para o Instagram, cada curto sai também em tela cheia (`layout: "cheia"`, saída `<ep>-curto-<n>-ig`: a cena maior no meio e a mesma cena desfocada em volta, sem as faixas escuras), porque os recortes com faixas tiveram o pior alcance da conta e o Instagram evita recomendar Reels com bordas (pedido do Giovanni em 09/11/2026); o `pacote.py` põe essa versão na pasta `instagram/`. Referência: `episodios/pedro-voce-me-ama/corte.json`. Cada quadro chama as cenas e a legenda da origem no tempo certo, e o áudio é a mesma narração, cortada nos mesmos pontos. Saem `out/<ep>.mp4`, `out/<ep>-tiktok.mp4` e `out/<ep>-curto-<n>.mp4`; as capas dos curtos saem de `episodios/<ep>/curto-<n>-capa.html`. Referência: `episodios/depois-da-cruz-5min`. Para revisar quadros antes: `SO_MAPA=1 node tools/corte.cjs ...` e `CORTE=out/<nome>.corte.json node preview.cjs <origem> <tempos>`.
+
+## Aposta e aprendizado (Giovanni, 10/11/2026)
+
+Pedido dele: o roteiro, o gancho e o vídeo têm que melhorar a cada episódio. Para isso, cada roteiro registra o que está testando, e o resultado volta para o próximo.
+
+- **Antes de escrever o gancho,** leia no MARK1 `projetos/pregaai-roteiros.md`: o banco de ganchos (cada abertura já usada, com quanto segurou em 3, 10 e 30 s) e as leituras do banco. No MARK1 isso é a skill `/roteiros`.
+- **Todo `roteiro.md` leva, logo abaixo do status, o bloco:**
+```
+## Aposta
+- **Gancho:** "<primeira frase>" (tipo: <tipo do quadro do MARK1>)
+- **O que muda em relação ao último vídeo do mesmo formato:** <uma coisa só, se possível>
+- **Previsão (TikTok, 48 h):** 3 s __% (faixa) · 10 s __% · 30 s __% · tempo médio __ s · views __ (faixa). Confiança: alta | média | baixa
+- **Se errar, o que isso ensina:** <uma linha>
+```
+- A previsão sai dos vídeos do mesmo grupo no banco (mesmo formato, distribuídos pelo Para Você). Sem acesso ao MARK1, escreva o gancho e o tipo e deixe a previsão como "a preencher no MARK1".
+- **Curto tirado de longo abre com frase de gancho própria,** nunca com a frase de contexto do longo ("João conta o que aconteceu..."). Nos dados de 10/11, os cortes que abriram no meio da história seguraram 41% a 54% em 3 s no Instagram, contra 59% a 70% dos curtos com abertura própria. Frase nova é mudança de roteiro: vai para o Giovanni validar.
+- A aposta não muda a regra de validação: o texto continua esperando o ok dele. Depois de publicado, a análise de 48 h é feita no MARK1, sem trabalho para ele.
 
 ## Fluxo
 
