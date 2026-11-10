@@ -1,23 +1,26 @@
 # O que aconteceu quando Jesus morreu (Mateus 27:45-56; Marcos 15:33-39; Lucas 23:44-49; João 19:28-37)
 
-**Status: em espera.** Em 2026-11-10 o Giovanni pediu um tema diferente ("não queria algo repetitivo"), e o próximo longo passou a ser `eu-sou`. O texto não foi validado. Versão 1 (2026-11-10). Vídeo longo 16:9. 3172 caracteres de narração, ~3:50 (830 por minuto); com o cartão final do YouTube, ~4:05. No TikTok, termina na última fala, sem cartão.
+**Status: aguardando validação do Giovanni.** Versão 2 (2026-11-10). Saiu da espera no mesmo dia: os vídeos desde 07/11 ficam nos seguidores que o viral trouxe, e esse público veio pela cruz (Giovanni: "se for preciso repetiremos então vai, iremos alcançar mais pessoas mesmo"). O texto ainda não foi validado. Vídeo longo 16:9. 3213 caracteres de narração, ~3:52 (830 por minuto); com o cartão final do YouTube, ~4:10. No TikTok, termina na última fala, sem cartão.
+
+**O que mudou da v1 para a v2 (marcado em negrito no texto):** (1) a primeira frase começa pela cortina rasgando, e o lugar vem depois (leitura 17 do MARK1: no "Eu sou", a queda foi em 0:02, antes do elemento estranho); (2) o fecho diz onde procurar o app, como no fecho aprovado do "Eu sou", com "Google Play", o nome oficial da loja; (3) a abertura do curto 2 também começa pelos túmulos.
 
 ## Aposta
-- **Gancho:** "Dentro do templo de Jerusalém, uma cortina se rasgou ao meio." (tipo: cena estranha)
+- **Gancho:** "Uma cortina se rasgou ao meio, dentro do templo de Jerusalém." (tipo: cena estranha)
 - **O que muda em relação ao último longo:** abre direto na cena, sem a frase de roteiro ("Hoje você vai ver...") e sem volta no tempo anunciada (teste 2 da fila em `projetos/pregaai-roteiros.md` do MARK1). A promessa vem dentro da cena: "Separei sete coisas que os evangelhos contam daquela hora. E a última, só um deles conta." É a lista contada item por item, como o viral.
-- **Previsão (TikTok, 48 h):** 3 s 58% (52 a 64) · 10 s 38% (32 a 44) · 30 s 29% (23 a 35) · tempo médio 60 s (45 a 80) · views 8.000 (1.500 a 60.000). Confiança: baixa. Base: os 3 longos do Para Você (viral 61/42/34 e 98,9 s; longo 2 56/38/28 e 56 s; Pedro 60/31/22 e 46 s).
+- **O que mais se testa:** se o tema que a base de seguidores pediu (a cruz e o véu, os mais citados nos comentários do viral) faz o vídeo sair dela. Desde 07/11, os vídeos ficam com 51% a 88% de seguidores entre quem viu e ~1 mil views. De quebra, separa tema e voz (leitura 18): é sobre a cruz e sai no v4 Turbo.
+- **Previsão (TikTok, 48 h):** 3 s 58% (52 a 64) · 10 s 38% (32 a 44) · 30 s 29% (23 a 35) · tempo médio 60 s (45 a 80) · views 1.500 (900 a 10.000) · seguidores entre quem viu 55% (35 a 75). Confiança: baixa. Base da retenção: os 3 longos do Para Você (viral 61/42/34 e 98,9 s; longo 2 56/38/28 e 56 s; Pedro 60/31/22 e 46 s). Base das views: os vídeos desde 07/11 (1,0 a 1,4 mil), sem o empurrão do viral (v1 previa 8.000 com a base do hype).
 - **Momento para mandar a alguém:** a explicação do véu e Hebreus 10:20, "um novo e vivo caminho que ele nos abriu por meio do véu, isto é, do seu corpo". O véu foi o momento mais curtido do viral (6.956 curtidas no comentário) e o mais perguntado ("que véu? que templo?").
-- **Se errar, o que isso ensina:** se os 10 s caírem abaixo de 32%, abrir sem a promessa explícita perde para a regra 1 do playbook; se os 30 s ficarem abaixo de 23%, a lista não segura fora das 7 frases.
+- **Se errar, o que isso ensina:** se os 10 s caírem abaixo de 32%, abrir sem a promessa explícita perde para a regra 1 do playbook; se os 30 s ficarem abaixo de 23%, a lista não segura fora das 7 frases. Se ficar perto de 1 mil views e com mais de 60% de seguidores, o tema da cruz não basta para sair da base; se passar de 3 mil com menos de 50%, o tema que a base pediu é a alavanca. Se segurar como o longo 2 depois dos 3 s, a voz Turbo não é o problema.
 
 **Curtos tirados deste longo (cada um pede uma frase de abertura própria, nova, a validar junto):**
 1. **O véu** (parte 2). Abertura: "Só uma pessoa podia passar por aquela cortina. Uma vez por ano."
-2. **Os túmulos abertos** (partes 3 e 4). Abertura: "Quando Jesus morreu, túmulos se abriram. E mortos foram ressuscitados."
+2. **Os túmulos abertos** (partes 3 e 4). Abertura: **"Túmulos se abriram na hora em que Jesus morreu. E mortos foram ressuscitados."** (v2: o elemento estranho vem primeiro)
 3. **O centurião** (parte 5, até "pregado ele na cruz"). Abertura: "Quem chamou Jesus de Filho de Deus naquela hora não foi um sacerdote."
 
 ## Para ler
 
 ### Abertura
-Dentro do templo de Jerusalém, uma cortina se rasgou ao meio. De alto a baixo. No mesmo instante, a terra tremeu. As rochas se partiram. E túmulos se abriram. Tudo isso aconteceu na hora em que Jesus morreu. Separei sete coisas que os evangelhos contam daquela hora. E a última, só um deles conta.
+**Uma cortina se rasgou ao meio, dentro do templo de Jerusalém.** De alto a baixo. No mesmo instante, a terra tremeu. As rochas se partiram. E túmulos se abriram. Tudo isso aconteceu na hora em que Jesus morreu. Separei sete coisas que os evangelhos contam daquela hora. E a última, só um deles conta.
 
 ### 1. As trevas
 A primeira começou antes. Do meio-dia às três da tarde, houve trevas sobre toda a terra. Lucas diz que o sol deixou de brilhar. Três horas de escuro, no meio do dia. Por volta das três, Jesus bradou em alta voz: "Meu Deus! Meu Deus! Por que me abandonaste?" Alguns acharam que ele estava chamando Elias. Um deles correu, molhou uma esponja em vinagre e deu pra ele beber. E Jesus, com um alto brado, entregou o espírito.
@@ -35,7 +38,7 @@ A quinta aconteceu bem na frente da cruz. O centurião, o oficial dos soldados q
 E a sétima, só João conta. O dia seguinte era um sábado especialmente sagrado. Pediram a Pilatos que quebrassem as pernas dos crucificados e tirassem os corpos antes do sábado. Os soldados quebraram as pernas dos dois homens crucificados com Jesus. Mas, quando chegaram a Jesus, ele já estava morto. E não quebraram as pernas dele. Em vez disso, um soldado furou o lado dele com uma lança. E logo saiu sangue e água. João diz que essas coisas aconteceram para que se cumprisse a Escritura. "Nenhum dos seus ossos será quebrado." E: "Olharão para aquele que traspassaram." Quem viu tudo isso deixou escrito por quê: "para que vocês também creiam".
 
 ### Fecho
-Essa tarde inteira está em Mateus 27 e em João 19. Se quiser ler com calma, tá no app Prega aí. Das sete, qual mexeu mais com você? Me conta aqui embaixo.
+Essa tarde inteira está em Mateus 27 e em João 19. **Se você quer ler direto na Bíblia, um pouco por dia, procura Prega aí na Google Play.** Das sete, qual mexeu mais com você? Me conta aqui embaixo.
 
 ## Conferência na NVI
 As citações entre aspas foram conferidas por script contra o `assets/bible/nvi.json` do repo `pregaai`: todas exatas (Mateus 27:46 e 27:54; Hebreus 10:20; João 19:35, 19:36 e 19:37). O resto, frase a frase:
