@@ -781,6 +781,167 @@ function scMulheres(t) {
   return { svg: cam(s, fx, lerp(560, 600, k), lerp(1.02, 1.22, k), 960 - fx, lerp(0, -70, k)), html: '' };
 }
 
+// ================================================================ 7. sangue e água (João 19:31-37)
+// O Gólgota no fim da tarde, com as três cruzes em silhueta contra o sol baixo (o mesmo do longo da ressurreição).
+function cidadeSil(x, base, s, fill) {
+  const r = (a, b, c, d) => `<rect x="${a}" y="${b}" width="${c}" height="${d}"/>`;
+  let g = r(-300, -120, 600, 120) + r(-340, -190, 70, 190) + r(270, -190, 70, 190);
+  [[-220, 150, 110], [-100, 200, 100], [10, 236, 120], [140, 170, 100]].forEach(([hx, hh, hw]) => (g += r(hx, -hh, hw, hh)));
+  for (let i = 0; i < 12; i++) g += r(-300 + i * 50, -146, 26, 28);
+  return `<g transform="translate(${x} ${base}) scale(${s})" fill="${fill}">${g}</g>`;
+}
+// y do morro de primeiro plano (hill de lib.js) na posição x, para pôr gente em cima dele.
+function hillY(cx, top, hw, x) {
+  const P = [[cx - hw, top + hw * 0.42], [cx - hw * 0.55, top + 30], [cx - hw * 0.3, top], [cx, top]];
+  const xx = x > cx ? 2 * cx - x : x;
+  let best = P[0][1], bd = 1e9;
+  for (let u = 0; u <= 1; u += 0.01) {
+    const v = 1 - u, bx = v * v * v * P[0][0] + 3 * v * v * u * P[1][0] + 3 * v * u * u * P[2][0] + u * u * u * P[3][0];
+    const by = v * v * v * P[0][1] + 3 * v * v * u * P[1][1] + 3 * v * u * u * P[2][1] + u * u * u * P[3][1];
+    if (Math.abs(bx - xx) < bd) { bd = Math.abs(bx - xx); best = by; }
+  }
+  return best;
+}
+function golgotaTarde(t, o = {}) {
+  let s = (o.bg === false ? '' : bgDusk(t)) + sun(o.sunX ?? 1560, o.sunY ?? GROUND - 70, 50, t) + cidadeSil(360, GROUND + 6, 0.55, '#2A201B');
+  s += hill(960, 560, 1150, DUSK_HILL, DUSK_OL);
+  const b = o.bows || [0.35, 0.35, 1], rim = C.p400;
+  s += crossFig(690, 592, 0.5, { fill: CRUZ_TARDE, rim, bow: b[0] }) + crossFig(1230, 592, 0.5, { fill: CRUZ_TARDE, rim, bow: b[1] });
+  s += crossFig(960, 572, 0.64, { fill: CRUZ_TARDE, rim, plaque: true, bow: b[2] });
+  return s;
+}
+// A cruz do meio de perto, em silhueta, no fim da tarde (Jesus já morto).
+function cruzTarde(t, x = 960, sc = 1.5, o = {}) {
+  return bgDusk(t) + sun(o.sunX ?? 1600, o.sunY ?? 520, 54, t) + hill(x, 880, 1300, DUSK_HILL, DUSK_OL) + crossFig(x, 905, sc, { plaque: true, fill: CRUZ_TARDE, rim: C.p400, bow: 1 });
+}
+const silT = (o) => person({ sil: CRUZ_TARDE, rim: C.p400, noShadow: true, ...o });
+// Lança em pé ou inclinada na mão (hx, hy), em silhueta; ang em graus a partir da vertical.
+function lanca(hx, hy, ang, len = 360, s = 1) {
+  const a = (ang * Math.PI) / 180, tx = hx + Math.sin(a) * len, ty = hy - Math.cos(a) * len, bx = hx - Math.sin(a) * 120 * s, by = hy + Math.cos(a) * 120 * s;
+  return `<line x1="${f1(bx)}" y1="${f1(by)}" x2="${f1(tx)}" y2="${f1(ty)}" stroke="${CRUZ_TARDE}" stroke-width="${f1(12 * s)}" stroke-linecap="round"/><path d="M ${f1(tx + Math.sin(a) * 46 * s)} ${f1(ty - Math.cos(a) * 46 * s)} L ${f1(tx + Math.cos(a) * 11 * s)} ${f1(ty + Math.sin(a) * 11 * s)} L ${f1(tx - Math.cos(a) * 11 * s)} ${f1(ty - Math.sin(a) * 11 * s)} Z" fill="${CRUZ_TARDE}"/>`;
+}
+// Desenho do cartão 7: a cruz no fim da tarde e uma lança fincada no chão ao lado, sem ninguém e sem sangue.
+function artLanca(t) {
+  let g = `<rect x="1160" y="260" width="680" height="540" fill="url(#skyDusk)"/><circle cx="1700" cy="640" r="260" fill="url(#gPeach)" opacity="0.5"/>` + sun(1700, 640, 40, t);
+  g += hill(1460, 700, 460, DUSK_HILL, DUSK_OL) + crossFig(1460, 712, 0.6, { plaque: true, fill: CRUZ_TARDE, rim: C.p400, bow: 1 });
+  g += lanca(1640, 690, 4, 260, 0.9);
+  return MOLDURA('mLanca', g, '#3B2820');
+}
+const scCartao7 = cenaCartao(7, () => at(46), artLanca);
+// "O dia seguinte era um sábado especialmente sagrado." (João 19:31) O sol se pondo sobre Jerusalém; as lamparinas
+// das casas vão se acendendo; as cruzes ficam pequenas, fora da cidade.
+function scSabado(t) {
+  const a0 = at(47), sy = lerp(GROUND - 120, GROUND - 50, prog(t, a0, at(48)));
+  let s = bgDusk(t) + sun(640, sy, 60, t) + `<circle cx="640" cy="${f1(sy)}" r="460" fill="url(#gPeach)" opacity="0.4"/>`;
+  s += hill(250, 600, 300, DUSK_HILL, DUSK_OL) + crossFig(190, 622, 0.15, { fill: CRUZ_TARDE, rim: C.p400, bow: 1 }) + crossFig(310, 622, 0.15, { fill: CRUZ_TARDE, rim: C.p400, bow: 1 }) + crossFig(250, 612, 0.2, { fill: CRUZ_TARDE, rim: C.p400, plaque: true, bow: 1 });
+  s += floor('dusk');
+  const CX = 1330, CB = GROUND + 70, CS = 1.6;
+  s += cidadeSil(CX, CB, CS, '#241B17');
+  [[-220, 150, 110], [-100, 200, 100], [10, 236, 120], [140, 170, 100]].forEach(([hx, hh, hw], i) => {
+    const p = pop(t, a0 + 0.6 + i * 0.35, 0.4);
+    if (p > 0) s += `<g transform="translate(${CX} ${CB}) scale(${CS})"><rect x="${hx + hw * 0.3}" y="${-hh + 34}" width="20" height="26" rx="4" fill="${C.a300}" opacity="${f1(clamp(p) * 100) / 100}"/><circle cx="${hx + hw * 0.3 + 10}" cy="${-hh + 47}" r="40" fill="url(#gAmber)" opacity="${f1(clamp(p) * 0.6 * 100) / 100}"/></g>`;
+  });
+  return { svg: cam(s, 960, 560, 1.02 + 0.05 * prog(t, a0, at(48))), html: '' };
+}
+// "Pediram a Pilatos que quebrassem as pernas dos crucificados e tirassem os corpos antes do sábado." (João 19:31)
+function palacio(t) {
+  let s = bgDay(t, { seed: 881, sunX: 300, sunY: 300 });
+  [300, 620, 1300, 1620].forEach((x) => (s += rect(x - 44, 120, 88, 560, C.g100, ink(6)) + rect(x - 60, 100, 120, 32, C.g300, `rx="8" ${ink(6)}`)));
+  s += rect(200, 90, 1520, 26, C.g300, ink(6));
+  s += rect(1080, 640, 620, 130, C.g300, ink(6)) + rect(1050, 620, 680, 34, C.g400, `rx="8" ${ink(6)}`);
+  s += throne(1560, 622, 0.62, C.a400);
+  return s;
+}
+function scPilatos(t) {
+  const tp = wordTime(48, 'pediram');
+  let s = palacio(t) + `<rect x="-300" y="-300" width="${W + 600}" height="${H + 600}" fill="#E8A06A" opacity="0.14"/>`;
+  s += person({ ...PILATOS, x: 1360, y: 640, s: 1.1, look: -1, mood: 'calm', armR: 14, armL: 14 });
+  [[480, 1301], [680, 1302], [880, 1303]].forEach(([x, seed], i) => (s += person({ ...lider(seed), x, y: FLOOR_Y - (i % 2) * 12, s: 1.2, look: 1, mood: 'calm', armR: i === 2 ? fala(t, tp - 0.2, fim(48), 40, 50) : 20, armL: 18 })));
+  return { svg: cam(s, 960, 560, 1.02 + 0.05 * prog(t, at(48), at(49))), html: '' };
+}
+// "Os soldados quebraram as pernas dos dois homens crucificados com Jesus." (João 19:32) Os soldados vão de cruz
+// em cruz; só se vê a cabeça dos dois cair. Nada da violência.
+function scPernas(t) {
+  const t1 = wordTime(49, 'quebraram'), t2 = wordTime(49, 'crucificados');
+  const go = E.inOut(prog(t, at(49), t1 - 0.2)), go2 = E.inOut(prog(t, t1 + 0.5, t2));
+  let s = golgotaTarde(t, { bows: [lerp(0.35, 1, E.inOut(prog(t, t1 + 0.1, t1 + 0.7))), lerp(0.35, 1, E.inOut(prog(t, t2 + 0.1, t2 + 0.7))), 1] });
+  [0, 1].forEach((i) => {
+    const x = lerp(lerp(330 - i * 70, 610 - i * 70, go), 1150 + i * 70, go2);
+    s += silT({ x, y: hillY(960, 560, 1150, x) + 8, s: 0.42, walk: (go > 0 && go < 1) || (go2 > 0 && go2 < 1) ? t * 7 + i : null, gear: { helmet: 'rom', spear: 'r' }, armR: 26, look: 1 });
+  });
+  return { svg: cam(s, 960, 480, 1.08 + 0.04 * prog(t, at(49), at(50))), html: '' };
+}
+// "Mas, quando chegaram a Jesus, ele já estava morto. E não quebraram as pernas dele." (João 19:33)
+// O soldado chega ao pé da cruz do meio, olha e vai embora.
+function scJaMorto(t) {
+  const chega = E.out(prog(t, at(50), seg(50) + 1.2)), vai = E.inOut(prog(t, seg(51) + 0.3, at(52) + 0.3));
+  let s = cruzTarde(t);
+  const x = lerp(lerp(140, 560, chega), 260, vai);
+  s += silT({ x, y: FLOOR_Y, s: 1.45, gear: { helmet: 'rom', armor: true, spear: 'r' }, armR: 26, armL: 14, walk: (chega > 0 && chega < 1) || (vai > 0 && vai < 1) ? t * 5 : null });
+  return { svg: cam(s, 960, 600, 1.0 + 0.06 * E.inOut(prog(t, at(50), at(52)))), html: '' };
+}
+// "Em vez disso, um soldado furou o lado dele com uma lança. E logo saiu sangue e água." (João 19:34)
+// Primeiro, o soldado em primeiro plano levanta a lança na direção da cruz, que está longe (a ponta não chega
+// perto do corpo). Depois, a cruz de perto e um fio claro que escorre do lado até o chão, sem detalhe.
+function scLanca(t) {
+  const tf = wordTime(52, 'furou'), tc = seg(53) - 0.25, ts = wordTime(53, 'sangue');
+  const A = (u) => {
+    const th = E.inOut(prog(u, tf - 0.3, tf + 0.4));
+    let s = bgDusk(u) + sun(1700, 360, 54, u) + `<circle cx="1700" cy="360" r="460" fill="url(#gPeach)" opacity="0.35"/>`;
+    s += hill(1400, 690, 760, DUSK_HILL, DUSK_OL) + crossFig(1400, 702, 0.72, { plaque: true, fill: CRUZ_TARDE, rim: C.p400, bow: 1 });
+    const so = { x: 560, y: FLOOR_Y, s: 1.6, gear: { helmet: 'rom', armor: true }, armR: lerp(150, 132, th), armL: 14, lean: 4 * th };
+    const [hx, hy] = mao(so, 1);
+    s += lanca(hx, hy, lerp(6, 32, th), 330, 1.3) + silT(so);
+    return cam(s, 960, 560, 1.02 + 0.03 * prog(u, at(52), tc));
+  };
+  const B = (u) => {
+    let s = cruzTarde(u, 960, 1.3, { sunX: 1600, sunY: 300 });
+    const f = E.inOut(prog(u, ts - 0.2, ts + 1.4));
+    if (f > 0) s += `<path d="M 936 480 C 930 540 942 600 944 660 C 946 720 948 800 950 884" fill="none" stroke="#EADFD6" stroke-width="3.5" stroke-linecap="round" opacity="0.85" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${f1((1 - f) * 1000) / 1000}"/>`;
+    return cam(s, 960, 560, 1.06 + 0.06 * prog(u, tc, at(54)));
+  };
+  return { svg: xcut(t, tc, A, B), html: '' };
+}
+// "João diz que essas coisas aconteceram para que se cumprisse a Escritura. Nenhum dos seus ossos será
+// quebrado. E: Olharão para aquele que traspassaram." (João 19:36-37, NVI) Cada citação entra quando a voz chega.
+function scEscritura(t) {
+  const p = E.out(prog(t, at(54) + 0.1, at(54) + 0.6));
+  const r1 = E.out(prog(t, seg(55) - 0.25, seg(55) + 0.2)), r2 = E.out(prog(t, seg(56) - 0.25, seg(56) + 0.2));
+  const h1 = prog(t, seg(55), fim(55) + 0.2), h2 = prog(t, wordTime(56, 'olharão'), fim(56) + 0.2);
+  const row = (ref, txt, h, op) => `<div class="lrow vrow" style="padding:34px 44px;opacity:${f1(op * 100) / 100}"><div class="vtext" style="padding-left:0;font-size:54px">${hlWords(txt, h)}</div><div class="lref">${ref}</div></div>`;
+  const html = `<div class="list" style="left:240px;right:240px;top:170px;opacity:${f1(p * 100) / 100};transform:translateY(${f1((1 - p) * 30)}px)">
+    <div class="lhead"><div class="eyebrow">A Bíblia diz</div><div class="ltitle">Para que se cumprisse a Escritura</div></div>
+    ${row('João 19:36', 'Nenhum dos seus ossos será quebrado', h1, r1)}${row('João 19:37', 'Olharão para aquele que traspassaram', h2, r2)}</div>`;
+  return { svg: `<rect x="-300" y="-300" width="${W + 600}" height="${H + 600}" fill="${C.paper}"/><circle cx="960" cy="480" r="820" fill="url(#gAmber)" opacity="0.2"/>`, html };
+}
+// "Quem viu tudo isso deixou escrito por quê: para que vocês também creiam." (João 19:35) João escreve num rolo,
+// à luz da lamparina; as linhas vão aparecendo.
+function sala(t, o = {}) {
+  let s = `<rect x="-200" y="-200" width="${W + 400}" height="${H + 400}" fill="#231D19"/>`;
+  for (let r = 0; r < 11; r++) for (let c = 0; c < 12; c++) {
+    const x = c * 200 - (r % 2) * 100 - 80, y = -20 + r * 62;
+    s += `<rect x="${x + 4}" y="${y}" width="192" height="56" rx="8" fill="${(r * 7 + c * 3) % 5 ? '#2E2621' : '#342B25'}" stroke="#120E0B" stroke-width="5"/>`;
+  }
+  s += floor('dusk', 0, 680);
+  s += `<circle cx="${o.lx ?? 960}" cy="${o.ly ?? 600}" r="${o.lr ?? 780}" fill="url(#gAmber)" opacity="${o.glow ?? 0.4}"/>`;
+  return s;
+}
+const lamparina = (x, y, t) => flame(x, y - 8, 13, 44 + 4 * Math.sin(t * 9), C.a300) + `<ellipse cx="${x}" cy="${y}" rx="32" ry="12" fill="${C.a600}" ${ink(5, NIGHT_OL)}/>`;
+function scTestemunha(t) {
+  const a0 = at(57), esc = prog(t, a0 + 0.3, fim(57) + 0.2);
+  let s = sala(t, { lx: 1180, ly: 600, glow: 0.5 });
+  s += rect(1080, 700, 260, 26, C.wood, `rx="8" ${ink(5, NIGHT_OL)}`) + rect(1110, 726, 200, 110, '#5A4030', ink(5, NIGHT_OL)) + lamparina(1210, 698, t);
+  const J = { ...JOAO, x: 820, y: 720, s: 1.45, look: 0.3, mood: 'calm', armL: -18, armR: -6 + 6 * Math.sin(t * 7) * (esc > 0 && esc < 1 ? 1 : 0), rock: '#5A4F46', ol: NIGHT_OL };
+  s += sentado(J);
+  // o rolo no colo, aberto, com as linhas que ele vai escrevendo
+  const rx = 820, ry = 720 - 28 * 1.45, w = 300, h = 96;
+  s += rect(rx - w / 2, ry - h / 2, w, h, '#EFE3CC', ink(5, NIGHT_OL)) + rect(rx - w / 2 - 18, ry - h / 2 - 10, 26, h + 20, '#C9A77A', `rx="12" ${ink(5, NIGHT_OL)}`) + rect(rx + w / 2 - 8, ry - h / 2 - 10, 26, h + 20, '#C9A77A', `rx="12" ${ink(5, NIGHT_OL)}`);
+  for (let k = 0; k < 4; k++) { const q = clamp(esc * 4 - k); if (q > 0) s += `<line x1="${rx - w / 2 + 24}" y1="${f1(ry - 30 + k * 20)}" x2="${f1(rx - w / 2 + 24 + (w - 60 - (k % 2) * 40) * q)}" y2="${f1(ry - 30 + k * 20)}" stroke="#6B5A44" stroke-width="5" stroke-linecap="round"/>`; }
+  const [hx, hy] = mao(J, 1);
+  s += `<line x1="${f1(hx)}" y1="${f1(hy)}" x2="${f1(hx + 18)}" y2="${f1(hy - 44)}" stroke="${NIGHT_OL}" stroke-width="7" stroke-linecap="round"/>`;
+  return { svg: cam(s, 900, 600, 1.08 + 0.06 * prog(t, a0, at(58))), html: '' };
+}
+
 // ================================================================ linha do tempo
 const SCENES = [
   // abertura
@@ -821,4 +982,13 @@ const SCENES = [
   { a: depois(40), b: at(42), f: scCartao6, ref: null },
   { a: at(42), b: at(44), f: scPovo, ref: 'Lucas 23:48' },
   { a: at(44), b: at(46), f: scMulheres, ref: 'Lucas 23:49' },
+  // 7. sangue e água
+  { a: at(46), b: at(47), f: scCartao7, ref: null },
+  { a: at(47), b: at(48), f: scSabado, ref: 'João 19:31', dark: true },
+  { a: at(48), b: at(49), f: scPilatos, ref: null },
+  { a: at(49), b: at(50), f: scPernas, ref: 'João 19:32', dark: true },
+  { a: at(50), b: at(52), f: scJaMorto, ref: 'João 19:33', dark: true },
+  { a: at(52), b: at(54), f: scLanca, ref: 'João 19:34', dark: true },
+  { a: at(54), b: at(57), f: scEscritura, ref: null },
+  { a: at(57), b: at(58), f: scTestemunha, ref: 'João 19:35', dark: true },
 ];
