@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Banner do canal no YouTube (2560×1440 com ESCALA=2)</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* Área que aparece em todos os aparelhos (YouTube: 1235×338 de 2048×1152): no viewBox 1920×1080,
+   x 381–1539 e y 377–703. Texto e herói ficam dentro dela; o resto é cenário que só a TV e o
+   computador mostram. Guia: ?guia=1 */
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg></div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script>
+window.SIZE = [1280, 720];
+const q = new URLSearchParams(location.search);
+const LINHA1 = q.get('l1') || 'HISTÓRIAS DA';
+const LINHA2 = q.get('l2') || 'BÍBLIA';
+const SUB = q.get('sub') || 'explicadas do jeito que estão escritas';
+let s = DEFS;
+// noite com luz âmbar atrás da cruz, como as miniaturas dos longos; poucos elementos
+s += `<rect width="1920" height="1080" fill="url(#skyNight)"/>`;
+s += stars(0, 150, 7, 820, 0.8);
+s += `<circle cx="1250" cy="600" r="640" fill="url(#gAmber)" opacity="0.55"/>`;
+s += hills(860, 50, 0.003, 3, '#1C1B1E');
+// herói, dentro da área segura: o monte e a cruz
+s += `<path d="M 300 1080 L 300 1040 C 680 840 1000 690 1250 690 C 1500 690 1820 840 2200 1040 L 2200 1080 Z" fill="#141316"/>`;
+s += hills(930, 30, 0.004, 9, '#121114');
+s += crossFig(1250, 700, 0.56, { fill: '#0E0C0B', plaque: true });
+s += `<rect width="1920" height="1080" fill="url(#gVig)"/>`;
+// texto à esquerda da cruz, centrado na faixa que todo aparelho mostra (y 377–703)
+const X = 430, Y1 = 478;
+s += `<text x="${X}" y="${Y1}" font-family="Gasoek One" font-size="70" fill="#fff" stroke="#0B0A09" stroke-width="12" paint-order="stroke" letter-spacing="1">${LINHA1}</text>`;
+const w2 = measure(LINHA2, '96px "Gasoek One"');
+const ty = Y1 + 22;
+s += `<g transform="rotate(-3 ${X} ${ty + 52})"><rect x="${X - 6}" y="${ty + 8}" width="${w2 + 46}" height="108" rx="10" fill="#0B0A09"/>
+  <rect x="${X - 14}" y="${ty}" width="${w2 + 46}" height="108" rx="10" fill="${C.b500}" stroke="#0B0A09" stroke-width="7"/>
+  <text x="${X + 9}" y="${ty + 92}" font-family="Gasoek One" font-size="96" fill="#fff" stroke="#0B0A09" stroke-width="9" paint-order="stroke">${LINHA2}</text></g>`;
+s += `<text x="${X}" y="${ty + 170}" font-family="Geist" font-weight="700" font-size="34" fill="#F3EEE8" stroke="#0B0A09" stroke-width="7" paint-order="stroke">${esc(SUB)}</text>`;
+if (q.get('guia')) s += `<rect x="381" y="377" width="1158" height="326" fill="none" stroke="#f0f" stroke-width="4" stroke-dasharray="16 10"/>`;
+document.getElementById('art').innerHTML = s;
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
