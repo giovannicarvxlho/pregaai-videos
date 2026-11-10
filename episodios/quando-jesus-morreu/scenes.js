@@ -432,6 +432,174 @@ function scEntregou(t) {
   return { svg: cam(s, 960, 400, 1.0 + 0.06 * prog(t, antes(13), at(14))), html: '' };
 }
 
+// ================================================================ 2. o véu (Mateus 27:51; Êxodo 26:33; 2 Crônicas 3:14; Hebreus 9:7; 10:19-20)
+const scCartao2 = cenaCartao(2, () => at(14), artVeu);
+// Seta da direção do rasgo ("de alto a baixo"), desenhada de cima para baixo pelo meio do rasgo.
+function seta(x, y0, y1, a) {
+  if (a <= 0) return '';
+  const y = lerp(y0, y1, a);
+  let g = `<line x1="${x}" y1="${y0}" x2="${x}" y2="${f1(y - 24)}" stroke="${C.ink}" stroke-width="28" stroke-linecap="round"/><line x1="${x}" y1="${y0}" x2="${x}" y2="${f1(y - 24)}" stroke="${C.b500}" stroke-width="14" stroke-linecap="round"/>`;
+  g += `<path d="M ${x - 40} ${f1(y - 50)} L ${x} ${f1(y + 8)} L ${x + 40} ${f1(y - 50)} Z" fill="${C.b500}" ${ink(7)}/>`;
+  return g;
+}
+// "Naquele momento, o véu do santuário se rasgou em duas partes. E o texto faz questão de dizer a direção: de
+// alto a baixo." O véu inteiro rasga; na frase seguinte, uma seta desce pelo rasgo, do alto até embaixo.
+function scDirecao(t) {
+  const t0 = wordTime(15, 'rasgou') - 0.15, t1 = fim(15) + 0.3;
+  const p = E.inOut(prog(t, t0, t1)), q = 0.4 * prog(t, t0, t0 + 0.2) * (1 - prog(t, t1, t1 + 0.6));
+  const a = E.inOut(prog(t, wordTime(16, 'alto') - 0.25, wordTime(16, 'baixo') + 0.25));
+  let s = veuCena(t, p, { id: 'v15' }) + poeiraAlto(t, t0, 960, VEU.Y0);
+  s += seta(960, VEU.Y0 + 40, VEU.Y1 - 40, a);
+  return { svg: camQ(s, 960, 500, 1.03 + 0.04 * prog(t, antes(15), depois(16)), 960, 500, q, t), html: '' };
+}
+// "Mas que véu era esse?" O santuário do templo por fora; a câmera vai até a porta.
+function templo(t) {
+  let s = bgDay(t, { sunX: 1600, sunY: 170, seed: 811 });
+  // a esplanada e os degraus
+  s += rect(160, 700, 1600, 60, C.g300, ink(6)) + rect(260, 760, 1400, 40, C.g400, ink(6)) + rect(360, 800, 1200, 40, C.g300, ink(6));
+  // o santuário: corpo, a fachada mais larga em cima e o friso de ouro
+  s += rect(620, 300, 680, 400, C.g100, ink(6)) + rect(1080, 303, 217, 394, C.g300);
+  s += rect(520, 190, 880, 140, C.g100, ink(6)) + rect(1200, 193, 197, 134, C.g300);
+  s += rect(505, 172, 910, 26, C.a400, `rx="6" ${ink(5)}`) + rect(520, 326, 880, 14, C.a400, ink(4));
+  [690, 780, 1140, 1230].forEach((x) => (s += `<line x1="${x}" y1="360" x2="${x}" y2="690" stroke="${C.g300}" stroke-width="10"/>`));
+  // a porta alta (escura), com o batente de ouro
+  s += `<path d="M 870 700 L 870 450 C 870 380 1050 380 1050 450 L 1050 700 Z" fill="${C.g800}" ${ink(6)}/><path d="M 870 700 L 870 450 C 870 380 1050 380 1050 450 L 1050 700" fill="none" stroke="${C.a400}" stroke-width="10"/>`;
+  // os pórticos do pátio, baixos, dos dois lados
+  [[180, 520], [1400, 1740]].forEach(([x0, x1]) => {
+    s += rect(x0 - 20, 560, x1 - x0 + 40, 26, C.g300, ink(5));
+    for (let x = x0; x <= x1; x += 85) s += rect(x - 16, 586, 32, 114, C.g100, ink(5));
+  });
+  return s;
+}
+function scTemplo(t) {
+  const k = E.inOut(prog(t, depois(16), antes(18) + 0.2));
+  return { svg: cam(templo(t), 960, lerp(560, 560, k), lerp(1.0, 1.6, k), 0, lerp(0, -20, k)), html: '' };
+}
+
+// O santuário em corte (Êxodo 26:33; Hebreus 9:2-7): o Lugar Santo, com o candelabro, a mesa dos pães e o altar
+// do incenso; a cortina; e o Lugar Santíssimo, vazio e escuro. A parede da frente está cortada para ver dentro.
+// o.rasgo (0..1) abre a cortina de alto a baixo e a luz passa para o Lugar Santo; o.rot: [Santo, Santíssimo]
+// (0..1); o.pulso: realce da cortina; o.id: prefixo dos recortes.
+const T_ = { x0: 250, x1: 1670, top: 250, fl: 800, vx: 1150, vw: 46 };
+function cortinaCorte(x, y0, y1, w, rasgo, pulso, id) {
+  const yf = lerp(y0, y1 + 20, rasgo), d = (y) => (y >= yf ? 0 : 44 * rasgo * Math.pow((yf - y) / Math.max(1, yf - y0), 0.8));
+  let pano = rect(x - 40, y0, w + 80, y1 - y0, C.b500);
+  for (let xx = x + 8; xx < x + w; xx += 15) pano += `<line x1="${xx}" y1="${y0}" x2="${xx}" y2="${y1}" stroke="${C.b600}" stroke-width="4"/>`;
+  [[y0 + 24, '#5B3F7A'], [y0 + 46, C.r600], [y0 + 70, '#F1E8D6'], [y1 - 82, '#F1E8D6'], [y1 - 64, C.r600], [y1 - 42, '#5B3F7A']].forEach(([y, c]) => (pano += rect(x - 40, y, w + 80, c === '#F1E8D6' ? 8 : 16, c)));
+  let s = '';
+  if (pulso > 0) s += `<rect x="${x - 14}" y="${y0 - 6}" width="${w + 28}" height="${y1 - y0 + 12}" rx="10" fill="none" stroke="${C.b300}" stroke-width="${f1(16 * pulso)}" opacity="${f1(pulso * 100) / 100}"/>`;
+  const N = 24, ys = []; for (let k = 0; k <= N; k++) ys.push(y0 + ((y1 - y0) * k) / N);
+  const half = (side) => {
+    const out = ys.map((y) => `${f1(side < 0 ? x - d(y) * 0.5 : x + w + d(y) * 0.5)} ${f1(y)}`);
+    const inn = ys.slice().reverse().map((y) => `${f1(x + w / 2 + side * d(y))} ${f1(y)}`);
+    return `M ${out.join(' L ')} L ${inn.join(' L ')} Z`;
+  };
+  [-1, 1].forEach((side) => (s += `<clipPath id="${id}${side}"><path d="${half(side)}"/></clipPath><g clip-path="url(#${id}${side})">${pano}</g><path d="${half(side)}" fill="none" ${ink(5)}/>`));
+  s += rect(x - 18, y0 - 12, w + 36, 14, C.a400, `rx="7" ${ink(4)}`);
+  return s;
+}
+function altarIncenso(x, y, s) {
+  return `<g transform="translate(${x} ${y}) scale(${s})">${rect(-34, -96, 68, 96, C.a400, ink(5))}${rect(-44, -108, 88, 16, C.a600, `rx="5" ${ink(4)}`)}<path d="M -6 -112 q -10 -24 2 -44 q 6 18 -2 44 Z" fill="${C.g300}" opacity="0.8"/></g>`;
+}
+function corte(t, o = {}) {
+  const rasgo = o.rasgo || 0, luz = o.luz || 0, rot = o.rot || [1, 1], id = o.id || 'ct';
+  let s = bgGloom(t, { seed: 811 });
+  s += rect(-600, T_.fl, W + 1200, H - T_.fl + 600, C.g300) + `<line x1="-600" y1="${T_.fl}" x2="${W + 600}" y2="${T_.fl}" stroke="${C.ink}" stroke-width="6"/>`;
+  s += rect(T_.x0 - 30, T_.top - 40, T_.x1 - T_.x0 + 60, 40, C.g400, ink(7)) + rect(T_.x0, T_.top, T_.x1 - T_.x0, T_.fl - T_.top, C.g200, ink(7));
+  // Lugar Santo
+  s += rect(T_.x0 + 30, T_.top + 30, T_.vx - T_.x0 - 30, T_.fl - T_.top - 30, '#EFE6DA', ink(5));
+  s += menorah(450, T_.fl, 1.15, t) + rect(640, T_.fl - 70, 180, 22, C.wood, `rx="6" ${ink(5)}`) + rect(660, T_.fl - 48, 14, 48, C.wood, ink(4)) + rect(786, T_.fl - 48, 14, 48, C.wood, ink(4));
+  for (let k = 0; k < 6; k++) s += `<ellipse cx="${670 + (k % 3) * 52}" cy="${T_.fl - 80 - Math.floor(k / 3) * 14}" rx="24" ry="9" fill="${C.p300}" ${ink(3)}/>`;
+  s += altarIncenso(980, T_.fl, 1.0);
+  // Lugar Santíssimo: vazio e escuro; a luz só aparece quando a cortina rasga
+  const ix0 = T_.vx + T_.vw, ix1 = T_.x1 - 30;
+  s += rect(ix0, T_.top + 30, ix1 - ix0, T_.fl - T_.top - 30, '#2A2622', ink(5));
+  if (luz > 0) {
+    s += `<clipPath id="${id}S"><rect x="${ix0}" y="${T_.top + 30}" width="${ix1 - ix0}" height="${T_.fl - T_.top - 30}"/></clipPath><g clip-path="url(#${id}S)"><circle cx="${(ix0 + ix1) / 2}" cy="${(T_.top + T_.fl) / 2}" r="${f1(200 + 260 * luz)}" fill="url(#gAmber)" opacity="${f1(0.9 * luz * 100) / 100}"/></g>`;
+    s += `<path d="M ${T_.vx + 20} ${T_.top + 40} L ${T_.vx + 20} ${T_.fl} L ${T_.x0 + 30} ${T_.fl} L ${T_.x0 + 30} ${f1(T_.fl - 330 * luz)} Z" fill="#FFF3D6" opacity="${f1(0.5 * luz * 100) / 100}"/>`;
+  }
+  s += cortinaCorte(T_.vx, T_.top + 30, T_.fl, T_.vw, rasgo, o.pulso || 0, id + 'c');
+  // a porta, à esquerda
+  s += rect(T_.x0 - 8, T_.fl - 250, 46, 250, '#3A3330', ink(5));
+  const lab = (x, txt, col, p) => (p > 0 ? `<g opacity="${f1(clamp(p) * 100) / 100}" transform="translate(0 ${f1((1 - clamp(p)) * 14)})">${label(x, T_.top + 96, txt, { size: 40, fill: col })}</g>` : '');
+  s += lab((T_.x0 + T_.vx) / 2 + 15, 'Lugar Santo', C.g700, rot[0]) + lab((ix0 + ix1) / 2, 'Lugar Santíssimo', '#F4EBDD', rot[1]);
+  return s;
+}
+// O sumo sacerdote: peitoral com as pedras, a lâmina de ouro no turbante e a bacia na mão direita, fechada,
+// sem nada à vista. o.brilho: um reflexo na bacia; o.bacia: false para sair sem ela.
+function sumoSacerdote(o) {
+  const s = o.s || 1, P = { ...SUMO, armL: 14, armR: 40, mood: 'calm', ...o, op: 1 };
+  let g = person(P);
+  const pedras = [C.r400, C.a400, C.gr400, C.b300, C.p300, C.r300];
+  let peito = rect(-20, -160, 40, 42, C.a400, `rx="5" ${ink(4)}`);
+  for (let k = 0; k < 12; k++) peito += `<circle cx="${-11 + (k % 3) * 11}" cy="${-152 + Math.floor(k / 3) * 9}" r="3.4" fill="${pedras[k % 6]}"/>`;
+  if (!o.walk) g += `<g transform="translate(${f1(o.x)} ${f1(o.y)}) scale(${f1(s * 1000) / 1000})">${peito}${rect(-16, -242, 32, 12, C.a400, `rx="4" ${ink(3)}`)}</g>`;
+  else g += `<g transform="translate(${f1(o.x)} ${f1(o.y)}) scale(${f1(s * 1000) / 1000})">${peito}${rect(-16, -242, 32, 12, C.a400, `rx="4" ${ink(3)}`)}</g>`;
+  if (o.bacia !== false) {
+    const [hx, hy] = mao(P, 1), k = s;
+    g += `<path d="M ${f1(hx - 30 * k)} ${f1(hy - 16 * k)} L ${f1(hx + 30 * k)} ${f1(hy - 16 * k)} Q ${f1(hx + 26 * k)} ${f1(hy + 14 * k)} ${f1(hx)} ${f1(hy + 14 * k)} Q ${f1(hx - 26 * k)} ${f1(hy + 14 * k)} ${f1(hx - 30 * k)} ${f1(hy - 16 * k)} Z" fill="${C.a400}" ${ink(4)}/>`;
+    g += `<ellipse cx="${f1(hx)}" cy="${f1(hy - 16 * k)}" rx="${f1(30 * k)}" ry="${f1(6 * k)}" fill="${C.a600}" ${ink(3)}/>`;
+    if (o.brilho > 0) g += `<circle cx="${f1(hx)}" cy="${f1(hy - 4 * k)}" r="${f1(70 * k)}" fill="url(#gAmber)" opacity="${f1(o.brilho * 0.9 * 100) / 100}"/><path d="M ${f1(hx - 14 * k)} ${f1(hy - 2 * k)} q 8 ${f1(10 * k)} ${f1(22 * k)} ${f1(4 * k)}" stroke="#FFF6DF" stroke-width="${f1(4 * k)}" fill="none" stroke-linecap="round" opacity="${f1(o.brilho * 100) / 100}"/>`;
+  }
+  return opg(o.op ?? 1, g);
+}
+// "No templo, essa cortina separava o Lugar Santo do Lugar Santíssimo." (Êxodo 26:33)
+function scCorte(t) {
+  const rot = [E.out(prog(t, wordTime(18, 'santo') - 0.3, wordTime(18, 'santo') + 0.2)), E.out(prog(t, wordTime(18, 'santíssimo') - 0.3, wordTime(18, 'santíssimo') + 0.2))];
+  const pulso = bump(t, wordTime(18, 'cortina') - 0.2, 1.2);
+  return { svg: cam(corte(t, { rot, pulso, id: 'c18' }), 960, 540, 1.02 + 0.04 * prog(t, antes(18), at(19))), html: '' };
+}
+// "Desde Salomão, ela era feita de azul, roxo, vermelho e linho fino, com querubins desenhados." (2 Crônicas 3:14)
+// O véu de perto: cada cor acende quando a voz fala dela, e os querubins vão sendo bordados.
+function scCores(t) {
+  const w = (word) => wordTime(19, word) - 0.12;
+  const realce = { azul: bump(t, w('azul'), 0.8), roxo: bump(t, w('roxo'), 0.8), vermelho: bump(t, w('vermelho'), 0.8), linho: bump(t, w('linho'), 1.0) };
+  const qp = prog(t, w('querubins') - 0.1, fim(19) + 0.3);
+  const s = veuCena(t, 0, { id: 'v19', querubins: qp, realce });
+  return { svg: cam(s, 960, 470, 1.22 - 0.08 * E.inOut(prog(t, at(19), depois(19))), 0, 20), html: '' };
+}
+// "E só uma pessoa podia passar pra lá: o sumo sacerdote. Uma vez por ano. E nunca sem levar o sangue do
+// sacrifício. Naquela tarde, a cortina se rasgou." (Hebreus 9:7; Mateus 27:51) Os sacerdotes ficam no Lugar
+// Santo; só o sumo sacerdote vai até a cortina, com a bacia. Na frase 23 ele some (era outro tempo) e a cortina
+// rasga de alto a baixo naquela tarde.
+const sumoX = (t) => lerp(170, 1060, E.inOut(prog(t, seg(20) + 0.2, fim(20) - 0.1)));
+function scSumo(t) {
+  const px = sumoX(t), anda = px > 172 && px < 1058;
+  const sai = prog(t, seg(23) - 0.2, seg(23) + 0.6);
+  const tr = wordTime(23, 'se') - 0.1, rasgo = E.inOut(prog(t, tr, tr + 0.75)), luz = E.out(prog(t, tr + 0.25, tr + 1.1));
+  let s = corte(t, { rot: [1, 1], rasgo, luz, id: 'c20' });
+  const brilho = bump(t, wordTime(22, 'sangue') - 0.3, 1.4);
+  // os outros sacerdotes param no Lugar Santo e olham ele passar
+  [[560, 1601], [830, 1602]].forEach(([x, seed]) => (s += person({ ...sacerdote(seed), x, y: T_.fl, s: 0.92, look: px > x ? 1 : -1, mood: 'calm', op: 1 - sai })));
+  s += sumoSacerdote({ x: px, y: T_.fl + 14, s: 1.0, look: 1, walk: anda ? t * 6 : null, armR: lerp(40, 62, brilho), brilho, op: 1 - sai });
+  // câmera: geral; segue o sacerdote; chega perto da bacia; abre de novo para o rasgo
+  const segue = E.inOut(prog(t, seg(20), seg(20) + 0.8)), perto = E.inOut(prog(t, seg(22) - 0.4, seg(22) + 0.4)), abre = E.inOut(prog(t, seg(23) - 0.1, seg(23) + 1.0));
+  const fx = lerp(lerp(960, clamp(px, 560, 1040), segue), 1060, perto * (1 - abre)), fxa = lerp(fx, 960, abre);
+  const z = lerp(lerp(1.0, 1.25, segue) + 0.25 * perto, 1.02, abre);
+  return { svg: cam(s, fxa, 640, z, 960 - fxa, lerp(-40, 0, abre) * segue), html: '' };
+}
+// "Anos depois, a carta aos Hebreus explica o que isso quer dizer: temos plena confiança para entrar no Santo
+// dos Santos pelo sangue de Jesus, por um novo e vivo caminho que ele nos abriu por meio do véu, isto é, do seu
+// corpo." O cartão com Hebreus 10:19-20 (NVI): cada bloco acende quando a voz chega nele.
+const HEB = [['…temos plena confiança para entrar', 2], ['no Santo dos Santos pelo sangue de', 3], ['Jesus, por um novo e vivo caminho', 4], ['que ele nos abriu por meio do véu,', 5], ['isto é, do seu corpo.', 6]];
+function scHebreus(t) {
+  const sp = SEGS[24][3], a0 = antes(24), p = E.out(prog(t, a0 + 0.1, a0 + 0.6));
+  const txt = HEB.map(([w, k]) => {
+    const on = E.out(prog(t, sp[k][0] - 0.15, sp[k][0] + 0.25)), h = prog(t, sp[k][0], sp[k][1]);
+    return `<span style="opacity:${f1((0.22 + 0.78 * on) * 100) / 100}">${hlWords(w, h)}</span>`;
+  }).join('');
+  let s = `<rect x="-300" y="-300" width="${W + 600}" height="${H + 600}" fill="${C.paper}"/><circle cx="960" cy="480" r="820" fill="url(#gAmber)" opacity="0.22"/>`;
+  return { svg: s, html: verseCard(txt, 'Hebreus 10:19-20', f1(p * 100) / 100, 'big') };
+}
+// "O lugar onde só o sumo sacerdote entrava, uma vez por ano." O véu aberto e a luz; o sumo sacerdote, de antes,
+// some aos poucos diante dele.
+function scLugar(t) {
+  const mem = 1 - prog(t, seg(25) + 0.6, fim(25) + 0.3);
+  let s = veuCena(t, 1, { id: 'v25', glow: 0.3 });
+  s += sumoSacerdote({ x: 690, y: 900, s: 1.25, look: 1, op: 0.85 * mem });
+  return { svg: cam(s, 960, 500, 1.02 + 0.1 * E.inOut(prog(t, at(25), depois(25)))), html: '' };
+}
+
 // ================================================================ linha do tempo
 const SCENES = [
   // abertura
@@ -447,4 +615,13 @@ const SCENES = [
   { a: at(11), b: at(12), f: scElias, ref: 'Mateus 27:47', dark: true },
   { a: at(12), b: antes(13), f: scEsponja, ref: 'Mateus 27:48', dark: true },
   { a: antes(13), b: at(14), f: scEntregou, ref: 'Mateus 27:50', dark: true },
+  // 2. o véu
+  { a: at(14), b: antes(15), f: scCartao2, ref: null },
+  { a: antes(15), b: depois(16), f: scDirecao, ref: 'Mateus 27:51', dark: true },
+  { a: depois(16), b: antes(18), f: scTemplo, ref: null },
+  { a: antes(18), b: at(19), f: scCorte, ref: 'Êxodo 26:33' },
+  { a: at(19), b: depois(19), f: scCores, ref: '2 Crônicas 3:14', dark: true },
+  { a: depois(19), b: antes(24), f: scSumo, ref: [[depois(19), 'Hebreus 9:7'], [at(23), 'Mateus 27:51']] },
+  { a: antes(24), b: at(25), f: scHebreus, ref: null },
+  { a: at(25), b: depois(25), f: scLugar, ref: null, dark: true },
 ];
