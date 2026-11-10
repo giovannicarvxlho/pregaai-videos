@@ -27,7 +27,7 @@ const inicioTrecho = (i) => seg(i) - Math.min(0.15, i > 0 ? (seg(i) - fim(i - 1)
 const fimTrecho = (i) => fim(i) + (i + 1 < SEGS.length ? Math.min(0.6, seg(i + 1) - fim(i)) : 0.6);
 const antes = (i) => Math.min(at(i), inicioTrecho(i) - XF / 2 - 0.02);
 const depois = (i) => Math.max(at(i + 1), fimTrecho(i) + XF / 2 + 0.02);
-// O trecho da frase 61 (abertura do curto 1) vai até 254,04 s, depois do CARTAO_INICIO do data.js (253,80).
+// O trecho da frase 61 (abertura do curto 1) vai até 254,04 s, e o CARTAO_INICIO do data.js estava em 253,80 (subiu para 254,20 em 2026-11-10; o contorno abaixo fica por segurança).
 // No recorte (curtos e TikTok), que não usa o cartão final, a cena da 61 continua até o fim desse trecho;
 // no longo, o cartão entra no CARTAO_INICIO, como manda o corte.json.
 const FIM_A = CURTO ? Math.max(CARTAO_INICIO, fimTrecho(61) + 0.05) : CARTAO_INICIO;
