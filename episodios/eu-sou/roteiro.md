@@ -1,6 +1,6 @@
 # Os sete "Eu sou" de Jesus (João 6, 8, 9, 10, 11, 14, 15 e 18; Êxodo 3:14)
 
-**Status: aguardando validação do Giovanni.** Versão 3 (2026-11-10), depois de cinco rodadas de revisão bíblica e teológica, as três últimas sem erro (ver "Revisão"). Vídeo longo 16:9. 3789 caracteres de narração, ~4:35 (830 por minuto); com o cartão final do YouTube, ~4:50 (limite: 5:00). No TikTok, termina na última fala, sem cartão.
+**Status: texto aprovado pelo Giovanni em 2026-11-10 ("Aprovado o texto, ficou ótimo"); o fecho com o CTA está sendo refeito a pedido dele.** No texto para ler e na legenda, o nome é **PregaAI**; no `narracao.txt`, que é só para a voz, fica "Prega aí", para a ElevenLabs pronunciar certo. Versão 3 (2026-11-10), depois de cinco rodadas de revisão bíblica e teológica, as três últimas sem erro (ver "Revisão"). Vídeo longo 16:9. 3789 caracteres de narração, ~4:35 (830 por minuto); com o cartão final do YouTube, ~4:50 (limite: 5:00). No TikTok, termina na última fala, sem cartão.
 
 **Por que este tema:** o Giovanni pediu em 10/11 um conteúdo diferente, "não queria algo repetitivo", depois de três vídeos seguidos sobre a cruz; os 7 "Eu sou" estavam no banco de temas (`projetos/pregaai-roteiros.md` do MARK1) como o mais parecido com o viral sem ser a cruz: lista fechada, falas de Jesus, cada uma com uma imagem. O autocompletar do YouTube e do Google trazem "os 7 eu sou de jesus" (consulta de 10/11).
 
@@ -43,7 +43,7 @@ A sétima, ele disse na mesma noite. "Eu sou a videira; vocês são os ramos." E
 Depois, Jesus atravessou um vale e entrou num olival com os discípulos. Judas chegou com um destacamento de soldados e guardas, levando tochas, lanternas e armas. Jesus saiu e perguntou: "A quem vocês estão procurando?" "A Jesus de Nazaré." "Sou eu." Quando Jesus disse "Sou eu", eles recuaram e caíram por terra. O texto não explica por quê. No templo, ele tinha dito: "antes de Abraão nascer, Eu Sou!" E, na sarça que não se queimava, quando Moisés perguntou que nome devia dizer ao povo, Deus respondeu: "Eu Sou o que Sou. É isto que você dirá aos israelitas: Eu Sou me enviou a vocês."
 
 ### Fecho
-As sete estão no evangelho de João. Dá pra ler no app Prega aí. Das sete, qual você mais precisa ouvir hoje? Me conta aqui embaixo.
+As sete estão no evangelho de João. Dá pra ler no app PregaAI. Das sete, qual você mais precisa ouvir hoje? Me conta aqui embaixo.
 
 ## Conferência na NVI
 As citações entre aspas foram conferidas por script contra o `assets/bible/nvi.json` do repo `pregaai`: todas exatas (João 6:26, 6:33, 6:34, 6:35, 8:12, 8:57, 8:58, 9:2, 9:3, 9:5, 9:7, 10:9, 10:11, 11:21, 11:25, 11:26, 11:27, 11:43, 14:5, 14:6, 15:5, 18:4, 18:5, 18:6, 20:28; Êxodo 3:14). O resto, frase a frase:
