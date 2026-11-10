@@ -5,7 +5,7 @@
 // (render.cjs com CORTE), e o áudio é a mesma narração, cortada nos mesmos pontos.
 // Serve para o longo de 4 a 5 min recortado de um longo maior e para os curtos verticais tirados do longo.
 //
-// Campos de cada saída: nome (sai em out/<nome>.mp4), frases, cartao (segundos do cartão final, sem áudio),
+// Campos de cada saída: nome (sai em out/<nome>.mp4), frases (na ordem em que entram no vídeo), cartao (segundos do cartão final, sem áudio),
 // SO_MAPA=1 só escreve out/<nome>.corte.json, para revisar quadros com CORTE=... node preview.cjs.
 // tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão; com um índice de frase, termina nela), layout ("vertical" para curto; "cheia" para o curto do
 // Instagram, sem faixas escuras: a cena maior no meio e a mesma cena desfocada em volta), titulo (texto fixo
@@ -37,10 +37,12 @@ if (!fs.existsSync(narr)) {
   execFileSync(py, [path.join(RAIZ, 'tools', 'juntar.py'), dirFonte], { stdio: 'inherit' });
 }
 
-// Frases que ficam → trechos contínuos da narração. Cada trecho começa um pouco antes da 1ª frase e
-// termina com a pausa natural depois da última (no máximo 0,6 s), para o corte respirar como a fala.
+// Frases que ficam → trechos contínuos da narração, na ordem do corte.json. Cada trecho começa um pouco antes
+// da 1ª frase e termina com a pausa natural depois da última (no máximo 0,6 s), para o corte respirar como a fala.
+// A ordem é a da lista: um curto pode abrir com uma frase gravada depois da fala do longo (a abertura própria
+// do curto, que o longo não usa) e seguir com as frases do meio.
 function trechos(frases) {
-  const lista = [...new Set(frases)].sort((a, b) => a - b), out = [];
+  const lista = [...new Set(frases)], out = [];
   for (let k = 0; k < lista.length; k++) {
     let j = k;
     while (j + 1 < lista.length && lista[j + 1] === lista[j] + 1) j++;
@@ -71,7 +73,7 @@ const roda = (cmd, args, env = {}) => new Promise((ok, erro) => {
     }
     const total = video.reduce((acc, [a, b]) => acc + b - a, 0);
     const mapaPath = path.join(OUT, `${s.nome}.corte.json`);
-    fs.writeFileSync(mapaPath, JSON.stringify({ trechos: video, layout: s.layout || null, titulo: s.titulo || null, cta: !!s.cta, refs: s.refs || null }));
+    fs.writeFileSync(mapaPath, JSON.stringify({ trechos: video, frases: s.frases, layout: s.layout || null, titulo: s.titulo || null, cta: !!s.cta, refs: s.refs || null }));
     console.log(`\n== ${s.nome}: ${fala.length} trechos, fala ${tFala.toFixed(1)} s, vídeo ${total.toFixed(1)} s`);
     if (process.env.SO_MAPA) continue; // só escreve o mapa (para o preview.cjs com CORTE)
 
