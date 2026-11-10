@@ -1,6 +1,6 @@
 # O que aconteceu quando Jesus morreu (Mateus 27:45-56; Marcos 15:33-39; Lucas 23:44-49; João 19:28-37)
 
-**Status: aguardando validação do Giovanni.** Versão 1 (2026-11-10). Vídeo longo 16:9. 3172 caracteres de narração, ~3:50 (830 por minuto); com o cartão final do YouTube, ~4:05. No TikTok, termina na última fala, sem cartão.
+**Status: em espera.** Em 2026-11-10 o Giovanni pediu um tema diferente ("não queria algo repetitivo"), e o próximo longo passou a ser `eu-sou`. O texto não foi validado. Versão 1 (2026-11-10). Vídeo longo 16:9. 3172 caracteres de narração, ~3:50 (830 por minuto); com o cartão final do YouTube, ~4:05. No TikTok, termina na última fala, sem cartão.
 
 ## Aposta
 - **Gancho:** "Dentro do templo de Jerusalém, uma cortina se rasgou ao meio." (tipo: cena estranha)

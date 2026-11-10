@@ -1,6 +1,6 @@
 # O ladrão da cruz (Lucas 23:38-43)
 
-**Status: aguardando validação do Giovanni.** Versão 1 (2026-11-10). Curto original vertical, com narração própria. 925 caracteres, ~67 s (pela velocidade do curto dos reis magos). No TikTok, termina na última fala, sem cartão.
+**Status: em espera.** Em 2026-11-10 o Giovanni pediu um tema diferente ("não queria algo repetitivo"), e o próximo longo passou a ser `eu-sou`. O texto não foi validado. Versão 1 (2026-11-10). Curto original vertical, com narração própria. 925 caracteres, ~67 s (pela velocidade do curto dos reis magos). No TikTok, termina na última fala, sem cartão.
 
 ## Aposta
 - **Gancho:** "Três homens estavam sendo crucificados no mesmo lugar." (tipo: revelação adiada, novo no banco)
