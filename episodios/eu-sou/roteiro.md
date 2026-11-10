@@ -1,6 +1,6 @@
 # Os sete "Eu sou" de Jesus (João 6, 8, 9, 10, 11, 14, 15 e 18; Êxodo 3:14)
 
-**Status: aguardando validação do Giovanni.** Versão 1 (2026-11-10). Vídeo longo 16:9. 3448 caracteres de narração, ~4:10 (830 por minuto); com o cartão final do YouTube, ~4:25. No TikTok, termina na última fala, sem cartão.
+**Status: aguardando validação do Giovanni.** Versão 1 (2026-11-10). Vídeo longo 16:9. 3290 caracteres de narração, ~4:00 (830 por minuto); com o cartão final do YouTube, ~4:15. No TikTok, termina na última fala, sem cartão.
 
 **Por que este tema:** o Giovanni pediu em 10/11 um conteúdo diferente, "não queria algo repetitivo", depois de três vídeos seguidos sobre a cruz; os 7 "Eu sou" estavam no banco de temas (`projetos/pregaai-roteiros.md` do MARK1) como o mais parecido com o viral sem ser a cruz: lista fechada, falas de Jesus, cada uma com uma imagem. O autocompletar do YouTube e do Google trazem "os 7 eu sou de jesus" (consulta de 10/11).
 
@@ -40,13 +40,13 @@ A sexta foi num jantar com os discípulos. Jesus disse que ia preparar lugar pra
 A sétima, ele disse na mesma noite. "Eu sou a videira; vocês são os ramos." E completou: "sem mim vocês não podem fazer coisa alguma".
 
 ### O olival
-Depois, Jesus atravessou um vale e entrou num olival com os discípulos. Judas chegou com um destacamento de soldados e guardas, levando tochas, lanternas e armas. Jesus saiu e perguntou: "A quem vocês estão procurando?" "A Jesus de Nazaré." "Sou eu." Quando Jesus disse "Sou eu", eles recuaram e caíram por terra. Jesus perguntou de novo. E de novo responderam: "A Jesus de Nazaré". "Já lhes disse que sou eu. Se vocês estão me procurando, deixem ir embora estes homens." O texto não explica por quê. Mas lembra de como Deus se apresentou a Moisés, no meio da sarça que não se queimava? "Eu Sou o que Sou."
+Depois, Jesus atravessou um vale e entrou num olival com os discípulos. Judas chegou com um destacamento de soldados e guardas, levando tochas, lanternas e armas. Jesus saiu e perguntou: "A quem vocês estão procurando?" "A Jesus de Nazaré." "Sou eu." Quando Jesus disse "Sou eu", eles recuaram e caíram por terra. O texto não explica por quê. Mas lembra de como Deus se apresentou a Moisés, no meio da sarça que não se queimava? "Eu Sou o que Sou."
 
 ### Fecho
 Os sete estão no evangelho de João. Dá pra ler no app Prega aí. Dos sete, qual você mais precisa ouvir hoje? Me conta aqui embaixo.
 
 ## Conferência na NVI
-As 24 citações entre aspas foram conferidas por script contra o `assets/bible/nvi.json` do repo `pregaai`: todas exatas (João 8:57, 8:58, 6:26, 6:34, 6:35, 8:12, 9:2, 9:3, 9:7, 10:9, 10:10, 10:11, 11:21, 11:25, 11:26, 11:27, 11:43, 14:5, 14:6, 15:5, 18:4, 18:5, 18:6, 18:8; Êxodo 3:14). O resto, frase a frase:
+As citações entre aspas foram conferidas por script contra o `assets/bible/nvi.json` do repo `pregaai`: todas exatas (João 8:57, 8:58, 6:26, 6:34, 6:35, 8:12, 9:2, 9:3, 9:7, 10:9, 10:10, 10:11, 11:21, 11:25, 11:26, 11:27, 11:43, 14:5, 14:6, 15:5, 18:4, 18:5, 18:6; Êxodo 3:14). O resto, frase a frase:
 - Pedras e saída do templo: João 8:59; no templo: João 8:20.
 - Cinco pães de cevada e dois peixinhos, cerca de cinco mil homens: João 6:9-10. No dia seguinte, a multidão foi de barco atrás dele: João 6:22-24.
 - "Sou a luz do mundo" na segunda vez: João 9:5. Cuspiu no chão, misturou terra com saliva, nos olhos; lavou-se e voltou vendo: João 9:6-7.
