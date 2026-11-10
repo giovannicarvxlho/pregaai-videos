@@ -697,6 +697,90 @@ function scQuemEram(t) {
   return { svg: cam(s, 960, 560, 1.03 + 0.08 * E.inOut(prog(t, a0, at(34)))), html: '' };
 }
 
+// ================================================================ 5. o centurião (Marcos 15:39; Mateus 27:54)
+// Desenho do cartão 5: o centurião em frente da cruz.
+function artCenturiao(t) {
+  let g = `<rect x="1160" y="260" width="680" height="540" fill="url(#skyDawn)"/><circle cx="1690" cy="430" r="300" fill="url(#gAmber)" opacity="0.35"/>`;
+  g += hill(1700, 640, 420, '#1B1E22', '#060708') + crossFig(1700, 652, 0.5, { plaque: true, fill: '#050505', rim: RIM, bow: 1 });
+  g += person({ ...CENT, x: 1400, y: 800, s: 1.12, look: 1, mood: 'calm', armL: 18, armR: 24, rim: C.a300 });
+  return MOLDURA('mCent', g, '#1E2530');
+}
+const scCartao5 = cenaCartao(5, () => at(34), artCenturiao);
+// O centurião em frente da cruz, com os soldados que vigiavam (Mateus 27:36, 54). o: light (luz quente),
+// fear (0..1), shake, armR, extra (desenho por trás das pessoas: rachadura, rocha).
+function centuriaoCena(t, o = {}) {
+  const light = o.light || 0;
+  let s = bgTrevas(t, { glow: 0.12, gx: 1330 });
+  s += `<circle cx="1330" cy="300" r="600" fill="url(#gAmber)" opacity="${f1(light * 0.6 * 100) / 100}"/>`;
+  s += hill(1330, 640, 900, '#1B1E22', '#060708') + crossFig(1330, 660, 0.9, { plaque: true, fill: '#050505', rim: RIM, bow: 1 });
+  if (o.extra) s += o.extra;
+  const fear = o.fear || 0, rim = light > 0.05 ? C.a300 : RIM;
+  [[290, 4101, 1.2, 838], [440, 4103, 1.16, 846]].forEach(([x, seed, sc, y], i) => (s += person({ ...soldado(seed), x: x - 50 * fear, y, s: sc, look: 1, mood: fear > 0.5 ? 'fear' : 'calm', t: t + i, shake: (o.shake || 0) * 6 + fear * 3, armR: 26, armL: lerp(14, 40, fear), gear: { helmet: 'rom', armor: true, spear: 'r' }, rim, noShadow: true })));
+  s += person({ ...CENT, x: 680 - 30 * fear * (o.fica ? 0 : 1), y: FLOOR_Y, s: 1.55, look: 1, mood: o.mood || (fear > 0.5 ? 'fear' : 'calm'), t, shake: (o.shake || 0) * 5 + fear * 2, armL: 18, armR: o.armR ?? 24, rim });
+  return s;
+}
+// "O centurião, o oficial dos soldados que tinham crucificado Jesus, viu como ele morreu. Viu o terremoto e
+// tudo o que tinha acontecido. Ele e os soldados ficaram aterrorizados."
+function scCenturiao(t) {
+  const a0 = antes(35), tq = wordTime(36, 'terremoto') - 0.2, ta = wordTime(37, 'aterrorizados') - 0.3;
+  const q = prog(t, tq - 0.1, tq + 0.2) * (1 - prog(t, fim(37) - 0.3, fim(37) + 0.4));
+  const fear = E.out(prog(t, ta - 0.5, ta + 0.3));
+  let extra = racha(820, W + 80, 900, E.out(prog(t, tq, tq + 1.0)), 11, { w: 11, amp: 22 });
+  extra += rocha(1660, 900, 0.85, E.out(prog(t, tq + 0.5, tq + 1.1)), 'r36') + cascalho(t, 1300, 1300, 520, 890, q * 0.7, { seed: 71 });
+  const s = centuriaoCena(t, { fear, shake: q, extra });
+  const k = E.inOut(prog(t, a0, seg(36))), back = E.inOut(prog(t, seg(37) - 0.3, seg(37) + 0.9));
+  const fx = lerp(lerp(960, 820, k), 900, back), z = lerp(lerp(1.03, 1.14, k), 1.06, back);
+  return { svg: camQ(s, fx, 560, z, 960, 560, q, t), html: '' };
+}
+// "E disseram: Verdadeiramente este era o Filho de Deus!" "Quem chamou Jesus de Filho de Deus naquela hora não
+// foi um sacerdote. Foi o oficial dos soldados que tinham pregado ele na cruz." A luz esquenta; a câmera vai até
+// o rosto do centurião e depois abre para mostrar os soldados dele.
+function scFilho(t) {
+  const tv = wordTime(38, 'verdadeiramente'), l = E.out(prog(t, tv - 0.3, tv + 0.6));
+  const up = E.out(prog(t, tv - 0.2, tv + 0.3)) * (1 - E.inOut(prog(t, seg(39) - 0.2, seg(39) + 0.6)));
+  const k39 = E.inOut(prog(t, seg(39) - 0.4, seg(39) + 1.0)), k40 = E.inOut(prog(t, seg(40) - 0.3, seg(40) + 1.1));
+  const s = centuriaoCena(t, { light: l, fear: 1 - E.out(prog(t, tv, tv + 0.6)), fica: true, mood: t > tv ? 'calm' : 'fear', armR: lerp(24, 112, up) });
+  const fx = lerp(lerp(lerp(900, 960, l), 630, k39), 560, k40), fy = lerp(lerp(560, 560, l), 520, k39), z = lerp(lerp(1.04, 1.1, l), 1.75, k39) - 0.5 * k40;
+  return { svg: cam(s, fx, lerp(fy, 600, k40), z, 960 - fx, lerp(0, -40, k39) * (1 - k40)), html: '' };
+}
+
+// ================================================================ 6. o povo e as mulheres (Lucas 23:48-49)
+// Desenho do cartão 6: as mulheres, de longe, olhando as cruzes.
+function artMulheres(t) {
+  let g = `<rect x="1160" y="260" width="680" height="540" fill="url(#skyGloom)"/>` + golgotaLonge(t, 1330, 520, 0.42, { bows: [0.35, 0.35, 1] });
+  g += rect(1160, 600, 680, 200, '#E2D8CC');
+  [[1560, 2411], [1680, 2412], [1790, 2413]].forEach(([x, seed]) => (g += person({ ...mulher(seed), x, y: 790, s: 0.95, look: -1, mood: 'sad' })));
+  return MOLDURA('mMul', g, '#E6E0D9');
+}
+const scCartao6 = cenaCartao(6, () => depois(40), artMulheres);
+// O lugar diante das cruzes, de tarde, depois das trevas.
+function diante(t) {
+  return bgGloom(t, { seed: 1041 }) + golgotaLonge(t, 1450, 560, 0.62, { bows: [0.35, 0.35, 1] }) + floor('day');
+}
+// "O povo que tinha ido ver a crucificação começou a bater no peito. E foi embora." (Lucas 23:48)
+const MULTIDAO = [[230, 2301, 0], [440, 2302, 0], [650, 2303, 0], [860, 2304, 0], [1070, 2305, 0], [330, 2306, 1], [560, 2307, 1], [790, 2308, 1], [1020, 2309, 1]];
+function scPovo(t) {
+  const tb = wordTime(42, 'bater') - 0.4, tv = seg(43) - 0.5;
+  let s = diante(t);
+  MULTIDAO.forEach(([x, seed, row], i) => {
+    const bate = prog(t, tb + (i % 3) * 0.12, tb + 0.4 + (i % 3) * 0.12), vai = E.in(prog(t, tv + (i % 5) * 0.12, tv + 1.9 + (i % 5) * 0.12));
+    const arm = lerp(14, lerp(-14, -50, Math.abs(Math.sin(t * 4.5 + i * 1.3))), bate * (1 - vai));
+    const P = row ? { y: FLOOR_Y, s: 1.2 } : { y: 800, s: 0.95, noShadow: true };
+    s += person({ ...(i % 4 === 1 ? mulher(seed) : povo(seed)), x: x - 1350 * vai, ...P, look: vai > 0 ? -1 : 1, mood: 'sad', armL: arm, walk: vai > 0 && vai < 1 ? t * 6 + i : null });
+  });
+  return { svg: cam(s, 960, 560, 1.02 + 0.04 * prog(t, at(42), at(44))), html: '' };
+}
+// "Mas quem conhecia Jesus ficou. As mulheres que tinham seguido ele desde a Galileia ficaram de longe,
+// observando." (Lucas 23:49) Ficam os conhecidos e as mulheres; a câmera vai até elas.
+function scMulheres(t) {
+  let s = diante(t);
+  [[250, 2401], [400, 2402]].forEach(([x, seed]) => (s += person({ ...povo(seed), x, y: 796, s: 0.92, look: 1, mood: 'sad', noShadow: true })));
+  [[560, 2411], [740, 2412], [920, 2413], [1090, 2414]].forEach(([x, seed], i) => (s += person({ ...mulher(seed), x, y: FLOOR_Y, s: 1.2, look: 1, mood: 'sad', armL: i === 1 ? 30 : 16, armR: i === 2 ? 26 : 14 })));
+  const k = E.inOut(prog(t, seg(45) - 0.2, seg(45) + 2.2));
+  const fx = lerp(960, 860, k);
+  return { svg: cam(s, fx, lerp(560, 600, k), lerp(1.02, 1.22, k), 960 - fx, lerp(0, -70, k)), html: '' };
+}
+
 // ================================================================ linha do tempo
 const SCENES = [
   // abertura
@@ -729,4 +813,12 @@ const SCENES = [
   { a: at(31), b: at(32), f: scCidade, ref: null },
   { a: at(32), b: at(33), f: scSoMateus, ref: null },
   { a: at(33), b: at(34), f: scQuemEram, ref: null },
+  // 5. o centurião
+  { a: at(34), b: antes(35), f: scCartao5, ref: null },
+  { a: antes(35), b: at(38), f: scCenturiao, ref: [[antes(35), 'Marcos 15:39'], [at(36), 'Mateus 27:54']], dark: true },
+  { a: at(38), b: depois(40), f: scFilho, ref: null, dark: true },
+  // 6. o povo e as mulheres
+  { a: depois(40), b: at(42), f: scCartao6, ref: null },
+  { a: at(42), b: at(44), f: scPovo, ref: 'Lucas 23:48' },
+  { a: at(44), b: at(46), f: scMulheres, ref: 'Lucas 23:49' },
 ];
