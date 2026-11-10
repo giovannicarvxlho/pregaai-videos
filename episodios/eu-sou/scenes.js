@@ -378,8 +378,8 @@ function lazaro(o) {
     ${[-150, -128, -106, -84, -62, -40, -18].map((yy, i) => `<line x1="-46" y1="${yy + (i % 2 ? 8 : 0)}" x2="46" y2="${yy + (i % 2 ? 0 : 8)}" stroke="${C.g400}" stroke-width="4"/>`).join('')}
     ${[-40, -24, -8].map((yy) => `<line x1="-22" y1="${yy}" x2="22" y2="${yy + 6}" stroke="${C.g400}" stroke-width="4"/>`).join('')}
     <circle cx="-43" cy="-68" r="14" fill="#F4F1EC" ${ink(4)}/><circle cx="43" cy="-68" r="14" fill="#F4F1EC" ${ink(4)}/>
-    <path d="M -40 -246 C -40 -262 40 -262 40 -246 L 42 -186 C 30 -176 -30 -176 -42 -186 Z" fill="#ECE6DC" ${ink(5)}/>
-    <line x1="-36" y1="-226" x2="36" y2="-220" stroke="${C.g400}" stroke-width="4"/><line x1="-38" y1="-204" x2="38" y2="-198" stroke="${C.g400}" stroke-width="4"/>
+    <path d="M -46 -184 C -52 -232 -34 -258 0 -258 C 34 -258 52 -232 46 -184 C 32 -172 16 -180 0 -172 C -16 -180 -32 -172 -46 -184 Z" fill="#ECE6DC" ${ink(5)}/>
+    <path d="M -20 -244 C -26 -222 -22 -202 -28 -182 M 18 -246 C 24 -224 18 -202 24 -180" stroke="${C.g400}" stroke-width="4" fill="none" stroke-linecap="round"/>
   </g>`;
   return opg(o.op ?? 1, g);
 }
