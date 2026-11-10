@@ -2,7 +2,7 @@
 
 **Episódio:** eu-sou (longo com 4:47 de narração e 4:57 com o cartão final; 3 curtos recortados da narração, cada um com abertura própria, aprovada em 2026-11-10) · **Palavra-chave principal:** os 7 eu sou de jesus · **Outras buscas:** eu sou o pão da vida, eu sou a luz do mundo, eu sou a ressurreição e a vida, antes de abraão nascer eu sou · **Base bíblica:** João 6:1-35; 8:12; 8:56-59; 9:1-7; 10:9-11; 11:17-44; 14:2-6; 15:5; 18:1-6; Êxodo 3:2-14
 
-Calendário (sugestão, para agendar tudo de uma vez no YouTube Studio, no TikTok Studio pelo computador e no Instagram): o longo sai na quinta, 12/11, às 19 h, no YouTube e no TikTok. Os curtos saem um por dia, de sexta a domingo: às 12 h no Shorts e no Instagram e às 19 h no TikTok. No TikTok, nunca no mesmo dia do longo.
+Calendário (decisão do Giovanni em 2026-11-10: o longo sai hoje, sem esperar a quinta): o longo sai hoje, terça, 10/11, no YouTube e no TikTok, assim que subir. Os curtos saem um por dia, de quarta a sexta (11 a 13/11): às 12 h no Shorts e no Instagram e às 19 h no TikTok. No TikTok, nunca no mesmo dia do longo.
 
 ## YouTube
 
@@ -10,10 +10,10 @@ Calendário (sugestão, para agendar tudo de uma vez no YouTube Studio, no TikTo
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-12 19:00 | `youtube/longo.mp4` (4:57, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
-| 2026-11-13 12:00 | `youtube/curto-01.mp4` (Shorts, 0:49) | quadro de ~5 s, escolhido no app |
-| 2026-11-14 12:00 | `youtube/curto-02.mp4` (Shorts, 0:49) | quadro de ~48 s, escolhido no app |
-| 2026-11-15 12:00 | `youtube/curto-03.mp4` (Shorts, 0:28) | quadro de ~27 s, escolhido no app |
+| 2026-11-10, hoje | `youtube/longo.mp4` (4:57, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
+| 2026-11-11 12:00 | `youtube/curto-01.mp4` (Shorts, 0:49) | quadro de ~5 s, escolhido no app |
+| 2026-11-12 12:00 | `youtube/curto-02.mp4` (Shorts, 0:49) | quadro de ~48 s, escolhido no app |
+| 2026-11-13 12:00 | `youtube/curto-03.mp4` (Shorts, 0:28) | quadro de ~27 s, escolhido no app |
 
 ### Vídeo longo: `youtube/longo.mp4`
 
@@ -144,10 +144,10 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-12 19:00 | `tiktok/longo.mp4` (4:47; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
-| 2026-11-13 19:00 | `tiktok/curto-01.mp4` (0:49) | `tiktok/curto-01-capa.jpg` |
-| 2026-11-14 19:00 | `tiktok/curto-02.mp4` (0:49) | `tiktok/curto-02-capa.jpg` |
-| 2026-11-15 19:00 | `tiktok/curto-03.mp4` (0:28) | `tiktok/curto-03-capa.jpg` |
+| 2026-11-10, hoje | `tiktok/longo.mp4` (4:47; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
+| 2026-11-11 19:00 | `tiktok/curto-01.mp4` (0:49) | `tiktok/curto-01-capa.jpg` |
+| 2026-11-12 19:00 | `tiktok/curto-02.mp4` (0:49) | `tiktok/curto-02-capa.jpg` |
+| 2026-11-13 19:00 | `tiktok/curto-03.mp4` (0:28) | `tiktok/curto-03-capa.jpg` |
 
 **Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto. Rótulo de IA opcional, porque a animação não é realista. Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
 
@@ -240,9 +240,9 @@ Os três curtos vão em **tela cheia**: sem as faixas escuras, com a cena maior 
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-13 12:00 | `instagram/curto-01.mp4` (0:49, tela cheia) | `instagram/curto-01-capa.jpg` |
-| 2026-11-14 12:00 | `instagram/curto-02.mp4` (0:49, tela cheia) | `instagram/curto-02-capa.jpg` |
-| 2026-11-15 12:00 | `instagram/curto-03.mp4` (0:28, tela cheia) | `instagram/curto-03-capa.jpg` |
+| 2026-11-11 12:00 | `instagram/curto-01.mp4` (0:49, tela cheia) | `instagram/curto-01-capa.jpg` |
+| 2026-11-12 12:00 | `instagram/curto-02.mp4` (0:49, tela cheia) | `instagram/curto-02-capa.jpg` |
+| 2026-11-13 12:00 | `instagram/curto-03.mp4` (0:28, tela cheia) | `instagram/curto-03-capa.jpg` |
 
 **Configurações de todos:**
 - Capa personalizada: a imagem da pasta. Não dá para trocar depois de publicar.
