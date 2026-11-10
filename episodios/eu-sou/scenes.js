@@ -1091,12 +1091,13 @@ const SCENES = [
   // fecho
   { a: seg(57) - 0.18, b: at(58), f: scAsSete, ref: null },
   { a: at(58), b: at(59), f: scLer, ref: null },
-  { a: at(59), b: 287.5, f: scQualDasSete, ref: null },
-  // aberturas dos curtos (só nos curtos): entram secas, sem a cena vizinha por baixo
-  { a: 287.5, b: 293.0, f: scDuasPalavras, ref: 'João 18:6', dark: true, cut: true },
-  { a: 293.0, b: at(62), f: scSepulcro, ref: 'João 11:17', cut: true },
-  { a: at(62), b: 298.05, f: scESaiu, ref: 'João 11:44' },
-  { a: 298.05, b: CARTAO_INICIO, f: scQuemTinhaPecado, ref: 'João 9:2', cut: true },
+  { a: at(59), b: seg(60) - 0.24, f: scQualDasSete, ref: null },
+  // aberturas dos curtos (só nos curtos): entram secas, sem a cena vizinha por baixo. Cada uma começa entre o fim
+  // do trecho anterior e o começo do seu (corte.json): 286,88 | 287,59; 292,86 | 293,17; 297,87 | 298,21.
+  { a: seg(60) - 0.24, b: seg(61) - 0.32, f: scDuasPalavras, ref: 'João 18:6', dark: true, cut: true },
+  { a: seg(61) - 0.32, b: at(62), f: scSepulcro, ref: 'João 11:17', cut: true },
+  { a: at(62), b: seg(63) - 0.31, f: scESaiu, ref: 'João 11:44' },
+  { a: seg(63) - 0.31, b: CARTAO_INICIO, f: scQuemTinhaPecado, ref: 'João 9:2', cut: true },
   // cartão final (o longo pula das frases do longo direto para cá: corte.json, cartao_inicio)
   { a: CARTAO_INICIO, b: DURATION + 1, f: scFim, ref: null, end: true, cut: true },
 ];
