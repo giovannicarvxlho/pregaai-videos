@@ -158,6 +158,8 @@ const Q = new URLSearchParams(location.search), EP = Q.get('ep');
 // Recorte vertical de um longo (curtos), título fixo e banner de CTA vêm da URL (tools/corte.cjs).
 const CHEIA = Q.get('layout') === 'cheia', RECORTE = Q.get('layout') === 'vertical' || CHEIA, TITULO = Q.get('titulo') || '', CTA = Q.get('cta') === '1';
 const REFS = Q.get('refs') ? JSON.parse(Q.get('refs')) : null; // referências do cartão final num corte
+// Frases que ficam num corte: a legenda de uma frase cortada não aparece (nem a sobra dela no começo do trecho seguinte).
+const FRASES = Q.get('frases') ? new Set(Q.get('frases').split(',').map(Number)) : null;
 document.write(`<script src="episodios/${EP}/data.js"><\/script>`);
 </script>
 <script src="lib.js"></script>
@@ -179,11 +181,16 @@ window.VW = RECORTE ? 1080 : W; window.VH = RECORTE ? 1920 : H;
 const CHUNKS = buildChunks(SEGS);
 const $fundo = document.getElementById('fundo'), $stage = document.getElementById('stage'), $scene = document.getElementById('scene'), $chrome = document.getElementById('chrome');
 
+// cut: true faz a cena entrar seca, sem o fade, e tira a anterior da tela (as aberturas dos curtos gravadas
+// depois da fala do longo e o cartão final: num corte, o 1º quadro do trecho não pode trazer a cena vizinha por baixo).
 function activeScenes(t) {
   const out = [];
   SCENES.forEach((sc, i) => {
-    const a = i === 0 ? -1 : sc.a - XF / 2, b = sc.end ? 1e9 : sc.b + XF / 2;
-    if (t >= a && t < b) out.push({ sc, op: i === 0 ? 1 : E.sine(prog(t, sc.a - XF / 2, sc.a + XF / 2)) });
+    const a = i === 0 ? -1 : sc.cut ? sc.a : sc.a - XF / 2, b = sc.end ? 1e9 : sc.b + XF / 2;
+    if (t >= a && t < b) {
+      if (sc.cut) out.length = 0;
+      out.push({ sc, op: i === 0 || sc.cut ? 1 : E.sine(prog(t, sc.a - XF / 2, sc.a + XF / 2)) });
+    }
   });
   return out;
 }
@@ -194,7 +201,7 @@ function captionHTML(t) {
   const i = CHUNKS.findIndex((c) => t >= c.t0 && t < c.t1);
   if (i < 0) return '';
   const c = CHUNKS[i];
-  if (c.hidden) return '';
+  if (c.hidden || (FRASES && !FRASES.has(c.seg))) return '';
   const next = CHUNKS[i + 1];
   const cut = next && Math.abs(next.t0 - c.t1) < 1e-6;
   const pin = E.out(prog(t, c.t0, c.t0 + 0.12)), pout = cut ? 1 : 1 - prog(t, c.t1 - 0.16, c.t1);
