@@ -910,7 +910,8 @@ function syl(w) {
 function buildChunks(SEGS) {
   const out = [];
   // spans (opcional): [início, fim] de cada bloco "|", quando a voz faz pausa dentro da frase.
-  SEGS.forEach(([a, b, raw, spans], si) => {
+  // wst (opcional, 5º item): o início de cada palavra, devolvido pela ElevenLabs (tools/tempos.py); deixa o wordTime exato.
+  SEGS.forEach(([a, b, raw, spans, wst], si) => {
     const hidden = raw.startsWith('!');
     const text = hidden ? raw.slice(1) : raw;
     const parts = text.split('|').map((p) => p.trim());
@@ -932,7 +933,8 @@ function buildChunks(SEGS) {
       let acc = 0;
       ws.forEach((x, i) => { x.t = a0 + (acc / total) * (b0 - a0) - 0.04; acc += weights[i]; });
     };
-    if (spans) parts.forEach((_, pi) => time(words.filter((x) => x.part === pi), ...spans[pi]));
+    if (wst && wst.length === words.length) words.forEach((x, i) => { x.t = wst[i] - 0.04; });
+    else if (spans) parts.forEach((_, pi) => time(words.filter((x) => x.part === pi), ...spans[pi]));
     else time(words, a, b);
     parts.forEach((_, pi) => {
       const ws = words.filter((x) => x.part === pi);
