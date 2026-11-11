@@ -29,7 +29,6 @@ const DISC = [JOAO, PEDRO, TOME, { ...man(1243), robe: C.p600, beard: true, cove
 // Povo (multidão, ouvintes, quem está de luto): roupa em meio-tom, para Jesus, o único de roupa clara e sem véu, se destacar.
 const TONS = [C.g600, C.p400, C.ch300, C.oliveDk, '#7B6A55', C.p600, '#9C8F70', C.g700, '#B9897A', '#8C7A62'];
 const povo = (seed, extra = {}) => { const r = rng(seed * 31 + 7); return { ...man(seed), robe: pick(r, TONS), ...extra }; };
-const lider = (seed, extra = {}) => ({ ...man(seed), cover: COVERS[seed % 4], beard: true, ...extra });
 const LIDERES = [lider(3101, { robe: C.ch300 }), lider(3102, { robe: '#5B3F7A' }), lider(3103, { robe: C.g700 }), lider(3104, { robe: C.p600, cover: C.g300 })];
 const mulher = (seed, extra = {}) => ({ ...povo(seed), beard: false, cover: ['#E2D8CF', C.g300, '#C9BBAE', C.g100][seed % 4], ...extra });
 const MARTA = { ...mulher(3301), robe: C.r400, cover: '#E2D8CF', skin: '#C68B59' };
@@ -44,28 +43,8 @@ const guarda = (seed) => ({ ...man(seed), cover: C.g700, beard: true, robe: C.ch
 
 // ---------------------------------------------------------------- utilidades (as mesmas do longo do Pedro)
 const SOMBRA_BAIXO = `<linearGradient id="gBaixo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></linearGradient><rect x="-200" y="760" width="${W + 400}" height="${H}" fill="url(#gBaixo)"/>`;
-const opg = (op, svg) => (op <= 0 ? '' : op >= 1 ? svg : `<g opacity="${f1(op * 100) / 100}">${svg}</g>`);
 // Corte dentro de uma cena, no meio da frase: cruza de A para B no mesmo tempo das trocas de cena.
-function xcut(t, tc, A, B) {
-  const p = E.sine(prog(t, tc - XF / 2, tc + XF / 2));
-  if (p <= 0) return A(t);
-  if (p >= 1) return B(t);
-  return A(t) + `<g opacity="${p.toFixed(3)}">${B(t)}</g>`;
-}
-const fala = (t, t0, t1, base = 20, amp = 30) => base + amp * Math.abs(Math.sin(t * 5.5)) * (t > t0 && t < t1 ? 1 : 0);
-function lagrimas(x, y, s, t, op = 1) {
-  let g = '';
-  [-12, 12].forEach((dx, i) => {
-    const ph = (t * 0.9 + i * 0.5) % 1, ty = y + s * (-200 + ph * 40);
-    g += `<path d="M ${f1(x + dx * s)} ${f1(ty)} q ${f1(-6 * s)} ${f1(10 * s)} 0 ${f1(14 * s)} q ${f1(6 * s)} ${f1(-4 * s)} 0 ${f1(-14 * s)} Z" fill="${C.b300}" opacity="${f1((1 - ph) * op * 100) / 100}"/>`;
-  });
-  return g;
-}
 // Onde fica a mão de uma pessoa (para pôr pão, tocha, cajado).
-function mao(o, side) {
-  const s = o.s || 1, f = o.flip ? -1 : 1, ang = (side > 0 ? o.armR : o.armL) ?? 14, r = (ang * Math.PI) / 180;
-  return [o.x + f * s * side * (34 + 86 * Math.sin(r)), o.y + s * (-154 + 86 * Math.cos(r) + (o.kneel ? 40 : 0))];
-}
 // Sentado (no chão, numa pedra baixa): o corpo ajoelhado com as pernas para a frente. o.rock põe a pedra.
 function sentado(o) {
   const s = o.s || 1, col = o.sil || C.g800, sw = o.sil ? 0 : f1(4 * s), ol = o.sil || o.ol || C.ink;
@@ -89,12 +68,6 @@ const lembranca = (svg) => SEPIA + `<g filter="url(#fSepia)">${svg}</g><rect x="
 const label = (x, y, txt, o = {}) => `<text x="${f1(x)}" y="${f1(y)}" text-anchor="${o.anchor || 'middle'}" font-family="${o.fam || 'Geist'}" font-weight="${o.w || 700}" font-size="${o.size || 36}" fill="${o.fill || C.inkDeep}" opacity="${f1((o.op ?? 1) * 100) / 100}">${o.html || esc(txt)}</text>`;
 
 // ---------------------------------------------------------------- a lista (1 a 7): a bolinha do longo das 7 frases
-function dot(x, y, n, sc = 1, op = 1) {
-  if (sc <= 0 || op <= 0) return '';
-  return `<g transform="translate(${f1(x)} ${f1(y)}) scale(${f1(sc * 100) / 100})" opacity="${f1(op * 100) / 100}">
-    <circle cy="8" r="42" fill="${C.ink}"/><circle r="42" fill="${C.b500}" stroke="${C.ink}" stroke-width="6"/>
-    <text y="16" text-anchor="middle" font-family="Geist" font-weight="800" font-size="46" fill="#fff">${n}</text></g>`;
-}
 // Marca do item no canto de cima à esquerda, quando o narrador diz "a primeira", "a segunda"...
 const tag = (t, t0, ...ns) => ns.map((n, k) => { const p = pop(t, t0 + k * 0.18, 0.45); return p > 0 ? dot(130 + k * 112, 120, n, p) : ''; }).join('');
 const EUSOU = [null,
@@ -978,17 +951,6 @@ function flores(x, y, s, t, seed) {
     g += `<line x1="${f1(dx)}" y1="0" x2="${f1(dx + sw)}" y2="${f1(-h)}" stroke="#3E4A3A" stroke-width="5" stroke-linecap="round"/><circle cx="${f1(dx + sw)}" cy="${f1(-h)}" r="10" fill="${col}" ${ink(3)}/>`;
   }
   return `<g transform="translate(${f1(x)} ${f1(y)}) scale(${s})">${g}</g>`;
-}
-function livro(x, y, s, t, turn) {
-  const pg = (side) => `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + side * 112 * s)} ${f1(y - 10 * s)} L ${f1(x + side * 104 * s)} ${f1(y - 74 * s)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FBF9F4" ${ink(4)}/>`;
-  let g = `<path d="M ${f1(x - 120 * s)} ${f1(y - 6 * s)} L ${f1(x)} ${f1(y + 8 * s)} L ${f1(x + 120 * s)} ${f1(y - 6 * s)} L ${f1(x + 116 * s)} ${f1(y + 4 * s)} L ${f1(x)} ${f1(y + 18 * s)} L ${f1(x - 116 * s)} ${f1(y + 4 * s)} Z" fill="${C.r600}" ${ink(4)}/>`;
-  g += pg(-1) + pg(1);
-  for (let k = 0; k < 4; k++) [-1, 1].forEach((sd) => (g += `<line x1="${f1(x + sd * 18 * s)}" y1="${f1(y - (50 - k * 11) * s)}" x2="${f1(x + sd * 92 * s)}" y2="${f1(y - (58 - k * 11) * s)}" stroke="${C.g400}" stroke-width="4" stroke-linecap="round"/>`));
-  if (turn > 0 && turn < 1) {
-    const k = Math.cos(Math.PI * turn), lift = Math.sin(Math.PI * turn) * 30 * s;
-    g += `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + k * 112 * s)} ${f1(y - 10 * s - lift)} L ${f1(x + k * 104 * s)} ${f1(y - 74 * s - lift)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FFFFFF" ${ink(4)}/>`;
-  }
-  return g;
 }
 function leitor(t, o = {}) {
   const x = o.x ?? 640;

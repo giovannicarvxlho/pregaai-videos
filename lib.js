@@ -989,3 +989,45 @@ function ctaBanner(tv, o = {}) {
     <img class="cta-icon" src="assets/icon.png"><div class="cta-app"><div class="cta-nome">PregaAI</div><div class="cta-txt">${linha}</div></div>${selo}</div>`;
 }
 
+
+// Peças que estavam copiadas em 3 ou mais episódios (movidas em 11/11/2026; a regra é: peça nova entra aqui).
+// Um episódio ainda pode ter a sua versão com "function" (vale só para ele); com "const", dá erro de nome repetido.
+function mao(o, side) {
+  const s = o.s || 1, f = o.flip ? -1 : 1, ang = (side > 0 ? o.armR : o.armL) ?? 14, r = (ang * Math.PI) / 180;
+  return [o.x + f * s * side * (34 + 86 * Math.sin(r)), o.y + s * (-154 + 86 * Math.cos(r) + (o.kneel ? 40 : 0))];
+}
+function xcut(t, tc, A, B) {
+  const p = E.sine(prog(t, tc - XF / 2, tc + XF / 2));
+  if (p <= 0) return A(t);
+  if (p >= 1) return B(t);
+  return A(t) + `<g opacity="${p.toFixed(3)}">${B(t)}</g>`;
+}
+const opg = (op, svg) => (op <= 0 ? '' : op >= 1 ? svg : `<g opacity="${f1(op * 100) / 100}">${svg}</g>`);
+const fala = (t, t0, t1, base = 20, amp = 30) => base + amp * Math.abs(Math.sin(t * 5.5)) * (t > t0 && t < t1 ? 1 : 0);
+function livro(x, y, s, t, turn) {
+  const pg = (side) => `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + side * 112 * s)} ${f1(y - 10 * s)} L ${f1(x + side * 104 * s)} ${f1(y - 74 * s)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FBF9F4" ${ink(4)}/>`;
+  let g = `<path d="M ${f1(x - 120 * s)} ${f1(y - 6 * s)} L ${f1(x)} ${f1(y + 8 * s)} L ${f1(x + 120 * s)} ${f1(y - 6 * s)} L ${f1(x + 116 * s)} ${f1(y + 4 * s)} L ${f1(x)} ${f1(y + 18 * s)} L ${f1(x - 116 * s)} ${f1(y + 4 * s)} Z" fill="${C.r600}" ${ink(4)}/>`;
+  g += pg(-1) + pg(1);
+  for (let k = 0; k < 4; k++) [-1, 1].forEach((sd) => (g += `<line x1="${f1(x + sd * 18 * s)}" y1="${f1(y - (50 - k * 11) * s)}" x2="${f1(x + sd * 92 * s)}" y2="${f1(y - (58 - k * 11) * s)}" stroke="${C.g400}" stroke-width="4" stroke-linecap="round"/>`));
+  if (turn > 0 && turn < 1) {
+    const k = Math.cos(Math.PI * turn), lift = Math.sin(Math.PI * turn) * 30 * s;
+    g += `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + k * 112 * s)} ${f1(y - 10 * s - lift)} L ${f1(x + k * 104 * s)} ${f1(y - 74 * s - lift)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FFFFFF" ${ink(4)}/>`;
+  }
+  return g;
+}
+const lider = (seed, extra = {}) => ({ ...man(seed), cover: COVERS[seed % 4], beard: true, ...extra });
+const flipX = (x, svg) => `<g transform="translate(${2 * x} 0) scale(-1 1)">${svg}</g>`;
+function lagrimas(x, y, s, t, op = 1) {
+  let g = '';
+  [-12, 12].forEach((dx, i) => {
+    const ph = (t * 0.9 + i * 0.5) % 1, ty = y + s * (-200 + ph * 40);
+    g += `<path d="M ${f1(x + dx * s)} ${f1(ty)} q ${f1(-6 * s)} ${f1(10 * s)} 0 ${f1(14 * s)} q ${f1(6 * s)} ${f1(-4 * s)} 0 ${f1(-14 * s)} Z" fill="${C.b300}" opacity="${f1((1 - ph) * op * 100) / 100}"/>`;
+  });
+  return g;
+}
+function dot(x, y, n, sc = 1, op = 1) {
+  if (sc <= 0 || op <= 0) return '';
+  return `<g transform="translate(${f1(x)} ${f1(y)}) scale(${f1(sc * 100) / 100})" opacity="${f1(op * 100) / 100}">
+    <circle cy="8" r="42" fill="${C.ink}"/><circle r="42" fill="${C.b500}" stroke="${C.ink}" stroke-width="6"/>
+    <text y="16" text-anchor="middle" font-family="Geist" font-weight="800" font-size="46" fill="#fff">${n}</text></g>`;
+}

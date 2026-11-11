@@ -24,28 +24,7 @@ const soldado = (seed) => ({ ...man(seed), cover: null, beard: false, robe: C.p6
 
 // Sombra na faixa da legenda, para a legenda clara ler em cima de roupa clara (closes à noite).
 const SOMBRA_BAIXO = `<linearGradient id="gBaixo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></linearGradient><rect x="-200" y="760" width="${W + 400}" height="${H}" fill="url(#gBaixo)"/>`;
-const flipX = (x, svg) => `<g transform="translate(${2 * x} 0) scale(-1 1)">${svg}</g>`;
-const opg = (op, svg) => (op <= 0 ? '' : op >= 1 ? svg : `<g opacity="${f1(op * 100) / 100}">${svg}</g>`);
 // Corte dentro de uma cena, no meio da frase: cruza de A para B no mesmo tempo das trocas de cena.
-function xcut(t, tc, A, B) {
-  const p = E.sine(prog(t, tc - XF / 2, tc + XF / 2));
-  if (p <= 0) return A(t);
-  if (p >= 1) return B(t);
-  return A(t) + `<g opacity="${p.toFixed(3)}">${B(t)}</g>`;
-}
-const fala = (t, t0, t1, base = 20, amp = 30) => base + amp * Math.abs(Math.sin(t * 5.5)) * (t > t0 && t < t1 ? 1 : 0);
-function lagrimas(x, y, s, t, op = 1) {
-  let g = '';
-  [-12, 12].forEach((dx, i) => {
-    const ph = (t * 0.9 + i * 0.5) % 1, ty = y + s * (-200 + ph * 40);
-    g += `<path d="M ${f1(x + dx * s)} ${f1(ty)} q ${f1(-6 * s)} ${f1(10 * s)} 0 ${f1(14 * s)} q ${f1(6 * s)} ${f1(-4 * s)} 0 ${f1(-14 * s)} Z" fill="${C.b300}" opacity="${f1((1 - ph) * op * 100) / 100}"/>`;
-  });
-  return g;
-}
-function mao(o, side) {
-  const s = o.s || 1, f = o.flip ? -1 : 1, ang = (side > 0 ? o.armR : o.armL) ?? 14, r = (ang * Math.PI) / 180;
-  return [o.x + f * s * side * (34 + 86 * Math.sin(r)), o.y + s * (-154 + 86 * Math.cos(r) + (o.kneel ? 40 : 0))];
-}
 // Sentado no chão (ou numa pedra baixa): o corpo ajoelhado com as pernas para a frente.
 function sentado(o) {
   const s = o.s || 1, col = o.sil || C.g800, sw = o.sil ? 0 : f1(4 * s);

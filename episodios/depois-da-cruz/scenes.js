@@ -15,7 +15,6 @@ const FLOOR_Y = 880; // pés dos personagens em primeiro plano (a legenda começ
 const NIGHT_OL = '#0E0D0C';
 
 const soldado = (seed, extra = {}) => ({ ...man(seed), cover: null, beard: false, robe: C.p600, gear: { helmet: 'rom', armor: true }, ...extra });
-const lider = (seed, extra = {}) => ({ ...man(seed), cover: COVERS[seed % 4], beard: true, ...extra });
 const mulher = (seed, extra = {}) => ({ ...man(seed), beard: false, cover: ['#E2D8CF', C.g300, '#C9BBAE', C.g100][seed % 4], ...extra });
 const JESUS = { robe: '#E9E1D8', skin: '#B97A4A', hair: '#2F2622', beard: true };
 const VIVO = { ...JESUS, robe: '#FFFFFF' }; // Jesus ressuscitado: em pé, com rosto
@@ -32,26 +31,13 @@ const PAULO = { robe: C.g600, skin: '#C68B59', hair: '#3A2A20', beard: true, bal
 
 // Texto em SVG (rótulos curtos).
 const label = (x, y, txt, o = {}) => `<text x="${f1(x)}" y="${f1(y)}" text-anchor="middle" font-family="${o.fam || 'Geist'}" font-weight="${o.w || 700}" font-size="${o.size || 36}" fill="${o.fill || C.inkDeep}" opacity="${f1((o.op ?? 1) * 100) / 100}">${esc(txt)}</text>`;
-const flipX = (x, svg) => `<g transform="translate(${2 * x} 0) scale(-1 1)">${svg}</g>`;
-const opg = (op, svg) => (op <= 0 ? '' : op >= 1 ? svg : `<g opacity="${f1(op * 100) / 100}">${svg}</g>`);
 // Corte dentro de uma cena, no meio da frase: cruza de A para B no mesmo tempo das trocas de cena.
-function xcut(t, tc, A, B) {
-  const p = E.sine(prog(t, tc - XF / 2, tc + XF / 2));
-  if (p <= 0) return A(t);
-  if (p >= 1) return B(t);
-  return A(t) + `<g opacity="${p.toFixed(3)}">${B(t)}</g>`;
-}
 // Sombra na faixa da legenda, para a legenda clara ler em cima de um fundo que muda de luz.
 const SOMBRA_BAIXO = `<linearGradient id="gBaixo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.5"/></linearGradient><rect x="-200" y="720" width="${W + 400}" height="${H}" fill="url(#gBaixo)"/>`;
 // Tremor de câmera (a mesma conta do véu no longo 1).
 const quakeCam = (inner, cx, cy, z, q, t) => cam(inner, cx, cy, z, Math.sin(t * 43) * 12 * q, Math.cos(t * 37) * 8 * q);
 // Braço que fala: sobe e desce enquanto a frase dura.
-const fala = (t, t0, t1, base = 20, amp = 30) => base + amp * Math.abs(Math.sin(t * 5.5)) * (t > t0 && t < t1 ? 1 : 0);
 // Onde fica a mão de uma pessoa (para pôr bolsa, pão, livro).
-function mao(o, side) {
-  const s = o.s || 1, f = o.flip ? -1 : 1, ang = (side > 0 ? o.armR : o.armL) ?? 14, r = (ang * Math.PI) / 180;
-  return [o.x + f * s * side * (34 + 86 * Math.sin(r)), o.y + s * (-154 + 86 * Math.cos(r) + (o.kneel ? 40 : 0))];
-}
 // Sentado (na pedra, no chão): o corpo ajoelhado com as pernas para a frente. o.rock põe uma pedra baixa embaixo.
 function sentado(o) {
   const s = o.s || 1, col = o.sil || C.g800, sw = o.sil ? 0 : f1(4 * s);
@@ -66,14 +52,6 @@ function caido(o, ang) {
   return g + `<g transform="translate(0 ${f1(-44 * s * k * k * k)}) rotate(${f1(ang)} ${f1(o.x)} ${f1(o.y)})">${person({ ...o, noShadow: k > 0.2 })}</g>`;
 }
 // Lágrimas que escorrem dos olhos de quem tem os pés em (x, y) e escala s.
-function lagrimas(x, y, s, t, op = 1) {
-  let g = '';
-  [-12, 12].forEach((dx, i) => {
-    const ph = (t * 0.9 + i * 0.5) % 1, ty = y + s * (-200 + ph * 40);
-    g += `<path d="M ${f1(x + dx * s)} ${f1(ty)} q ${f1(-6 * s)} ${f1(10 * s)} 0 ${f1(14 * s)} q ${f1(6 * s)} ${f1(-4 * s)} 0 ${f1(-14 * s)} Z" fill="${C.b300}" opacity="${f1((1 - ph) * op * 100) / 100}"/>`;
-  });
-  return g;
-}
 // Pássaros que levantam voo (traço em V).
 function passaros(t, t0, x0, y0, n = 5, col = C.ink, sp = 1, vy = 1) {
   let g = '';
@@ -893,17 +871,6 @@ function scEuVi(t) {
 // Cena calma, igual no YouTube e no TikTok (sem selo nem cartão): alguém lê a Bíblia ao amanhecer.
 // Na última frase ("agora vem a história que eles pagaram pra contar") a câmera vai até a cidade.
 const LEITOR = { ...man(1401), robe: C.b500, cover: null, beard: true, skin: '#C68B59', hair: '#2F2622' };
-function livro(x, y, s, t, turn) {
-  const pg = (side) => `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + side * 112 * s)} ${f1(y - 10 * s)} L ${f1(x + side * 104 * s)} ${f1(y - 74 * s)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FBF9F4" ${ink(4)}/>`;
-  let g = `<path d="M ${f1(x - 120 * s)} ${f1(y - 6 * s)} L ${f1(x)} ${f1(y + 8 * s)} L ${f1(x + 120 * s)} ${f1(y - 6 * s)} L ${f1(x + 116 * s)} ${f1(y + 4 * s)} L ${f1(x)} ${f1(y + 18 * s)} L ${f1(x - 116 * s)} ${f1(y + 4 * s)} Z" fill="${C.r600}" ${ink(4)}/>`;
-  g += pg(-1) + pg(1);
-  for (let k = 0; k < 4; k++) [-1, 1].forEach((sd) => (g += `<line x1="${f1(x + sd * 18 * s)}" y1="${f1(y - (50 - k * 11) * s)}" x2="${f1(x + sd * 92 * s)}" y2="${f1(y - (58 - k * 11) * s)}" stroke="${C.g400}" stroke-width="4" stroke-linecap="round"/>`));
-  if (turn > 0 && turn < 1) {
-    const k = Math.cos(Math.PI * turn), lift = Math.sin(Math.PI * turn) * 30 * s;
-    g += `<path d="M ${f1(x)} ${f1(y)} L ${f1(x + k * 112 * s)} ${f1(y - 10 * s - lift)} L ${f1(x + k * 104 * s)} ${f1(y - 74 * s - lift)} L ${f1(x)} ${f1(y - 62 * s)} Z" fill="#FFFFFF" ${ink(4)}/>`;
-  }
-  return g;
-}
 function leitor(t, o = {}) {
   let s = bgSunrise(t, { sunX: o.sunX ?? 1420, sunY: o.sunY ?? 430, seed: 31 });
   s += city(1720, GROUND + 4, 0.42, t);

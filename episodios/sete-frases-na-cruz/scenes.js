@@ -24,7 +24,6 @@ function golgotaWide(t, o = {}) {
 const JESUS = { robe: '#E9E1D8', skin: '#B97A4A', hair: '#2F2622', beard: true };
 const MANTO = '#A33A44'; // manto vermelho (Mateus 27:28)
 const PILATOS = { robe: '#F4F1EC', skin: '#E0AC69', hair: '#3A2A20', beard: false };
-const lider = (seed, extra = {}) => ({ ...man(seed), cover: COVERS[seed % 4], beard: true, ...extra });
 const mulher = (seed, extra = {}) => ({ ...man(seed), beard: false, cover: ['#E2D8CF', C.g300, '#C9BBAE', C.g100][seed % 4], ...extra });
 const NIGHT_OL = '#0E0D0C';
 
@@ -83,12 +82,6 @@ const BOOKS = [
   { name: 'João', ref: '19:26-27, 28, 30', x: 1590, dots: [3, 5, 6] },
 ];
 const CARD = { top: 330, w: 360, h: 380 };
-function dot(x, y, n, sc = 1, op = 1) {
-  if (sc <= 0 || op <= 0) return '';
-  return `<g transform="translate(${f1(x)} ${f1(y)}) scale(${f1(sc * 100) / 100})" opacity="${f1(op * 100) / 100}">
-    <circle cy="8" r="42" fill="${C.ink}"/><circle r="42" fill="${C.b500}" stroke="${C.ink}" stroke-width="6"/>
-    <text y="16" text-anchor="middle" font-family="Geist" font-weight="800" font-size="46" fill="#fff">${n}</text></g>`;
-}
 function bookCard(b, i, t, k) {
   const { pin, out, hl } = k;
   if (pin <= 0 || out >= 1) return '';
@@ -421,7 +414,6 @@ function scLideresW(t) {
   return { svg: cam(s, 960, 540, 1.0 + 0.05 * prog(t, at(L(5, 1)), at(L(5, 2)))), html: '' };
 }
 // Os dois criminosos (Mateus 27:44; Marcos 15:32; Lucas 23:39-43).
-const flipX = (x, svg) => `<g transform="translate(${2 * x} 0) scale(-1 1)">${svg}</g>`;
 function shout(x, y, dir, t, on, col) {
   if (on <= 0) return '';
   let g = '';
