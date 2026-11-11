@@ -55,9 +55,6 @@ const roda = (cmd, args) => {
     else erro(linha || 'ElevenLabs', 'plano pago e ELEVENLABS_API_KEY=... no .env.local da raiz (veja o README)');
   }
 
-  if (roda('pandoc', ['--version'])) ok('pandoc (documentos .docx da entrega)');
-  else erro('pandoc (documentos .docx da entrega)', WIN ? 'winget install -e --id JohnMacFarlane.Pandoc' : MAC ? 'brew install pandoc' : 'sudo apt install pandoc');
-
   if (fs.existsSync(path.join(R, '..', 'pregaai', 'assets', 'bible', 'nvi.json'))) ok('NVI (../pregaai/assets/bible/nvi.json)');
   else aviso('NVI não encontrada em ../pregaai/assets/bible/nvi.json', 'clone o repo pregaai na mesma pasta deste, para conferir o roteiro');
 
