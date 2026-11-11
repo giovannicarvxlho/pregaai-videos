@@ -17,16 +17,18 @@
 #   out/<ep>-miniatura-*.jpg        miniaturas do YouTube (Testar e comparar)  <- episodios/<ep>/miniatura-*.html
 #   out/<ep>-capa-tiktok.jpg        capa do longo no TikTok, 1080×1920         <- episodios/<ep>/capa-tiktok.html
 #   out/<ep>-curto-<n>.mp4          curtos recortados do longo
-#   out/<ep>-curto-<n>-ig.mp4       o mesmo curto em tela cheia, para o Instagram (layout "cheia" do corte.cjs), se houver
+#   out/<ep>-curto-<n>-ig.mp4       o mesmo curto em tela cheia (layout "cheia" do corte.cjs), o que vai para as três redes
 #   out/<ep>-curto-<n>-capa.jpg     capa de cada curto, 1080×1920              <- episodios/<ep>/curto-<n>-capa.html
 #   out/<ep>-capa.jpg               capa, quando o episódio é um curto          <- episodios/<ep>/capa.html
 #   episodios/<ep>/legenda.srt      legenda do longo no YouTube, se houver
 #   episodios/<ep>/publicacao.md    o texto de tudo, com uma seção por rede (modelo em modelos/publicacao.md)
 #
 # O longo vai para o YouTube e o TikTok; os curtos para o YouTube (Shorts), o TikTok e o Instagram, o mesmo arquivo
+# em tela cheia, sem as faixas escuras em cima e embaixo (pedido do Giovanni em 11/11/2026; antes, só o Instagram).
+# Sem a versão em tela cheia, vai o recorte com faixas, com aviso.
 # nas três pastas. O Shorts não recebe capa: ela não sobe por arquivo, e o documento diz qual quadro escolher.
 # Saída: out/pacote/<AAAA-MM-DD>-<ep>/ e out/pacote/<AAAA-MM-DD>-<ep>.zip (e a cópia no Drive, se configurada)
-import datetime, glob, os, re, shutil, sys, zipfile
+import datetime, glob, json, os, re, shutil, subprocess, sys, zipfile
 
 REDES = {'youtube': 'YouTube', 'tiktok': 'TikTok', 'instagram': 'Instagram'}
 
@@ -112,7 +114,6 @@ longo = os.path.exists(dados) and "FORMAT = 'wide'" in open(dados, encoding='utf
 # Episódio montado por corte (tools/corte.cjs) a partir de um longo: tem corte.json com uma saída horizontal.
 corte = os.path.join(epd, 'corte.json')
 if not longo and os.path.exists(corte):
-    import json
     longo = any(not x.get('layout') for x in json.load(open(corte, encoding='utf-8'))['saidas'])
 o = lambda f: os.path.join(out, f)
 copias = []  # (origem, destino relativo)
@@ -121,6 +122,7 @@ def pega(origem, *rels):
         copias.extend((origem, r) for r in rels)
 
 curtos = []  # (vídeo, capa)
+sem_cheia = []  # curtos recortados de um longo que não têm a versão em tela cheia
 if longo:
     pega(o(f'{ep}.mp4'), 'youtube/longo.mp4')
     pega(o(f'{ep}-tiktok.mp4') if os.path.exists(o(f'{ep}-tiktok.mp4')) else o(f'{ep}.mp4'), 'tiktok/longo.mp4')
@@ -128,15 +130,19 @@ if longo:
     pega(os.path.join(epd, 'legenda.srt'), 'youtube/legenda.srt')
     for m in sorted(glob.glob(o(f'{ep}-miniatura*.jpg'))):
         pega(m, 'youtube/' + os.path.basename(m)[len(ep) + 1:])
-    vert = [c for c in glob.glob(o(f'{ep}-curto-*.mp4')) if re.search(r'-curto-\d+\.mp4$', c)]
-    for c in sorted(vert, key=lambda c: int(re.search(r'-curto-(\d+)\.mp4$', c).group(1))):
-        curtos.append((c, c[:-4] + '-capa.jpg'))
+    # cada curto pelo número, venha do recorte com faixas (<ep>-curto-<n>.mp4) ou só da tela cheia (-ig)
+    nums = sorted({int(m.group(1)) for c in glob.glob(o(f'{ep}-curto-*.mp4'))
+                   if (m := re.search(r'-curto-(\d+)(?:-ig)?\.mp4$', c))})
+    for k in nums:
+        curtos.append((o(f'{ep}-curto-{k}.mp4'), o(f'{ep}-curto-{k}-capa.jpg')))
 else:
     curtos.append((o(f'{ep}.mp4'), o(f'{ep}-capa.jpg')))
 for n, (video, capa) in enumerate(curtos, 1):
-    ig = video[:-4] + '-ig.mp4'  # tela cheia, sem faixas escuras: o Instagram evita recomendar Reels com bordas
-    pega(video, f'youtube/curto-{n:02d}.mp4', f'tiktok/curto-{n:02d}.mp4')
-    pega(ig if os.path.exists(ig) else video, f'instagram/curto-{n:02d}.mp4')
+    cheia = video[:-4] + '-ig.mp4'  # tela cheia, sem as faixas escuras (o nome -ig ficou de quando era só do Instagram)
+    if longo and not os.path.exists(cheia):
+        sem_cheia.append(n)
+    pega(cheia if os.path.exists(cheia) else video,
+         f'youtube/curto-{n:02d}.mp4', f'tiktok/curto-{n:02d}.mp4', f'instagram/curto-{n:02d}.mp4')
     pega(capa, f'tiktok/curto-{n:02d}-capa.jpg', f'instagram/curto-{n:02d}-capa.jpg')
 
 for origem, rel in copias:
@@ -172,12 +178,47 @@ for f in sorted(citados - no_pacote):
 for f in sorted(r for r in no_pacote if r.endswith(('.mp4', '.jpg')) and r not in citados):
     avisos.append(f'{f} está no pacote, mas o documento não diz como usar')
 for n, (video, capa) in enumerate(curtos, 1):
-    if os.path.exists(video) and not os.path.exists(capa):
+    if (os.path.exists(video) or os.path.exists(video[:-4] + '-ig.mp4')) and not os.path.exists(capa):
         avisos.append(f'curto {n:02d} sem capa (TikTok e Instagram): gere {os.path.relpath(capa, raiz)}')
 if longo and not glob.glob(o(f'{ep}-miniatura*.jpg')):
     avisos.append('longo sem miniaturas do YouTube: gere as 3 do Testar e comparar')
 if longo and not os.path.exists(o(f'{ep}-capa-tiktok.jpg')):
     avisos.append(f'longo sem capa do TikTok: gere out/{ep}-capa-tiktok.jpg (episodios/{ep}/capa-tiktok.html)')
+for n in sem_cheia:
+    avisos.append(f'curto {n:02d} sem a versão em tela cheia (saída "<ep>-curto-{n}-ig", layout "cheia", no corte.json):'
+                  ' foi o recorte com faixas escuras para as três redes')
+
+# Duração e tamanho de cada vídeo, pelas regras de cada rede (especificações no AGENTS.md).
+def medir(arq):
+    try:
+        r = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
+                            'stream=width,height:format=duration', '-of', 'json', arq],
+                           capture_output=True, text=True, check=True)
+        j = json.loads(r.stdout)
+        st = j['streams'][0]
+        return int(st['width']), int(st['height']), float(j['format']['duration'])
+    except Exception:
+        return None
+mmss = lambda s: f'{int(s // 60)}:{int(round(s % 60)):02d}'
+if shutil.which('ffprobe'):
+    for origem, rel in copias:
+        if not rel.endswith('.mp4'):
+            continue
+        m = medir(origem)
+        if not m or m[2] < 1:  # arquivo que não é vídeo de verdade (teste) ou ilegível
+            continue
+        w, h, dur = m
+        curto = '/curto-' in rel
+        if (curto or rel.startswith('instagram/')) and (w, h) != (1080, 1920):
+            avisos.append(f'{rel} está em {w}×{h}; curto e Reel saem em 1080×1920 (9:16)')
+        if rel.startswith('instagram/') and dur > 180:
+            avisos.append(f'{rel} tem {mmss(dur)}: Reel acima de 3 min não é recomendado a quem não segue a conta')
+        if rel.startswith('youtube/curto-') and dur > 180:
+            avisos.append(f'{rel} tem {mmss(dur)}: acima de 3 min o YouTube não trata como Short')
+        if rel == 'youtube/longo.mp4' and dur > 300:
+            avisos.append(f'{rel} tem {mmss(dur)}: o longo vai de 4 a 5 min, nunca mais de 5 (regra de 06/11/2026)')
+else:
+    print('(sem o ffprobe: duração e tamanho dos vídeos não foram conferidos)')
 if not any(r.endswith('.mp4') for r in no_pacote):
     avisos.append('nenhum vídeo encontrado em out/: rode o build.sh antes')
 

@@ -7,8 +7,8 @@
 //
 // Campos de cada saída: nome (sai em out/<nome>.mp4), frases (na ordem em que entram no vídeo), cartao (segundos do cartão final, sem áudio),
 // SO_MAPA=1 só escreve out/<nome>.corte.json, para revisar quadros com CORTE=... node preview.cjs.
-// tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão; com um índice de frase, termina nela), layout ("vertical" para curto; "cheia" para o curto do
-// Instagram, sem faixas escuras: a cena maior no meio e a mesma cena desfocada em volta), titulo (texto fixo
+// tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão; com um índice de frase, termina nela), layout ("cheia" para curto, a versão que vai para as três
+// redes: sem faixas escuras, a cena maior no meio e a mesma cena desfocada em volta; "vertical": recorte com faixas), titulo (texto fixo
 // em cima, no curto; *palavra* sai em azul), cta (banner do app a cada 30 s) e refs (as referências do cartão final,
 // quando o corte tira capítulos que o cartão da origem citava).
 const { execFileSync, spawn } = require('child_process');
