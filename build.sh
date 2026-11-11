@@ -7,8 +7,10 @@ EP=${1:?uso: bash build.sh <episódio>}
 D=episodios/$EP
 N=${N:-3}
 mkdir -p out && rm -f out/seg_*.mp4
-for k in $(seq 0 $((N - 1))); do node render.cjs "$EP" $k $N out/seg_$k.mp4 & done
-wait
+# Espera cada processo pelo PID e para se algum falhar (antes, um "wait" sem PID seguia com um pedaço faltando).
+PIDS=()
+for k in $(seq 0 $((N - 1))); do node render.cjs "$EP" $k $N out/seg_$k.mp4 & PIDS+=($!); done
+for p in "${PIDS[@]}"; do wait "$p" || { echo "✘ um processo de render falhou (veja o erro acima)" >&2; exit 1; }; done
 for k in $(seq 0 $((N - 1))); do echo "file 'seg_$k.mp4'"; done > out/list.txt
 read DUR SPEED < <(node -e "const fs=require('fs');eval(fs.readFileSync('$D/data.js','utf8').replace(/const /g,'var '));console.log(DURATION, typeof SPEED==='undefined'?1:SPEED)")
 # T0/T1 (segundos) geram só um trecho: out/<ep>-<T0>.mp4
