@@ -17,6 +17,7 @@ npx playwright install chromium              # o navegador que fotografa os quad
 python3 -m pip install -r tools/requirements.txt   # Whisper (sherpa-onnx) e Pillow
 python3 tools/baixar_modelo.py               # modelo do Whisper em tools/modelos
 npm run checar                               # confere tudo e diz o comando de cada item faltando
+npm test                                     # testa todos os episódios (roda também no GitHub a cada push e PR)
 ```
 
 No Windows, se `python3` não existir, use `python`. O `checar` avisa.
