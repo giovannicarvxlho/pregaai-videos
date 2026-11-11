@@ -1,8 +1,15 @@
 # Monta a pasta de entrega de um episódio, uma subpasta por rede social, pronta para subir no Drive:
 #   python3 tools/pacote.py <ep>
-# Cada pasta (youtube/, tiktok/, instagram/) leva os vídeos e as capas daquela rede e um documento .docx só dela,
-# que o Drive abre como Google Docs. Gera também um .zip para subir tudo de uma vez.
-# Não renderiza nada: rode antes o build.sh e o capa.cjs. Precisa do pandoc (o npm run checar confere).
+# Cada pasta (youtube/, tiktok/, instagram/) leva os vídeos e as capas daquela rede e um texto .txt só dela
+# (publicacao-<rede>.txt), para copiar e colar nos apps (pedido do Giovanni em 11/11/2026, no lugar do .docx).
+# Gera também um .zip para subir tudo de uma vez. Não renderiza nada: rode antes o build.sh e o capa.cjs.
+#
+# O zip abre numa pasta só: dentro dele ficam direto youtube/, tiktok/ e instagram/, sem repetir o nome do
+# pacote (o "Extrair tudo" do Windows já cria a pasta com o nome do zip; pedido do Giovanni em 11/11/2026).
+#
+# Drive no computador: com PACOTE_DRIVE=<pasta> no ambiente ou no .env.local da raiz (fora do git), o pacote
+# também é copiado para <pasta>/<AAAA-MM-DD>-<ep>/. Use uma pasta sincronizada pelo Google Drive para computador
+# (ex.: PACOTE_DRIVE=G:\Meu Drive\PregaAI\Pacotes), e o Drive sobe sozinho.
 #
 # O que ele procura (os nomes que o build.sh e o capa.cjs geram):
 #   out/<ep>.mp4                    o longo. Se o episódio for um curto, é o curto 01.
@@ -18,10 +25,65 @@
 #
 # O longo vai para o YouTube e o TikTok; os curtos para o YouTube (Shorts), o TikTok e o Instagram, o mesmo arquivo
 # nas três pastas. O Shorts não recebe capa: ela não sobe por arquivo, e o documento diz qual quadro escolher.
-# Saída: out/pacote/<AAAA-MM-DD>-<ep>/ e out/pacote/<AAAA-MM-DD>-<ep>.zip
-import datetime, glob, os, re, shutil, subprocess, sys, tempfile, zipfile
+# Saída: out/pacote/<AAAA-MM-DD>-<ep>/ e out/pacote/<AAAA-MM-DD>-<ep>.zip (e a cópia no Drive, se configurada)
+import datetime, glob, os, re, shutil, sys, zipfile
 
 REDES = {'youtube': 'YouTube', 'tiktok': 'TikTok', 'instagram': 'Instagram'}
+
+
+def config(nome):
+    """Valor do ambiente ou do .env.local da raiz (o mesmo arquivo da chave da ElevenLabs)."""
+    if os.environ.get(nome):
+        return os.environ[nome].strip()
+    p = os.path.join(raiz, '.env.local')
+    if os.path.exists(p):
+        for linha in open(p, encoding='utf-8'):
+            k, _, v = linha.strip().partition('=')
+            if k.strip() == nome and v.strip():
+                return v.strip().strip('"\'')
+    return ''
+
+
+def inline(t):
+    """Tira a marcação de uma linha: negrito, código e links; o texto fica igual."""
+    t = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'\1 (\2)', t)
+    t = re.sub(r'\*\*(.+?)\*\*', r'\1', t)
+    return t.replace('`', '')
+
+
+def para_txt(md):
+    """Markdown do publicacao.md -> texto puro para copiar e colar. O que está entre ``` sai como está."""
+    saida, bloco = [], False
+    for linha in md.splitlines():
+        if linha.strip().startswith('```'):
+            bloco = not bloco
+            saida.append('')
+            continue
+        if bloco:
+            saida.append(linha)
+            continue
+        m = re.match(r'^(#{1,6})\s+(.*)$', linha)
+        if m:
+            nivel, titulo = len(m.group(1)), inline(m.group(2)).strip()
+            if nivel <= 2:
+                saida += ['', titulo.upper(), '=' * len(titulo), '']
+            elif nivel == 3:
+                saida += ['', titulo, '-' * len(titulo), '']
+            else:
+                saida += ['', '> ' + titulo, '']
+            continue
+        if re.match(r'^\s*\|?\s*:?-{3,}', linha):  # linha separadora da tabela
+            continue
+        if linha.strip().startswith('|'):
+            celulas = [inline(c).strip() for c in linha.strip().strip('|').split('|')]
+            saida.append('  ·  '.join(c for c in celulas if c))
+            continue
+        linha = re.sub(r'^>\s?', '', linha)
+        saida.append(inline(linha).rstrip())
+    texto = '\n'.join(saida)
+    texto = re.sub(r'\n{3,}', '\n\n', texto).strip() + '\n'
+    return texto
+
 
 if len(sys.argv) < 2:
     sys.exit('uso: python3 tools/pacote.py <ep>')
@@ -33,9 +95,6 @@ if not os.path.isdir(epd):
 pub = os.path.join(epd, 'publicacao.md')
 if not os.path.exists(pub):
     sys.exit(f'✘ falta episodios/{ep}/publicacao.md (copie de modelos/publicacao.md e preencha)')
-if not shutil.which('pandoc'):
-    sys.exit('✘ falta o pandoc, que gera os .docx. Windows: winget install -e --id JohnMacFarlane.Pandoc'
-             ' · Mac: brew install pandoc · Linux: sudo apt install pandoc')
 
 try:
     from zoneinfo import ZoneInfo
@@ -85,7 +144,7 @@ for origem, rel in copias:
     shutil.copy2(origem, os.path.join(dest, rel))
     print('  ', rel)
 
-# ---------------------------------------------------------------- um documento por rede
+# ---------------------------------------------------------------- um texto por rede
 texto = open(pub, encoding='utf-8').read()
 texto_limpo = re.sub(r'<!--.*?-->', '', texto, flags=re.S)
 cabecalho = re.split(r'^## ', texto_limpo, maxsplit=1, flags=re.M)[0]
@@ -97,12 +156,11 @@ for pasta, titulo in REDES.items():
         avisos.append(f'o publicacao.md não tem a seção "## {titulo}"')
         continue
     os.makedirs(os.path.join(dest, pasta), exist_ok=True)
-    with tempfile.NamedTemporaryFile('w', suffix='.md', delete=False, encoding='utf-8') as tmp:
-        tmp.write(cabecalho.rstrip() + f'\n\n## {titulo}\n' + corpo)
-    docx = os.path.join(dest, pasta, f'publicacao-{pasta}.docx')
-    subprocess.run(['pandoc', tmp.name, '-f', 'markdown', '-o', docx], check=True)
-    os.unlink(tmp.name)
-    print(f'   {pasta}/publicacao-{pasta}.docx')
+    txt = os.path.join(dest, pasta, f'publicacao-{pasta}.txt')
+    # utf-8 com BOM: o visualizador do Drive e o Bloco de Notas acertam os acentos e os emojis
+    with open(txt, 'w', encoding='utf-8-sig', newline='\n') as f:
+        f.write(para_txt(cabecalho.rstrip() + f'\n\n## {titulo}\n' + corpo))
+    print(f'   {pasta}/publicacao-{pasta}.txt')
 
 # ---------------------------------------------------------------- conferência
 if '<!--' in texto or re.search(r'<[^<>\n]{1,60}>', texto_limpo):
@@ -129,10 +187,20 @@ with zipfile.ZipFile(arq_zip, 'w') as z:
         for a in sorted(arquivos):
             caminho = os.path.join(pasta, a)
             modo = zipfile.ZIP_STORED if a.endswith(('.mp4', '.jpg', '.png')) else zipfile.ZIP_DEFLATED
-            z.write(caminho, os.path.join(nome, os.path.relpath(caminho, dest)), compress_type=modo)
+            z.write(caminho, os.path.relpath(caminho, dest), compress_type=modo)
 
 mb = os.path.getsize(arq_zip) / 1e6
 print(f'\npasta: {dest}\nzip:   {arq_zip} ({mb:.0f} MB)')
+
+drive = config('PACOTE_DRIVE')
+if drive:
+    if os.path.isdir(drive):
+        destino = os.path.join(drive, nome)
+        shutil.rmtree(destino, ignore_errors=True)
+        shutil.copytree(dest, destino)
+        print(f'drive: {destino}')
+    else:
+        avisos.append(f'PACOTE_DRIVE aponta para {drive}, que não existe: o pacote não foi copiado para o Drive')
 for a in avisos:
     print('! ' + a)
 sys.exit(1 if avisos else 0)

@@ -16,7 +16,6 @@ npm i                                        # Playwright e fontes da marca (Gei
 npx playwright install chromium              # o navegador que fotografa os quadros
 python3 -m pip install -r tools/requirements.txt   # Whisper (sherpa-onnx) e Pillow
 python3 tools/baixar_modelo.py               # modelo do Whisper em tools/modelos
-# pandoc, que gera os .docx da entrega: Windows: winget install -e --id JohnMacFarlane.Pandoc · Mac: brew install pandoc
 npm run checar                               # confere tudo e diz o comando de cada item faltando
 ```
 
@@ -29,6 +28,12 @@ ELEVENLABS_API_KEY=sua-chave
 ```
 
 Na nuvem do Claude Code a chave vem do ambiente e não precisa disso.
+
+**Entrega direto no Drive (opcional, no computador):** com o Google Drive para computador instalado, acrescente ao `.env.local` a pasta sincronizada onde os pacotes devem cair. O `tools/pacote.py` copia a pasta de cada pacote para lá, e o Drive sobe sozinho:
+
+```
+PACOTE_DRIVE=G:\Meu Drive\PregaAI\Pacotes
+```
 
 **No dia a dia:**
 

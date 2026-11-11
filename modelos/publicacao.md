@@ -3,7 +3,8 @@
 <!--
 Modelo do documento de publicação (pedidos do Giovanni em 06/11/2026). Copie para episodios/<ep>/publicacao.md,
 preencha e apague estes comentários. O tools/pacote.py corta este arquivo nas seções "## YouTube", "## TikTok" e
-"## Instagram" e gera um .docx para cada rede, dentro da pasta dela (o .docx abre como Google Docs no Drive).
+"## Instagram" e gera um .txt para cada rede, dentro da pasta dela (texto puro para copiar e colar; o que está entre
+``` sai igual).
 O cabeçalho (até a primeira seção) entra nos três; a "Conferência na NVI" fica só no repositório.
 
 Regras que valem para todas as redes:
@@ -13,8 +14,10 @@ Regras que valem para todas as redes:
   É a principal forma de ser achado; hashtag só classifica o vídeo e ajuda a busca, não dá alcance.
 - Hashtags: poucas, específicas, as mesmas palavras que alguém buscaria. Nunca #fyp, #viral, #foryou.
 - Cada número e cada promessa do texto tem que estar no vídeo. A capa e o título prometem só o que o vídeo mostra.
-- Horários do playbook do TikTok: 12 h e 19 h de Brasília (pico às 21 h). Instagram e YouTube ainda não têm dado
-  por hora; usar os mesmos. O longo sai primeiro; os curtos levam para ele.
+- Horários: os da seção "Horários e a evidência" de projetos/pregaai-calendario.md no MARK1, que o fechamento da noite
+  e o /semana atualizam com os resultados. Sem acesso ao MARK1: no TikTok, 12 h, 19 h ou 21 h de Brasília (seguidores
+  online de 04 a 09/11/2026, pela Windsor: 95% a 99% do pico; das 14 h às 16 h, ~85%; da 1 h às 6 h, menos de 50%).
+  Instagram e YouTube ainda não têm dado próprio por hora. O longo sai primeiro; os curtos levam para ele.
 - Regras da análise de 07/11/2026 (o Giovanni decidiu seguir as recomendações; dados no MARK1, projetos/pregaai-canais.md):
   - TikTok: os curtos saem a partir de 24 h depois do longo, nunca no mesmo dia, e sem "parte N" no título (teste:
     depois do viral, os vídeos vão quase só para quem já segue, e tudo no mesmo dia vai para o mesmo público).
