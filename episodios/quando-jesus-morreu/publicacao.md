@@ -2,7 +2,7 @@
 
 **Episódio:** quando-jesus-morreu (longo com 4:08 de narração e 4:18 com o cartão final; 3 curtos recortados da narração, cada um com abertura própria, aprovada com o roteiro v3 em 2026-11-10) · **Palavra-chave principal:** o que aconteceu quando jesus morreu · **Outras buscas:** o véu do templo se rasgou, mortos ressuscitaram quando jesus morreu, centurião filho de deus, sangue e água · **Base bíblica:** Mateus 27:45-56; Marcos 15:33-39; Lucas 23:44-49; João 19:28-37; Hebreus 9:7; 10:19-20; Êxodo 26:33; 2 Crônicas 3:14
 
-Calendário (horário de Brasília): o longo sai na quinta, 12/11, às 19:00, no YouTube e no TikTok. Os três curtos saem na sexta, 13/11, no TikTok e no YouTube Shorts, às 12:00, 18:00 e 21:00. No Instagram, um por dia: 13/11 às 19:00, 14/11 às 12:00 e 15/11 às 19:00.
+Calendário (horário de Brasília): o longo sai na quinta, 12/11, às 19:00, no YouTube e no TikTok. Os três curtos saem no YouTube Shorts na sexta, 13/11, às 12:00, 18:00 e 21:00. No TikTok, a partir de 24 h depois do longo (regra do `modelos/publicacao.md`): 13/11 às 19:00 e 21:00 e 14/11 às 12:00. No Instagram, um por dia: 13/11 às 19:00, 14/11 às 12:00 e 15/11 às 19:00.
 
 ## YouTube
 
@@ -141,9 +141,9 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 | Quando | Vídeo | Capa |
 |---|---|---|
 | 2026-11-12 19:00 | `tiktok/longo.mp4` (4:08, vertical, com o título fixo; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
-| 2026-11-13 12:00 | `tiktok/curto-01.mp4` (0:53) | `tiktok/curto-01-capa.jpg` |
-| 2026-11-13 18:00 | `tiktok/curto-02.mp4` (0:30) | `tiktok/curto-02-capa.jpg` |
-| 2026-11-13 21:00 | `tiktok/curto-03.mp4` (0:29) | `tiktok/curto-03-capa.jpg` |
+| 2026-11-13 19:00 | `tiktok/curto-01.mp4` (0:53) | `tiktok/curto-01-capa.jpg` |
+| 2026-11-13 21:00 | `tiktok/curto-02.mp4` (0:30) | `tiktok/curto-02-capa.jpg` |
+| 2026-11-14 12:00 | `tiktok/curto-03.mp4` (0:29) | `tiktok/curto-03-capa.jpg` |
 
 **Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto. Rótulo de IA opcional, porque a animação não é realista. Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**. Música do app: só se o Giovanni confirmar que o viral das 7 frases teve música; se não, sem música.
 
