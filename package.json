@@ -4,7 +4,8 @@
   "description": "Gerador dos vídeos curtos do PregaAI",
   "scripts": {
     "checar": "node tools/checar.cjs",
-    "build": "bash build.sh"
+    "build": "bash build.sh",
+    "test": "node tools/testar.cjs"
   },
   "dependencies": {
     "@expo-google-fonts/gasoek-one": "^0.4.1",
