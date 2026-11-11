@@ -18,7 +18,8 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 6. **Cenas:** comece copiando o `scenes.js` da referência e troque as cenas uma a uma. Use as peças do `lib.js`; peça nova entra no `lib.js` no mesmo traço. Cada cena começa em `at(i)` ou `wordTime(i, 'palavra')`, nunca num segundo fixo.
 7. **Revise vendo:** `node preview.cjs <ep>` (um quadro de cada cena), `bash sheet.sh 6`, abra o `sheet.png` e olhe de verdade: personagem inteiro e dentro do quadro, legenda sem cobrir rosto, nada nas zonas que o app cobre (README), nenhum `ERRO:` no terminal. Corrija e repita até ficar limpo.
 8. **Render, capa e publicação:** `bash build.sh <ep>` gera `out/<ep>.mp4`; faça também a capa ou as miniaturas (regras abaixo) e o `episodios/<ep>/publicacao.md` a partir de `modelos/publicacao.md`.
-9. **Entrega:** `python3 tools/pacote.py <ep>` monta a pasta e o .zip (ver "Ciclo do episódio e entrega"). Entregue tudo de uma vez, com o `sheet.png`. Com o ok dele, commit e push.
+9. **Teste:** `npm test` (episódios desenham sem erro, todo `wordTime` acha a palavra, `data.js` bate com o `narracao.txt` frase por frase, `corte.json` válido, nenhum corte começando no meio da fala). Roda também no GitHub a cada push e PR; PR com teste vermelho não entra na `main`.
+10. **Entrega:** `python3 tools/pacote.py <ep>` monta a pasta e o .zip (ver "Ciclo do episódio e entrega"). Entregue tudo de uma vez, com o `sheet.png`. Com o ok dele, commit e push.
 
 `out/`, `prev/`, `sheet.png` e `tools/modelos/` ficam fora do git.
 
