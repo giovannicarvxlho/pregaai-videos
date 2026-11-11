@@ -39,7 +39,7 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 O Giovanni quer o ciclo sempre assim, e no fim tudo de uma vez, separado, para subir no Drive e publicar depois.
 
-1. **História:** ele escolhe, ou pede uma sugestão. Na sugestão, traga 3 opções, cada uma com o motivo e o dado que a sustenta: o que funcionou no placar e no playbook (MARK1, `projetos/pregaai-canais.md`), o calendário cristão (Advento em 29/11, Natal) e o que está em alta na busca. Não invente número: diga de onde veio.
+1. **História:** ele escolhe, ou pede uma sugestão. Na sugestão, traga 3 opções, cada uma com o motivo e o dado que a sustenta: o que funcionou no placar e no playbook (MARK1, `projetos/pregaai-canais.md`), o calendário cristão (Advento em 29/11, Natal) e o que está em alta na busca. Não invente número: diga de onde veio. **Pelo menos uma das 3 vem do garimpo** (pedido do Giovanni em 11/11/2026): o topo de `python3 .claude/skills/roteiros/motor.py garimpo` no MARK1, que ordena os posts de outros perfis do nicho que fizeram muito mais views que a mediana do próprio perfil (`projetos/pregaai-dados/garimpo.csv`), com o link e o múltiplo. Do post de fora se aproveita só a pergunta ou a história; o texto, a arte, o áudio, o título e a capa são nossos, e tudo continua conferido na NVI (regra completa em "Garimpo de fora da curva", no `projetos/pregaai-roteiros.md` do MARK1).
 2. **Roteiro:** o longo, com os trechos que viram curtos marcados. É a única parada: ele valida o texto.
 3. **Produção:** narração, cenas, render do longo (YouTube e, quando a versão for diferente, TikTok), curtos, capas e miniaturas.
 4. **Publicação:** o `episodios/<ep>/publicacao.md`, a partir de `modelos/publicacao.md`, com título, descrição ou legenda, hashtags, tags, capa, comentário fixado, configurações e calendário de cada plataforma. Os textos seguem as regras do modelo, que vêm das skills de publicação (`social-media-skills:youtube-publishing-and-metadata`, `tiktok-video-publishing`, `instagram-reels-publishing`, `hashtag-strategy`) e do playbook do canal. Use as skills quando estiverem disponíveis; quando discordarem dos dados do canal ou da regra oficial da plataforma, valem os dados e a regra oficial.
@@ -68,6 +68,7 @@ Pedido dele: o roteiro, o gancho e o vídeo têm que melhorar a cada episódio. 
 ```
 ## Aposta
 - **Gancho:** "<primeira frase>" (tipo: <tipo do quadro do MARK1>)
+- **Origem do tema:** garimpo (<link do post de fora>) | canal (dado do próprio canal: viral, comentários) | calendário | outra
 - **O que muda em relação ao último vídeo do mesmo formato:** <uma coisa só, se possível>
 - **Previsão (TikTok, 48 h):** 3 s __% (faixa) · 10 s __% · 30 s __% · tempo médio __ s · views __ (faixa) · views de quem não segue __ (faixa) · terminou __%. Confiança: alta | média | baixa
 - **Previsão (curtos, 48 h):** Instagram, pulo __% (faixa) · Shorts, continuaram __% (faixa)
