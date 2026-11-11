@@ -7,7 +7,6 @@ const seg = (i) => SEGS[i][0];
 const SIL = '#16110F';
 const JESUS = { robe: '#A33A44', skin: '#B97A4A', hair: '#2F2622', beard: true }; // manto vermelho (Mateus 27:28)
 const soldado = (seed, extra = {}) => ({ ...man(seed), cover: null, beard: false, robe: C.p600, gear: { helmet: 'rom', armor: true }, ...extra });
-const lider = (seed, extra = {}) => ({ ...man(seed), cover: COVERS[seed % 4], beard: true, ...extra });
 
 // As três cruzes no morro. k = quanto cada cruz já está de pé (0 deitada, 1 erguida).
 function golgota(t, o = {}) {
