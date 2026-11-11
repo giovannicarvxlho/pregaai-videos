@@ -66,10 +66,10 @@ const SEGS = [
   [276.14, 281.65, 'Se você quer ler essas sete direto | na Bíblia, um pouco por dia, procura | PregaAI na Play Store.', [[276.14, 278.19], [278.21, 280.42], [280.57, 281.65]]],
   [282.30, 286.28, 'Das sete, qual você mais precisa | ouvir hoje? Me conta aqui embaixo.', [[282.3, 284.4], [284.42, 286.28]]],
   // Aberturas próprias dos curtos (partes 10 a 12, aprovadas em 2026-11-10). O longo não usa estas frases.
-  [287.74, 292.26, 'Ele disse duas palavras, | e os soldados e os guardas | caíram no chão.', [[287.74, 289.40], [289.71, 291.36], [291.38, 292.26]]],
-  [293.32, 296.22, 'Lázaro estava no sepulcro | havia quatro dias.', [[293.32, 294.80], [294.82, 296.22]]],
-  [296.68, 297.27, 'E saiu.'],
-  [298.36, 302.44, 'Os discípulos perguntaram quem | tinha pecado para um homem | nascer cego.', [[298.36, 300.13], [300.15, 301.73], [301.75, 302.44]]],
+  [287.38, 291.90, 'Ele disse duas palavras, | e os soldados e os guardas | caíram no chão.', [[287.38, 289.04], [289.35, 291.00], [291.02, 291.90]]],
+  [292.93, 295.83, 'Lázaro estava no sepulcro | havia quatro dias.', [[292.93, 294.41], [294.43, 295.83]]],
+  [296.29, 296.88, 'E saiu.'],
+  [297.92, 302.00, 'Os discípulos perguntaram quem | tinha pecado para um homem | nascer cego.', [[297.92, 299.69], [299.71, 301.29], [301.31, 302.00]]],
 ];
 const AUDIO_END = 287.30; // fim da fala do longo (frase 59); as frases 60 a 63 são só dos curtos
 const CARTAO_INICIO = 303.60; // na origem, o cartão final vem depois das aberturas dos curtos (corte.json: cartao_inicio)
