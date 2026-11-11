@@ -61,13 +61,16 @@ O `pacote.py` confere duração e tamanho de cada vídeo do pacote (ffprobe) e a
 
 Pedido dele: o roteiro, o gancho e o vídeo têm que melhorar a cada episódio. Para isso, cada roteiro registra o que está testando, e o resultado volta para o próximo.
 
-- **Antes de escrever o gancho,** leia no MARK1 `projetos/pregaai-roteiros.md`: o banco de ganchos (cada abertura já usada, com quanto segurou em 3, 10 e 30 s) e as leituras do banco. No MARK1 isso é a skill `/roteiros`.
+- **Antes de escrever o gancho,** leia no MARK1 a seção "Fórmula atual" de `projetos/pregaai-roteiros.md`: o que o roteiro segue, a métrica de crescimento de cada rede e o que está em teste (versão nova a cada leitura que muda de grau). O detalhe está no banco de ganchos e nas leituras do mesmo arquivo. Na nuvem, anexe o MARK1 (`add_repo` de `giovannicarvxlho/MARK1`, só leitura); no computador, clone-o ao lado deste repo, em `../MARK1`. No MARK1 isso é a skill `/roteiros`, passo A.
+- **Gerar antes de escolher** (Giovanni, 11/11/2026: "que cada vez saiam vídeos com ganchos melhores"): escreva 10 aberturas candidatas (1ª e 2ª frase), de pelo menos 4 tipos, fiéis à NVI. Dê de 0 a 3 pontos a cada uma: (a) a coisa estranha ou a ação nas duas primeiras palavras; (b) a 2ª frase continua a cena; (c) promete explicar algo que o público não entende. O longo leva a de maior nota; cada curto testa um tipo diferente dos outros. Junto com o roteiro, mostre ao Giovanni a escolhida e as 2 seguintes, com a nota.
 - **Todo `roteiro.md` leva, logo abaixo do status, o bloco:**
 ```
 ## Aposta
 - **Gancho:** "<primeira frase>" (tipo: <tipo do quadro do MARK1>)
 - **O que muda em relação ao último vídeo do mesmo formato:** <uma coisa só, se possível>
-- **Previsão (TikTok, 48 h):** 3 s __% (faixa) · 10 s __% · 30 s __% · tempo médio __ s · views __ (faixa). Confiança: alta | média | baixa
+- **Previsão (TikTok, 48 h):** 3 s __% (faixa) · 10 s __% · 30 s __% · tempo médio __ s · views __ (faixa) · quem não segue __% (faixa). Confiança: alta | média | baixa
+- **Previsão (curtos, 48 h):** Instagram, pulo __% (faixa) · Shorts, continuaram __% (faixa)
+- **Curtos:** curto 1 testa <tipo> · curto 2 testa <tipo> · curto 3 testa <tipo>
 - **Momento para mandar a alguém:** <a frase ou cena que alguém enviaria>
 - **Se errar, o que isso ensina:** <uma linha>
 ```
