@@ -7,7 +7,9 @@
 # Chave: ELEVENLABS_API_KEY no ambiente ou no .env.local da raiz (fora do git). Na nuvem do
 # Claude Code a rede injeta a chave e não precisa de nada.
 # Não sobrescreve mp3 que já existe, porque cada geração gasta crédito; --refazer gera de novo.
-import json, os, sys, urllib.error, urllib.request
+# Junto de cada mp3 grava <mp3 sem extensão>.tempos.json: o início e o fim de cada letra do texto, que a própria
+# ElevenLabs devolve (endpoint with-timestamps). O tools/tempos.py monta o SEGS do data.js com eles, sem Whisper.
+import base64, json, os, sys, time, urllib.error, urllib.request
 
 VOZ = 'bJrNspxJVFovUxNBQ0wh'  # Marcelo Costa - Articulate and Balanced (Voice Library)
 # v4 Turbo: metade do crédito do v4 (0,5 por caractere); aprovado pelo Giovanni no teste de 06/11/2026.
@@ -92,10 +94,18 @@ if s and total > s[1]:
 print(f'gerando {len(fazer)} mp3, {total} caracteres' + (f' (restam {s[1]})' if s else ''), flush=True)
 
 for texto, saida in fazer:
-    st, audio = pedir(f'/v1/text-to-speech/{VOZ}?output_format=mp3_44100_128', {'text': texto, **AJUSTES})
+    for tentativa in range(4):  # 429 e 5xx são passageiros: tenta de novo com espera crescente
+        st, corpo = pedir(f'/v1/text-to-speech/{VOZ}/with-timestamps?output_format=mp3_44100_128', {'text': texto, **AJUSTES})
+        if st == 200 or (st != 429 and st < 500):
+            break
+        print(f'  ElevenLabs {st}, tentando de novo em {5 * 2 ** tentativa} s', flush=True)
+        time.sleep(5 * 2 ** tentativa)
     if st != 200:
-        falha(st, audio)
+        falha(st, corpo)
+    j = json.loads(corpo)
     os.makedirs(os.path.dirname(saida), exist_ok=True)
     with open(saida, 'wb') as f:
-        f.write(audio)
+        f.write(base64.b64decode(j['audio_base64']))
+    with open(saida[:-4] + '.tempos.json', 'w', encoding='utf-8') as f:
+        json.dump({'texto': texto, 'alinhamento': j['alignment']}, f, ensure_ascii=False)
     print(' ', saida, flush=True)

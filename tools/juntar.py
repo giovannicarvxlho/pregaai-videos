@@ -16,18 +16,30 @@ def amostras(p):
     return len(pcm) / 2 / SR
 
 
-d = sys.argv[1]
-parts = sorted(glob.glob(f'{d}/partes/*.mp3'))
-args, filt, t = [], '', 0.0
-for i, p in enumerate(parts):
-    dur = amostras(p)
-    print(f'{os.path.basename(p)} começa em {t:7.2f} s ({dur:.2f} s)')
-    args += ['-i', p]
-    filt += f'[{i}:a]aresample=44100,aformat=channel_layouts=mono,apad=pad_dur={GAP}[a{i}];'
-    t += dur + GAP
-filt += ''.join(f'[a{i}]' for i in range(len(parts))) + f'concat=n={len(parts)}:v=0:a=1[out]'
-subprocess.run(['ffmpeg', '-v', 'error', '-y', *args, '-filter_complex', filt, '-map', '[out]', '-c:a', 'libmp3lame', '-b:a', '192k', f'{d}/narration.mp3'], check=True)
-real = amostras(f'{d}/narration.mp3')
-print(f'{d}/narration.mp3: {real:.2f} s (previsto {t:.2f} s)')
-if abs(real - t) > 0.05:
-    print(f'! a narração juntada difere {real - t:+.2f} s do previsto: confira os inícios das partes com o alinhar.py')
+def inicios(parts):
+    """Onde cada parte começa na narração juntada (s), e o fim previsto."""
+    out, t = [], 0.0
+    for p in parts:
+        out.append(t)
+        t += amostras(p) + GAP
+    return out, t
+
+
+def juntar(d):
+    parts = sorted(glob.glob(f'{d}/partes/*.mp3'))
+    ini, t = inicios(parts)
+    args, filt = [], ''
+    for i, p in enumerate(parts):
+        print(f'{os.path.basename(p)} começa em {ini[i]:7.2f} s')
+        args += ['-i', p]
+        filt += f'[{i}:a]aresample={SR},aformat=channel_layouts=mono,apad=pad_dur={GAP}[a{i}];'
+    filt += ''.join(f'[a{i}]' for i in range(len(parts))) + f'concat=n={len(parts)}:v=0:a=1[out]'
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', *args, '-filter_complex', filt, '-map', '[out]', '-c:a', 'libmp3lame', '-b:a', '192k', f'{d}/narration.mp3'], check=True)
+    real = amostras(f'{d}/narration.mp3')
+    print(f'{d}/narration.mp3: {real:.2f} s (previsto {t:.2f} s)')
+    if abs(real - t) > 0.05:
+        print(f'! a narração juntada difere {real - t:+.2f} s do previsto: confira os tempos (tools/tempos.py ou alinhar.py)')
+
+
+if __name__ == '__main__':
+    juntar(sys.argv[1].rstrip('/\\'))
