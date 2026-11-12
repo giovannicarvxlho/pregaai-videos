@@ -2,32 +2,26 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Miniatura C: o centurião (rosto e olhar)</title>
+<title>Miniatura C: as 7 frases na cruz ("Por que me abandonaste?")</title>
 <style>
 @font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
-@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
-@font-face { font-family: 'Geist Mono'; src: url(../../node_modules/@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf); font-weight: 500; }
-@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
 html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
-#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
-svg { position: absolute; inset: 0; }
-/* C: emoção que combina com o texto: o centurião aterrorizado (Mateus 27:54), o olhar levando até a cruz
-   na luz. Sem texto. Fundo escuro, rosto e cruz iluminados. */
+svg { position: absolute; inset: 0; -webkit-font-smoothing: antialiased; }
+/* C (o grito, cartaz): "Meu Deus! Meu Deus! Por que me abandonaste?" nas trevas do meio-dia às três (Mateus 27:45-46).
+   A cruz do meio grande, em silhueta, no centro. Texto: POR QUE ME ABANDONASTE?, no alto, de lado a lado. */
 </style>
 </head>
 <body>
-<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg></div>
+<svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
 <script src="data.js"></script>
 <script src="../../lib.js"></script>
+<script src="../../capa-lib.js"></script>
 <script src="scenes.js"></script>
+<script src="capas.js"></script>
 <script>
 window.SIZE = [1280, 720];
-let s = DEFS + bgNight(0, { sky: 'skyDawn', moon: false, starOp: 0 });
-s += `<circle cx="1420" cy="330" r="620" fill="url(#gAmber)" opacity="0.7"/>`;
-s += hill(1420, 860, 700, '#1B1E22', '#060708') + crossFig(1420, 880, 1.15, { plaque: true, fill: '#050505', rim: '#5A606A', bow: 1 });
-s += person({ ...soldado(821), robe: '#8E3B46', x: 600, y: 430 + 206 * 3.2, s: 3.2, look: 1, mood: 'fear', t: 0.35, armL: 18, armR: 24, gear: { helmet: 'cent', armor: true }, rim: C.a300, noShadow: true });
-document.getElementById('art').innerHTML = s;
-window.ready = document.fonts.ready;
+// o texto mede a fonte para definir o tamanho: a arte só entra depois de a fonte carregar
+window.ready = document.fonts.load("100px 'Gasoek One'").then(() => { document.getElementById('art').innerHTML = DEFS + artN3(); return document.fonts.ready; });
 </script>
 </body>
 </html>
