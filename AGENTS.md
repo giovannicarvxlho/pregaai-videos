@@ -128,15 +128,15 @@ Substitui o molde de 28/10 (fundo creme com raios, rosto com medo e seta em toda
 - Reduzida a 168×94, o tamanho do feed no celular, dá para entender o que é.
 - Em preto e branco, o herói continua se separando do fundo.
 
-### Estilo da miniatura do vídeo longo (aprovado pelo Giovanni em 06/11/2026; referência: `episodios/depois-da-cruz/miniatura-a.html`, `-b`, `-c`)
+### Estilo da miniatura do vídeo longo (aprovado pelo Giovanni em 06/11/2026 e refeito em 12/11/2026; referência: `episodios/quando-jesus-morreu/miniatura-a.html`, `-b`, `-c`)
 
 Giovanni: "crave esse estilo", mas "não pode ficar SEMPRE igual, tem um padrão, mas nunca 100% igual". Vale a regra da família acima: o padrão abaixo é o que se repete, e a lista "Varia" é obrigatória.
 
 **O padrão (repete em todas):**
 - A arte sai das funções do próprio episódio (`data.js`, `lib.js` e `scenes.js` carregados na página da miniatura), para a miniatura mostrar só o que o vídeo mostra.
 - Pouca luz no fundo e **uma fonte de luz quente** (gradiente radial dourado ou âmbar) atrás do herói, com vinheta escura nas bordas. É o que separa o herói do fundo no feed.
-- **Herói grande:** um rosto em close com a emoção da história (medo, choro, espanto), ou uma figura central grande. Nada de cena aberta com personagens pequenos.
-- **Texto:** Gasoek One, até 4 palavras com o nome da história (regra de 12/11/2026, acima), branco com contorno escuro grosso e sombra; a palavra-chave numa etiqueta azul `#2383E2` com borda preta, sombra dura e inclinada. De preferência, uma pergunta ou um mistério que o vídeo responde.
+- **Herói grande:** um rosto em close com a emoção da história (medo, choro, espanto), ou uma figura central grande. Nada de cena aberta com personagens pequenos. **Desde 12/11/2026 o rosto sai do `retrato()` do `capa-lib.js`** (peças só de capa, carregadas depois do `lib.js`; o vídeo não usa): o mesmo personagem do episódio (as cores vêm do `scenes.js`), desenhado de perto, com olhos, sobrancelhas e boca, luz de um lado e um contorno de luz em volta. Motivo: o boneco do vídeo tem dois pontos no lugar dos olhos e não lê emoção em 168×94; as miniaturas do nicho que crescem têm rosto grande e expressivo. **Jesus não entra em close com expressão exagerada** (critério do Claude, a confirmar com o Giovanni): aparece em silhueta, de longe ou com luz atrás; o rosto com emoção é de quem estava na cena (o centurião, Pedro, Maria Madalena, o guarda).
+- **Texto:** Gasoek One, até 4 palavras com o nome da história (regra de 12/11/2026, acima), pelo `capaTexto()` do `capa-lib.js`: branco com contorno escuro grosso e sombra, e a linha principal em dourado (degradê `#FFE45C` a `#FFB800`), a maior do quadro, com 15% ou mais da altura. O dourado substitui a etiqueta azul nas miniaturas de longo (Giovanni, 12/11/2026: no feed escuro do nicho o azul some e o amarelo é o de maior contraste); a etiqueta azul continua valendo nas capas verticais dos curtos. De preferência, uma afirmação forte, uma pergunta ou um mistério que o vídeo responde.
 - Texto de um lado e herói do outro; o canto de baixo à direita fica livre (duração).
 - Render: `ESCALA=2 node capa.cjs <ep> miniatura-<x>` (2560×1440). O JPG fica abaixo de 2 MB, para subir pelo celular.
 - Antes de entregar: `tools/testar_capa.py` (168×94 e preto e branco) e uma folha com a miniatura no meio de miniaturas do nicho na busca do YouTube, para ver se ela se destaca.

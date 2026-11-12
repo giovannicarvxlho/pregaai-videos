@@ -18,15 +18,19 @@ Calendário (horário de Brasília): o longo sai na quinta, 12/11, às 19:00, no
 ### Vídeo longo: `youtube/longo.mp4`
 
 **Título**
-> O que aconteceu quando Jesus morreu: 7 coisas que os evangelhos contam | Histórias Bíblicas
+> O QUE ACONTECEU QUANDO JESUS MORREU NA CRUZ? 7 COISAS
+
+Título novo de 12/11/2026 (em maiúsculas, começando pela frase do autocompletar do YouTube "o que aconteceu quando jesus morreu na cruz"). O anterior, com que o vídeo foi programado: "O que aconteceu quando Jesus morreu: 7 coisas que os evangelhos contam | Histórias Bíblicas".
 
 **Miniaturas para o "Testar e comparar"** (2560×1440; sobem nesta ordem, e a primeira fica se não houver vencedora)
 
 | Ordem | Arquivo | Texto | Motivo para clicar |
 |---|---|---|---|
-| 1 | `youtube/miniatura-a.jpg` | QUE VÉU? | a curiosidade: que véu era esse e por que importa que ele rasgou (o vídeo responde: a cortina que separava o Lugar Santo do Lugar Santíssimo, por onde só o sumo sacerdote passava, uma vez por ano; Mateus 27:51, Êxodo 26:33, Hebreus 9:7 e 10:19-20) |
-| 2 | `youtube/miniatura-b.jpg` | OS MORTOS SAÍRAM | a estranheza: os sepulcros se abriram e, depois da ressurreição de Jesus, os santos ressuscitados saíram deles e entraram na cidade (Mateus 27:52-53) |
-| 3 | `youtube/miniatura-c.jpg` | MEIO-DIA ESCURO | a contradição: trevas sobre toda a terra do meio-dia às três, e o sol deixou de brilhar (Mateus 27:45; Lucas 23:44-45) |
+| 1 | `youtube/miniatura-a.jpg` | JESUS MORREU / TUDO TREMEU | o espetáculo: o centurião aterrorizado, de perto, olhando para a cruz na tarde escura; a terra tremeu e as rochas se partiram, e o centurião e os que vigiavam Jesus ficaram aterrorizados (Mateus 27:51, 54; o sol deixou de brilhar, Lucas 23:45) |
+| 2 | `youtube/miniatura-b.jpg` | O VÉU RASGOU | a curiosidade: o véu do santuário rasgado de alto a baixo, com a luz passando pelo rasgo (Mateus 27:51; o vídeo explica que véu era, Êxodo 26:33, Hebreus 9:7 e 10:19-20) |
+| 3 | `youtube/miniatura-c.jpg` | TÚMULOS SE ABRIRAM | a estranheza: o sepulcro com a pedra partida e a luz saindo, as três cruzes ao fundo (Mateus 27:51-52) |
+
+Miniaturas refeitas em 12/11/2026 no estilo novo (`capa-lib.js`: rosto em close com emoção, luz forte, texto branco e dourado). As anteriores ("QUE VÉU?", "OS MORTOS SAÍRAM", "MEIO-DIA ESCURO") estão no histórico do git.
 
 **Descrição**
 ```
