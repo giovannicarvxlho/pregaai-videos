@@ -59,6 +59,16 @@ O `pacote.py` confere duração e tamanho de cada vídeo do pacote (ffprobe) e a
 - **YouTube:** Short até 3 min, vertical ou quadrado; acima disso, ou na horizontal, vira vídeo comum (guias de terceiros; conferir na ajuda do YouTube). Short com mais de 1 min e qualquer reivindicação de Content ID fica bloqueado: a música só vem do pipeline. O longo vai de 4 a 5 min, nunca mais de 5.
 - **TikTok:** curto composto na vertical (regra de "Todas"), sem faixas. O Programa de Recompensas só conta vídeo com mais de 1 min, e o vídeo com a divulgação de conteúdo comercial ligada (o banner do app) pode ficar de fora.
 
+## Formato e testes aprovados (Giovanni, 12/11/2026)
+
+Decisões da pesquisa de plataformas (MARK1, `projetos/pregaai-pesquisa/relatorio.md`, seção 8). Os testes respeitam o limite de 3 testes abertos da Fórmula do MARK1: cada um entra quando abrir vaga, na ordem abaixo, e quem produz o episódio daquele dia monta o que o teste pede. Nada aqui muda o que já está programado.
+
+- **Formato "pergunta do público" nos curtos escritos do zero:** a história bíblica vira a resposta a uma dúvida real, em série de molde fixo ("Por que Deus...?", "O que aconteceu com... no fim?", "O detalhe que ninguém repara em..."). A pergunta vai no título, na 1ª frase e no texto do 1º quadro, e é sempre respondida pelo texto bíblico, conferido na NVI; pergunta de doutrina (quem vai para o céu, é pecado?) passa pela revisão de teologia e pelo Giovanni. Comece por uma série só. Nos recortes do longo, o gancho segue o sorteio da Fórmula.
+- **Fila de testes:**
+  1. **Trilha baixa** (entra quando o teste de tema fechar, depois da análise do longo da cruz): trilha gerada no próprio pipeline (síntese no ffmpeg, sem custo e sem direitos), a 20% a 30% do volume da voz, desde o 1º quadro. O mesmo curto sai com e sem, no mesmo episódio e na mesma rede. A peça de trilha ainda não existe: quem produz o episódio do teste a monta.
+  2. **Carrossel no Instagram:** 3 por semana durante 2 semanas, 6 a 8 quadros 4:5 (1080×1350), com trilha instrumental, em lista fechada ("As 7 frases de Jesus na cruz", uma por quadro) ou pergunta com resposta no fim. Gerado como as capas (HTML com as peças do `lib.js` e `capa.cjs`). Mede alcance, salvamentos e envios contra a mediana dos Reels.
+  3. **"História completa" da Paixão, 10 a 20 min, só no YouTube:** as narrações que já existem (as 7 frases, quando Jesus morreu, depois da cruz, a ressurreição, "tu me amas?"), mais abertura nova, pontes narradas entre as partes e capítulos. A abertura e as pontes são roteiro novo e passam pelo Giovanni. Mede em 4 semanas contra os longos de 5 min; não é regra nova de duração.
+
 ## Aposta e aprendizado (Giovanni, 10/11/2026)
 
 Pedido dele: o roteiro, o gancho e o vídeo têm que melhorar a cada episódio. Para isso, cada roteiro registra o que está testando, e o resultado volta para o próximo.
@@ -104,13 +114,14 @@ Pedido dele: o roteiro, o gancho e o vídeo têm que melhorar a cada episódio. 
 Substitui o molde de 28/10 (fundo creme com raios, rosto com medo e seta em todas), que deixou as capas iguais umas às outras. A capa vende o vídeo em menos de um segundo, quase sempre no celular.
 
 **Fica igual em todas (é o que faz o canal ser reconhecido):**
-- Texto em Gasoek One, de 0 a 3 palavras, com o azul `#2383E2` como destaque. Personagens no traço de tinta de `lib.js`.
-- **O texto soma ao título, nunca o repete.** Ele contradiz ou completa (título "Uma flecha ao acaso matou o rei Acabe", capa "NÃO FOI ACASO").
+- Texto em Gasoek One, **até 4 palavras: o nome da história ou do personagem que se busca (a âncora: ELIAS, PEDRO, LÁZARO) mais 1 a 3 palavras de tensão** (número, pergunta, contraste), com o azul `#2383E2` como destaque. Personagens no traço de tinta de `lib.js`. (Giovanni, 12/11/2026, sistema de capa da pesquisa de plataformas: as capas antigas eram enigmas sem sujeito, como "DUAS PALAVRAS", e na busca por Elias 12 de 15 miniaturas do nicho trazem o nome escrito.)
+- **O texto completa o título:** pode repetir uma palavra dele (o nome), nunca a frase inteira. Teste: quem só vê a capa sabe dizer qual é a história.
 - A capa promete só o que o vídeo mostra.
 
 **Muda conforme a história:**
 - Fundo claro ou escuro pelo clima dela; noite, morte e juízo pedem escuro. Fundo calmo: raios só quando ajudam.
-- **Um herói só:** um rosto ou um objeto da história. Rosto só com a emoção que o conteúdo tem (não a mesma cara de susto em tudo).
+- **Um herói só, grande:** um rosto ou um objeto da história, com 45% ou mais da altura (ou rosto com 25% ou mais); no máximo 3 elementos (herói, um contexto, texto). Rosto só com a emoção que o conteúdo tem (não a mesma cara de susto em tudo). **Ação, não pose:** mostrar o verbo da história (o fogo caindo, a água derramada, a pedra rolando).
+- **Paleta de capa, não de cena:** um acento quente saturado (fogo `#FF6A13`, ouro `#FFB21E`) ou a água azul da marca em 15% ou mais do quadro, sobre fundo escuro ou complementar; nada de bege sobre bege (12/11/2026).
 - Seta só quando aponta para algo que precisa ser visto.
 
 **Dois testes antes de entregar** (`python3 tools/testar_capa.py <imagens>`):
@@ -125,10 +136,12 @@ Giovanni: "crave esse estilo", mas "não pode ficar SEMPRE igual, tem um padrão
 - A arte sai das funções do próprio episódio (`data.js`, `lib.js` e `scenes.js` carregados na página da miniatura), para a miniatura mostrar só o que o vídeo mostra.
 - Pouca luz no fundo e **uma fonte de luz quente** (gradiente radial dourado ou âmbar) atrás do herói, com vinheta escura nas bordas. É o que separa o herói do fundo no feed.
 - **Herói grande:** um rosto em close com a emoção da história (medo, choro, espanto), ou uma figura central grande. Nada de cena aberta com personagens pequenos.
-- **Texto:** Gasoek One, de 1 a 3 palavras, branco com contorno escuro grosso e sombra; a palavra-chave numa etiqueta azul `#2383E2` com borda preta, sombra dura e inclinada. De preferência, uma pergunta ou um mistério que o vídeo responde.
+- **Texto:** Gasoek One, até 4 palavras com o nome da história (regra de 12/11/2026, acima), branco com contorno escuro grosso e sombra; a palavra-chave numa etiqueta azul `#2383E2` com borda preta, sombra dura e inclinada. De preferência, uma pergunta ou um mistério que o vídeo responde.
 - Texto de um lado e herói do outro; o canto de baixo à direita fica livre (duração).
 - Render: `ESCALA=2 node capa.cjs <ep> miniatura-<x>` (2560×1440). O JPG fica abaixo de 2 MB, para subir pelo celular.
 - Antes de entregar: `tools/testar_capa.py` (168×94 e preto e branco) e uma folha com a miniatura no meio de miniaturas do nicho na busca do YouTube, para ver se ela se destaca.
+
+**Três variantes com três motivos e três layouts** (12/11/2026): espetáculo (o momento mais visual), confronto (quem contra quem) e curiosidade (o detalhe estranho). Mudam o herói, o lado, o fundo e o tipo de texto, não só a palavra; a mais segura sobe primeiro, porque fica se o "Testar e comparar" der inconclusivo. Antes de entregar, a folha de feed: a miniatura no meio de 14 do nicho na mesma busca.
 
 **Varia (nunca 100% igual):** cada miniatura nova muda pelo menos 2 destes itens em relação às 3 últimas do canal (critério sugerido pelo Claude).
 - A cor da luz e do fundo, pelo clima da história: noite azul-escura, madrugada dourada, nascer do sol quente, entardecer, escuro total.
@@ -140,7 +153,7 @@ Giovanni: "crave esse estilo", mas "não pode ficar SEMPRE igual, tem um padrão
 
 **Formatos:**
 - Vídeo longo: 1280×720, nada importante no canto de baixo à direita (a duração do YouTube cobre). Fazer 3 versões, cada uma com um motivo diferente para clicar, para o "Testar e comparar" do YouTube Studio.
-- Short e TikTok: 1080×1920, tudo o que importa no miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil. Sem referência bíblica e sem logo. No Short a capa pesa pouco: quem decide é o primeiro quadro.
+- Short e TikTok: 1080×1920, tudo o que importa no miolo 3:4 (y 240 a 1680), que é o recorte da grade do perfil. Sem referência bíblica e sem logo. No Short a capa pesa pouco: quem decide é o primeiro quadro. **No TikTok e no Reel, a capa faz o papel do título** (a grade não mostra título): o nome da história no terço de cima, com letra de 190 px ou mais, sempre na mesma posição em toda a série; canto de baixo à esquerda livre (o contador de views da grade).
 
 **Capas por rede, em toda entrega** (pedido do Giovanni em 06/11/2026; arquivo, tamanho e de onde sai):
 - **YouTube, longo:** 3 miniaturas 16:9 para o "Testar e comparar" (`episodios/<ep>/miniatura-a.html`, `-b`, `-c`; `ESCALA=2 node capa.cjs <ep> miniatura-a` gera 2560×1440).
@@ -164,7 +177,7 @@ Mesmas regras do roteiro: sem travessão e com cada afirmação conferida na NVI
 ## Vídeo longo (aprovado em 02/11/2026, referência: `episodios/sete-frases-na-cruz`)
 
 - 16:9, 1920×1080 (`const FORMAT = 'wide'` no `data.js`). Mesmo traço e mesmas regras de texto dos Shorts.
-- Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar. De 4 a 5 min, nunca mais de 5, contando o cartão final (regra de 06/11/2026). Na prática: ~3.300 a 3.900 caracteres de narração (~830 por minuto).
+- Narração em partes, uma por capítulo do roteiro, entregue em blocos de código. Sem acelerar. De 4 a 5 min, nunca mais de 5, contando o cartão final (regra de 06/11/2026). Exceção aprovada pelo Giovanni em 12/11/2026, um teste só: a "história completa" da Paixão de 10 a 20 min, só no YouTube (ver "Formato e testes aprovados"). Na prática: ~3.300 a 3.900 caracteres de narração (~830 por minuto).
 - Cenas de explicação (cartões com os livros, versículos em cartão) valem aqui, porque são a cena inteira e não algo por cima da ilustração.
 - Quando o roteiro vier de fora, confira tudo na NVI antes de produzir e diga o que foi corrigido.
 - Miniatura 1280×720 pela regra da capa acima, em 3 versões para o "Testar e comparar".
