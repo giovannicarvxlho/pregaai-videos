@@ -17,15 +17,15 @@
 #   out/<ep>-miniatura-*.jpg        miniaturas do YouTube (Testar e comparar)  <- episodios/<ep>/miniatura-*.html
 #   out/<ep>-capa-tiktok.jpg        capa do longo no TikTok, 1080×1920         <- episodios/<ep>/capa-tiktok.html
 #   out/<ep>-curto-<n>.mp4          curtos recortados do longo
-#   out/<ep>-curto-<n>-ig.mp4       o mesmo curto em tela cheia (layout "cheia" do corte.cjs), o que vai para as três redes
+#   out/<ep>-curto-<n>-ig.mp4       o curto composto na vertical (layout "foco" do corte.cjs, desde 12/11/2026; antes, "cheia"), o que vai para as três redes
 #   out/<ep>-curto-<n>-capa.jpg     capa de cada curto, 1080×1920              <- episodios/<ep>/curto-<n>-capa.html
 #   out/<ep>-capa.jpg               capa, quando o episódio é um curto          <- episodios/<ep>/capa.html
 #   episodios/<ep>/legenda.srt      legenda do longo no YouTube, se houver
 #   episodios/<ep>/publicacao.md    o texto de tudo, com uma seção por rede (modelo em modelos/publicacao.md)
 #
 # O longo vai para o YouTube e o TikTok; os curtos para o YouTube (Shorts), o TikTok e o Instagram, o mesmo arquivo
-# em tela cheia, sem as faixas escuras em cima e embaixo (pedido do Giovanni em 11/11/2026; antes, só o Instagram).
-# Sem a versão em tela cheia, vai o recorte com faixas, com aviso.
+# composto na vertical, sem faixas (layout "foco", decisão do Giovanni em 12/11/2026; de 11/11 a 12/11, a "cheia").
+# Sem a versão vertical (-ig), vai o recorte com faixas, com aviso.
 # nas três pastas. O Shorts não recebe capa: ela não sobe por arquivo, e o documento diz qual quadro escolher.
 # Saída: out/pacote/<AAAA-MM-DD>-<ep>/ e out/pacote/<AAAA-MM-DD>-<ep>.zip (e a cópia no Drive, se configurada)
 import datetime, glob, json, os, re, shutil, subprocess, sys, zipfile
@@ -185,7 +185,7 @@ if longo and not glob.glob(o(f'{ep}-miniatura*.jpg')):
 if longo and not os.path.exists(o(f'{ep}-capa-tiktok.jpg')):
     avisos.append(f'longo sem capa do TikTok: gere out/{ep}-capa-tiktok.jpg (episodios/{ep}/capa-tiktok.html)')
 for n in sem_cheia:
-    avisos.append(f'curto {n:02d} sem a versão em tela cheia (saída "<ep>-curto-{n}-ig", layout "cheia", no corte.json):'
+    avisos.append(f'curto {n:02d} sem a versão vertical (saída "<ep>-curto-{n}-ig", layout "foco", no corte.json):'
                   ' foi o recorte com faixas escuras para as três redes')
 
 # Duração e tamanho de cada vídeo, pelas regras de cada rede (especificações no AGENTS.md).

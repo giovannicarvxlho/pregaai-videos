@@ -1,7 +1,7 @@
 // Render de um trecho do vídeo: node render.cjs <episódio> <worker> <workers> <out.mp4>
 // Cada worker pega um bloco contíguo de quadros e manda JPEGs para o ffmpeg.
 // CORTE=<arquivo.json> (gerado pelo tools/corte.cjs): vídeo cortado. O quadro do tempo tv do vídeo final
-// mostra a narração no tempo t do trecho correspondente; layout, título e banner vão na URL.
+// mostra a narração no tempo t do trecho correspondente; layout, enquadramento, gancho, título e banner vão na URL.
 const { abrir, url } = require('./tools/navegador.cjs');
 const { spawn } = require('child_process');
 const path = require('path');
@@ -10,7 +10,7 @@ const FPS = 30;
 (async () => {
   const [ep, k, n, out] = [process.argv[2], Number(process.argv[3]), Number(process.argv[4]), process.argv[5]];
   const corte = process.env.CORTE ? JSON.parse(fs.readFileSync(process.env.CORTE, 'utf8')) : null;
-  const q = corte ? (corte.layout ? '&layout=' + corte.layout : '') + (corte.titulo ? '&titulo=' + encodeURIComponent(corte.titulo) : '') + (corte.cta ? '&cta=1' : '') + (corte.refs ? '&refs=' + encodeURIComponent(JSON.stringify(corte.refs)) : '') + (corte.frases ? '&frases=' + corte.frases.join(',') : '') : '';
+  const q = corte ? (corte.layout ? '&layout=' + corte.layout : '') + (corte.titulo ? '&titulo=' + encodeURIComponent(corte.titulo) : '') + (corte.cta ? '&cta=1' : '') + (corte.refs ? '&refs=' + encodeURIComponent(JSON.stringify(corte.refs)) : '') + (corte.frases ? '&frases=' + corte.frases.join(',') : '') + (corte.foco ? '&foco=' + encodeURIComponent(JSON.stringify(corte.foco)) : '') + (corte.gancho ? '&gancho=' + encodeURIComponent(corte.gancho) : '') : '';
   const mapa = (tv) => {
     if (!corte) return tv;
     let acc = 0;

@@ -71,6 +71,8 @@ function picoNoInicio(mp3, t0) {
   return m ? (m[1] === '-inf' ? -Infinity : Number(m[1])) : null;
 }
 
+const NCENAS = {}; // episódio → número de cenas (preenchido por cenas())
+
 function cortes(ep) {
   const cj = path.join(EPS, ep, 'corte.json');
   if (!fs.existsSync(cj)) return;
@@ -84,8 +86,23 @@ function cortes(ep) {
     if (!Array.isArray(s.frases) || !s.frases.length) { falha(ep, `corte ${nome}: sem frases`); continue; }
     const ruins = s.frases.filter((i) => !Number.isInteger(i) || i < 0 || i >= SEGS.length);
     if (ruins.length) { falha(ep, `corte ${nome}: frases que não existem no SEGS (${SEGS.length} frases): ${ruins.join(', ')}`); continue; }
-    if (s.layout && !['vertical', 'cheia'].includes(s.layout)) falha(ep, `corte ${nome}: layout "${s.layout}" desconhecido`);
-    if (s.layout && !s.titulo) falha(ep, `corte ${nome}: curto sem título`);
+    if (s.layout && !['vertical', 'cheia', 'foco'].includes(s.layout)) falha(ep, `corte ${nome}: layout "${s.layout}" desconhecido`);
+    if (s.layout && s.layout !== 'foco' && !s.titulo) falha(ep, `corte ${nome}: curto sem título`);
+    // layout foco (12/11/2026): todo curto leva o texto do gancho no 1º quadro, e o enquadramento só cita cenas e frases que existem
+    if (s.layout === 'foco' && !s.gancho) falha(ep, `corte ${nome}: curto sem "gancho" (o texto do 1º quadro é obrigatório desde 12/11/2026)`);
+    if (s.foco) {
+      const nCenas = NCENAS[cfg.fonte]; // contado no desenho das cenas, que roda antes
+      for (const [k, r] of Object.entries(s.foco.cena || {})) if (nCenas !== undefined && !(Number(k) >= 0 && Number(k) < nCenas)) falha(ep, `corte ${nome}: foco da cena ${k}, que não existe (${nCenas} cenas)`);
+      for (const [k, r] of Object.entries(s.foco.frase || {})) if (!s.frases.includes(Number(k))) falha(ep, `corte ${nome}: foco da frase ${k}, que não está no corte`);
+      for (const r of [s.foco.padrao, ...Object.values(s.foco.cena || {}), ...Object.values(s.foco.frase || {})]) {
+        if (!r) continue;
+        for (const x of [r, r.ate || {}]) {
+          if (x.cx !== undefined && !(x.cx >= 0 && x.cx <= 1920)) falha(ep, `corte ${nome}: foco com cx ${x.cx} fora da cena (0 a 1920)`);
+          if (x.cy !== undefined && !(x.cy >= 0 && x.cy <= 1080)) falha(ep, `corte ${nome}: foco com cy ${x.cy} fora da cena (0 a 1080)`);
+          if (x.z !== undefined && !(x.z >= 1 && x.z <= 3)) falha(ep, `corte ${nome}: foco com z ${x.z} (vale de 1 a 3; menos que 1 deixaria faixa)`);
+        }
+      }
+    }
     if (typeof s.tiktok === 'number' && (s.tiktok < 0 || s.tiktok >= SEGS.length)) falha(ep, `corte ${nome}: "tiktok" aponta para a frase ${s.tiktok}, que não existe`);
     if (!temAudio) continue;
     // início de cada trecho contínuo, igual ao tools/corte.cjs
@@ -121,8 +138,9 @@ async function cenas(browser, ep) {
     };
     let quadros = 0;
     for (let t = 0; t < DURATION; t += 1) { window.renderFrame(t); quadros++; }
-    return { quadros, falta: [...falta] };
+    return { quadros, falta: [...falta], nCenas: SCENES.length };
   });
+  NCENAS[ep] = r.nCenas;
   await page.close();
   for (const e of [...new Set(erros)].slice(0, 5)) falha(ep, `erro ao desenhar: ${e}`);
   if (r.falta.length) falha(ep, `wordTime não acha a palavra na frase (a cena cai no começo dela): ${r.falta.slice(0, 8).join(', ')}`);
@@ -135,9 +153,16 @@ async function cenas(browser, ep) {
     .filter((e) => !pedidos.length || pedidos.includes(e)).sort();
   const browser = await abrir();
   let quadros = 0;
+  // Primeiro desenha todos (conta as cenas de cada um), depois confere textos e cortes: um corte pode vir de outro episódio.
   for (const ep of eps) {
     try {
       if (fs.existsSync(path.join(EPS, ep, 'scenes.js'))) quadros += await cenas(browser, ep);
+    } catch (e) {
+      falha(ep, `o teste quebrou: ${e.message}`);
+    }
+  }
+  for (const ep of eps) {
+    try {
       textoBate(ep);
       cortes(ep);
     } catch (e) {

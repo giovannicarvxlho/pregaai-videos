@@ -7,10 +7,13 @@
 //
 // Campos de cada saída: nome (sai em out/<nome>.mp4), frases (na ordem em que entram no vídeo), cartao (segundos do cartão final, sem áudio),
 // SO_MAPA=1 só escreve out/<nome>.corte.json, para revisar quadros com CORTE=... node preview.cjs.
-// tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão; com um índice de frase, termina nela), layout ("cheia" para curto, a versão que vai para as três
-// redes: sem faixas escuras, a cena maior no meio e a mesma cena desfocada em volta; "vertical": recorte com faixas), titulo (texto fixo
-// em cima, no curto; *palavra* sai em azul), cta (banner do app a cada 30 s) e refs (as referências do cartão final,
-// quando o corte tira capítulos que o cartão da origem citava).
+// tiktok (também gera out/<nome>-tiktok.mp4, sem o cartão; com um índice de frase, termina nela), layout ("foco" para curto, a versão que vai
+// para as três redes desde 12/11/2026: a cena enche a tela vertical, com a janela de cada cena ou frase no campo foco; "cheia", antiga, saiu de
+// uso: cena 16:9 no meio e a mesma cena desfocada em volta; "vertical": recorte com faixas), foco (enquadramento do layout foco:
+// { padrao: {cx, cy, z, empurra}, cena: {"<índice da cena>": {cx, cy, z, ate: {cx, cy, z}}}, frase: {"<índice da frase>": {...}} },
+// em unidades da cena 1920×1080; sem foco, a janela fica no meio e empurra devagar), gancho (texto do gancho no 1º quadro, até ~3 s;
+// obrigatório em curto), titulo (texto fixo em cima, no curto; *palavra* sai em azul), cta (banner do app a cada 30 s) e refs (as
+// referências do cartão final, quando o corte tira capítulos que o cartão da origem citava).
 const { execFileSync, spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -73,7 +76,7 @@ const roda = (cmd, args, env = {}) => new Promise((ok, erro) => {
     }
     const total = video.reduce((acc, [a, b]) => acc + b - a, 0);
     const mapaPath = path.join(OUT, `${s.nome}.corte.json`);
-    fs.writeFileSync(mapaPath, JSON.stringify({ trechos: video, frases: s.frases, layout: s.layout || null, titulo: s.titulo || null, cta: !!s.cta, refs: s.refs || null }));
+    fs.writeFileSync(mapaPath, JSON.stringify({ trechos: video, frases: s.frases, layout: s.layout || null, titulo: s.titulo || null, cta: !!s.cta, refs: s.refs || null, foco: s.foco || null, gancho: s.gancho || null }));
     console.log(`\n== ${s.nome}: ${fala.length} trechos, fala ${tFala.toFixed(1)} s, vídeo ${total.toFixed(1)} s`);
     if (process.env.SO_MAPA) continue; // só escreve o mapa (para o preview.cjs com CORTE)
 

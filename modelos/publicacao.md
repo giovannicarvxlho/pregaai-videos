@@ -24,9 +24,9 @@ Regras que valem para todas as redes:
   - TikTok: o vídeo termina na última fala, sem cartão final e sem pedido falado depois dela (com cartão, 1,8% a 5,3%
     assistiram inteiro; sem, 10,5% e 12,5%).
   - Cada curto abre com a própria frase de gancho e tem o próprio título fixo; nenhum curto começa no meio da narração.
-  - Curtos em tela cheia, sem as faixas escuras, nas três redes (layout "cheia" do tools/corte.cjs, saída
-    <ep>-curto-<n>-ig; o pacote.py põe essa versão nas pastas youtube/, tiktok/ e instagram/). Pedido do Giovanni em
-    11/11/2026 para o TikTok e o Shorts; no Instagram, desde 09/11. Limites de duração por rede: "Especificações por
+  - Curtos compostos na vertical, sem faixas, nas três redes (layout "foco" do tools/corte.cjs, com o texto do gancho
+    no 1º quadro; saída <ep>-curto-<n>-ig; o pacote.py põe essa versão nas pastas youtube/, tiktok/ e instagram/).
+    Decisão do Giovanni em 12/11/2026, no lugar da tela cheia de 11/11. Limites de duração por rede: "Especificações por
     rede" no AGENTS.md.
   - App: o texto diz "Na Google Play: procure PregaAI", nunca "Android" nem "Play Store" (regra de marca do Google).
     Vídeo com o banner do selo e sem cartão final (o longo do TikTok e todos os curtos) leva, na última linha da

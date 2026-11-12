@@ -10,7 +10,7 @@ const path = require('path');
   const prev = path.join(__dirname, 'prev');
   fs.mkdirSync(prev, { recursive: true });
   const corte = process.env.CORTE ? JSON.parse(fs.readFileSync(process.env.CORTE, 'utf8')) : null;
-  const q = corte ? (corte.layout ? '&layout=' + corte.layout : '') + (corte.titulo ? '&titulo=' + encodeURIComponent(corte.titulo) : '') + (corte.cta ? '&cta=1' : '') + (corte.refs ? '&refs=' + encodeURIComponent(JSON.stringify(corte.refs)) : '') + (corte.frases ? '&frases=' + corte.frases.join(',') : '') : '';
+  const q = corte ? (corte.layout ? '&layout=' + corte.layout : '') + (corte.titulo ? '&titulo=' + encodeURIComponent(corte.titulo) : '') + (corte.cta ? '&cta=1' : '') + (corte.refs ? '&refs=' + encodeURIComponent(JSON.stringify(corte.refs)) : '') + (corte.frases ? '&frases=' + corte.frases.join(',') : '') + (corte.foco ? '&foco=' + encodeURIComponent(JSON.stringify(corte.foco)) : '') + (corte.gancho ? '&gancho=' + encodeURIComponent(corte.gancho) : '') : '';
   const mapa = (tv) => {
     if (!corte) return tv;
     let acc = 0;
