@@ -18,15 +18,19 @@ Calendário da semana (sugestão, para agendar tudo de uma vez: YouTube Studio, 
 ### Vídeo longo: `youtube/longo.mp4`
 
 **Título**
-> Jesus e Pedro: tu me amas? O que aconteceu depois da negação | Histórias Bíblicas
+> PEDRO, TU ME AMAS? O QUE JESUS FEZ DEPOIS DA NEGAÇÃO
+
+Título novo de 12/11/2026 (em maiúsculas, começando pela frase do autocompletar do YouTube). O anterior, com que o vídeo foi publicado: "Jesus e Pedro: tu me amas? O que aconteceu depois da negação | Histórias Bíblicas".
 
 **Miniaturas para o "Testar e comparar"** (2560×1440; sobem nesta ordem, e a primeira fica se não houver vencedora)
 
 | Ordem | Arquivo | Texto | Motivo para clicar |
 |---|---|---|---|
-| 1 | `youtube/miniatura-a.jpg` | 153 PEIXES | a curiosidade: o número exato que alguém contou (João 21:11) |
-| 2 | `youtube/miniatura-b.jpg` | PERGUNTOU 3 VEZES | a emoção: Pedro chorando na terceira pergunta |
-| 3 | `youtube/miniatura-c.jpg` | ELE SABIA | o mistério: Pedro sabia como ia morrer (2 Pedro 1:14) |
+| 1 | `youtube/miniatura-a.jpg` | PEDRO FICOU MAGOADO | a emoção: Pedro de perto, chorando, na praia ao amanhecer, com a fogueira de brasas e os peixes (João 21:17; 21:9; 21:4). As lágrimas são as que o vídeo mostra na cena; a NVI diz "magoado" |
+| 2 | `youtube/miniatura-b.jpg` | PEDRO PUXOU 153 PEIXES | a curiosidade: a rede cheia e o número exato que alguém contou (João 21:11) |
+| 3 | `youtube/miniatura-c.jpg` | JESUS AVISOU PEDRO | o mistério: Pedro velho, de mãos estendidas; Jesus indicou com que tipo de morte ele ia glorificar a Deus (João 21:18-19) |
+
+Miniaturas refeitas em 12/11/2026 no estilo novo (`capa-lib.js`: rosto em close com emoção, luz forte, texto branco e dourado). As anteriores ("153 PEIXES", "PERGUNTOU 3 VEZES", "ELE SABIA") estão no histórico do git.
 
 **Descrição**
 ```

@@ -2,32 +2,26 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Miniatura A: o véu (objeto, sem texto)</title>
+<title>Miniatura A: as 7 frases na cruz (Maria chorando perto da cruz)</title>
 <style>
 @font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
-@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/700Bold/Geist_700Bold.ttf); font-weight: 700; }
-@font-face { font-family: 'Geist Mono'; src: url(../../node_modules/@expo-google-fonts/geist-mono/500Medium/GeistMono_500Medium.ttf); font-weight: 500; }
-@font-face { font-family: Geist; src: url(../../node_modules/@expo-google-fonts/geist/800ExtraBold/Geist_800ExtraBold.ttf); font-weight: 800; }
 html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
-#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
-svg { position: absolute; inset: 0; }
-/* A: o objeto é o herói. Véu azul rasgado contra fundo escuro, a luz âmbar saindo do rasgo e a cruz vista
-   pela abertura. Sem texto: o título conta, a imagem mostra. Azul contra âmbar (complementares). */
+svg { position: absolute; inset: 0; -webkit-font-smoothing: antialiased; }
+/* A (emoção, sobe primeiro): Maria, a mãe de Jesus, chorando perto da cruz (João 19:25-27), as três cruzes na luz vermelha.
+   Texto: 7 ÚLTIMAS FRASES, embaixo à direita, acima do canto da duração. */
 </style>
 </head>
 <body>
-<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg></div>
+<svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
 <script src="data.js"></script>
 <script src="../../lib.js"></script>
+<script src="../../capa-lib.js"></script>
 <script src="scenes.js"></script>
+<script src="capas.js"></script>
 <script>
 window.SIZE = [1280, 720];
-let s = DEFS + `<rect width="1920" height="1080" fill="#0F0C0A"/>`;
-s += `<circle cx="960" cy="520" r="760" fill="url(#gAmber)" opacity="0.75"/>`;
-const g = veil(1, 380, 1540, 70, 1010, { beamTo: 1180, gapMax: 520, id: 'vA' });
-s += g + crossFig(960, 860, 0.95, { fill: '#16110F', plaque: true });
-document.getElementById('art').innerHTML = s;
-window.ready = document.fonts.ready;
+// o texto mede a fonte para definir o tamanho: a arte só entra depois de a fonte carregar
+window.ready = document.fonts.load("100px 'Gasoek One'").then(() => { document.getElementById('art').innerHTML = DEFS + artN1(); return document.fonts.ready; });
 </script>
 </body>
 </html>

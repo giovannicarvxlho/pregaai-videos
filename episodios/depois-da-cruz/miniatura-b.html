@@ -2,41 +2,26 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Miniatura B: O que aconteceu depois que Jesus morreu na cruz</title>
+<title>Miniatura B: depois da cruz (quem rolou a pedra)</title>
 <style>
 @font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
 html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
-#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
-svg { position: absolute; inset: 0; }
-/* B: quem abriu o túmulo (Mateus 28:2-4). Luz saindo do túmulo, o anjo sentado na pedra e os guardas caídos.
-   O texto soma ao título ("O que aconteceu depois que Jesus morreu na cruz"), não repete. Nada importante no canto de baixo à direita (duração). */
-.hook { position: absolute; left: 46px; top: 80px; display: flex; flex-direction: column; align-items: flex-start; }
-.l { font: 400 150px/0.95 'Gasoek One'; color: #FFFFFF; white-space: nowrap;
-  text-shadow: -5px -5px 0 #181614, 5px -5px 0 #181614, -5px 5px 0 #181614, 5px 5px 0 #181614, 0 -6px 0 #181614, 0 6px 0 #181614, -6px 0 0 #181614, 6px 0 0 #181614, 0 13px 0 #181614; }
-.chip { margin-top: 16px; padding: 4px 30px 20px; background: #2383E2; border: 7px solid #181614; border-radius: 28px; box-shadow: 0 12px 0 0 #181614;
-  font: 400 138px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); }
+svg { position: absolute; inset: 0; -webkit-font-smoothing: antialiased; }
+/* B (mistério): a pedra rolada e, sentado nela, o anjo de aparência "como um relâmpago", só em luz (Mateus 28:2-3).
+   Texto: QUEM ROLOU / A PEDRA?, no alto à direita. Canto de baixo à direita: só o chão. */
 </style>
 </head>
 <body>
-<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg>
-  <div class="hook"><div class="l">QUEM</div><div class="chip">ABRIU?</div></div>
-</div>
+<svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
 <script src="data.js"></script>
 <script src="../../lib.js"></script>
+<script src="../../capa-lib.js"></script>
 <script src="scenes.js"></script>
+<script src="capas.js"></script>
 <script>
 window.SIZE = [1280, 720];
-const t = 3.0;
-const VIN = (o = 0.55) => `<defs><radialGradient id="vin" cx="50%" cy="50%" r="72%"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${o}"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#vin)"/>`;
-let s = tumulo(t, { tone: 'dawn', open: 1, seal: 1, inside: `<circle cx="${TB.x}" cy="${TB.base - 120}" r="560" fill="url(#gWhite)" opacity="1"/><circle cx="${TB.x}" cy="${TB.base - 120}" r="320" fill="url(#gWhite)" opacity="1"/>`,
-  angel: ANJO_PEDRA(t, { glow: 1, mood: 'calm' }) });
-s += `<rect width="1920" height="1080" fill="#0B1426" opacity="0.45"/><defs>${radial('gOuro', '#FFB938', 0.95)}</defs><circle cx="${TB.x}" cy="${TB.base - 140}" r="470" fill="url(#gOuro)" opacity="0.9"/><circle cx="${PEDRA_ABERTA}" cy="${PEDRA_Y - 140}" r="300" fill="url(#gWhite)" opacity="0.9"/>` + pedra(PEDRA_ABERTA, ((PEDRA_ABERTA - PEDRA_FECHADA) / PR) * 57.3, 'dawn') + anjo(ANJO_PEDRA(t, { glow: 0.6, mood: 'calm' }));
-const cx = PEDRA_ABERTA, cy = PEDRA_Y - 70;
-s = cam(s, cx, cy, 2.15, 1330 - cx, 600 - cy);
-s += caido(guarda(0, { x: 120, y: 1015, s: 1.7, mood: 'fear', t }), 84);
-s += VIN(0.65);
-document.getElementById('art').innerHTML = DEFS + s;
-window.ready = document.fonts.ready;
+// o texto mede a fonte para definir o tamanho: a arte só entra depois de a fonte carregar
+window.ready = document.fonts.load("100px 'Gasoek One'").then(() => { document.getElementById('art').innerHTML = DEFS + artN2(); return document.fonts.ready; });
 </script>
 </body>
 </html>

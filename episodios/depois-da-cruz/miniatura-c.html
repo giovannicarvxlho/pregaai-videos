@@ -2,40 +2,27 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Miniatura C: O que aconteceu depois que Jesus morreu na cruz</title>
+<title>Miniatura C: depois da cruz (quem viu Jesus primeiro)</title>
 <style>
 @font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
 html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
-#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
-svg { position: absolute; inset: 0; }
-/* C: quem viu Jesus vivo primeiro (João 20:14-16; Mateus 28:9). Maria chorando em close e Jesus em pé, com rosto, na luz.
-   O texto soma ao título ("O que aconteceu depois que Jesus morreu na cruz"), não repete. Nada importante no canto de baixo à direita (duração). */
-.hook { position: absolute; right: 46px; top: 60px; display: flex; flex-direction: column; align-items: flex-end; }
-.l { font: 400 124px/0.95 'Gasoek One'; color: #FFFFFF; white-space: nowrap;
-  text-shadow: -5px -5px 0 #181614, 5px -5px 0 #181614, -5px 5px 0 #181614, 5px 5px 0 #181614, 0 -6px 0 #181614, 0 6px 0 #181614, -6px 0 0 #181614, 6px 0 0 #181614, 0 13px 0 #181614; }
-.chip { margin-top: 16px; padding: 4px 30px 20px; background: #2383E2; border: 7px solid #181614; border-radius: 28px; box-shadow: 0 12px 0 0 #181614;
-  font: 400 112px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); }
+svg { position: absolute; inset: 0; -webkit-font-smoothing: antialiased; }
+/* C (curiosidade): Maria Madalena chorando, de perto, e atrás dela, de longe e contra o sol, o homem que ela tomou
+   pelo jardineiro (João 20:14-16; Marcos 16:9). Jesus só em silhueta. Texto: QUEM VIU JESUS / PRIMEIRO?, no alto.
+   Canto de baixo à direita: só o chão do jardim. */
 </style>
 </head>
 <body>
-<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720"></svg>
-  <div class="hook"><div class="l">QUEM VIU</div><div class="chip">PRIMEIRO?</div></div>
-</div>
+<svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
 <script src="data.js"></script>
 <script src="../../lib.js"></script>
+<script src="../../capa-lib.js"></script>
 <script src="scenes.js"></script>
+<script src="capas.js"></script>
 <script>
 window.SIZE = [1280, 720];
-const t = 1.3;
-const VIN = (o = 0.55) => `<defs><radialGradient id="vin" cx="50%" cy="50%" r="72%"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${o}"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#vin)"/>`;
-let s = tumulo(t, { tone: 'sunrise', open: 1, seal: 1, back: jardim(t, { trees: [[150, GROUND + 140, 1.5], [430, GROUND + 90, 1.1]] }) });
-s += `<rect width="1920" height="1080" fill="#3A2418" opacity="0.28"/>`;
-s += `<defs>${radial('gOuro', '#FFA53A', 0.95)}</defs><circle cx="1250" cy="560" r="700" fill="url(#gOuro)" opacity="0.85"/><circle cx="1250" cy="560" r="330" fill="url(#gWhite)" opacity="0.9"/>`;
-s += person({ ...VIVO, x: 1250, y: 990, s: 2.05, look: -1, mood: 'calm', armL: 40, armR: 14, rim: C.a300 });
-s += person({ ...MADALENA, x: 470, y: 1340, s: 3.4, look: 1, mood: 'sad', armL: 24, armR: 70 }) + lagrimas(470, 1340, 3.4, t, 1) + lagrimas(470, 1340, 3.4, t + 0.5, 1);
-s += VIN(0.6);
-document.getElementById('art').innerHTML = DEFS + s;
-window.ready = document.fonts.ready;
+// o texto mede a fonte para definir o tamanho: a arte só entra depois de a fonte carregar
+window.ready = document.fonts.load("100px 'Gasoek One'").then(() => { document.getElementById('art').innerHTML = DEFS + artN3(); return document.fonts.ready; });
 </script>
 </body>
 </html>

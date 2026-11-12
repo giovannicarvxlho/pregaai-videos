@@ -55,7 +55,7 @@ Regras que valem para todas as redes:
 
 ### Vídeo longo: `youtube/longo.mp4`
 
-**Título** <!-- até 100 caracteres; palavra-chave nos primeiros ~40; 50 a 60 no total; clareza antes de esperteza. Pode terminar em "| Histórias Bíblicas". -->
+**Título** <!-- até ~55 caracteres; começa pela frase que se digita na busca (confira no autocompletar do YouTube), depois o número ou a pergunta; clareza antes de esperteza. Sem "| Histórias Bíblicas" no fim (gasta 21 caracteres e não é buscado). EM MAIÚSCULAS: teste aprovado pelo Giovanni em 12/11/2026, pelo padrão do canal do Peter Jordan; como ler o resultado está no MARK1, `projetos/pregaai-referencias.md`. -->
 > <título>
 
 **Miniaturas para o "Testar e comparar"** <!-- 3 versões 2560×1440, cada uma com um motivo diferente para clicar; sobem nesta ordem e a primeira fica se não houver vencedora; nada importante no canto de baixo à direita. -->

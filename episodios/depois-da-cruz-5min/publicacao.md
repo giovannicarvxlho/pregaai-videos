@@ -16,15 +16,19 @@
 ### Vídeo longo: `youtube/longo.mp4`
 
 **Título**
-> O que aconteceu depois que Jesus morreu na cruz | Histórias Bíblicas
+> O QUE ACONTECEU DEPOIS QUE JESUS MORREU? O TÚMULO VAZIO
+
+Título novo de 12/11/2026 (em maiúsculas, começando pela frase do autocompletar do YouTube). O anterior, com que o vídeo foi publicado: "O que aconteceu depois que Jesus morreu na cruz | Histórias Bíblicas".
 
 **Miniaturas para o "Testar e comparar"** (2560×1440; sobem nesta ordem, e a primeira fica se não houver vencedora)
 
 | Ordem | Arquivo | Texto | Motivo para clicar |
 |---|---|---|---|
-| 1 | `youtube/miniatura-a.jpg` | PAGOS PRA MENTIR | o escândalo: alguém pagou para esconder a verdade |
-| 2 | `youtube/miniatura-b.jpg` | QUEM ABRIU? | o mistério do túmulo aberto |
-| 3 | `youtube/miniatura-c.jpg` | QUEM VIU PRIMEIRO? | a curiosidade sobre a primeira testemunha |
+| 1 | `youtube/miniatura-a.jpg` | PAGOS PRA MENTIR | o escândalo: o guarda do túmulo, com cara de culpa, e a bolsa de moedas; os chefes dos sacerdotes deram aos soldados grande soma de dinheiro (Mateus 28:11-15) |
+| 2 | `youtube/miniatura-b.jpg` | QUEM ROLOU A PEDRA? | o mistério do túmulo aberto, com a luz saindo e o guarda caído (Mateus 28:2-4; o vídeo responde: o anjo) |
+| 3 | `youtube/miniatura-c.jpg` | QUEM VIU JESUS PRIMEIRO? | a curiosidade sobre a primeira testemunha: Maria Madalena de perto, chorando e espantada, e Jesus em silhueta no jardim (João 20:11-16; Marcos 16:9) |
+
+Miniaturas refeitas em 12/11/2026 no estilo novo (`capa-lib.js`: rosto em close com emoção, luz forte, texto branco e dourado). As anteriores ("PAGOS PRA MENTIR", "QUEM ABRIU?", "QUEM VIU PRIMEIRO?") estão no histórico do git.
 
 **Descrição**
 ```

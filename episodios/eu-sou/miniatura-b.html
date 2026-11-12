@@ -2,31 +2,26 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Miniatura B: Os sete Eu sou de Jesus (a sarça)</title>
+<title>Miniatura B: os 7 "Eu sou" (a sarça que não se consumia)</title>
 <style>
 @font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
 html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
-#root { position: relative; width: 1280px; height: 720px; overflow: hidden; -webkit-font-smoothing: antialiased; }
-svg { position: absolute; inset: 0; }
-/* B: a sarça em chamas que não se queima (Êxodo 3:2), sem figura nenhuma nela. Mistério. Entardecer escuro, herói: um objeto, texto à direita, etiqueta na 2ª linha inclinada para a esquerda. */
-.hook { position: absolute; right: 50px; top: 80px; display: flex; flex-direction: column; align-items: flex-end; }
-.l { font: 400 136px/0.95 'Gasoek One'; color: #FFFFFF; white-space: nowrap;
-  text-shadow: -5px -5px 0 #181614, 5px -5px 0 #181614, -5px 5px 0 #181614, 5px 5px 0 #181614, 0 -6px 0 #181614, 0 6px 0 #181614, -6px 0 0 #181614, 6px 0 0 #181614, 0 13px 0 #181614; }
-.chip { padding: 4px 30px 20px; background: #2383E2; border: 7px solid #181614; border-radius: 28px; box-shadow: 0 12px 0 0 #181614; font: 400 122px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-4deg); margin: 16px 0 0; }
+svg { position: absolute; inset: 0; -webkit-font-smoothing: antialiased; }
+/* B (mistério): a sarça em chamas que não se consumia, sozinha, no entardecer do deserto (Êxodo 3:2, 13-14).
+   Texto: O NOME / EU SOU, à esquerda. Canto de baixo à direita: só o chão. */
 </style>
 </head>
 <body>
-<div id="root"><svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
-  <div class="hook"><div class="l">NÃO</div><div class="chip">QUEIMAVA</div></div>
-</div>
+<svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
 <script src="data.js"></script>
 <script src="../../lib.js"></script>
+<script src="../../capa-lib.js"></script>
 <script src="scenes.js"></script>
 <script src="capas.js"></script>
 <script>
 window.SIZE = [1280, 720];
-document.getElementById('art').innerHTML = DEFS + artB();
-window.ready = document.fonts.ready;
+// o texto mede a fonte para definir o tamanho: a arte só entra depois de a fonte carregar
+window.ready = document.fonts.load("100px 'Gasoek One'").then(() => { document.getElementById('art').innerHTML = DEFS + artN2(); return document.fonts.ready; });
 </script>
 </body>
 </html>
