@@ -142,6 +142,24 @@ html.recorte, .recorte body, .recorte #root { width: 1080px; height: 1920px; bac
 .cheia .ref { top: 556px; }
 .cheia .cap { top: 1340px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); }
 #fundo { display: none; }
+/* enquadramento por cena (?layout=foco, decisão do Giovanni em 12/11/2026): a cena 16:9 enche a tela vertical inteira.
+   As cenas são SVG, então a janela de 607,5 × 1080 da cena (zoom 1) vira 1080 × 1920 sem perder resolução; o centro
+   e o zoom de cada cena ou frase vêm do campo "foco" do corte.json (renderFrame). Sem faixas e sem fundo desfocado.
+   Um degradê escuro em cima e embaixo segura a leitura do título, do gancho e da legenda sobre a cena. */
+.foco #stage { top: 0; left: 0; width: 1080px; height: 1920px; }
+.foco #scene { top: 0; left: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+.foco #chrome { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0, rgba(0, 0, 0, 0.18) 40%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0) 85%, rgba(0, 0, 0, 0.35) 100%); }
+.foco .titulo, .foco .gancho { text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6); }
+/* com a cena cheia, os personagens ficam na metade de baixo (o chão da cena 16:9): a legenda sobe para a faixa do céu,
+   logo abaixo do título, e nunca cobre rosto; a referência fica entre os dois */
+.foco .ref { top: 586px; color: #E9E8E4; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); }
+.foco .cap { top: 640px; width: 780px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75); }
+/* texto do gancho no 1º quadro (decisão do Giovanni em 12/11/2026): a frase do gancho escrita na tela do quadro 0
+   até ~3 s, no terço de cima, dentro da zona segura; some antes do título fixo entrar */
+.gancho { position: absolute; left: 70px; right: 70px; top: 290px; height: 280px; display: flex; align-items: center; justify-content: center;
+  text-align: center; font: 400 92px/1.02 'Gasoek One'; color: #FFFFFF; }
+.gancho span { color: #6FB1FC; }
+html:not(.wide) .gancho { text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55); }
 .titulo { position: absolute; left: 70px; right: 70px; top: 300px; height: 250px; display: flex; align-items: center; justify-content: center;
   text-align: center; font: 400 86px/1.02 'Gasoek One'; color: #FFFFFF; }
 .titulo span { color: #6FB1FC; }
@@ -156,7 +174,10 @@ html.recorte, .recorte body, .recorte #root { width: 1080px; height: 1920px; bac
 // lib.js porque é ele que diz o formato (FORMAT = 'wide' no vídeo longo).
 const Q = new URLSearchParams(location.search), EP = Q.get('ep');
 // Recorte vertical de um longo (curtos), título fixo e banner de CTA vêm da URL (tools/corte.cjs).
-const CHEIA = Q.get('layout') === 'cheia', RECORTE = Q.get('layout') === 'vertical' || CHEIA, TITULO = Q.get('titulo') || '', CTA = Q.get('cta') === '1';
+const CHEIA = Q.get('layout') === 'cheia', FOCO = Q.get('layout') === 'foco', RECORTE = Q.get('layout') === 'vertical' || CHEIA || FOCO, TITULO = Q.get('titulo') || '', CTA = Q.get('cta') === '1';
+// Enquadramento do layout foco (campo "foco" do corte.json): { padrao: {cx, cy, z, empurra}, cena: { "<i>": {...} }, frase: { "<i>": {...} } }.
+const FOCO_CFG = Q.get('foco') ? JSON.parse(Q.get('foco')) : {};
+const GANCHO_URL = Q.get('gancho') || ''; // texto do gancho no 1º quadro (corte.json); no curto nativo, a constante GANCHO do data.js
 const REFS = Q.get('refs') ? JSON.parse(Q.get('refs')) : null; // referências do cartão final num corte
 // Frases que ficam num corte: a legenda de uma frase cortada não aparece (nem a sobra dela no começo do trecho seguinte).
 const FRASES = Q.get('frases') ? new Set(Q.get('frases').split(',').map(Number)) : null;
@@ -171,6 +192,7 @@ if (WIDE) {
   st.setAttribute('viewBox', `0 0 ${W} ${H}`); st.setAttribute('width', W); st.setAttribute('height', H);
   if (RECORTE) { document.documentElement.classList.add('recorte'); st.setAttribute('width', 1080); st.setAttribute('height', 607.5); }
   if (CHEIA) { document.documentElement.classList.add('cheia'); st.setAttribute('width', 1268); st.setAttribute('height', 713.25); }
+  if (FOCO) { document.documentElement.classList.add('foco'); st.setAttribute('width', 1080); st.setAttribute('height', 1920); }
 }
 // Num corte que tirou capítulos, o cartão final cita só as referências que ficaram.
 if (REFS) { const cartao = endCard; endCard = (t, t0, refs, o) => cartao(t, t0, REFS, o); }
@@ -226,6 +248,27 @@ function chromeHTML(t, list) {
   return { html: h, dark: typeof cur.dark === 'function' ? cur.dark(t) : !!cur.dark };
 }
 
+// Layout foco: a janela da cena (em unidades da cena 1920×1080) que enche a tela 1080×1920 no tempo t.
+// Vale a regra mais específica: a da frase falada, depois a da cena, depois o padrão. cx e cy são o centro da janela;
+// z é o zoom (1 = altura inteira da cena; menos que 1 não existe, porque deixaria faixa); "ate" leva a janela até outro
+// ponto ao longo da frase ou da cena (campo e contracampo, ou uma panorâmica). Sem "ate", a câmera empurra devagar
+// (empurra: zoom a mais no fim da cena; padrão 0,04), para a cena nunca ficar parada.
+function janelaFoco(t, cur, iCena) {
+  const P = FOCO_CFG.padrao || {}, cena = (FOCO_CFG.cena || {})[iCena], ch = CHUNKS.find((c) => t >= c.t0 && t < c.t1);
+  const fr = ch && (FOCO_CFG.frase || {})[ch.seg];
+  const regra = fr || cena || {}, base = { cx: 960, cy: 540, z: 1, ...P, ...regra };
+  const [a, b] = fr ? [SEGS[ch.seg][0], SEGS[ch.seg][1]] : [cur.a, Math.min(cur.b, typeof DURATION === 'number' ? DURATION : cur.b)];
+  const p = E.sine(prog(t, a, b));
+  const fim = regra.ate ? { ...base, ...regra.ate } : { ...base, z: base.z + (base.empurra ?? 0.04) };
+  const cx = base.cx + (fim.cx - base.cx) * p, cy = base.cy + (fim.cy - base.cy) * p, z = Math.max(1, base.z + (fim.z - base.z) * p);
+  const k = (1920 / 1080) * z, w = 1080 / k, h = 1920 / k;
+  const x0 = Math.min(Math.max(cx - w / 2, 0), W - w), y0 = Math.min(Math.max(cy - h / 2, 0), H - h);
+  return { x0, y0, w, h, k };
+}
+const GANCHO_TXT = GANCHO_URL || (typeof GANCHO === 'string' ? GANCHO : '');
+// O gancho fica do quadro 0 até 3 s do vídeo final e some em 0,4 s. Só no vertical (recorte ou curto nativo).
+const ganchoOp = (tv) => (GANCHO_TXT && (RECORTE || !WIDE) ? 1 - prog(tv, 2.6, 3.0) : 0);
+
 // t: tempo da narração (as cenas e a legenda); tv: tempo do vídeo final, diferente de t num vídeo cortado.
 window.renderFrame = (t, tv = t) => {
   const list = activeScenes(t);
@@ -238,14 +281,22 @@ window.renderFrame = (t, tv = t) => {
   $stage.innerHTML = svg;
   if (CHEIA) $fundo.innerHTML = svg;
   $scene.innerHTML = html;
+  if (FOCO && list.length) {
+    const top = list[list.length - 1], cur = top.op >= 0.5 || list.length === 1 ? top.sc : list[0].sc;
+    const j = janelaFoco(t, cur, SCENES.indexOf(cur));
+    $stage.setAttribute('viewBox', `${f1(j.x0)} ${f1(j.y0)} ${f1(j.w)} ${f1(j.h)}`);
+    $scene.style.transform = `scale(${j.k.toFixed(5)}) translate(${f1(-j.x0)}px, ${f1(-j.y0)}px)`;
+  }
   const ch = chromeHTML(t, list);
   $chrome.className = 'layer' + (ch.dark ? ' dark' : '');
   // No recorte, o banner de CTA entra no lugar do título: o título sai antes de o banner entrar e volta depois que ele sai.
   const cta = CTA && !ch.end ? ctaFase(tv) : null;
-  const tituloOp = cta ? f1((1 - cta.titulo) * 100) / 100 : 1;
+  const gop = ganchoOp(tv);
+  const tituloOp = f1((cta ? 1 - cta.titulo : 1) * (1 - Math.min(1, gop * 2)) * 100) / 100;
+  const gancho = gop > 0 ? `<div class="gancho" style="opacity:${f1(gop * 100) / 100}"><div>${esc(GANCHO_TXT).replace(/\*(.+?)\*/g, '<span>$1</span>')}</div></div>` : '';
   const titulo = RECORTE && TITULO && tituloOp > 0
     ? `<div class="titulo" style="opacity:${tituloOp}"><div>${esc(TITULO).replace(/\*(.+?)\*/g, '<span>$1</span>')}</div></div>` : '';
-  $chrome.innerHTML = titulo + ch.html + (cta ? ctaBanner(tv) : '');
+  $chrome.innerHTML = gancho + titulo + ch.html + (cta ? ctaBanner(tv) : '');
 };
 window.ready = (async () => {
   const fams = ['500 40px Geist', '600 40px Geist', '700 40px Geist', '800 40px Geist', '600 40px Lora', 'italic 500 40px Lora', '40px "Gasoek One"', '500 40px "Geist Mono"', '600 40px "Geist Mono"'];
