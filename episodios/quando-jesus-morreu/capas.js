@@ -60,3 +60,63 @@ function artE(o = {}) {
   [[x + 330, 2104, ps * 0.62, py - 150], [x + 190, 2103, ps * 0.78, py - 90], [x, 2102, ps, py]].forEach(([px, seed, sc, y], i) => (s += person({ ...santo(seed), x: px, y, s: sc, look: 1, mood: 'calm', walk: 0.6 + i * 1.7 })));
   return s + VIN(o.vin ?? 0.3);
 }
+
+// ---------- Miniaturas novas do longo (12/11/2026), com as peças do capa-lib.js ----------
+// Cada uma com um motivo para clicar e um layout diferente; todas só com o que o vídeo mostra.
+// N1 (espetáculo): o centurião aterrorizado, de perto, olhando para a cruz na tarde escura (Mateus 27:54:
+//     "viram o terremoto e tudo o que havia acontecido, ficaram aterrorizados"). Texto à esquerda, embaixo.
+function artN1(o = {}) {
+  const CX = 500, TOPO = 500;
+  let s = capaFundo([[0, '#050409'], [0.5, '#170C10'], [0.78, '#4A160C'], [1, '#7A2A10']]);
+  s += capaLuz(CX, 330, 760, '#FF6A13', 0.95) + capaRaios(CX, 300, 900, 14, '#FFB347', 0.16, 8);
+  // o sol que deixou de brilhar (Lucas 23:45), atrás da cruz do meio
+  s += `<circle cx="${CX}" cy="250" r="158" fill="#6B1E0A" stroke="#FFC46B" stroke-width="9"/>`;
+  s += hill(CX, TOPO, 1000, '#070505', '#000');
+  s += crossFig(CX - 300, TOPO + 46, 0.5, { fill: '#040303', rim: '#B5461A', bow: 0.35 }) + crossFig(CX + 300, TOPO + 46, 0.5, { fill: '#040303', rim: '#B5461A', bow: 0.35 });
+  s += crossFig(CX, TOPO + 16, 0.74, { plaque: true, fill: '#040303', rim: '#FF8A3C', bow: 1 });
+  s += capaMotas(60, 80, 1000, 500, 26, 77, '#FFC98A', 0.7);
+  // lascas de rocha no ar (Mateus 27:51: "a terra tremeu, e as rochas se partiram")
+  const r = rng(27);
+  for (let i = 0; i < 9; i++) {
+    const x = 90 + r() * 900, y = 250 + r() * 220, k = 10 + r() * 16, rot = r() * 360;
+    s += `<path transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)})" d="M ${-k} ${k * 0.3} L ${-k * 0.4} ${-k} L ${k * 0.8} ${-k * 0.6} L ${k} ${k * 0.5} L ${k * 0.1} ${k} Z" fill="#070505" stroke="#B5461A" stroke-width="3"/>`;
+  }
+  s += retrato({ ...CENT, x: 1460, y: 600, s: 1.42, helmet: 'cent', armor: true, mood: 'medo', look: [-0.75, -0.45], lado: -1, luz: '#FF8A3C', suor: true, id: 'n1' });
+  s += capaVinheta(0.55, '45%', '45%', '80%');
+  s += capaTexto([{ t: 'JESUS MORREU', w: 800 }, { t: 'TUDO', w: 560, fill: 'ouro' }, { t: 'TREMEU', w: 860, fill: 'ouro' }], { x: 64, y: 548, gap: 0.1 });
+  return s;
+}
+// N2 (curiosidade): o véu do santuário rasgado de alto a baixo, com a luz estourando pelo rasgo (Mateus 27:51).
+//     Sem ninguém: o herói é o pano. Texto à esquerda, no meio. Roxo e ouro.
+function artN2(o = {}) {
+  const X0 = -500, X1 = 2100, cx = 1290;
+  // o pano na penumbra do santuário: azul fundo e saturado (o brilho do rasgo entra por cima)
+  let s = `<g style="filter: brightness(0.6) saturate(1.5)" transform="translate(${cx - (X0 + X1) / 2} 0)">` + veil(1, X0, X1, -60, 1150, { id: 'n2', querubins: 1, linho: true, gapMax: 430, beamTo: 1150 }) + `</g>`;
+  s += `<defs><linearGradient id="n2esq" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#05030C" stop-opacity="0.92"/><stop offset="0.4" stop-color="#05030C" stop-opacity="0.5"/><stop offset="0.62" stop-color="#05030C" stop-opacity="0"/></linearGradient></defs><rect x="0" y="-400" width="1920" height="1880" fill="url(#n2esq)"/>`;
+  s += capaRaios(cx, 240, 1700, 12, '#FFE9A8', 0.2, 4);
+  s += capaLuz(cx, 420, 700, '#FFB52E', 0.75) + capaLuz(cx - 10, 470, 300, '#FFFFFF', 1, 0.62, 2.3) + capaLuz(cx, 260, 400, '#FFFFFF', 1);
+  s += capaMotas(cx - 520, 40, 1040, 960, 46, 9, '#FFF3C9', 0.95);
+  s += capaVinheta(0.72, '67%', '40%', '80%');
+  s += capaTexto([{ t: 'O VÉU', w: 700 }, { t: 'RASGOU', w: 810, fill: 'ouro' }], { x: 64, y: 250, gap: 0.12, rot: -3 });
+  return s;
+}
+// N3 (estranheza): o sepulcro da frente com a pedra partida e a luz saindo; ao fundo, as três cruzes
+//     (Mateus 27:51-52: "as rochas se partiram, os sepulcros se abriram"). Texto à direita, no alto. Azul frio e ouro.
+function artN3(o = {}) {
+  const SX = 600, BASE = 1090, K = 2.3;
+  let s = capaFundo([[0, '#04070F'], [0.55, '#0B1730'], [1, '#182C52']]);
+  // o Gólgota ao longe, com o resto de luz atrás das cruzes
+  s += capaLuz(1560, 640, 420, '#FF6A13', 0.8);
+  s += hill(1560, 700, 520, '#05070C', '#000');
+  s += crossFig(1430, 728, 0.3, { fill: '#020304', bow: 0.35 }) + crossFig(1690, 728, 0.3, { fill: '#020304', bow: 0.35 }) + crossFig(1560, 712, 0.42, { plaque: true, fill: '#020304', bow: 1 });
+  s += `<path d="M -400 1200 L -400 760 C 300 700 900 760 1300 800 C 1600 830 1900 800 2400 820 L 2400 1200 Z" fill="#0A1322" stroke="#000" stroke-width="8"/>`;
+  s += capaLuz(SX - 12, BASE - 150 * K, 1000, '#FFB52E', 0.5);
+  TOM_SEPULCRO.capa = ['#2B3554', '#222B47', '#141A2E', '#04060B', '#56628A', '#333D5E', '#0A0D17']; // pedra fria, para a luz quente saltar
+  s += sepulcro(SX, BASE, K, { tom: 'capa', parte: 1, luz: 1, id: 'n3' });
+  s += capaRaios(SX - 12, BASE - 130 * K, 1500, 9, '#FFD98A', 0.12, 11, 196, 344);
+  s += capaLuz(SX - 12, BASE - 130 * K, 520, '#FFB52E', 0.6) + capaLuz(SX - 12, BASE - 120 * K, 330, '#FFFFFF', 0.95);
+  s += capaMotas(SX - 420, 120, 840, 760, 40, 5, '#FFE9B0', 0.9);
+  s += capaVinheta(0.6, '40%', '55%', '85%');
+  s += capaTexto([{ t: 'TÚMULOS', w: 900 }, { t: 'SE ABRIRAM', w: 900, fill: 'ouro' }], { x: 1862, y: 56, anchor: 'end', gap: 0.12, rot: 2 });
+  return s;
+}
