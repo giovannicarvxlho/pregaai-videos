@@ -91,7 +91,8 @@ function retrato(o = {}) {
 
   // cabeça: a luz forte de um lado (filete claro), a sombra do outro
   g += `<clipPath id="${id}"><circle cx="0" cy="0" r="${R}"/></clipPath>`;
-  g += `<g clip-path="url(#${id})"><rect x="-210" y="-210" width="420" height="420" fill="${luz}"/><circle cx="${-lado * 20}" cy="8" r="${R}" fill="${skin}"/><circle cx="${-lado * 330}" cy="60" r="250" fill="${skDk}" opacity="0.75"/>`;
+  g += `<radialGradient id="${id}s" gradientUnits="userSpaceOnUse" cx="${lado * 90}" cy="-40" r="330"><stop offset="0" stop-color="${shade(skin, 1.14)}"/><stop offset="0.6" stop-color="${skin}"/><stop offset="1" stop-color="${shade(skin, 0.86)}"/></radialGradient>`;
+  g += `<g clip-path="url(#${id})"><rect x="-210" y="-210" width="420" height="420" fill="${luz}"/><circle cx="${-lado * 20}" cy="8" r="${R}" fill="url(#${id}s)"/><circle cx="${-lado * 330}" cy="60" r="250" fill="${skDk}" opacity="0.75"/>`;
   g += `<ellipse cx="-122" cy="${92 + fy}" rx="44" ry="26" fill="#E0564A" opacity="0.28"/><ellipse cx="122" cy="${92 + fy}" rx="44" ry="26" fill="#E0564A" opacity="0.28"/></g>`;
   g += `<circle cx="0" cy="0" r="${R}" fill="none" ${st()}/>`;
 
@@ -112,6 +113,7 @@ function retrato(o = {}) {
     g += `<circle cx="${f1(cx + lx * (rx - ir - 4))}" cy="${f1(ey + ly * (ry - ir - 6))}" r="${ir}" fill="#3B2314"/><circle cx="${f1(cx + lx * (rx - ir - 4))}" cy="${f1(ey + ly * (ry - ir - 6))}" r="${ir * 0.55}" fill="#0B0705"/>`;
     g += `<circle cx="${f1(cx + lx * (rx - ir - 4) - 10)}" cy="${f1(ey + ly * (ry - ir - 6) - 11)}" r="${ir * 0.3}" fill="#fff"/></g>`;
     g += `<ellipse cx="${cx}" cy="${ey}" rx="${rx}" ry="${ry}" fill="none" ${st(10)}/>`;
+    g += `<path d="M ${cx - rx} ${ey - 4} A ${rx} ${ry} 0 0 1 ${cx + rx} ${ey - 4}" fill="none" ${st(14)}/>`;
     if (mood === 'choro') g += `<path d="M ${cx - rx} ${ey - 6} Q ${cx} ${ey - ry * 1.5} ${cx + rx} ${ey - 6} Z" fill="${skin}" ${st(10)}/>`;
     // sobrancelha
     const by = ey - ry - (o.helmet ? 34 : big ? 40 : 26);
@@ -162,5 +164,8 @@ function retrato(o = {}) {
   if (o.suor) g += capaGota(-lado * 236, -30 + fy, 1.5) + capaGota(-lado * 262, 84 + fy, 1.05);
   if (mood === 'choro') g += capaGota(-ex - 6, ey + ry + 44, 1.5) + capaGota(ex + 14, ey + ry + 70, 1.2);
 
-  return `<g transform="translate(${f1(o.x || 0)} ${f1(o.y || 0)}) scale(${(o.flip ? -1 : 1) * s} ${s}) rotate(${o.rot || 0})">${g}</g>`;
+  const fig = `<g transform="translate(${f1(o.x || 0)} ${f1(o.y || 0)}) scale(${(o.flip ? -1 : 1) * s} ${s}) rotate(${o.rot || 0})">${g}</g>`;
+  if (o.contorno === 0) return fig;
+  const cw = o.contorno ?? 9;
+  return `<filter id="${id}k" x="-20%" y="-20%" width="140%" height="140%"><feMorphology in="SourceAlpha" operator="dilate" radius="${cw}" result="d"/><feOffset in="d" dx="${lado * cw * 0.9}" dy="${-cw * 0.4}" result="o"/><feFlood flood-color="${o.contornoCor || luz}"/><feComposite in2="o" operator="in" result="c"/><feMerge><feMergeNode in="c"/><feMergeNode in="SourceGraphic"/></feMerge></filter><g filter="url(#${id}k)">${fig}</g>`;
 }

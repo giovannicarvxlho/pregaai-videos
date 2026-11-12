@@ -81,7 +81,7 @@ function artN1(o = {}) {
     const x = 90 + r() * 900, y = 250 + r() * 220, k = 10 + r() * 16, rot = r() * 360;
     s += `<path transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)})" d="M ${-k} ${k * 0.3} L ${-k * 0.4} ${-k} L ${k * 0.8} ${-k * 0.6} L ${k} ${k * 0.5} L ${k * 0.1} ${k} Z" fill="#070505" stroke="#B5461A" stroke-width="3"/>`;
   }
-  s += retrato({ ...CENT, x: 1460, y: 600, s: 1.42, helmet: 'cent', armor: true, mood: 'medo', look: [-0.75, -0.45], lado: -1, luz: '#FF8A3C', suor: true, id: 'n1' });
+  s += retrato({ ...CENT, x: 1476, y: 648, s: 1.62, helmet: 'cent', armor: true, mood: 'medo', look: [-0.8, -0.5], lado: -1, luz: '#FF9A4A', suor: true, id: 'n1' });
   s += capaVinheta(0.55, '45%', '45%', '80%');
   s += capaTexto([{ t: 'JESUS MORREU', w: 800 }, { t: 'TUDO', w: 560, fill: 'ouro' }, { t: 'TREMEU', w: 860, fill: 'ouro' }], { x: 64, y: 548, gap: 0.1 });
   return s;
