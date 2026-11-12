@@ -64,7 +64,7 @@ function capaGota(x, y, s = 1, cor = '#8FD0FF') {
 
 // Rosto de perto, do peito para cima. (x, y) é o centro da cabeça; a cabeça tem raio 200 em s = 1.
 // o: skin, hair, robe, beard, cover (cor do pano na cabeça), helmet ('cent' | 'rom'), armor,
-//    mood ('medo' | 'espanto' | 'choro' | 'raiva' | 'calmo'), look [dx, dy] de -1 a 1,
+//    mood ('medo' | 'espanto' | 'choro' | 'culpa' | 'raiva' | 'calmo'), look [dx, dy] de -1 a 1,
 //    lado (de que lado vem a luz: -1 esquerda, 1 direita), luz (cor da luz), suor, flip, id.
 function retrato(o = {}) {
   const s = o.s || 1, R = 200, id = 'rt' + (o.id || ++_capaId);
@@ -104,7 +104,8 @@ function retrato(o = {}) {
 
   // olhos
   const big = mood === 'medo' || mood === 'espanto';
-  const ex = 84, ey = -22 + fy, rx = big ? 62 : 52, ry = (big ? 72 : mood === 'raiva' ? 40 : 52) - (o.helmet ? 8 : 0), ir = big ? 27 : 32;
+  const choro = mood === 'choro', culpa = mood === 'culpa', grande = big || choro;
+  const ex = 84, ey = -22 + fy, rx = grande ? 62 : culpa ? 58 : 52, ry = (grande ? 72 : mood === 'raiva' ? 40 : 52) - (o.helmet ? 8 : 0), ir = big ? 27 : culpa ? 26 : 32;
   [-1, 1].forEach((d) => {
     const cx = d * ex, cid = `${id}e${d < 0 ? 'l' : 'r'}`;
     g += `<clipPath id="${cid}"><ellipse cx="${cx}" cy="${ey}" rx="${rx}" ry="${ry}"/></clipPath>`;
@@ -113,13 +114,31 @@ function retrato(o = {}) {
     g += `<circle cx="${f1(cx + lx * (rx - ir - 4))}" cy="${f1(ey + ly * (ry - ir - 6))}" r="${ir}" fill="#3B2314"/><circle cx="${f1(cx + lx * (rx - ir - 4))}" cy="${f1(ey + ly * (ry - ir - 6))}" r="${ir * 0.55}" fill="#0B0705"/>`;
     g += `<circle cx="${f1(cx + lx * (rx - ir - 4) - 10)}" cy="${f1(ey + ly * (ry - ir - 6) - 11)}" r="${ir * 0.3}" fill="#fff"/></g>`;
     g += `<ellipse cx="${cx}" cy="${ey}" rx="${rx}" ry="${ry}" fill="none" ${st(10)}/>`;
-    g += `<path d="M ${cx - rx} ${ey - 4} A ${rx} ${ry} 0 0 1 ${cx + rx} ${ey - 4}" fill="none" ${st(14)}/>`;
-    if (mood === 'choro') g += `<path d="M ${cx - rx} ${ey - 6} Q ${cx} ${ey - ry * 1.5} ${cx + rx} ${ey - 6} Z" fill="${skin}" ${st(10)}/>`;
-    // sobrancelha
-    const by = ey - ry - (o.helmet ? 34 : big ? 40 : 26);
-    const [y1, y2] = mood === 'raiva' ? [by - 6, by + 44] : mood === 'calmo' ? [by + 10, by + 6] : [by + 26, by - 16]; // [fora, dentro]
-    g += `<path d="M ${d * (ex + rx + 4)} ${y1} Q ${d * ex} ${Math.min(y1, y2) - (mood === 'raiva' ? 0 : 20)} ${d * (ex - rx + 12)} ${y2}" fill="none" ${st(24, o.sobrancelha || shade(hair, 0.8))}/>`;
+    if (choro) {
+      // tristeza: a pálpebra cai para fora e o olho enche de água embaixo
+      const xi = cx - d * (rx + 12), xo = cx + d * (rx + 12), yi = ey - ry * 0.72, yo = ey - ry * 0.04;
+      g += `<g clip-path="url(#${cid})"><path d="M ${xi} ${ey - ry - 20} L ${xo} ${ey - ry - 20} L ${xo} ${yo} L ${xi} ${yi} Z" fill="${shade(skin, 0.9)}"/><line x1="${xi}" y1="${yi}" x2="${xo}" y2="${yo}" ${st(13)}/>`;
+      g += `<path d="M ${cx - rx} ${ey + ry * 0.5} Q ${cx} ${ey + ry * 0.2} ${cx + rx} ${ey + ry * 0.5} L ${cx + rx} ${ey + ry + 10} L ${cx - rx} ${ey + ry + 10} Z" fill="#8FD0FF" opacity="0.92"/><path d="M ${cx - rx * 0.5} ${ey + ry * 0.64} q ${rx * 0.3} -10 ${rx * 0.6} 0" fill="none" ${st(6, '#fff')}/></g>`;
+      g += `<ellipse cx="${cx}" cy="${ey}" rx="${rx}" ry="${ry}" fill="none" ${st(10)}/>`;
+    } else if (culpa) {
+      // olhar de quem tem culpa: pálpebra reta, meio fechada
+      const yl = ey - ry * 0.28;
+      g += `<g clip-path="url(#${cid})"><rect x="${cx - rx - 6}" y="${ey - ry - 10}" width="${rx * 2 + 12}" height="${yl - (ey - ry - 10)}" fill="${shade(skin, 0.9)}"/><line x1="${cx - rx - 6}" y1="${yl}" x2="${cx + rx + 6}" y2="${yl}" ${st(13)}/></g>`;
+      g += `<ellipse cx="${cx}" cy="${ey}" rx="${rx}" ry="${ry}" fill="none" ${st(10)}/>`;
+    } else {
+      g += `<path d="M ${cx - rx} ${ey - 4} A ${rx} ${ry} 0 0 1 ${cx + rx} ${ey - 4}" fill="none" ${st(14)}/>`;
+    }
+    // sobrancelha: [fora, dentro]
+    const by = ey - ry - (o.helmet ? 34 : grande ? 40 : 26);
+    const [y1, y2] = mood === 'raiva' ? [by - 6, by + 44] : mood === 'calmo' ? [by + 10, by + 6] : choro ? [by + 46, by - 18] : culpa ? (d < 0 ? [by + 4, by - 14] : [by + 30, by + 26]) : [by + 26, by - 16];
+    const topo = mood === 'raiva' || choro ? Math.min(y1, y2) + (choro ? 6 : 0) : culpa && d > 0 ? y1 - 4 : Math.min(y1, y2) - 20;
+    g += `<path d="M ${d * (ex + rx + 4)} ${y1} Q ${d * ex} ${topo} ${d * (ex - rx + 12)} ${y2}" fill="none" ${st(24, o.sobrancelha || shade(hair, 0.8))}/>`;
   });
+  if (choro) {
+    // fios de lágrima descendo dos dois olhos
+    const fio = (cx, y0, len, w) => `<path d="M ${cx - w} ${y0} C ${cx - w - 6} ${y0 + len * 0.5} ${cx - w + 2} ${y0 + len * 0.8} ${cx} ${y0 + len} C ${cx + w + 4} ${y0 + len * 0.8} ${cx + w + 2} ${y0 + len * 0.4} ${cx + w} ${y0} Z" fill="#8FD0FF" ${st(8)}/><path d="M ${cx - w * 0.3} ${y0 + 12} L ${cx - w * 0.3} ${y0 + len * 0.55}" fill="none" ${st(5, '#fff')} opacity="0.9"/>`;
+    g += fio(-ex - 12, ey + ry - 8, 118, 16) + fio(ex + 16, ey + ry - 8, 84, 14);
+  }
 
   // boca
   const my = 118 + fy * 0.5;
@@ -128,8 +147,14 @@ function retrato(o = {}) {
     g += `<clipPath id="${mid}"><ellipse cx="0" cy="${my}" rx="${mw}" ry="${mh}"/></clipPath><ellipse cx="0" cy="${my}" rx="${mw}" ry="${mh}" fill="#3A0D12"/>`;
     g += `<g clip-path="url(#${mid})"><ellipse cx="0" cy="${my + mh * 0.9}" rx="${mw * 0.8}" ry="${mh * 0.6}" fill="#E0564A"/><rect x="${-mw}" y="${my - mh - 4}" width="${mw * 2}" height="${mh * 0.42}" fill="#fff"/></g>`;
     g += `<ellipse cx="0" cy="${my}" rx="${mw}" ry="${mh}" fill="none" ${st(10)}/>`;
-  } else if (mood === 'choro') {
-    g += `<path d="M -50 ${my + 22} Q -24 ${my - 22} 0 ${my - 4} Q 24 ${my - 22} 50 ${my + 22}" fill="none" ${st(13)}/>`;
+  } else if (choro) {
+    // boca aberta virada para baixo
+    g += `<path d="M -54 ${my + 40} C -46 ${my - 22} 46 ${my - 22} 54 ${my + 40} C 30 ${my + 18} -30 ${my + 18} -54 ${my + 40} Z" fill="#3A0D12" ${st(11)}/>`;
+    g += `<path d="M -30 ${my - 3} Q 0 ${my - 18} 30 ${my - 3} L 25 ${my + 7} Q 0 ${my - 6} -25 ${my + 7} Z" fill="#fff"/>`;
+  } else if (culpa) {
+    // sorriso amarelo: dentes à mostra, torto
+    g += `<path d="M -58 ${my - 12} Q 0 ${my - 26} 60 ${my - 4} L 52 ${my + 28} Q 0 ${my + 34} -50 ${my + 20} Z" fill="#fff" ${st(10)}/>`;
+    g += `<path d="M -54 ${my + 5} Q 0 ${my + 4} 56 ${my + 12} M -28 ${my - 16} L -26 ${my + 24} M 0 ${my - 19} L 1 ${my + 30} M 28 ${my - 14} L 27 ${my + 30}" fill="none" ${st(5)}/>`;
   } else if (mood === 'raiva') {
     g += `<path d="M -54 ${my + 14} Q 0 ${my - 26} 54 ${my + 14} L 46 ${my + 34} Q 0 ${my + 6} -46 ${my + 34} Z" fill="#fff" ${st(10)}/>`;
   } else {
@@ -150,7 +175,8 @@ function retrato(o = {}) {
     [-1, 1].forEach((d) => (g += `<path d="M ${d * 152} -110 L ${d * 222} -110 L ${d * 228} 96 Q ${d * 200} 150 ${d * 160} 118 C ${d * 178} 40 ${d * 174} -40 ${d * 152} -110 Z" fill="${ouro}" ${st()}/>`));
     g += `<path d="M ${-lado * 222} -100 L ${-lado * 227} 90 Q ${-lado * 204} 138 ${-lado * 176} 122 C ${-lado * 196} 40 ${-lado * 196} -30 ${-lado * 190} -100 Z" fill="#000" opacity="0.18"/>`;
     g += `<path d="M -222 -124 C -236 -340 236 -340 222 -124 Q 0 -186 -222 -124 Z" fill="${ouro}" ${st()}/>`;
-    g += `<path d="M ${-lado * 222} -124 C ${-lado * 232} -260 ${-lado * 160} -320 ${-lado * 60} -334 C ${-lado * 130} -280 ${-lado * 150} -200 ${-lado * 150} -150 Z" fill="#000" opacity="0.16"/>`;
+    // sombra do lado oposto à luz, recortada no casco (sem o recorte ela passava do topo no capacete sem crista larga)
+    g += `<clipPath id="${id}h"><path d="M -222 -124 C -236 -340 236 -340 222 -124 Q 0 -186 -222 -124 Z"/></clipPath><g clip-path="url(#${id}h)"><path d="M ${-lado * 240} -110 C ${-lado * 240} -280 ${-lado * 160} -340 ${-lado * 60} -350 C ${-lado * 130} -280 ${-lado * 150} -200 ${-lado * 150} -140 Z" fill="#000" opacity="0.16"/></g>`;
     g += `<path d="M -234 -124 Q 0 -190 234 -124 L 240 -84 Q 0 -152 -240 -84 Z" fill="${ouroDk}" ${st()}/>`;
     g += `<path d="M ${lado * 192} -150 C ${lado * 190} -236 ${lado * 130} -278 ${lado * 60} -286" fill="none" ${st(16, '#FFE9A8')} opacity="0.9"/>`;
   } else if (o.cover) {
@@ -162,7 +188,6 @@ function retrato(o = {}) {
 
   // suor (do lado da sombra) e lágrimas
   if (o.suor) g += capaGota(-lado * 236, -30 + fy, 1.5) + capaGota(-lado * 262, 84 + fy, 1.05);
-  if (mood === 'choro') g += capaGota(-ex - 6, ey + ry + 44, 1.5) + capaGota(ex + 14, ey + ry + 70, 1.2);
 
   const fig = `<g transform="translate(${f1(o.x || 0)} ${f1(o.y || 0)}) scale(${(o.flip ? -1 : 1) * s} ${s}) rotate(${o.rot || 0})">${g}</g>`;
   if (o.contorno === 0) return fig;

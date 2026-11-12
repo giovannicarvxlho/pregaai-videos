@@ -36,7 +36,7 @@ function artN1(o = {}) {
   s += capaLuz(TX - 8, TBASE - 130 * K, 300, '#FFFFFF', 0.9);
   // o guarda, à direita, olhando para as moedas
   s += capaLuz(1040, 620, 520, '#FFB52E', 0.3);
-  s += retrato({ skin: G.skin, hair: G.hair, robe: '#9C2F3A', x: 1500, y: 640, s: 1.55, helmet: 'rom', armor: true, mood: 'medo', look: [-0.7, 0.55], lado: -1, luz: '#FFC24A', suor: true, id: 'dc1r' });
+  s += retrato({ skin: G.skin, hair: G.hair, robe: '#9C2F3A', x: 1500, y: 640, s: 1.55, helmet: 'rom', armor: true, mood: 'culpa', look: [-0.85, 0.35], lado: -1, luz: '#FFC24A', suor: true, id: 'dc1r' });
   // a bolsa e as moedas no ar, entre o túmulo e o guarda
   s += dcBolsa(1020, 1075, 2.5, -10);
   [[905, 640, 58, -22, 0.8], [1050, 520, 66, 12, 0.92], [1170, 700, 54, 28, 0.6], [960, 420, 46, -8, 0.7], [1150, 360, 50, 20, 0.95], [860, 800, 44, 30, 0.5]].forEach(([x, y, r, rot, k]) => (s += dcMoeda(x, y, r, rot, k)));

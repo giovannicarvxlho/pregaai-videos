@@ -18,15 +18,19 @@ Calendário (decisão do Giovanni em 2026-11-10: o longo sai hoje, sem esperar a
 ### Vídeo longo: `youtube/longo.mp4`
 
 **Título**
-> Os 7 "Eu sou" de Jesus e a noite em que os soldados caíram | Histórias Bíblicas
+> OS 7 EU SOU DE JESUS E OS SOLDADOS QUE CAÍRAM
+
+Título novo de 12/11/2026 (em maiúsculas, começando pela frase do autocompletar do YouTube). O anterior, com que o vídeo foi publicado: "Os 7 "Eu sou" de Jesus e a noite em que os soldados caíram | Histórias Bíblicas".
 
 **Miniaturas para o "Testar e comparar"** (2560×1440; sobem nesta ordem, e a primeira fica se não houver vencedora)
 
 | Ordem | Arquivo | Texto | Motivo para clicar |
 |---|---|---|---|
-| 1 | `youtube/miniatura-a.jpg` | DUAS PALAVRAS | a curiosidade: que duas palavras eram essas (o vídeo responde: "Sou eu", João 18:5-6) |
-| 2 | `youtube/miniatura-b.jpg` | NÃO QUEIMAVA | o mistério: a sarça em chamas que não se consumia, onde Deus disse "Eu Sou o que Sou" (Êxodo 3:2, 3:14) |
-| 3 | `youtube/miniatura-c.jpg` | MORTO 4 DIAS | o choque: Lázaro estava morto havia quatro dias e saiu do túmulo (João 11:17, 11:44) |
+| 1 | `youtube/miniatura-a.jpg` | JESUS FALOU / ELES CAÍRAM | o espetáculo: o soldado de perto, aterrorizado, caindo para trás, e Jesus de pé, calmo, à luz das tochas (João 18:3-6; a NVI traz "Sou eu") |
+| 2 | `youtube/miniatura-b.jpg` | O NOME / EU SOU | o mistério: a sarça em chamas que não se consumia, onde Deus disse o nome (Êxodo 3:2, 13-14) |
+| 3 | `youtube/miniatura-c.jpg` | LÁZARO / 4 DIAS MORTO | o choque: Lázaro enfaixado saindo do túmulo depois de quatro dias (João 11:17, 39, 43-44) |
+
+Miniaturas refeitas em 12/11/2026 no estilo novo (`capa-lib.js`: rosto em close com emoção, luz forte, texto branco e dourado). As anteriores ("DUAS PALAVRAS", "NÃO QUEIMAVA", "MORTO 4 DIAS") estão no histórico do git.
 
 **Descrição**
 ```

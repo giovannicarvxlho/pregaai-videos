@@ -84,9 +84,7 @@ function artN1(o = {}) {
   s += person({ ...JESUS, robe: '#FFF8EC', x: 1290, y: 1040, s: 1.78, look: -1, mood: 'calm', ol: '#0B0806', rim: '#FFB347' });
   s += esTocha(1010, 760, 40, 0.95, 3);
   s += capaMotas(880, 330, 260, 380, 16, 31, '#FFC98A', 0.85);
-  // a sombra do casco do capa-lib passa do topo do capacete 'rom' (ela foi pensada para a crista larga do centurião): sai daqui
-  s += retrato({ ...soldado(4101), x: 480, y: 660, s: 1.5, rot: -12, helmet: 'rom', armor: true, mood: 'medo', look: [0.82, -0.12], lado: 1, luz: '#FF9A3C', suor: true, id: 'e1' })
-    .replace(/<path d="M -222 -124 C -232 -260 -160 -320 -60 -334[^>]*opacity="0\.16"\/>/, '');
+  s += retrato({ ...soldado(4101), x: 480, y: 660, s: 1.5, rot: -12, helmet: 'rom', armor: true, mood: 'medo', look: [0.82, -0.12], lado: 1, luz: '#FF9A3C', suor: true, id: 'e1' });
   s += capaVinheta(0.6, '52%', '55%', '82%');
   s += capaTexto([{ t: 'JESUS FALOU', w: 690 }, { t: 'ELES', w: 470, fill: 'ouro' }, { t: 'CAÍRAM', w: 800, fill: 'ouro' }], { x: 1872, y: 34, anchor: 'end', gap: 0.1 });
   return s;

@@ -39,9 +39,8 @@ function artN1(o = {}) {
   s += crossFig(CX, TOPO + 18, 0.84, { plaque: true, fill: '#050203', rim: '#FF9A4A', bow: 1 });
   s += capaMotas(860, 60, 1000, 480, 26, 31, '#FFC9A0', 0.7);
   const MX = 468, MY = 650, MS = 1.58;
-  let m = sfVeuFundo(MX, MY, MS, MARIA.cover) + retrato({ ...MARIA, cover: null, bald: true, x: MX, y: MY, s: MS, mood: 'medo', look: [0.75, -0.55], lado: 1, luz: '#FF8A5C', id: 'sf1', contorno: 0 });
+  let m = sfVeuFundo(MX, MY, MS, MARIA.cover) + retrato({ ...MARIA, cover: null, bald: true, x: MX, y: MY, s: MS, mood: 'choro', look: [0.6, -0.35], lado: 1, luz: '#FF8A5C', id: 'sf1', contorno: 0 });
   m += sfVeu(MX, MY, MS, MARIA.cover, 1);
-  m += sfLagrima(MX - 84 * MS, MY + 52 * MS, MS, 96, 1.25) + sfLagrima(MX + 84 * MS, MY + 52 * MS, MS, 60, 1.05);
   s += sfContorno(m, 'sf1k', '#FF8A5C', 1, 14);
   s += capaVinheta(0.55, '58%', '42%', '82%');
   s += capaTexto([{ t: '7', size: 500, fill: 'ouro', traco: 0.07 }], { x: 876, y: 566 });
