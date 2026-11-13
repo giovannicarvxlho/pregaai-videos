@@ -290,7 +290,8 @@ window.renderFrame = (t, tv = t) => {
   const ch = chromeHTML(t, list);
   $chrome.className = 'layer' + (ch.dark ? ' dark' : '');
   // No recorte, o banner de CTA entra no lugar do título: o título sai antes de o banner entrar e volta depois que ele sai.
-  const cta = CTA && !ch.end ? ctaFase(tv) : null;
+  const ctaFixo = typeof CTA_FIXO !== 'undefined' && CTA_FIXO;
+  const cta = (CTA || ctaFixo) && !ch.end ? ctaFase(tv) : null;
   const gop = ganchoOp(tv);
   const tituloOp = f1((cta ? 1 - cta.titulo : 1) * (1 - Math.min(1, gop * 2)) * 100) / 100;
   const gancho = gop > 0 ? `<div class="gancho" style="opacity:${f1(gop * 100) / 100}"><div>${esc(GANCHO_TXT).replace(/\*(.+?)\*/g, '<span>$1</span>')}</div></div>` : '';

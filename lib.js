@@ -969,6 +969,9 @@ function wordTime(segIndex, word) {
 // Onde fica: no longo (16:9), no canto de cima à direita; no curto vertical (recorte), no lugar do
 // título, que some enquanto o banner está na tela (ctaFase dá o quanto, para o index.html).
 function ctaFase(tv, o = {}) {
+  if (typeof CTA_FIXO !== 'undefined' && CTA_FIXO) {
+    return { n: 1, ios: false, p: 1, titulo: 0 };
+  }
   const ciclo = o.ciclo || 30, dura = o.dura || 4.5;
   if (tv < ciclo) return null;
   const n = Math.floor(tv / ciclo), lt = tv - n * ciclo;
