@@ -3,9 +3,9 @@
 <!--
 Modelo do documento de publicação (pedidos do Giovanni em 06/11/2026). Copie para episodios/<ep>/publicacao.md,
 preencha e apague estes comentários. O tools/pacote.py corta este arquivo nas seções "## YouTube", "## TikTok" e
-"## Instagram" e gera um .txt para cada rede, dentro da pasta dela (texto puro para copiar e colar; o que está entre
-``` sai igual).
-O cabeçalho (até a primeira seção) entra nos três; a "Conferência na NVI" fica só no repositório.
+"## Instagram" e gera um .txt só, publicacao.txt, na raiz do pacote, com o cabeçalho e as três redes (texto puro
+para copiar e colar; o que está entre ``` sai igual; pedido do Giovanni em 13/11/2026). A "Conferência na NVI"
+fica só no repositório.
 
 Regras que valem para todas as redes:
 - Sem travessão em nenhum texto. Toda afirmação bíblica conferida na NVI (tabela no fim).
