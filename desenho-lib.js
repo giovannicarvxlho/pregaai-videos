@@ -324,7 +324,7 @@ function rostoLivro(o, c) {
       raiva: 'M -13 3 Q 0 -3 13 3', deboche: 'M -12 2 Q 2 4 15 -5', firme: 'M -11 0 L 11 0' }[hm] || 'M -12 0 Q 0 3 12 0';
     g += `<path d="${forma}" transform="translate(${f1(fx)} ${my})" fill="none" ${tk(4)}/>`;
   } else {
-    const w = 11, h = 3 + ab * 14;
+    const w = 14, h = 4 + ab * 20; // grande o bastante para a fala aparecer no celular
     g += `<path d="M ${f1(fx - w)} ${my - 2} Q ${f1(fx)} ${my - 4} ${f1(fx + w)} ${my - 2} Q ${f1(fx + w * 0.8)} ${f1(my + h)} ${f1(fx)} ${f1(my + h)} Q ${f1(fx - w * 0.8)} ${f1(my + h)} ${f1(fx - w)} ${my - 2} Z" fill="#3E1212" ${tk(3.5)}/>`;
   }
   if (barba && barba !== 'rala') g += `<path d="M -22 45 C -14 38 -5 40 0 43 C 5 40 14 38 22 45 C 25 50 18 51 12 48 C 6 46 3 46 0 48 C -3 46 -6 46 -12 48 C -18 51 -25 50 -22 45 Z" transform="translate(${f1(fx)} 0)" fill="${corBarba}" ${tk(3.5)}/>`;
@@ -333,7 +333,7 @@ function rostoLivro(o, c) {
 
 // Estilo do rosto: 'atual', 'longa' ou 'livro'. A URL pode trocar (?rosto=longa), para comparar.
 const ROSTOS = { atual: rostoAtual, longa: rostoLonga, livro: rostoLivro };
-const ROSTO = new URLSearchParams(location.search).get('rosto') || 'longa'; // 'longa' desde a revisão de 13/11 (o 'atual' ficou com cara de sono)
+const ROSTO = new URLSearchParams(location.search).get('rosto') || 'livro'; // 'livro', escolhido pelo Giovanni em 13/11
 
 // ---------- corpo inteiro ----------
 

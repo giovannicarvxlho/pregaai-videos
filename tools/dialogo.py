@@ -24,6 +24,9 @@ AJUSTES = {'model_id': 'eleven_v4_turbo', 'language_code': 'pt',
            'voice_settings': {'stability': 0.5, 'similarity_boost': 0.8, 'speed': 1.0}}
 API = 'https://api.elevenlabs.io'
 GAP = 0.35  # silêncio entre duas falas seguidas
+# Cada voz da Voice Library sai com um volume; na mixagem toda fala vai para o mesmo volume médio (dB), e a fala
+# "em alta voz" (personagem com sufixo _FORTE ou _ALTO) fica um pouco acima. O limitador segura os picos.
+VOLUME, VOLUME_ALTO = -20.0, -17.5
 VOGAIS = set('aeiouáéíóúâêôãõàAEIOUÁÉÍÓÚÂÊÔÃÕÀ')
 
 
@@ -64,6 +67,12 @@ def ler_roteiro(d):
         else:
             sys.exit(f'✘ dialogo.txt, linha {n}: não entendi "{linha}" (use PERSONAGEM: texto ou [pausa N])')
     return itens, gancho
+
+
+def volume_medio(mp3):
+    """Volume médio do mp3 em dB (volumedetect do ffmpeg)."""
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-i', mp3, '-af', 'volumedetect', '-f', 'null', '-'], capture_output=True, text=True)
+    return float(re.search(r'mean_volume: (-?[\d.]+) dB', r.stderr)[1])
 
 
 def duracao(mp3):
@@ -183,9 +192,11 @@ def main():
     n = len(falas)
     if not estimar:
         entradas = sum([['-i', os.path.join(pasta, f'{i:02d}.mp3')] for i in range(1, n + 1)], [])
-        filtro = ''.join(f'[{i}:a]aresample=44100,aformat=channel_layouts=mono,adelay={round(inicios[i] * 1000)}:all=1[a{i}];'
+        ganho = [(VOLUME_ALTO if re.search(r'_(FORTE|ALTO)$', p) else VOLUME) - volume_medio(os.path.join(pasta, f'{i:02d}.mp3'))
+                 for i, (_, p, _) in enumerate(falas, 1)]
+        filtro = ''.join(f'[{i}:a]aresample=44100,aformat=channel_layouts=mono,volume={ganho[i]:.1f}dB,adelay={round(inicios[i] * 1000)}:all=1[a{i}];'
                          for i in range(n))
-        filtro += ''.join(f'[a{i}]' for i in range(n)) + f'amix=inputs={n}:normalize=0:duration=longest[o]'
+        filtro += ''.join(f'[a{i}]' for i in range(n)) + f'amix=inputs={n}:normalize=0:duration=longest,alimiter=limit=0.89:level=disabled[o]'
         subprocess.run(['ffmpeg', '-v', 'error', '-y', *entradas, '-filter_complex', filtro, '-map', '[o]', '-t', f'{t:.2f}',
                         '-c:a', 'libmp3lame', '-b:a', '128k', os.path.join(d, 'narration.mp3')], check=True)
 
