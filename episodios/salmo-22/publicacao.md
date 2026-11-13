@@ -38,7 +38,7 @@ Calendário (sugestão; o Giovanni decide; horário de Brasília): o longo sai n
 
 | Ordem | Arquivo | Texto | Motivo para clicar |
 |---|---|---|---|
-| 1 | `youtube/miniatura-a.jpg` | JESUS / ABANDONADO? | o espetáculo: a cruz em silhueta com a luz estourando atrás e os anéis do grito (Mateus 27:46). É a pergunta do título, a mais segura |
+| 1 | `youtube/miniatura-a.jpg` | DEUS / ABANDONOU / JESUS? (texto do Giovanni, 13/11/2026) | o espetáculo: a cruz em silhueta com a luz estourando atrás e os anéis do grito (Mateus 27:46). É a pergunta do título, a mais segura |
 | 2 | `youtube/miniatura-b.jpg` | ZOMBARAM DE / JESUS | o confronto: um mestre da lei zombando, de perto, e a cruz do outro lado (Mateus 27:41-43; a frase deles é parecida com a do Salmo 22:8) |
 | 3 | `youtube/miniatura-c.jpg` | SALMO 22 / SÉCULOS ANTES | a curiosidade: o rolo do salmo com a primeira linha acesa e a sombra da cruz por cima (a frase do grito já estava escrita havia séculos) |
 
@@ -328,7 +328,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Trecho da publicação e das capas | Fonte |
 |---|---|
-| "Meu Deus! Meu Deus! Por que me abandonaste?" é a primeira linha do Salmo 22 e o que Jesus gritou na cruz (citação exata) ("JESUS ABANDONADO?", "POR QUE GRITOU?") | Salmo 22:1; Mateus 27:46; Marcos 15:34 |
+| "Meu Deus! Meu Deus! Por que me abandonaste?" é a primeira linha do Salmo 22 e o que Jesus gritou na cruz (citação exata) ("DEUS ABANDONOU JESUS?", "JESUS ABANDONADO?", "POR QUE GRITOU?") | Salmo 22:1; Mateus 27:46; Marcos 15:34 |
 | "Eloí, Eloí, lamá sabactâni?", que significa "Meu Deus! Meu Deus! Por que me abandonaste?" (citação exata) ("ELOÍ, ELOÍ") | Marcos 15:34; Mateus 27:46 |
 | Alguns disseram que ele estava chamando Elias ("ELIAS?") | Mateus 27:47 |
 | Os insultos: os que passavam lançavam insultos, balançando a cabeça | Salmo 22:7; Mateus 27:39 |

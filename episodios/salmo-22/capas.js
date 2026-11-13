@@ -1,7 +1,8 @@
 // Arte das capas e miniaturas do episódio (carregada depois de data.js, lib.js, capa-lib.js e scenes.js), com as
 // funções das cenas. Só o que o vídeo mostra; Jesus só em silhueta, na cruz, de longe ou com luz atrás.
 // Miniaturas do longo (três motivos e três layouts, 12/11/2026):
-// A (espetáculo): a cruz em silhueta com a luz estourando atrás e os anéis do grito (Mateus 27:46). Texto à esquerda.
+// A (espetáculo): a cruz em silhueta com a luz estourando atrás e os anéis do grito (Mateus 27:46). Texto à esquerda:
+//   DEUS / ABANDONOU / JESUS? (texto do Giovanni, 13/11/2026).
 // B (confronto): um mestre da lei zombando, de perto, e a cruz do outro lado (Mateus 27:41-43). Texto à direita.
 // C (curiosidade): o rolo do salmo com a primeira linha acesa e a sombra da cruz em cima (Salmo 22:1). Texto à
 //   esquerda, embaixo.
@@ -29,7 +30,7 @@ function cruzGrito(o = {}) {
 function artA() {
   let s = cruzGrito({ cx: 1330, base: 1210, s: 2.0 });
   s += capaVinheta(0.6, '65%', '35%', '80%');
-  s += capaTexto([{ t: 'JESUS', w: 760, fill: 'ouro' }, { t: 'ABANDONADO?', w: 820 }], { x: 70, y: 250, gap: 0.12, rot: -2 });
+  s += capaTexto([{ t: 'DEUS', w: 470 }, { t: 'ABANDONOU', w: 800 }, { t: 'JESUS?', w: 900, fill: 'ouro' }], { x: 70, y: 150, gap: 0.1, rot: -2 });
   return s;
 }
 // B: um mestre da lei zombando (Mateus 27:41-43), de perto, à esquerda; a cruz em silhueta do outro lado, na luz.
