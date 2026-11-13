@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura A: Deus abandonou Jesus na cruz? (a cruz e o grito)</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+svg { position: absolute; inset: 0; -webkit-font-smoothing: antialiased; }
+/* A (espetáculo): a cruz em silhueta com a luz estourando atrás da cabeça e os anéis do grito (Mateus 27:46; Salmo 22:1). Texto: JESUS / ABANDONADO?, à esquerda. Canto de baixo à direita: só o morro escuro. */
+</style>
+</head>
+<body>
+<svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="../../capa-lib.js"></script>
+<script src="scenes.js"></script>
+<script src="capas.js"></script>
+<script>
+window.SIZE = [1280, 720];
+// o texto mede a fonte para definir o tamanho: a arte só entra depois de a fonte carregar
+window.ready = document.fonts.load("100px 'Gasoek One'").then(() => { document.getElementById('art').innerHTML = DEFS + artA(); return document.fonts.ready; });
+</script>
+</body>
+</html>

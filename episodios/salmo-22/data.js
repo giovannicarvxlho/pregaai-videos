@@ -68,6 +68,7 @@ const SEGS = [
   [307.52, 313.76, 'Mateus e Marcos guardaram | até o som das palavras: | "Eloí, Eloí, lamá sabactâni?"', [[307.52, 308.88], [308.96, 310.4], [310.96, 313.76]], [307.52, 307.92, 308.0, 308.48, 308.96, 309.24, 309.44, 309.68, 309.84, 310.96, 311.72, 312.56, 313.0]],
   [314.32, 318.80, 'Que significa: | "Meu Deus! Meu Deus! | Por que me abandonaste?"', [[314.32, 315.12], [315.6, 317.2], [317.52, 318.8]], [314.32, 314.48, 315.6, 315.84, 316.48, 316.72, 317.52, 317.76, 317.96, 318.08]],
 ];
-const AUDIO_END = 318.80;
-const DURATION = 328.80; // fala + cartão final; ajuste se precisar
+const AUDIO_END = 284.72; // fim da fala do longo (frase 56); as frases 57 a 62 são só das aberturas dos curtos
+const CARTAO_INICIO = 319.60; // na origem, o cartão final vem depois das aberturas dos curtos (corte.json: cartao_inicio)
+const DURATION = 329.60; // origem: fala + aberturas + 10 s de cartão. O longo publicado sai do corte.json: 285,3 s de fala + 10 s = 4:55
 const SPEED = 1;
