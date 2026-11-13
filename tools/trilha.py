@@ -6,6 +6,7 @@
 #   --nivel -3   (ganho final em dB; padrão 0)
 #   --corte out/<nome>.corte.json   (curtos e cortes: a trilha segue os trechos que o tools/corte.cjs juntou)
 #   --so-fundo   (sai só a trilha, sem a voz, ainda abaixando onde a voz fala: para medir o nível)
+#   --medir      (além do vídeo, grava <saida>-fundo.mp4 só com a trilha, para medir)
 #
 # Com --roteiro, a trilha acompanha a história (pedido do Giovanni em 2026-11-13: "momentos emocionantes,
 # impactantes, gostaria que a trilha sonora respeitasse isso"). O trilha.json do episódio diz, por frase do
@@ -401,7 +402,7 @@ def mistura(entrada, saida, faixas4, seg, nivel, so_fundo=False):
                   f'[4:a]aecho=0.8:0.4:60:0.2,volume={nivel}dB,{cauda}[ef];'
                   '[m][am]amix=inputs=2:normalize=0[fundo];'
                   '[0:a]asplit=2[voz][chave];'
-                  '[fundo][chave]sidechaincompress=threshold=0.05:ratio=1.5:attack=60:release=800[mb];'
+                  '[fundo][chave]sidechaincompress=threshold=0.08:ratio=1.3:attack=80:release=900[mb];'
                   + ('[voz]anullsink;[mb][g][ef]amix=inputs=3:normalize=0[a]' if so_fundo else  # para medir
                      '[voz][mb][g][ef]amix=inputs=4:duration=first:normalize=0,alimiter=limit=0.9:level=disabled[a]'))
         subprocess.check_call(['ffmpeg', '-v', 'error', '-y', '-i', entrada, '-i', wm, '-i', wg, '-i', wa, '-i', we,
@@ -431,6 +432,8 @@ def main():
     for (entrada, saida), t, seg in zip(pares, trechos, segs):
         f4 = [recorta(x, t, seg) for x in faixas4] if t else [x[:int((seg + 3) * SR)] for x in faixas4]
         mistura(entrada, saida, f4, seg, nivel, '--so-fundo' in args)
+        if '--medir' in args:  # também <saida>-fundo.mp4, só a trilha (abaixando sob a voz), para medir
+            mistura(entrada, saida.replace('.mp4', '-fundo.mp4'), f4, seg, nivel, True)
         print(f'{saida}: trilha {"pelo roteiro" if rot_arq else "constante"}, {nivel:g} dB, {seg:.1f} s')
 
 

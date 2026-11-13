@@ -1,5 +1,5 @@
 {
-  "volume": 0.35,
+  "volume": 1.0,
   "secoes": [
     {
       "frase": 0,
@@ -76,8 +76,8 @@
     {
       "frase": 50,
       "humor": "luz",
-      "ganho": 1.0,
-      "ate": 0.8
+      "ganho": 0.8,
+      "ate": 0.7
     },
     {
       "frase": 51,
@@ -96,22 +96,22 @@
       "frase": 29,
       "palavra": "rasgou",
       "tipo": "escuro",
-      "ganho": 0.5
+      "ganho": 1.0
     },
     {
       "frase": 30,
       "palavra": "grito",
       "tipo": "escuro",
-      "ganho": 0.5
+      "ganho": 1.0
     },
     {
       "frase": 50,
       "palavra": "vazio",
       "tipo": "luz",
-      "ganho": 0.5
+      "ganho": 0.7
     }
   ],
-  "efeitos_volume": 1.7,
+  "efeitos_volume": 4.0,
   "efeitos": [
     {
       "frase": 1,
@@ -374,13 +374,13 @@
     {
       "frase": 50,
       "tipo": "pedra",
-      "ganho": 0.4,
+      "ganho": 0.2,
       "palavra": "túmulo"
     },
     {
       "frase": 50,
       "tipo": "passaros",
-      "ganho": 0.4,
+      "ganho": 0.25,
       "atraso": -0.3
     },
     {
