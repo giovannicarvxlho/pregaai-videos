@@ -62,14 +62,13 @@ function artC() {
 // ---------- capas verticais (desenho na janela do meio, x 656 a 1264) ----------
 // Longo no TikTok: a cruz do grito no meio.
 const vCruz = () => cruzGrito({ cx: 960, base: 1150, s: 1.15, r0: 150, lados: false }) + capaVinheta(0.45, '50%', '55%', '80%');
-// Curto 1: o soldado mostrando a túnica inteira, com a luz quente atrás, e os dados no chão.
-function vTunica() {
-  let s = capaFundo([[0, '#07060A'], [0.55, '#16100D'], [1, '#3A1A0C']]);
-  s += capaLuz(960, 760, 620, '#FF8A2A', 0.9) + capaRaios(960, 740, 1100, 14, '#FFC46B', 0.16, 5);
-  s += `<rect x="0" y="880" width="1920" height="300" fill="#120C09"/>`;
-  s += segurando(T, { x: 960, y: 900, s: 1.15, glow: 0.9, mood: 'happy', id: 'cvT' });
-  s += dado(1130, 915, 1.3, 18, 5) + dado(800, 925, 1.3, -14, 3);
-  return s + capaVinheta(0.4, '50%', '60%', '85%');
+// Curto 1 ("Jesus, um Filho abandonado pelo Pai?"): a cruz de perto, no frio da noite, com uma luz fraca que
+// vem de cima e não chega até ela.
+function vFilho() {
+  let s = capaFundo([[0, '#04060B'], [0.55, '#0D1420'], [1, '#1A2433']]);
+  s += capaLuz(960, 120, 640, '#9CC0FF', 0.45) + capaRaios(960, 60, 1100, 10, '#BFD4FF', 0.12, 4, 60, 120);
+  s += hill(960, 1040, 1300, '#070A10', '#000') + crossFig(960, 1080, 1.55, { plaque: true, fill: '#020305', rim: '#8FB0E6', bow: 0.3 });
+  return s + capaVinheta(0.5, '50%', '50%', '85%');
 }
 // Curto 2: a cruz no fim da tarde, com os anéis do grito.
 function vGrito() {
@@ -77,6 +76,15 @@ function vGrito() {
   s += capaLuz(960, 420, 700, '#FFB347', 0.8) + aneis(960, 450, 140, '#FFE0B0') + capaLuz(960, 450, 120, '#FFFFFF', 0.9);
   s += hill(960, 1040, 1300, '#0A0605', '#000') + crossFig(960, 1070, 1.4, { plaque: true, fill: '#030202', rim: '#FF8A3C', bow: 0 });
   return s + capaVinheta(0.4, '50%', '50%', '85%');
+}
+// Curto 3 ("Você já se sentiu abandonado por Deus?"): alguém sentado sozinho no escuro, e, ao longe, a cruz com
+// a luz quente do fim do salmo.
+function vSozinho() {
+  let s = capaFundo([[0, '#05060B'], [0.6, '#11141C'], [1, '#1E1A22']]);
+  s += capaLuz(1130, 300, 420, '#FFB347', 0.7) + hill(1130, 520, 700, '#0A0C10', '#000') + crossFig(1130, 540, 0.5, { plaque: true, fill: '#030202', rim: '#FF8A3C', bow: 0.2 });
+  s += `<rect x="0" y="900" width="1920" height="300" fill="#08090C"/>`;
+  s += sentado({ ...povo(1041), x: 900, y: 790, s: 1.9, rock: '#262A30', mood: 'sad', look: 0.4, rim: '#FF9A4A' });
+  return s + capaVinheta(0.5, '45%', '55%', '85%');
 }
 // Curto 3: quem estava perto da cruz aponta para o alto ("está chamando Elias", Mateus 27:47).
 function vElias() {

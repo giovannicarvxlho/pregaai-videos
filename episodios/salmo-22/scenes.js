@@ -947,14 +947,12 @@ function scAsQuatro(t) {
 }
 
 // ================================================================ aberturas dos curtos (só nos curtos)
-// Curto 1: "Quatro soldados dividiram as roupas de um condenado. E sobrou uma peça." O mesmo pé da cruz; as quatro
-// peças vão para os quatro; a túnica fica no meio e acende.
-function scAbreTunica(t) {
-  const a0 = seco(57), tq = wordTime(57, 'dividiram') - 0.1, tp = [tq, tq + 0.3, tq + 0.6, tq + 0.9];
-  const ts = wordTime(57, 'peça') - 0.5, glow = E.out(prog(t, ts, ts + 0.5));
-  const s = divisao(t, { tp, pecas: tp.map((x) => E.inOut(prog(t, x - 0.3, x + 0.2)) * (1 - E.inOut(prog(t, x + 0.7, x + 1.1)))), glow, olhar: t > ts, id: 'b' });
-  const k = E.inOut(prog(t, ts - 0.3, ts + 0.9)) * (NARROW ? 0.45 : 1);
-  return { svg: cam(s, 960, lerp(560, 800, k), lerp(1.04, 1.32, k), 0, lerp(0, -170, k)), html: '' };
+// Curto 1: "Jesus, um Filho abandonado pelo Pai? É o que a frase dele na cruz parece dizer." A cruz de perto, no
+// escuro: a luz que vinha de cima apaga até "Pai", e o anel do grito sai em "frase".
+function scAbreFilho(t) {
+  const a0 = seco(57), light = 0.32 - 0.26 * E.inOut(prog(t, a0, wordTime(57, 'pai') + 0.3));
+  const s = cruzPerto(t, { light }) + anel(CABECA[0], CABECA[1], t, wordTime(57, 'frase') - 0.1);
+  return { svg: cam(s, 960, 470, 1.04 + 0.08 * prog(t, a0, seco(58))), html: '' };
 }
 // Curto 2: "Se Jesus sabia que ia ressuscitar, por que gritou: Meu Deus! Meu Deus! Por que me abandonaste? A frase é
 // a primeira linha do Salmo 22." A cruz no escuro, com os anéis do grito; depois, o cartão do salmo.
@@ -985,6 +983,20 @@ function scEloi(t) {
     { txt: `<i>${hl('Eloí, Eloí, lamá sabactâni?', h1)}</i>`, fs: NARROW ? 32 : 60 },
     { txt: hl('Meu Deus! Meu Deus! Por que me abandonaste?', h2), op: E.out(prog(t, seg(62) - 0.3, seg(62) + 0.2)) },
   ], topW: 200 }) };
+}
+
+// Curto 3: "Você já se sentiu abandonado por Deus? Na cruz, Jesus gritou: Meu Deus! Meu Deus! Por que me
+// abandonaste?" Primeiro, alguém sentado sozinho no escuro; em "cruz", a cruz de perto, com os anéis do grito.
+function scAbreSozinho(t) {
+  const a0 = seco(63), tc = wordTime(63, 'cruz') - 0.15;
+  if (t < tc) {
+    let s = bgTrevas(t, { glow: 0.14 }) + hill(960, 900, 1700, '#1B1E22', '#060708');
+    s += sentado({ ...povo(1041), x: 960, y: 800, s: 1.5, rock: '#2A2E33', mood: 'sad', look: 0, rim: RIM });
+    return { svg: cam(s, 960, 620, 1.02 + 0.06 * prog(t, a0, tc)), html: '' };
+  }
+  const n = (SEGS[63][4] || []).length;
+  const k = [tc, wt(63, n - 8), wt(63, n - 6), wt(63, n - 1)];
+  return { svg: cam(grito(t, k), 960, 470, 1.06 + 0.06 * prog(t, tc, fim(63))), html: '' };
 }
 
 // ================================================================ fim
@@ -1050,11 +1062,12 @@ const SCENES = [
   { a: depois(54), b: at(56), f: scApp, ref: null },
   { a: at(56), b: seco(57), f: scAsQuatro, ref: null },
   // aberturas dos curtos (só nos curtos): entram secas, sem a cena vizinha por baixo
-  { a: seco(57), b: seco(58), f: scAbreTunica, ref: 'João 19:23', cut: true },
+  { a: seco(57), b: seco(58), f: scAbreFilho, ref: null, dark: true, cut: true },
   { a: seco(58), b: at(59), f: scAbreGrito, ref: null, dark: true, cut: true },
   { a: at(59), b: seco(60), f: scSalmo1b, ref: null },
   { a: seco(60), b: at(61), f: scElias, ref: 'Mateus 27:47', dark: true, cut: true },
-  { a: at(61), b: CARTAO_INICIO, f: scEloi, ref: null },
+  { a: at(61), b: seco(63), f: scEloi, ref: null },
+  { a: seco(63), b: CARTAO_INICIO, f: scAbreSozinho, ref: null, dark: true, cut: true },
   // cartão final (o longo pula das frases do longo direto para cá: corte.json, cartao_inicio)
   { a: CARTAO_INICIO, b: DURATION + 1, f: scFim, ref: null, end: true, cut: true },
 ];

@@ -2,13 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Capa do curto 3: chamando Elias?</title>
+<title>Capa do curto 3: Deus me abandonou?</title>
 <style>
 @font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
 html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #111; }
 #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
 svg { position: absolute; inset: 0; }
-/* Curto 3 (Mateus 27:46-47; Marcos 15:34): quem estava perto da cruz aponta para o alto, como no vídeo. O nome fica no terço de cima, sempre na mesma posição na série (letra de 200 px); o herói no miolo 3:4 (y 240 a 1680); o canto de baixo à esquerda fica livre (contador de views da grade). */
+/* Curto 3 (Mateus 27:46; Salmo 22:31; Hebreus 5:7): alguém sentado sozinho no escuro e, ao longe, a cruz com luz quente. Soma à abertura do curto ("Você já se sentiu abandonado por Deus?"). O nome fica no terço de cima, sempre na mesma posição na série (letra de 200 px); o herói no miolo 3:4 (y 240 a 1680); o canto de baixo à esquerda fica livre (contador de views da grade). */
 .hook { position: absolute; left: 0; right: 0; top: 270px; display: flex; flex-direction: column; align-items: center; }
 .l { font: 400 200px/0.95 'Gasoek One'; color: #FFE45C; white-space: nowrap;
   text-shadow: -7px -7px 0 #181614, 7px -7px 0 #181614, -7px 7px 0 #181614, 7px 7px 0 #181614, 0 -8px 0 #181614, 0 8px 0 #181614, -8px 0 0 #181614, 8px 0 0 #181614, 0 17px 0 #181614; }
@@ -17,7 +17,7 @@ svg { position: absolute; inset: 0; }
 </head>
 <body>
 <div id="root"><svg id="art" viewBox="656 0 607.5 1080" width="1080" height="1920" preserveAspectRatio="xMidYMid slice"></svg>
-  <div class="hook"><div class="l">ELIAS?</div><div class="chip">ELOÍ, ELOÍ</div></div>
+  <div class="hook"><div class="l">DEUS</div><div class="chip">ME ABANDONOU?</div></div>
 </div>
 <script src="data.js"></script>
 <script src="../../lib.js"></script>
@@ -25,7 +25,7 @@ svg { position: absolute; inset: 0; }
 <script src="scenes.js"></script>
 <script src="capas.js"></script>
 <script>
-document.getElementById('art').innerHTML = DEFS + vElias();
+document.getElementById('art').innerHTML = DEFS + vSozinho();
 window.ready = document.fonts.ready;
 </script>
 </body>

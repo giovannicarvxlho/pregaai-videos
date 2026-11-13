@@ -9,7 +9,7 @@ PALAVRA = 'palavra'  # citação de uma palavra da própria frase, não de um ve
 REFS = ['mt.27:46', 'sl.22:7', 'mt.27:40', 'sl.22:8', 'mt.27:43', 'sl.22:16', 'jo.20:25', 'lc.24:39',
         'jo.19:24', 'jo.19:24', 'jo.19:24', '2co.5:21', 'is.53:6', 'rm.8:32', PALAVRA, PALAVRA, PALAVRA,
         'sl.22:10', 'sl.22:21', 'sl.22:24', 'hb.2:12', 'hb.5:7', 'hb.5:7', 'sl.22:31', 'mt.27:46', 'sl.22:31', '2co.5:21',
-        'mt.27:46', 'mc.15:34', 'mt.27:46']
+        'mt.27:46', 'mc.15:34', 'mt.27:46', 'mt.27:46']
 ALSO = {'mt.27:46': 'sl.22:1', 'jo.19:24': 'sl.22:18', 'hb.2:12': 'sl.22:22'}
 
 def norm(s):

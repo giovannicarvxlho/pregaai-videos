@@ -1,6 +1,6 @@
 {
  "fonte": "salmo-22",
- "cartao_inicio": 319.6,
+ "cartao_inicio": 330.32,
  "saidas": [
   {
    "nome": "salmo-22",
@@ -135,19 +135,35 @@
   {
    "nome": "salmo-22-curto-1-ig",
    "layout": "foco",
-   "titulo": "A túnica *sem costura*",
-   "gancho": "NÃO RASGARAM A *TÚNICA*",
+   "titulo": "Salmo 22 e a *cruz*",
+   "gancho": "ABANDONADO PELO *PAI*?",
    "cta": true,
    "frases": [
     57,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29
-   ]
+    61,
+    62,
+    3,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "foco": {
+    "cena": {
+     "14": {
+      "cx": 960,
+      "cy": 700,
+      "z": 1.6
+     }
+    }
+   }
   },
   {
    "nome": "salmo-22-curto-2-ig",
@@ -180,29 +196,20 @@
   {
    "nome": "salmo-22-curto-3-ig",
    "layout": "foco",
-   "titulo": "O que Jesus *gritou* na cruz",
-   "gancho": "CHAMANDO *ELIAS*?",
+   "titulo": "Como o Salmo 22 *termina*",
+   "gancho": "JÁ SE SENTIU *ABANDONADO*?",
    "cta": true,
    "frases": [
-    60,
-    61,
-    62,
+    63,
     3,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    32,
-    33,
     34,
     37,
     42,
     43,
+    46,
+    47,
+    48,
+    49,
     50
    ]
   }
