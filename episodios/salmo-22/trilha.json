@@ -424,6 +424,39 @@
       "tipo": "pop",
       "ganho": 0.4,
       "atraso": 0.6000000000000001
+    },
+    {
+      "frase": 57,
+      "tipo": "brilho",
+      "ganho": 0.4,
+      "palavra": "peça"
+    },
+    {
+      "frase": 58,
+      "tipo": "anel",
+      "ganho": 0.5,
+      "palavra": "gritou"
+    },
+    {
+      "frase": 59,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 60,
+      "tipo": "anel",
+      "ganho": 0.5,
+      "palavra": "gritou"
+    },
+    {
+      "frase": 61,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 62,
+      "tipo": "tique",
+      "ganho": 0.4
     }
   ],
   "piano": false

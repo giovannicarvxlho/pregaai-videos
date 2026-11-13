@@ -4,6 +4,7 @@
 #   python3 tools/trilha.py <video.mp4> <saida.mp4> --roteiro episodios/<ep>/trilha.json   (segue o roteiro)
 #   python3 tools/trilha.py <video.mp4> <saida.mp4>                                        (pad constante)
 #   --nivel -3   (ganho final em dB; padrão 0)
+#   --corte out/<nome>.corte.json   (curtos e cortes: a trilha segue os trechos que o tools/corte.cjs juntou)
 #   --so-fundo   (sai só a trilha, sem a voz, ainda abaixando onde a voz fala: para medir o nível)
 #
 # Com --roteiro, a trilha acompanha a história (pedido do Giovanni em 2026-11-13: "momentos emocionantes,
@@ -299,27 +300,37 @@ def grava(arq, x):
         w.writeframes((np.clip(x, -1, 1) * 32767).astype(np.int16).tobytes())
 
 
-def main():
-    args = sys.argv[1:]
-    valor = lambda k, d: args[args.index(k) + 1] if k in args else d
-    pos = [x for i, x in enumerate(args) if not x.startswith('--') and (i == 0 or args[i - 1] not in ('--nivel', '--roteiro'))]
-    if len(pos) != 2:
-        sys.exit('uso: python3 tools/trilha.py <video.mp4> <saida.mp4> [--roteiro episodios/<ep>/trilha.json] [--nivel 0]')
-    entrada, saida = pos
-    nivel = float(valor('--nivel', 0))
-    seg = duracao(entrada)
-    rot_arq = valor('--roteiro', None)
-    roteiro = json.load(open(rot_arq, encoding='utf-8')) if rot_arq else {'secoes': CONSTANTE}
-    fr = frases(os.path.join(os.path.dirname(rot_arq), 'data.js')) if rot_arq else []
-    referencia, _ = faixas(seg + 3, {'secoes': CONSTANTE}, [])  # o pad constante, que a escala de volume usa
-    musica, golpes = faixas(seg + 3, roteiro, fr)
+def prepara(roteiro, fr, total):
+    """Música, impactos, ambiente e efeitos na linha do tempo da narração, já no volume do roteiro."""
+    referencia, _ = faixas(total, {'secoes': CONSTANTE}, [])  # o pad constante, que a escala de volume usa
+    musica, golpes = faixas(total, roteiro, fr)
     rms = lambda x: np.sqrt(np.mean(x ** 2)) or 1
     escala = 0.9 / np.max(np.abs(referencia))  # o pad constante sai com pico de 0,9
     musica *= escala * roteiro.get('volume', 1.0) * rms(referencia) / rms(musica)
     golpes *= escala * rms(referencia) * 1.4
-    amb, efs = sons(seg + 3, roteiro, fr)
+    amb, efs = sons(total, roteiro, fr)
     amb *= escala * rms(referencia) * roteiro.get('ambiente_volume', 0.0)
     efs *= escala * rms(referencia) * 1.4 * roteiro.get('efeitos_volume', 0.0)
+    return musica, golpes, amb, efs
+
+
+def recorta(x, trechos, seg):
+    """Junta os pedaços na ordem do vídeo, com 40 ms de transição em cada emenda."""
+    k = int(0.04 * SR)
+    out = np.zeros(int((seg + 3) * SR))
+    pos = 0
+    for a, b in trechos:
+        p = x[int(a * SR):int(b * SR)].copy()
+        p[:k] *= np.linspace(0, 1, min(k, len(p)))
+        p[-k:] *= np.linspace(1, 0, min(k, len(p)))
+        m = max(0, min(len(p), len(out) - pos))
+        out[pos:pos + m] += p[:m]
+        pos += len(p)
+    return out
+
+
+def mistura(entrada, saida, faixas4, seg, nivel, so_fundo=False):
+    musica, golpes, amb, efs = faixas4
     with tempfile.TemporaryDirectory() as tmp:
         wm, wg, wa, we = (os.path.join(tmp, f'{x}.wav') for x in ('musica', 'golpes', 'ambiente', 'efeitos'))
         grava(wm, musica); grava(wg, golpes); grava(wa, amb); grava(we, efs)
@@ -331,12 +342,36 @@ def main():
                   '[m][am]amix=inputs=2:normalize=0[fundo];'
                   '[0:a]asplit=2[voz][chave];'
                   '[fundo][chave]sidechaincompress=threshold=0.05:ratio=1.5:attack=60:release=800[mb];'
-                  + ('[voz]anullsink;[mb][g][ef]amix=inputs=3:normalize=0[a]' if '--so-fundo' in args else  # para medir
+                  + ('[voz]anullsink;[mb][g][ef]amix=inputs=3:normalize=0[a]' if so_fundo else  # para medir
                      '[voz][mb][g][ef]amix=inputs=4:duration=first:normalize=0,alimiter=limit=0.9:level=disabled[a]'))
         subprocess.check_call(['ffmpeg', '-v', 'error', '-y', '-i', entrada, '-i', wm, '-i', wg, '-i', wa, '-i', we,
                                '-filter_complex', filtro, '-map', '0:v', '-map', '[a]', '-c:v', 'copy',
                                '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', saida])
-    print(f'{saida}: trilha {"pelo roteiro" if rot_arq else "constante"}, {nivel:g} dB, {seg:.1f} s')
+
+
+def main():
+    args = sys.argv[1:]
+    valor = lambda k, d: args[args.index(k) + 1] if k in args else d
+    opcoes = ('--nivel', '--roteiro', '--corte')
+    pos = [x for i, x in enumerate(args) if not x.startswith('--') and (i == 0 or args[i - 1] not in opcoes)]
+    cortes = [args[i + 1] for i, x in enumerate(args) if x == '--corte']
+    if not pos or len(pos) % 2 or (cortes and len(cortes) != len(pos) // 2):
+        sys.exit('uso: python3 tools/trilha.py <video.mp4> <saida.mp4> [<video2.mp4> <saida2.mp4> ...] '
+                 '[--roteiro episodios/<ep>/trilha.json] [--corte out/<nome>.corte.json, um por vídeo] [--nivel 0]')
+    pares = list(zip(pos[::2], pos[1::2]))
+    nivel = float(valor('--nivel', 0))
+    rot_arq = valor('--roteiro', None)
+    roteiro = json.load(open(rot_arq, encoding='utf-8')) if rot_arq else {'secoes': CONSTANTE}
+    fr = frases(os.path.join(os.path.dirname(rot_arq), 'data.js')) if rot_arq else []
+    trechos = [json.load(open(c, encoding='utf-8'))['trechos'] for c in cortes] or [None] * len(pares)
+    segs = [duracao(e) for e, _ in pares]
+    # a trilha é calculada uma vez, na linha do tempo da narração, e recortada para cada vídeo
+    total = max(max(b for _, b in t) if t else s for t, s in zip(trechos, segs)) + 3
+    faixas4 = prepara(roteiro, fr, total)
+    for (entrada, saida), t, seg in zip(pares, trechos, segs):
+        f4 = [recorta(x, t, seg) for x in faixas4] if t else [x[:int((seg + 3) * SR)] for x in faixas4]
+        mistura(entrada, saida, f4, seg, nivel, '--so-fundo' in args)
+        print(f'{saida}: trilha {"pelo roteiro" if rot_arq else "constante"}, {nivel:g} dB, {seg:.1f} s')
 
 
 if __name__ == '__main__':
