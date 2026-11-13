@@ -162,7 +162,7 @@ const SCENES = [
   {
     a: FB(11) + 0.7, b: FB(13) + 0.6, cut: true, dark: true, ref: [[FA(12) - 0.2, '3ª frase · João 19:26-27']],
     f: (t) => {
-      const olhaEle = t > FB(12) - 0.35, cx = 470, cy = 1330, z = 1.45; // no fim do "Aí está o seu filho" o olhar passa ao discípulo
+      const olhaEle = t > FB(12) - 0.35, cx = 470, cy = 1375, z = 1.45; // no fim do "Aí está o seu filho" o olhar passa ao discípulo
       const frente = pe(P.MAE, 330, 1900, 0.54, { t, humor: 'triste', look: [0.3, -1], boca: 0 })
         + pe(P.DISC, 520, 1900, 0.57, { t, humor: 'triste', look: olhaEle ? [0, -1] : [-0.5, -0.6] });
       const svg = golgota(t, { k: 0, frente, j: { look: olhaEle ? [0.1, 1] : [-0.6, 1], humor: 'triste', turn: olhaEle ? 0 : -0.3 } });

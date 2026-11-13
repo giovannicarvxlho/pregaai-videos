@@ -1,6 +1,6 @@
 # As 7 frases na cruz, versão desenho animado (diálogo)
 
-**Status: aguardando validação do Giovanni.**
+**Status: aprovado pelo Giovanni em 2026-11-13 ("pode gerar"), com o rosto no estilo livro.**
 
 Teste de formato pedido pelo Giovanni em 2026-11-13: a história do viral (as 7 frases na cruz) contada como desenho animado, sem narrador, com os personagens falando e a cena mudando a cada fala. Curto vertical (1080×1920), nativo em 9:16, ~1:40 a 2:00.
 
