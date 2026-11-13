@@ -1,0 +1,57 @@
+{
+  "_nota": "Uma voz por personagem, da Voice Library da ElevenLabs (vozes pt-BR). Modelo e ajustes padrão em tools/dialogo.py; 'ajustes' aqui sobrepõe o padrão só para aquele personagem. Personagem com sufixo (_FORTE) é o mesmo desenho com outro ajuste de voz.",
+  "JESUS": {
+    "voz": "EbiSUflQjzm4g7S895SC",
+    "nome": "Leo Antonio - Welcoming & Serene"
+  },
+  "SOLDADO1": {
+    "voz": "hwnuNyWkl9DjdTFykrN6",
+    "nome": "Adriano - Deep, Gravelly and Rugged"
+  },
+  "SOLDADO2": {
+    "voz": "lvkgCBi6spByiTZMPJEK",
+    "nome": "Gabriel - Young Male Brazilian, deep voice"
+  },
+  "PASSANTE": {
+    "voz": "NKKvpecEshlHm99K9zn9",
+    "nome": "Manoel Cota - Expressive and Direct"
+  },
+  "SACERDOTE": {
+    "voz": "rnJZLKxtlBZt77uIED10",
+    "nome": "Sergio - Deep, Resonant and Clear"
+  },
+  "CRIMINOSO1": {
+    "voz": "ycxdm1PRMs962FxyyuJ0",
+    "nome": "Otto - Intimidating and Aggressive"
+  },
+  "CRIMINOSO2": {
+    "voz": "1eBtZhneFpMPiYsjVTGl",
+    "nome": "Eduardo Hubi - Melancholic and Calm"
+  },
+  "HOMEM1": {
+    "voz": "GnDrTQvdzZ7wqAKfLzVQ",
+    "nome": "Guilherme - Direct and Neutral"
+  },
+  "HOMEM2": {
+    "voz": "TY3h8ANhQUsJaa0Bga5F",
+    "nome": "Cassio Cruz - Confident and Direct"
+  },
+  "CENTURIAO": {
+    "voz": "y3X5crcIDtFawPx7bcNq",
+    "nome": "Eliel - Deep, Gravly and Commanding"
+  },
+  "JESUS_FORTE": {
+    "voz": "EbiSUflQjzm4g7S895SC",
+    "nome": "Leo Antonio (Eloí: lamento em alta voz, mais expressão)",
+    "ajustes": {
+      "stability": 0.3
+    }
+  },
+  "JESUS_ALTO": {
+    "voz": "EbiSUflQjzm4g7S895SC",
+    "nome": "Leo Antonio (Pai, nas tuas mãos: entrega firme, perto do padrão)",
+    "ajustes": {
+      "stability": 0.42
+    }
+  }
+}
