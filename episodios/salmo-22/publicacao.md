@@ -29,7 +29,7 @@ Calendário (sugestão; o Giovanni decide; horário de Brasília): o longo sai n
 
 ### Vídeo longo: `youtube/longo.mp4`
 
-**Trilha:** o longo já sai com trilha de fundo, gerada no pipeline (`tools/trilha.py`, sem direitos; decisão do Giovanni em 2026-11-13). Não acrescente música do app.
+**Som:** o vídeo já sai com efeitos sonoros da animação (passos, falas, marca-texto, cartões, o véu, o grito), gerados no pipeline (`tools/trilha.py`, sem direitos), e sem música de fundo (decisão do Giovanni em 2026-11-13). Não acrescente música do app.
 
 **Título** (64 caracteres; começa pela busca "deus abandonou jesus na cruz", que está no autocompletar do YouTube, e o "Salmo 22" fica no fim, para quem busca o salmo)
 > DEUS ABANDONOU JESUS NA CRUZ? O QUE A BÍBLIA RESPONDE (SALMO 22)
@@ -168,7 +168,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 ### Longo: `tiktok/longo.mp4`
 
-**Trilha:** o longo já sai com trilha de fundo, gerada no pipeline (`tools/trilha.py`, sem direitos; decisão do Giovanni em 2026-11-13). Não acrescente música do app.
+**Som:** o vídeo já sai com efeitos sonoros da animação (passos, falas, marca-texto, cartões, o véu, o grito), gerados no pipeline (`tools/trilha.py`, sem direitos), e sem música de fundo (decisão do Giovanni em 2026-11-13). Não acrescente música do app.
 
 **Legenda**
 ```

@@ -398,11 +398,14 @@ def grava(arq, x):
 
 def prepara(roteiro, fr, total):
     """Música, impactos, ambiente e efeitos na linha do tempo da narração, já no volume do roteiro."""
-    referencia, _ = faixas(total, {'secoes': CONSTANTE}, [])  # o pad constante, que a escala de volume usa
-    musica, golpes = faixas(total, roteiro, fr)
+    referencia, _ = faixas(min(total, 40), {'secoes': CONSTANTE}, [])  # o pad constante, que a escala de volume usa
+    if roteiro.get('volume', 1.0) == 0:  # só efeitos, sem música de fundo (Giovanni, 2026-11-13)
+        musica, golpes = faixas(total, {**roteiro, 'secoes': []}, fr)
+    else:
+        musica, golpes = faixas(total, roteiro, fr)
     rms = lambda x: np.sqrt(np.mean(x ** 2)) or 1
     escala = 0.9 / np.max(np.abs(referencia))  # o pad constante sai com pico de 0,9
-    musica *= escala * roteiro.get('volume', 1.0) * rms(referencia) / rms(musica)
+    musica *= escala * roteiro.get('volume', 1.0) * rms(referencia) / rms(musica) if roteiro.get('volume', 1.0) else 0
     golpes *= escala * rms(referencia) * 1.4
     amb, efs = sons(total, roteiro, fr)
     amb *= escala * rms(referencia) * roteiro.get('ambiente_volume', 0.0)
