@@ -46,6 +46,7 @@ const respira = (t, seed = 0) => Math.sin(t * 2.1 + seed);
 
 // ---------- cabeça ----------
 
+const CABECA_L = 'M -88 -20 C -90 -88 -50 -116 0 -116 C 50 -116 90 -88 88 -20 C 87 22 80 52 63 78 C 47 100 24 111 0 113 C -24 111 -47 100 -63 78 C -80 52 -87 22 -88 -20 Z';
 const CABECA = 'M -90 -18 C -92 -84 -52 -114 0 -114 C 52 -114 92 -84 90 -18 C 88 42 56 100 0 106 C -56 100 -88 42 -90 -18 Z';
 // pálpebra de cima (quanto cobre, inclinação: + a ponta de fora mais baixa) e sobrancelha [dentro, fora, arco] por humor
 const HUMOR = {
@@ -73,12 +74,13 @@ function toonCabeca(o = {}) {
   // orelhas
   if (!pano && !cap && !o.turbante) [-1, 1].forEach((d) => (g += `<ellipse cx="${d * 88 + fx * 0.3}" cy="4" rx="15" ry="23" fill="${pele}" ${tk(5)}/><path d="M ${d * 86 + fx * 0.3} -6 q ${d * 6} 8 0 18" fill="none" ${tk(3, peleDk)}/>`));
   // rosto com sombra do lado contrário à luz
-  g += `<clipPath id="${id}h"><path d="${CABECA}"/></clipPath><path d="${CABECA}" fill="${pele}"/>`;
+  const CAB = (o.rosto || ROSTO) === 'longa' ? CABECA_L : CABECA;
+  g += `<clipPath id="${id}h"><path d="${CAB}"/></clipPath><path d="${CAB}" fill="${pele}"/>`;
   g += `<g clip-path="url(#${id}h)"><ellipse cx="${-L * 92 + fx}" cy="20" rx="70" ry="150" fill="${peleDk}" opacity="0.55"/>`;
   g += `<ellipse cx="${L * 40 + fx}" cy="-50" rx="40" ry="26" fill="#fff" opacity="0.12"/>`;
   [-1, 1].forEach((d) => (g += `<ellipse cx="${d * 52 + fx}" cy="40" rx="17" ry="10" fill="#E07A62" opacity="0.32"/>`));
   if (o.velho) g += `<path d="M -32 -64 Q 0 -72 32 -64 M -26 -52 Q 0 -58 26 -52" fill="none" ${tk(3, peleDk)}/>`;
-  g += `</g><path d="${CABECA}" fill="none" ${tk(5)}/>`;
+  g += `</g><path d="${CAB}" fill="none" ${tk(5)}/>`;
 
   // barba (por baixo da boca)
   if (barba && barba !== 'bigode') {
@@ -91,6 +93,62 @@ function toonCabeca(o = {}) {
     }
   }
 
+  g += (ROSTOS[o.rosto || ROSTO] || rostoAtual)(o, { id, pele, peleDk, corBarba, cap, fx, turn, lx, ly, pisca, ab, barba, hum, L });
+
+  // cabelo, pano, turbante, capacete, coroa
+  const brilho = (d) => `<path d="${d}" fill="none" ${tk(6, shade(cab, 1.8))} opacity="0.45"/>`;
+  if (!pano && !cap && !o.turbante) {
+    const top = {
+      longo: 'M -94 -6 C -108 -96 -56 -130 0 -126 C 56 -130 108 -96 94 -6 C 88 -46 76 -70 52 -84 C 38 -74 16 -86 4 -100 C -10 -84 -32 -74 -50 -84 C -74 -70 -88 -46 -94 -6 Z',
+      curto: 'M -92 -26 C -100 -102 -50 -128 0 -124 C 50 -128 100 -102 92 -26 C 84 -60 64 -80 34 -86 C 14 -78 -16 -82 -38 -90 C -64 -82 -84 -62 -92 -26 Z',
+      baguncado: 'M -94 -20 C -104 -104 -50 -130 0 -126 C 50 -130 104 -104 94 -20 L 80 -54 L 70 -40 L 58 -78 L 40 -64 L 26 -92 L 10 -72 L -6 -96 L -22 -72 L -38 -90 L -52 -66 L -66 -80 L -76 -46 L -86 -60 Z',
+      careca: 'M -92 -6 C -98 -40 -92 -58 -80 -66 C -82 -40 -78 -20 -72 -4 Z M 92 -6 C 98 -40 92 -58 80 -66 C 82 -40 78 -20 72 -4 Z',
+    }[o.penteado || 'curto'];
+    g += `<path d="${top}" fill="${cab}" ${tk(5)}/>`;
+    if (o.penteado !== 'careca') g += brilho('M -52 -102 Q 0 -120 44 -104');
+  }
+  if (pano) {
+    g += `<path d="M -114 40 C -128 -94 -66 -144 0 -144 C 66 -144 128 -94 114 40 L 124 236 L 84 236 L 80 30 C 78 -52 46 -98 0 -98 C -46 -98 -78 -52 -80 30 L -84 236 L -124 236 Z" fill="${pano.cor}" ${tk(5)}/>`;
+    g += `<path d="M -100 -40 C -96 30 -98 120 -104 220 M 100 -40 C 96 30 98 120 104 220" fill="none" ${tk(3, shade(pano.cor, 0.7))}/>`;
+    if (pano.listra) g += `<path d="M -92 -96 Q 0 -150 92 -96" fill="none" ${tk(7, pano.listra)}/><path d="M -104 -78 Q 0 -138 104 -78" fill="none" ${tk(4, pano.listra)}/>`;
+    if (pano.faixa) g += `<path d="M -86 -88 Q 0 -122 86 -88" fill="none" ${tk(11, pano.faixa)}/>`;
+    g += `<path d="M -40 -134 Q 0 -146 40 -134" fill="none" ${tk(6, '#fff')} opacity="0.3"/>`;
+  }
+  if (o.turbante) {
+    g += `<path d="M -96 -36 C -112 -132 -56 -170 0 -170 C 56 -170 112 -132 96 -36 Q 0 -70 -96 -36 Z" fill="#EEE7D7" ${tk(5)}/>`;
+    g += `<path d="M -92 -70 Q 0 -112 92 -70 M -86 -104 Q 0 -146 86 -104 M -60 -140 Q 0 -160 60 -140" fill="none" ${tk(3, '#BDB29C')}/>`;
+    g += `<path d="M -98 -44 Q 0 -80 98 -44" fill="none" ${tk(12, o.turbante)}/>`;
+  }
+  if (cap) {
+    const br = '#C99A3B', brDk = '#8E6A24', crista = '#B3302B';
+    if (cap === 'cent') {
+      g += `<path d="M -124 -116 C -116 -222 116 -222 124 -116 C 84 -150 -84 -150 -124 -116 Z" fill="${crista}" ${tk(5)}/>`;
+      for (let i = -6; i <= 6; i++) g += `<line x1="${i * 15}" y1="${-150 + Math.abs(i) * 1.5}" x2="${i * 18}" y2="${-196 + Math.abs(i) * 5}" ${tk(3, shade(crista, 0.65))}/>`;
+    } else {
+      g += `<rect x="-13" y="-212" width="26" height="80" rx="13" fill="${crista}" ${tk(5)}/><path d="M -6 -200 L -6 -144 M 6 -200 L 6 -144" ${tk(2.5, shade(crista, 0.65))}/>`;
+    }
+    g += `<path d="M -98 -30 C -104 -124 -52 -148 0 -148 C 52 -148 104 -124 98 -30 Q 0 -58 -98 -30 Z" fill="${br}" ${tk(5)}/>`;
+    g += `<path d="M ${L * 70} -110 C ${L * 50} -134 ${L * 20} -140 ${L * -6} -140" fill="none" ${tk(7, '#F7DE96')} opacity="0.85"/>`;
+    g += `<path d="M -106 -38 Q 0 -70 106 -38 L 108 -24 Q 0 -56 -108 -24 Z" fill="${brDk}" ${tk(4)}/>`;
+    [-1, 1].forEach((d) => (g += `<path d="M ${d * 98} -30 L ${d * 74} -28 C ${d * 72} 10 ${d * 70} 40 ${d * 78} 66 Q ${d * 92} 72 ${d * 102} 56 C ${d * 102} 22 ${d * 102} -4 ${d * 98} -30 Z" fill="${br}" ${tk(4)}/>`));
+  }
+  if (o.coroa) {
+    let c = '';
+    for (const k of [0, 1]) c += `<ellipse cx="0" cy="${-80 + k * 6}" rx="${100 - k * 4}" ry="20" transform="rotate(${k ? -4 : 4} 0 -80)" fill="none" ${tk(14)}/><ellipse cx="0" cy="${-80 + k * 6}" rx="${100 - k * 4}" ry="20" transform="rotate(${k ? -4 : 4} 0 -80)" fill="none" stroke="#7B5532" stroke-width="7"/>`;
+    for (let i = 0; i < 18; i++) {
+      const a = (i / 18) * Math.PI * 2, x = Math.cos(a) * 100, y = -80 + Math.sin(a) * 20;
+      if (Math.sin(a) > 0.3 && Math.abs(x) < 60) continue;
+      c += `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x * 1.12)}" y2="${f1(y + (Math.sin(a) > 0 ? 10 : -18))}" ${tk(4)}/>`;
+    }
+    g += c;
+  }
+  return `<g transform="rotate(${o.tilt || 0} 0 60)">${g}</g>`;
+}
+
+// Traços do rosto, estilo de 13/11 (olhos redondos grandes). Os outros estilos estão em ROSTOS.
+function rostoAtual(o, c) {
+  const { id, pele, corBarba, cap, fx, turn, lx, ly, pisca, ab, barba, hum } = c;
+  let g = '';
   // olhos
   const [palp, incl, sob] = hum;
   [-1, 1].forEach((d) => {
@@ -148,55 +206,134 @@ function toonCabeca(o = {}) {
   }
   if (barba && barba !== 'rala') g += `<path d="M -27 51 C -18 41 -6 43 0 47 C 6 43 18 41 27 51 C 31 57 22 59 14 55 C 8 53 4 53 0 55 C -4 53 -8 53 -14 55 C -22 59 -31 57 -27 51 Z" transform="translate(${fx} 0)" fill="${corBarba}" ${tk(4)}/>`;
 
-  // cabelo, pano, turbante, capacete, coroa
-  const brilho = (d) => `<path d="${d}" fill="none" ${tk(6, shade(cab, 1.8))} opacity="0.45"/>`;
-  if (!pano && !cap && !o.turbante) {
-    const top = {
-      longo: 'M -94 -6 C -108 -96 -56 -130 0 -126 C 56 -130 108 -96 94 -6 C 88 -46 76 -70 52 -84 C 38 -74 16 -86 4 -100 C -10 -84 -32 -74 -50 -84 C -74 -70 -88 -46 -94 -6 Z',
-      curto: 'M -92 -26 C -100 -102 -50 -128 0 -124 C 50 -128 100 -102 92 -26 C 84 -60 64 -80 34 -86 C 14 -78 -16 -82 -38 -90 C -64 -82 -84 -62 -92 -26 Z',
-      baguncado: 'M -94 -20 C -104 -104 -50 -130 0 -126 C 50 -130 104 -104 94 -20 L 80 -54 L 70 -40 L 58 -78 L 40 -64 L 26 -92 L 10 -72 L -6 -96 L -22 -72 L -38 -90 L -52 -66 L -66 -80 L -76 -46 L -86 -60 Z',
-      careca: 'M -92 -6 C -98 -40 -92 -58 -80 -66 C -82 -40 -78 -20 -72 -4 Z M 92 -6 C 98 -40 92 -58 80 -66 C 82 -40 78 -20 72 -4 Z',
-    }[o.penteado || 'curto'];
-    g += `<path d="${top}" fill="${cab}" ${tk(5)}/>`;
-    if (o.penteado !== 'careca') g += brilho('M -52 -102 Q 0 -120 44 -104');
-  }
-  if (pano) {
-    g += `<path d="M -114 40 C -128 -94 -66 -144 0 -144 C 66 -144 128 -94 114 40 L 124 236 L 84 236 L 80 30 C 78 -52 46 -98 0 -98 C -46 -98 -78 -52 -80 30 L -84 236 L -124 236 Z" fill="${pano.cor}" ${tk(5)}/>`;
-    g += `<path d="M -100 -40 C -96 30 -98 120 -104 220 M 100 -40 C 96 30 98 120 104 220" fill="none" ${tk(3, shade(pano.cor, 0.7))}/>`;
-    if (pano.listra) g += `<path d="M -92 -96 Q 0 -150 92 -96" fill="none" ${tk(7, pano.listra)}/><path d="M -104 -78 Q 0 -138 104 -78" fill="none" ${tk(4, pano.listra)}/>`;
-    if (pano.faixa) g += `<path d="M -86 -88 Q 0 -122 86 -88" fill="none" ${tk(11, pano.faixa)}/>`;
-    g += `<path d="M -40 -134 Q 0 -146 40 -134" fill="none" ${tk(6, '#fff')} opacity="0.3"/>`;
-  }
-  if (o.turbante) {
-    g += `<path d="M -96 -36 C -112 -132 -56 -170 0 -170 C 56 -170 112 -132 96 -36 Q 0 -70 -96 -36 Z" fill="#EEE7D7" ${tk(5)}/>`;
-    g += `<path d="M -92 -70 Q 0 -112 92 -70 M -86 -104 Q 0 -146 86 -104 M -60 -140 Q 0 -160 60 -140" fill="none" ${tk(3, '#BDB29C')}/>`;
-    g += `<path d="M -98 -44 Q 0 -80 98 -44" fill="none" ${tk(12, o.turbante)}/>`;
-  }
-  if (cap) {
-    const br = '#C99A3B', brDk = '#8E6A24', crista = '#B3302B';
-    if (cap === 'cent') {
-      g += `<path d="M -124 -116 C -116 -222 116 -222 124 -116 C 84 -150 -84 -150 -124 -116 Z" fill="${crista}" ${tk(5)}/>`;
-      for (let i = -6; i <= 6; i++) g += `<line x1="${i * 15}" y1="${-150 + Math.abs(i) * 1.5}" x2="${i * 18}" y2="${-196 + Math.abs(i) * 5}" ${tk(3, shade(crista, 0.65))}/>`;
-    } else {
-      g += `<rect x="-13" y="-212" width="26" height="80" rx="13" fill="${crista}" ${tk(5)}/><path d="M -6 -200 L -6 -144 M 6 -200 L 6 -144" ${tk(2.5, shade(crista, 0.65))}/>`;
-    }
-    g += `<path d="M -98 -30 C -104 -124 -52 -148 0 -148 C 52 -148 104 -124 98 -30 Q 0 -58 -98 -30 Z" fill="${br}" ${tk(5)}/>`;
-    g += `<path d="M ${L * 70} -110 C ${L * 50} -134 ${L * 20} -140 ${L * -6} -140" fill="none" ${tk(7, '#F7DE96')} opacity="0.85"/>`;
-    g += `<path d="M -106 -38 Q 0 -70 106 -38 L 108 -24 Q 0 -56 -108 -24 Z" fill="${brDk}" ${tk(4)}/>`;
-    [-1, 1].forEach((d) => (g += `<path d="M ${d * 98} -30 L ${d * 74} -28 C ${d * 72} 10 ${d * 70} 40 ${d * 78} 66 Q ${d * 92} 72 ${d * 102} 56 C ${d * 102} 22 ${d * 102} -4 ${d * 98} -30 Z" fill="${br}" ${tk(4)}/>`));
-  }
-  if (o.coroa) {
-    let c = '';
-    for (const k of [0, 1]) c += `<ellipse cx="0" cy="${-80 + k * 6}" rx="${100 - k * 4}" ry="20" transform="rotate(${k ? -4 : 4} 0 -80)" fill="none" ${tk(14)}/><ellipse cx="0" cy="${-80 + k * 6}" rx="${100 - k * 4}" ry="20" transform="rotate(${k ? -4 : 4} 0 -80)" fill="none" stroke="#7B5532" stroke-width="7"/>`;
-    for (let i = 0; i < 18; i++) {
-      const a = (i / 18) * Math.PI * 2, x = Math.cos(a) * 100, y = -80 + Math.sin(a) * 20;
-      if (Math.sin(a) > 0.3 && Math.abs(x) < 60) continue;
-      c += `<line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x * 1.12)}" y2="${f1(y + (Math.sin(a) > 0 ? 10 : -18))}" ${tk(4)}/>`;
-    }
-    g += c;
-  }
-  return `<g transform="rotate(${o.tilt || 0} 0 60)">${g}</g>`;
+  return g;
 }
+
+// Pálpebra de cima (quanto cobre o olho) nos estilos novos: mais leve que no 'atual', para ninguém ficar com cara de sono.
+const PALP_LONGA = { neutro: 0.06, sereno: 0.14, triste: 0.3, dor: 0.36, choro: 0.32, raiva: 0.24, deboche: 0.42, espanto: 0, medo: 0.02, firme: 0.14 };
+const PALP_LIVRO = { triste: 0.3, dor: 0.34, choro: 0.3, raiva: 0.26, deboche: 0.42, firme: 0.1 };
+
+// Sobrancelha no estilo 'longa': [dentro, fora, arco] por humor (mais perto do olho e mais fina que no 'atual').
+const SOB_LONGA = {
+  neutro: [-36, -38, -6], sereno: [-37, -36, -4], triste: [-46, -32, -2], dor: [-47, -33, -1], choro: [-47, -32, -2],
+  raiva: [-27, -41, -2], deboche: [-35, -36, -4], espanto: [-50, -47, -8], medo: [-49, -45, -6], firme: [-31, -39, -4],
+};
+
+// Estilo 'longa' (de longa animado): olho amendoado com dobra da pálpebra, íris menor, sobrancelha cheia e afinando
+// para fora, nariz com a ponta desenhada, lábios e sombra embaixo da maçã do rosto. Mesma cabeça e mesmas medidas,
+// para cabelo, pano e capacete servirem nos dois estilos.
+function rostoLonga(o, c) {
+  const { id, pele, peleDk, corBarba, cap, fx, turn, lx, ly, pisca, barba, hum, L } = c;
+  const hm = o.humor || 'neutro', [palp, incl] = hum;
+  let ab = c.ab;
+  if ((hm === 'espanto' || hm === 'medo') && ab < 0.3) ab = 0.3; // susto: a boca fica entreaberta
+  let g = '';
+  // sombras do rosto: embaixo da maçã, do lado contrário à luz, e embaixo do queixo
+  g += `<g clip-path="url(#${id}h)"><path d="M ${-L * 86 + fx} 6 C ${-L * 74 + fx} 40 ${-L * 56 + fx} 62 ${-L * 34 + fx} 74 C ${-L * 64 + fx} 76 ${-L * 84 + fx} 54 ${-L * 92 + fx} 24 Z" fill="${peleDk}" opacity="0.4"/></g>`;
+  if (o.velho) g += `<path d="M ${-30 + fx} -62 Q ${fx} -68 ${30 + fx} -62 M ${-22 + fx} -52 Q ${fx} -56 ${22 + fx} -52 M ${-26 + fx} 40 Q ${-30 + fx} 54 ${-24 + fx} 66 M ${26 + fx} 40 Q ${30 + fx} 54 ${24 + fx} 66" fill="none" ${tk(2.5, shade(pele, 0.62))} opacity="0.7"/>`;
+  [-1, 1].forEach((d) => {
+    const longe = Math.max(0, d * turn), sx = 1 - longe * 0.2;
+    const ex = d * 34 + fx, ey = -12, w = 21 * sx, h = hm === 'espanto' ? 15 : hm === 'medo' ? 14 : 11.5;
+    const xin = ex - d * w, xout = ex + d * w, yin = ey + 2, yout = ey - 1.5;
+    const cima = `M ${f1(xin)} ${yin} C ${f1(ex - d * w * 0.45)} ${f1(ey - h * 1.35)} ${f1(ex + d * w * 0.5)} ${f1(ey - h * 1.3)} ${f1(xout)} ${yout}`;
+    const baixo = `C ${f1(ex + d * w * 0.45)} ${f1(ey + h * 0.95)} ${f1(ex - d * w * 0.5)} ${f1(ey + h)} ${f1(xin)} ${yin}`;
+    // pálpebra de cima: uma curva que sai do canto de dentro e chega no de fora, e desce com o humor (incl > 0: o lado
+    // de fora desce mais, tristeza; incl < 0: o de dentro, raiva). Com lid 0 ela é o próprio contorno do olho.
+    const lid = Math.min(1, (PALP_LONGA[hm] ?? palp) + pisca * (1 - (PALP_LONGA[hm] ?? palp)));
+    const li = clamp(lid - incl * 0.3), lo = clamp(lid + incl * 0.3);
+    const c1 = lerp(ey - h * 1.35, ey + h * 0.9, li), c2 = lerp(ey - h * 1.3, ey + h * 0.9, lo);
+    const palpebra = `M ${f1(xin)} ${yin} C ${f1(ex - d * w * 0.45)} ${f1(c1)} ${f1(ex + d * w * 0.5)} ${f1(c2)} ${f1(xout)} ${yout}`;
+    const cid = `${id}o${d}`;
+    g += `<clipPath id="${cid}"><path d="${cima} ${baixo} Z"/></clipPath><path d="${cima} ${baixo} Z" fill="#FBF6EE"/>`;
+    const ix = ex + lx * 8 * sx, iy = ey + ly * 4 + 1, ir = 10, cor = o.olho || '#6B4226';
+    g += `<g clip-path="url(#${cid})"><circle cx="${f1(ix)}" cy="${f1(iy)}" r="${ir}" fill="${cor}"/><circle cx="${f1(ix)}" cy="${f1(iy)}" r="${ir - 1}" fill="none" stroke="${shade(cor, 0.5)}" stroke-width="2"/>`;
+    g += `<circle cx="${f1(ix)}" cy="${f1(iy)}" r="5" fill="#120A06"/><circle cx="${f1(ix - 2.8)}" cy="${f1(iy - 3.2)}" r="2.7" fill="#fff"/><circle cx="${f1(ix + 3)}" cy="${f1(iy + 3)}" r="1.1" fill="#fff"/>`;
+    if (lid > 0.02) g += `<path d="${palpebra} L ${f1(xout + d * 6)} ${f1(ey - h * 2.2)} L ${f1(xin - d * 6)} ${f1(ey - h * 2.2)} Z" fill="${shade(pele, 0.93)}"/>`;
+    g += `<path d="${palpebra}" fill="none" stroke="#3A2A40" stroke-width="7" opacity="0.15"/></g>`;
+    g += `<path d="M ${f1(xout)} ${yout} ${baixo}" fill="none" ${tk(2.2)} opacity="${lid > 0.93 ? 0 : 0.55}"/>`;
+    g += `<path d="${palpebra}" fill="none" ${tk(lid > 0.93 ? 4 : 4.6)}/>`;
+    if (lid < 0.93) {
+      g += `<path d="M ${f1(xout)} ${yout} l ${d * 6} -4" fill="none" ${tk(3.2)}/>`;
+      if (o.cilios) g += `<path d="M ${f1(xout - d * 3)} ${yout - 2} l ${d * 8} -8 M ${f1(xout - d * 9)} ${yout - 5} l ${d * 5} -9" fill="none" ${tk(3)}/>`;
+      if (lid < 0.5) g += `<path d="M ${f1(ex - d * w * 0.55)} ${f1(ey - h * 1.55)} Q ${f1(ex + d * w * 0.1)} ${f1(ey - h * 2)} ${f1(ex + d * w * 0.95)} ${f1(ey - h * 1.45)}" fill="none" ${tk(2.2)} opacity="0.45"/>`;
+    }
+    // sobrancelha cheia: grossa por dentro, fina por fora
+    let [bi, bo, ba] = SOB_LONGA[hm] || SOB_LONGA.neutro;
+    if (hm === 'deboche' && d > 0) [bi, bo, ba] = [-43, -50, -6];
+    const dy = cap ? 6 : 0, xi = d * 12 + fx, xo = d * (12 + 48 * sx) + fx, yi = bi + dy, yo2 = bo + dy, ym = Math.min(yi, yo2) + ba;
+    g += `<path d="M ${f1(xi)} ${yi - 5} Q ${f1((xi + xo) / 2)} ${ym - 4} ${f1(xo)} ${yo2} Q ${f1((xi + xo) / 2)} ${ym + 3} ${f1(xi)} ${yi + 4} Z" fill="${shade(corBarba, 0.85)}" ${tk(2)}/>`;
+  });
+  if (o.lagrimas) [-1, 1].forEach((d) => (g += `<path d="M ${d * 38 + fx} 6 c -5 9 -5 14 0 15 c 5 -1 5 -6 0 -15 Z" fill="#A9D8FF" ${tk(2)}/>`));
+  // nariz: a ponte é só uma sombra leve; a ponta e as narinas, desenhadas
+  const nx = fx + turn * 4;
+  g += `<path d="M ${f1(nx - L * 5)} 6 C ${f1(nx - L * 7)} 12 ${f1(nx - L * 8)} 17 ${f1(nx - L * 9)} 23" fill="none" ${tk(2.4)} opacity="0.3"/>`;
+  g += `<path d="M ${f1(nx - 13)} 24 C ${f1(nx - 16)} 32 ${f1(nx - 9)} 36 ${f1(nx - 4)} 33 C ${f1(nx - 1)} 37 ${f1(nx + 5)} 37 ${f1(nx + 8)} 33 C ${f1(nx + 13)} 36 ${f1(nx + 17)} 31 ${f1(nx + 13)} 24" fill="none" ${tk(3.2)}/>`;
+  g += `<ellipse cx="${f1(nx - L * 5)}" cy="40" rx="11" ry="3.5" fill="${peleDk}" opacity="0.45"/>`;
+  // boca com lábios
+  const my = 60, lab = shade(pele, 0.78);
+  if (ab < 0.08) {
+    const forma = {
+      neutro: 'M -18 0 Q -9 -3 -3 -1 Q 0 -2 3 -1 Q 9 -3 18 0', sereno: 'M -18 -2 Q -9 2 -2 1 Q 0 0 2 1 Q 9 2 18 -2',
+      triste: 'M -18 4 Q -9 -2 0 -1 Q 9 -2 18 4', dor: 'M -18 4 Q -6 -3 2 0 Q 10 1 18 5', choro: 'M -18 4 Q -9 -2 0 -1 Q 9 -2 18 4',
+      raiva: 'M -18 3 Q 0 -4 18 3', deboche: 'M -18 2 Q -4 3 6 0 Q 14 -2 21 -7', firme: 'M -17 0 Q 0 -1 17 0',
+    }[hm] || 'M -18 0 Q 0 -2 18 0';
+    g += `<g transform="translate(${f1(fx)} ${my})"><path d="M -10 3 Q 0 13 10 3 Q 0 7 -10 3 Z" fill="${lab}" opacity="0.6"/><path d="${forma}" fill="none" ${tk(3.8)}/><path d="M -8 10 Q 0 13 8 10" fill="none" ${tk(2.2)} opacity="0.4"/></g>`;
+  } else {
+    const w = 17 - ab * 2, h = 4 + ab * 19, mid = `${id}m`;
+    const d = `M ${-w} 0 Q ${-w * 0.5} ${-h * 0.2} 0 ${-h * 0.08} Q ${w * 0.5} ${-h * 0.2} ${w} 0 Q ${w * 0.9} ${h * 1.05} 0 ${h * 1.12} Q ${-w * 0.9} ${h * 1.05} ${-w} 0 Z`;
+    g += `<g transform="translate(${f1(fx)} ${my - 3})"><clipPath id="${mid}"><path d="${d}"/></clipPath><path d="${d}" fill="#3E1212"/>`;
+    g += `<g clip-path="url(#${mid})"><ellipse cx="0" cy="${f1(h * 1.1)}" rx="${f1(w * 0.62)}" ry="${f1(h * 0.42)}" fill="#C9564E"/>`;
+    if (ab > 0.3) g += `<rect x="${-w}" y="${f1(-h * 0.3)}" width="${w * 2}" height="${f1(Math.min(5, h * 0.28) + h * 0.2)}" fill="#FBF6EC"/>`;
+    g += `</g><path d="${d}" fill="none" ${tk(3.5)}/><path d="M ${f1(-w * 0.55)} ${f1(h * 1.32)} Q 0 ${f1(h * 1.48)} ${f1(w * 0.55)} ${f1(h * 1.32)}" fill="none" ${tk(2.2)} opacity="0.4"/></g>`;
+  }
+  if (barba && barba !== 'rala') g += `<path d="M -26 49 C -17 40 -6 42 0 46 C 6 42 17 40 26 49 C 30 54 22 56 14 52 C 8 50 4 50 0 52 C -4 50 -8 50 -14 52 C -22 56 -30 54 -26 49 Z" transform="translate(${f1(fx)} 0)" fill="${corBarba}" ${tk(3.5)}/>`;
+  return g;
+}
+
+// Estilo 'livro' (livro ilustrado, o mais perto do traço que o canal já usa): olho em ponto preto com brilho,
+// sobrancelha curta, nariz em gancho e boca de uma linha. Pouca coisa, para a emoção vir da sobrancelha e da boca.
+function rostoLivro(o, c) {
+  const { id, corBarba, cap, fx, turn, lx, ly, pisca, barba, hum } = c;
+  const hm = o.humor || 'neutro', [palp, incl] = hum;
+  let ab = c.ab;
+  if ((hm === 'espanto' || hm === 'medo') && ab < 0.3) ab = 0.3;
+  let g = '';
+  [-1, 1].forEach((d) => {
+    const longe = Math.max(0, d * turn), sx = 1 - longe * 0.2;
+    const ex = d * 30 + fx + lx * 4, ey = -6 + ly * 3, rx = 8 * sx, ry = hm === 'espanto' ? 13 : 11;
+    const pl = PALP_LIVRO[hm] || 0, lid = Math.min(1, pl + pisca * (1 - pl));
+    if (lid > 0.9) g += `<path d="M ${f1(ex - 10)} ${ey} Q ${f1(ex)} ${ey + 6} ${f1(ex + 10)} ${ey}" fill="none" ${tk(4.5)}/>`;
+    else {
+      const cid = `${id}p${d}`, cut = ey - ry + 2 * ry * lid * 0.9, inc = incl * 6 * d;
+      g += `<clipPath id="${cid}"><path d="M ${f1(ex - 20)} ${f1(cut - inc)} L ${f1(ex + 20)} ${f1(cut + inc)} L ${f1(ex + 20)} ${ey + 30} L ${f1(ex - 20)} ${ey + 30} Z"/></clipPath>`;
+      g += `<g clip-path="url(#${cid})"><ellipse cx="${f1(ex)}" cy="${f1(ey)}" rx="${f1(rx)}" ry="${ry}" fill="#1A120C"/><circle cx="${f1(ex - 2.5)}" cy="${f1(ey - 4)}" r="2.8" fill="#fff"/></g>`;
+      if (lid > 0.15) g += `<path d="M ${f1(ex - 11)} ${f1(cut - inc)} L ${f1(ex + 11)} ${f1(cut + inc)}" fill="none" ${tk(3.5)}/>`;
+      if (o.cilios) g += `<path d="M ${f1(ex + d * 8)} ${f1(ey - 6)} l ${d * 7} -5" fill="none" ${tk(3)}/>`;
+    }
+    let [bi, bo, ba] = (SOB_LONGA[hm] || SOB_LONGA.neutro).map((v, k) => (k < 2 ? v - 4 : v));
+    if (hm === 'deboche' && d > 0) [bi, bo, ba] = [-46, -52, -6];
+    const dy = cap ? 6 : 0, xi = d * 18 + fx, xo = d * 44 + fx;
+    g += `<path d="M ${f1(xi)} ${bi + dy} Q ${f1((xi + xo) / 2)} ${Math.min(bi, bo) + ba + dy} ${f1(xo)} ${bo + dy}" fill="none" ${tk(5, shade(corBarba, 0.85))}/>`;
+  });
+  [-1, 1].forEach((d) => (g += `<ellipse cx="${d * 50 + fx}" cy="26" rx="15" ry="9" fill="#E9806A" opacity="0.4"/>`));
+  if (o.lagrimas) [-1, 1].forEach((d) => (g += `<path d="M ${d * 34 + fx} 12 c -5 9 -5 14 0 15 c 5 -1 5 -6 0 -15 Z" fill="#A9D8FF" ${tk(2)}/>`));
+  g += `<path d="M ${f1(fx + 2)} 12 Q ${f1(fx - 10)} 26 ${f1(fx + 4)} 30" fill="none" ${tk(3.5)}/>`;
+  const my = 54;
+  if (ab < 0.08) {
+    const forma = { sereno: 'M -12 -1 Q 0 5 12 -1', triste: 'M -12 4 Q 0 -3 12 4', choro: 'M -12 4 Q 0 -3 12 4', dor: 'M -12 4 Q 0 -2 12 4',
+      raiva: 'M -13 3 Q 0 -3 13 3', deboche: 'M -12 2 Q 2 4 15 -5', firme: 'M -11 0 L 11 0' }[hm] || 'M -12 0 Q 0 3 12 0';
+    g += `<path d="${forma}" transform="translate(${f1(fx)} ${my})" fill="none" ${tk(4)}/>`;
+  } else {
+    const w = 11, h = 3 + ab * 14;
+    g += `<path d="M ${f1(fx - w)} ${my - 2} Q ${f1(fx)} ${my - 4} ${f1(fx + w)} ${my - 2} Q ${f1(fx + w * 0.8)} ${f1(my + h)} ${f1(fx)} ${f1(my + h)} Q ${f1(fx - w * 0.8)} ${f1(my + h)} ${f1(fx - w)} ${my - 2} Z" fill="#3E1212" ${tk(3.5)}/>`;
+  }
+  if (barba && barba !== 'rala') g += `<path d="M -22 45 C -14 38 -5 40 0 43 C 5 40 14 38 22 45 C 25 50 18 51 12 48 C 6 46 3 46 0 48 C -3 46 -6 46 -12 48 C -18 51 -25 50 -22 45 Z" transform="translate(${f1(fx)} 0)" fill="${corBarba}" ${tk(3.5)}/>`;
+  return g;
+}
+
+// Estilo do rosto: 'atual', 'longa' ou 'livro'. A URL pode trocar (?rosto=longa), para comparar.
+const ROSTOS = { atual: rostoAtual, longa: rostoLonga, livro: rostoLivro };
+const ROSTO = new URLSearchParams(location.search).get('rosto') || 'longa'; // 'longa' desde a revisão de 13/11 (o 'atual' ficou com cara de sono)
 
 // ---------- corpo inteiro ----------
 
