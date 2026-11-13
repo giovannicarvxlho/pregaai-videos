@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #1C1A18; }
+#wrap { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.txt {
+  position: absolute; left: 0; right: 0; top: 340px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.t1 {
+  font: 400 88px/1 'Gasoek One'; color: #FFFFFF;
+  -webkit-text-stroke: 11px #181614; paint-order: stroke fill;
+  text-shadow: 0 11px 0 #181614; white-space: nowrap;
+}
+.t2 {
+  margin-top: 20px; padding: 6px 40px 22px;
+  background: #2383E2; border: 8px solid #181614; border-radius: 34px;
+  box-shadow: 0 14px 0 0 #181614;
+  font: 400 94px/1 'Gasoek One'; color: #FFFFFF;
+  white-space: nowrap; transform: rotate(-3deg);
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <svg id="art" viewBox="0 0 1080 1920" width="1080" height="1920" style="position:absolute;inset:0"></svg>
+  <div class="txt">
+    <div class="t1">UMA COISA</div>
+    <div class="t2">EU SEI</div>
+  </div>
+</div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="scenes.js"></script>
+<script>
+const bg = `
+  ${DEFS}
+  <rect width="1080" height="1920" fill="#1E1B18"/>
+  <circle cx="540" cy="1080" r="560" fill="url(#gAmber)" opacity="0.5"/>
+  <rect width="1080" height="1920" fill="url(#gVig)"/>
+`;
+const hero = person({ ...CEGO, x: 540, y: 1720, s: 3.1, mood: 'happy', look: 0, armL: 28, armR: 28, rim: C.a300 });
+document.getElementById('art').innerHTML = bg + hero;
+</script>
+</body>
+</html>
