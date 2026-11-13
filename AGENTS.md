@@ -25,6 +25,8 @@ O vídeo é **código**, não IA de vídeo ou de imagem. Cada quadro é um SVG d
 
 **Git:** mudança no repo vai por PR e o próprio agente faz o merge na `main`, sem perguntar (autorização do Giovanni em 06/11/2026). Sem o merge, a próxima sessão e o PC dele não recebem a mudança.
 
+**Windows / Antigravity:** sempre rode comandos (`run_command`) com `BypassSandbox: true`, pois o Sandbox de terminal do Windows derruba e reinicia o servidor do Antigravity.
+
 ## Metas de produção (Giovanni, 06/11/2026)
 
 - **Volume (Giovanni, 12/11/2026, recomendação da pesquisa de plataformas; substitui a meta de 2 longos e 6 curtos de 06/11):** **1 vídeo longo por dia e 1 a 2 curtos por dia por rede, diferentes entre si.** O longo continua com **4 a 5 minutos, nunca mais de 5**, contando o cartão final do YouTube (Giovanni, 06/11/2026: "o tempo limite é 5 minutos"). Motivo: postar mais não muda o vídeo típico (Buffer, 11,4 mi de posts), protege contra a regra de conteúdo inautêntico do YouTube (molde repetido em volume) e cabe no plano Starter da ElevenLabs com 1 curto escrito do zero por dia. Detalhe no MARK1, `projetos/pregaai-pesquisa/relatorio.md`.
