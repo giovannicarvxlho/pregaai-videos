@@ -1,0 +1,42 @@
+# Falas do desenho, na ordem. Uma fala por linha: PERSONAGEM: texto (o texto é o que a voz lê e a legenda mostra).
+# [pausa N] acrescenta N segundos de silêncio (ação sem fala); entre duas falas já há 0,35 s. [gancho TEXTO]: texto do 1º quadro.
+# As vozes de cada personagem ficam em vozes.json. Gerado por: python3 tools/dialogo.py episodios/sete-frases-desenho
+
+[gancho NENHUM EVANGELHO TEM *AS 7*]
+[pausa 1.0]
+JESUS: Pai, perdoa-lhes, pois não sabem o que estão fazendo.
+[pausa 0.8]
+SOLDADO1: Não a rasguemos.
+SOLDADO2: Vamos decidir por sorteio quem ficará com ela.
+[pausa 1.2]
+PASSANTE: Desça da cruz, se é Filho de Deus!
+SACERDOTE: Salvou os outros, mas não é capaz de salvar a si mesmo!
+SOLDADO1: Se você é o rei dos judeus, salve-se a si mesmo.
+[pausa 0.6]
+CRIMINOSO1: Você não é o Cristo? Salve-se a si mesmo e a nós!
+CRIMINOSO2: Você não teme a Deus, nem estando sob a mesma sentença?
+CRIMINOSO2: Nós estamos sendo punidos com justiça, porque estamos recebendo o que os nossos atos merecem.
+CRIMINOSO2: Mas este homem não cometeu nenhum mal.
+[pausa 0.6]
+CRIMINOSO2: Jesus, lembra-te de mim quando entrares no teu Reino.
+[pausa 0.4]
+JESUS: Eu lhe garanto: Hoje você estará comigo no paraíso.
+[pausa 1.0]
+JESUS: Aí está o seu filho.
+[pausa 0.4]
+JESUS: Aí está a sua mãe.
+[pausa 3.0]
+JESUS_FORTE: Eloí, Eloí, lamá sabactâni?
+[pausa 0.6]
+HOMEM1: Ouçam! Ele está chamando Elias.
+[pausa 0.8]
+JESUS: Tenho sede.
+[pausa 2.4]
+HOMEM2: Deixem-no. Vejamos se Elias vem salvá-lo.
+[pausa 1.0]
+JESUS: Está consumado!
+[pausa 0.8]
+JESUS_ALTO: Pai, nas tuas mãos entrego o meu espírito.
+[pausa 6.0]
+CENTURIAO: Verdadeiramente este era o Filho de Deus!
+[pausa 8.0]
