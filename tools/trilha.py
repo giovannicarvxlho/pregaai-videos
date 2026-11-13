@@ -4,6 +4,7 @@
 #   python3 tools/trilha.py <video.mp4> <saida.mp4> --roteiro episodios/<ep>/trilha.json   (segue o roteiro)
 #   python3 tools/trilha.py <video.mp4> <saida.mp4>                                        (pad constante)
 #   --nivel -3   (ganho final em dB; padrão 0)
+#   --so-fundo   (sai só a trilha, sem a voz, ainda abaixando onde a voz fala: para medir o nível)
 #
 # Com --roteiro, a trilha acompanha a história (pedido do Giovanni em 2026-11-13: "momentos emocionantes,
 # impactantes, gostaria que a trilha sonora respeitasse isso"). O trilha.json do episódio diz, por frase do
@@ -16,8 +17,9 @@
 #
 # Dois instrumentos sintetizados: cordas (um pad de notas levemente desafinadas) e um piano (notas com ataque e
 # queda, em arpejo). Tudo na região média, porque alto-falante de celular quase não toca grave (a 1ª versão,
-# uma oitava abaixo, sumia no celular). As cordas e o piano abaixam quando a voz fala (sidechain); os impactos
-# não, para marcarem o momento. O vídeo não é recodificado: só o áudio sai de novo.
+# uma oitava abaixo, sumia no celular). Por baixo, o som do lugar (vento, multidão, noite, pássaros) e
+# efeitos na palavra certa (o rolo, os dados, o tecido rasgando, o trovão, o coração, a pedra): ver "ambiente e
+# efeitos" abaixo. Música e ambiente abaixam quando a voz fala (sidechain); impactos e efeitos não, para marcarem o momento. O vídeo não é recodificado: só o áudio sai de novo.
 import json, os, re, subprocess, sys, tempfile, wave
 import numpy as np
 
@@ -137,6 +139,127 @@ def faixas(seg, roteiro, fr):
     return musica, golpes
 
 
+# ---------------------------------------------------------------- ambiente e efeitos (sons do lugar, sem música)
+# Tudo sintetizado de ruído filtrado e senoides, sem amostra de terceiros. No trilha.json:
+#   "ambientes": [{"de": 8, "ate": 17, "tipo": "vento", "ganho": 0.8}, ...]   (frases; entra e sai em 2 s)
+#   "efeitos":   [{"frase": 26, "palavra": "sorteio", "tipo": "dados"}, ...]
+#   "ambiente_volume" e "efeitos_volume": em relação ao pad constante, como o "volume" da música.
+def ruido(n, lo, hi, semente):
+    x = np.fft.rfft(np.random.default_rng(semente).standard_normal(n))
+    f = np.fft.rfftfreq(n, 1 / SR)
+    borda = lambda a, b: np.clip((f - a) / max(1, b - a), 0, 1)
+    x *= borda(lo * 0.7, lo) * (1 - borda(hi, hi * 1.4))
+    y = np.fft.irfft(x, n)
+    return y / (np.sqrt(np.mean(y ** 2)) or 1)
+
+
+def lento(n, hz, semente):  # modulação suave entre 0 e 1
+    k = max(2, int(n / SR * hz) + 2)
+    v = np.random.default_rng(semente).random(k)
+    return np.interp(np.arange(n), np.linspace(0, n, k), v)
+
+
+def ambiente(tipo, n, semente):
+    vento = lambda s: ruido(n, 150, 1000, s) * (0.35 + 0.65 * lento(n, 0.15, s + 1)) \
+        + 0.5 * ruido(n, 400, 2000, s + 2) * lento(n, 0.08, s + 3) ** 3
+    if tipo == 'vento':
+        return vento(semente)
+    if tipo == 'noite':  # vento baixo e escuro, com um ronco grave
+        return 0.5 * vento(semente) + ruido(n, 80, 400, semente + 4) * (0.6 + 0.4 * lento(n, 0.1, semente + 5))
+    if tipo == 'interior':
+        return 0.4 * ruido(n, 100, 400, semente)
+    if tipo == 'multidao':  # vozes indistintas: ruído na faixa da voz, ligando e desligando como sílabas
+        out = np.zeros(n)
+        for v in range(6):
+            r = np.random.default_rng(semente + 10 + v)
+            passo = int(0.22 * SR)
+            porta = np.repeat(r.random(n // passo + 1) > 0.45, passo)[:n].astype(float)
+            porta = np.convolve(porta, np.ones(int(0.04 * SR)) / int(0.04 * SR), 'same')
+            out += ruido(n, 300, 1200, semente + 20 + v) * porta * (0.5 + 0.5 * lento(n, 0.2, semente + 30 + v))
+        return out / 3
+    if tipo == 'amanhecer':  # brisa e pássaros
+        out = 0.3 * vento(semente)
+        r = np.random.default_rng(semente + 40)
+        t0 = r.uniform(0.5, 2.0)
+        while t0 < n / SR - 1:
+            for q in range(r.integers(2, 5)):
+                f0, f1, d = r.uniform(2800, 3600), r.uniform(3800, 4800), r.uniform(0.07, 0.13)
+                t = np.arange(int(d * SR)) / SR
+                pio = np.sin(2 * np.pi * np.cumsum(np.linspace(f0, f1, len(t))) / SR) * np.sin(np.pi * t / d) * 2.5
+                i0 = int((t0 + q * 0.16) * SR)
+                out[i0:i0 + len(pio)] += pio[:max(0, n - i0)]
+            t0 += r.uniform(0.9, 2.8)
+        return out
+    raise ValueError(f'ambiente desconhecido: {tipo}')
+
+
+def efeito(tipo, semente=3):
+    r = np.random.default_rng(semente)
+    def dur(s):
+        return np.arange(int(s * SR)) / SR
+    if tipo == 'papel':  # rolo desenrolando: chiado agudo com estalos
+        t = dur(1.2)
+        estalos = np.convolve((r.random(len(t)) > 0.996).astype(float), np.ones(240) / 240, 'same') * 30
+        return ruido(len(t), 2000, 7000, semente) * (0.3 + estalos) * np.sin(np.pi * t / t[-1]) * 0.6
+    if tipo == 'dados':  # dois dados quicando
+        t = dur(1.0)
+        out = np.zeros(len(t))
+        for k, (ini, a) in enumerate(((0.0, 1.0), (0.18, 0.8), (0.32, 0.6), (0.43, 0.45), (0.51, 0.3), (0.56, 0.2))):
+            c = dur(0.05)
+            clique = ruido(len(c), 2000, 6000, semente + k) * np.exp(-c / 0.008) + 0.5 * np.sin(2 * np.pi * 3100 * c) * np.exp(-c / 0.01)
+            i0 = int(ini * SR)
+            out[i0:i0 + len(c)] += a * clique
+        return out
+    if tipo == 'rasgo':  # tecido rasgando: ruído em grãos, crescendo e cortando seco
+        t = dur(1.4)
+        grao = np.repeat(r.random(len(t) // int(SR / 90) + 2) > 0.35, int(SR / 90)).astype(float)[:len(t)]
+        grao = np.convolve(grao, np.ones(96) / 96, 'same')[:len(t)]
+        env = np.minimum(1, t / 0.25) * np.where(t > 1.33, np.exp(-(t - 1.33) / 0.02), 1)
+        return ruido(len(t), 800, 6000, semente) * grao * env
+    if tipo == 'trovao':  # estrondo grave que rola e some
+        t = dur(4.5)
+        return (ruido(len(t), 40, 500, semente) * np.exp(-t / 1.6) * (0.7 + 0.3 * lento(len(t), 6, semente))
+                + 0.8 * ruido(len(t), 200, 3000, semente + 1) * np.exp(-t / 0.15)) * 1.2
+    if tipo == 'coracao':  # duas batidas (tum-tum), com grave e um pouco de médio para o celular
+        t = dur(1.8)
+        out = np.zeros(len(t))
+        for ini, a in ((0.0, 1.0), (0.28, 0.7), (0.9, 0.9), (1.18, 0.6)):
+            b = dur(0.25)
+            batida = (np.sin(2 * np.pi * 60 * b) + 0.6 * np.sin(2 * np.pi * 120 * b) + 0.4 * np.sin(2 * np.pi * 220 * b)) * np.exp(-b / 0.09) * np.minimum(1, b / 0.004)
+            i0 = int(ini * SR)
+            out[i0:i0 + len(b)] += a * batida
+        return out
+    if tipo == 'pedra':  # pedra grande rolando
+        t = dur(2.3)
+        env = np.minimum(1, t / 0.3) * np.minimum(1, (t[-1] - t) / 0.6)
+        return (ruido(len(t), 80, 700, semente) * (0.6 + 0.4 * np.sin(2 * np.pi * 11 * t) ** 2)
+                + 0.15 * ruido(len(t), 1000, 4000, semente + 1) * (r.random(len(t)) > 0.7)) * env
+    raise ValueError(f'efeito desconhecido: {tipo}')
+
+
+def sons(seg, roteiro, fr):
+    n = int(seg * SR)
+    amb, efs = np.zeros(n), np.zeros(n)
+    fim_de = lambda i: fr[i][0] if i < len(fr) else seg
+    for k, x in enumerate(roteiro.get('ambientes', [])):
+        a, b = int(quando(fr, x['de']) * SR), min(n, int(fim_de(x['ate']) * SR))
+        if b <= a:
+            continue
+        s = ambiente(x['tipo'], b - a, 100 + 7 * k)
+        r = min(int(2 * SR), (b - a) // 2)
+        env = np.ones(b - a)
+        env[:r] = np.linspace(0, 1, r)
+        env[-r:] = np.linspace(1, 0, r)
+        amb[a:b] += s * env * x.get('ganho', 1.0)
+    for k, x in enumerate(roteiro.get('efeitos', [])):
+        i0 = int((quando(fr, x['frase'], x.get('palavra')) + x.get('atraso', 0)) * SR)
+        s = efeito(x['tipo'], 200 + k)
+        s = s / (np.max(np.abs(s)) or 1) * x.get('ganho', 1.0)
+        m = max(0, min(len(s), n - i0))
+        efs[i0:i0 + m] += s[:m]
+    return amb, efs
+
+
 def grava(arq, x):
     with wave.open(arq, 'wb') as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
@@ -161,16 +284,23 @@ def main():
     escala = 0.9 / np.max(np.abs(referencia))  # o pad constante sai com pico de 0,9
     musica *= escala * roteiro.get('volume', 1.0) * rms(referencia) / rms(musica)
     golpes *= escala * rms(referencia) * 1.4
+    amb, efs = sons(seg + 3, roteiro, fr)
+    amb *= escala * rms(referencia) * roteiro.get('ambiente_volume', 0.0)
+    efs *= escala * rms(referencia) * 1.4 * roteiro.get('efeitos_volume', 0.0)
     with tempfile.TemporaryDirectory() as tmp:
-        wm, wg = os.path.join(tmp, 'musica.wav'), os.path.join(tmp, 'golpes.wav')
-        grava(wm, musica); grava(wg, golpes)
+        wm, wg, wa, we = (os.path.join(tmp, f'{x}.wav') for x in ('musica', 'golpes', 'ambiente', 'efeitos'))
+        grava(wm, musica); grava(wg, golpes); grava(wa, amb); grava(we, efs)
         cauda = f'afade=t=in:st=0:d=3,afade=t=out:st={max(0, seg - 6):.2f}:d=6,atrim=0:{seg:.3f}'
         filtro = (f'[1:a]lowpass=f=3500,aecho=0.8:0.6:70|140:0.25|0.15,volume={nivel}dB,{cauda}[m];'
                   f'[2:a]lowpass=f=5000,aecho=0.8:0.5:90|180:0.3|0.2,volume={nivel}dB,{cauda}[g];'
+                  f'[3:a]lowpass=f=8000,volume={nivel}dB,{cauda}[am];'
+                  f'[4:a]aecho=0.8:0.4:60:0.2,volume={nivel}dB,{cauda}[ef];'
+                  '[m][am]amix=inputs=2:normalize=0[fundo];'
                   '[0:a]asplit=2[voz][chave];'
-                  '[m][chave]sidechaincompress=threshold=0.05:ratio=1.5:attack=60:release=800[mb];'
-                  '[voz][mb][g]amix=inputs=3:duration=first:normalize=0,alimiter=limit=0.9:level=disabled[a]')
-        subprocess.check_call(['ffmpeg', '-v', 'error', '-y', '-i', entrada, '-i', wm, '-i', wg,
+                  '[fundo][chave]sidechaincompress=threshold=0.05:ratio=1.5:attack=60:release=800[mb];'
+                  + ('[voz]anullsink;[mb][g][ef]amix=inputs=3:normalize=0[a]' if '--so-fundo' in args else  # para medir
+                     '[voz][mb][g][ef]amix=inputs=4:duration=first:normalize=0,alimiter=limit=0.9:level=disabled[a]'))
+        subprocess.check_call(['ffmpeg', '-v', 'error', '-y', '-i', entrada, '-i', wm, '-i', wg, '-i', wa, '-i', we,
                                '-filter_complex', filtro, '-map', '0:v', '-map', '[a]', '-c:v', 'copy',
                                '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', saida])
     print(f'{saida}: trilha {"pelo roteiro" if rot_arq else "constante"}, {nivel:g} dB, {seg:.1f} s')

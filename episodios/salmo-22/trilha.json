@@ -1,5 +1,5 @@
 {
-  "volume": 0.49,
+  "volume": 0.245,
   "secoes": [
     {
       "frase": 0,
@@ -97,19 +97,115 @@
       "frase": 29,
       "palavra": "rasgou",
       "tipo": "escuro",
-      "ganho": 0.7
+      "ganho": 0.35
     },
     {
       "frase": 30,
       "palavra": "grito",
       "tipo": "escuro",
-      "ganho": 0.7
+      "ganho": 0.35
     },
     {
       "frase": 50,
       "palavra": "vazio",
       "tipo": "luz",
+      "ganho": 0.35
+    }
+  ],
+  "ambiente_volume": 0.25,
+  "efeitos_volume": 0.5,
+  "ambientes": [
+    {
+      "de": 0,
+      "ate": 8,
+      "tipo": "noite",
+      "ganho": 0.5
+    },
+    {
+      "de": 8,
+      "ate": 17,
+      "tipo": "vento",
+      "ganho": 0.8
+    },
+    {
+      "de": 9,
+      "ate": 17,
+      "tipo": "multidao",
+      "ganho": 0.6
+    },
+    {
+      "de": 17,
+      "ate": 21,
+      "tipo": "interior",
+      "ganho": 0.6
+    },
+    {
+      "de": 21,
+      "ate": 30,
+      "tipo": "vento",
+      "ganho": 0.8
+    },
+    {
+      "de": 30,
+      "ate": 39,
+      "tipo": "noite",
+      "ganho": 0.9
+    },
+    {
+      "de": 49,
+      "ate": 51,
+      "tipo": "amanhecer",
+      "ganho": 0.9
+    },
+    {
+      "de": 54,
+      "ate": 55,
+      "tipo": "interior",
+      "ganho": 0.5
+    }
+  ],
+  "efeitos": [
+    {
+      "frase": 2,
+      "palavra": "escrita",
+      "tipo": "papel",
       "ganho": 0.7
+    },
+    {
+      "frase": 26,
+      "palavra": "sorteio",
+      "tipo": "dados",
+      "ganho": 0.8
+    },
+    {
+      "frase": 29,
+      "palavra": "rasgou",
+      "tipo": "rasgo",
+      "ganho": 0.8
+    },
+    {
+      "frase": 30,
+      "palavra": "grito",
+      "tipo": "trovao",
+      "ganho": 0.8
+    },
+    {
+      "frase": 31,
+      "palavra": "abandonou",
+      "tipo": "coracao",
+      "ganho": 0.6
+    },
+    {
+      "frase": 50,
+      "palavra": "túmulo",
+      "tipo": "pedra",
+      "ganho": 0.6
+    },
+    {
+      "frase": 51,
+      "palavra": "abandonou",
+      "tipo": "coracao",
+      "ganho": 0.45
     }
   ]
 }
