@@ -40,6 +40,24 @@ HUMORES = {
     'terno':     ([F, Bb, F, C], 8.0, 0.35, 0.9, 1.5, 0.08),
     'luz':       ([D, G, D, A], 6.0, 1.0, 1.0, 0.75, 0.18),
 }
+HUMORES.update({
+    # pedido do Giovanni em 2026-11-13: "no começo iremos gerar curiosidade, então trilha de suspense; parte final
+    # emoção, logo trilha emocional". Sem piano: a melodia é de cordas.
+    'suspense':      ([Dm, Bb, Dm, A], 8.0, 0.7, 0.0, 0.0, 0.02),
+    'tensao':        ([Dm, Bb, Gm, A], 6.0, 0.9, 0.0, 0.0, 0.04),
+    'emocao':        ([F, C, Dm, Bb], 7.0, 1.0, 0.0, 0.0, 0.10),
+    'emocao_menor':  ([Dm, Bb, F, A], 8.0, 1.0, 0.0, 0.0, 0.06),
+})
+# o que cada humor tem além do pad: pulso (batidas por minuto, volume), melodia de cordas (volume) e um par de
+# notas agudas a meio tom de distância, bem baixo, que dá a sensação de suspense (volume)
+EXTRAS = {
+    'suspense':     {'pulso': (84, 0.55), 'agudo': 0.06},
+    'tensao':       {'pulso': (104, 0.75), 'agudo': 0.08},
+    'emocao':       {'melodia': 0.6},
+    'emocao_menor': {'melodia': 0.5},
+    'terno':        {'melodia': 0.35},
+    'luz':          {'melodia': 0.6},
+}
 CONSTANTE = [{'frase': 0, 'humor': 'pad', 'ganho': 1.0}]
 
 
@@ -84,6 +102,20 @@ def piano(f, amp):
     return amp * s * np.minimum(1, t / 0.005)
 
 
+def staccato(f, amp):  # corda tocada curta, para o pulso do suspense
+    t = np.arange(int(0.35 * SR)) / SR
+    s = np.sin(2 * np.pi * f * t) + 0.6 * np.sin(2 * np.pi * f * 1.002 * t + 1.1) + 0.3 * np.sin(2 * np.pi * 2 * f * t)
+    return amp * s / 1.9 * np.minimum(1, t / 0.006) * np.exp(-t / 0.13)
+
+
+def violino(f, dur, amp):  # nota longa de cordas com vibrato, para a melodia da emoção
+    t = np.arange(int(dur * SR)) / SR
+    fase = 2 * np.pi * np.cumsum(f * (1 + 0.003 * np.sin(2 * np.pi * 5.5 * t))) / SR
+    s = np.sin(fase) + 0.3 * np.sin(2 * fase) + 0.15 * np.sin(3 * fase)
+    env = np.minimum(1, t / 0.45) * np.minimum(1, (t[-1] - t) / 0.6 + 0.001)
+    return amp * s / 1.45 * env
+
+
 def impacto(tipo):
     t = np.arange(int(5.0 * SR)) / SR
     if tipo == 'luz':  # acorde de ré maior em sino, com ataque suave
@@ -125,6 +157,23 @@ def faixas(seg, roteiro, fr):
                 for q, ti in enumerate(np.arange(0, dur, p_passo)):
                     nt = piano(seq[q % len(seq)], 0.22 * p_amp)
                     i0 = int(ti * SR)
+                    m = min(len(nt), janela - i0)
+                    bloco[i0:i0 + m] += nt[:m]
+            ex = EXTRAS.get(x['humor'], {})
+            if 'pulso' in ex:  # colcheias alternando o baixo e a quinta do acorde
+                bpm, amp = ex['pulso']
+                for q, ti in enumerate(np.arange(0, dur, 30.0 / bpm)):
+                    nt = staccato(baixo if q % 2 == 0 else notas[2], 0.5 * amp * (1.0 if q % 4 == 0 else 0.7))
+                    i0 = int(ti * SR)
+                    m = min(len(nt), janela - i0)
+                    bloco[i0:i0 + m] += nt[:m]
+            if 'agudo' in ex:  # ré e mi bemol agudos, batendo entre si
+                bloco += ex['agudo'] * (np.sin(2 * np.pi * 1174.66 * t) + np.sin(2 * np.pi * 1244.51 * t)) / 2
+            if 'melodia' in ex:  # duas notas longas por acorde: a de cima do acorde e a do meio, uma oitava acima
+                meio = dur / 2
+                for q, nota_m in enumerate((notas[2] * 2, notas[1] * 2)):
+                    nt = violino(nota_m, meio + 1.0, 0.45 * ex['melodia'])
+                    i0 = int(q * meio * SR)
                     m = min(len(nt), janela - i0)
                     bloco[i0:i0 + m] += nt[:m]
             bloco *= env * (1 + 0.06 * np.sin(2 * np.pi * 0.1 * (t + ini / SR)))
@@ -255,6 +304,17 @@ def efeito(tipo, semente=3):
         t = dur(1.8)
         return (np.sin(2 * np.pi * 146.83 * t) + 0.5 * np.sin(2 * np.pi * 293.66 * t)) \
             * (0.6 + 0.4 * np.sin(2 * np.pi * 5 * t)) * np.exp(-t / 0.6) * np.minimum(1, t / 0.03)
+    if tipo == 'swish':  # passagem de uma parte para outra: varrida tonal que desce (sem chiado)
+        t = dur(0.4)
+        return np.sin(2 * np.pi * np.cumsum(np.linspace(1300, 280, len(t))) / SR) * np.sin(np.pi * t / t[-1]) ** 1.5
+    if tipo == 'peso':  # algo pesado caindo sobre os ombros
+        t = dur(0.6)
+        return ((np.sin(2 * np.pi * 110 * t) + 0.6 * np.sin(2 * np.pi * 220 * t) + 0.25 * np.sin(2 * np.pi * 440 * t))
+                * np.exp(-t / 0.18) * np.minimum(1, t / 0.003))
+    if tipo == 'estica':  # pano esticado entre duas mãos: rangido tonal
+        t = dur(0.7)
+        return (np.sin(2 * np.pi * np.cumsum(np.linspace(290, 345, len(t))) / SR)
+                * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 28 * t))) * np.sin(np.pi * t / t[-1]))
     if tipo == 'passaros':  # só os pássaros, sem vento
         t = dur(3.5)
         out = np.zeros(len(t))
