@@ -11,8 +11,8 @@ const FIM = DURATION;
 // Personagens (a mesma pessoa tem sempre o mesmo rosto e a mesma roupa).
 const P = {
   JESUS: { pele: '#C98E5E', cabelo: '#3B2416', penteado: 'longo', barba: 'cheia', olho: '#5A3A22', coroa: true, seed: 3 },
-  CRIM1: { pele: '#B57A4B', cabelo: '#1E1A18', penteado: 'baguncado', barba: 'rala', olho: '#3A2A1E', cordas: true, seed: 5 },
-  CRIM2: { pele: '#D7A06C', cabelo: '#5A3A24', penteado: 'curto', barba: 'curta', olho: '#6B4A2A', cordas: true, seed: 7 },
+  CRIM1: { pele: '#CB9262', cabelo: '#1E1A18', penteado: 'baguncado', barba: 'rala', olho: '#3A2A1E', cordas: true, seed: 5 },
+  CRIM2: { pele: '#C08756', cabelo: '#5A3A24', penteado: 'curto', barba: 'curta', olho: '#6B4A2A', cordas: true, seed: 7 },
   SOLD1: { pele: '#D9A877', capacete: 'rom', barba: 'rala', cabelo: '#4A3020', roupa: '#A8322C', soldado: true, olho: '#4A6A8A', seed: 11 },
   SOLD2: { pele: '#E2B48A', capacete: 'rom', roupa: '#A8322C', soldado: true, olho: '#6B4A2A', cabelo: '#6B4A2A', seed: 13 },
   PASS: { pele: '#BF8656', pano: { cor: '#C9B28A', listra: '#7A5A3A', faixa: '#3A2A20' }, barba: 'curta', cabelo: '#2A1E16', roupa: '#8C7A5E', seed: 17 },
@@ -162,7 +162,7 @@ const SCENES = [
   {
     a: FB(11) + 0.7, b: FB(13) + 0.6, cut: true, dark: true, ref: [[FA(12) - 0.2, '3ª frase · João 19:26-27']],
     f: (t) => {
-      const olhaEle = t > FA(13) - 0.3, cx = 470, cy = 1330, z = 1.45;
+      const olhaEle = t > FB(12) - 0.35, cx = 470, cy = 1330, z = 1.45; // no fim do "Aí está o seu filho" o olhar passa ao discípulo
       const frente = pe(P.MAE, 330, 1900, 0.54, { t, humor: 'triste', look: [0.3, -1], boca: 0 })
         + pe(P.DISC, 520, 1900, 0.57, { t, humor: 'triste', look: olhaEle ? [0, -1] : [-0.5, -0.6] });
       const svg = golgota(t, { k: 0, frente, j: { look: olhaEle ? [0.1, 1] : [-0.6, 1], humor: 'triste', turn: olhaEle ? 0 : -0.3 } });
@@ -291,6 +291,6 @@ function templo(t, p) {
   for (let y = 60; y < 1900; y += 90) for (let x = -60 + ((y / 90) % 2) * 70; x < 1140; x += 140) g += `<rect x="${x}" y="${y}" width="136" height="86" rx="6" fill="#6B533C" opacity="0.35"/>`;
   g += `<rect x="-300" y="1560" width="1680" height="700" fill="#3B2C20"/><path d="M -300 1560 L 1380 1560" ${tk(5)}/>`;
   [60, 1020].forEach((x) => (g += `<rect x="${x - 50}" y="280" width="100" height="1290" fill="#B79C74" ${tk(5)}/><rect x="${x - 66}" y="250" width="132" height="40" fill="#C9AE84" ${tk(5)}/><rect x="${x - 66}" y="1540" width="132" height="34" fill="#C9AE84" ${tk(5)}/>`));
-  g += veil(p, 150, 930, 420, 1540, { querubins: 1, linho: true, fios: true, metades: true, id: 'veuD', beamTo: 1540, gapMax: 230 }); // sem facho de luz: o texto não fala em luz
+  g += veil(p, 150, 930, 420, 1540, { querubins: 1, linho: true, fios: true, metades: true, id: 'veuD', beamTo: 1540, gapMax: 230, fundo: '#1E150F' }); // sem luz no rasgo: o texto não fala em luz
   return g;
 }

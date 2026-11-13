@@ -732,7 +732,7 @@ function querubim(x, y, s = 1, o = {}) {
 // narração fala dela, o.fios solta fiapos nas bordas do rasgo e o.metades abre o contorno junto com o rasgo.
 function veil(p, X0, X1, Y0, Y1, o = {}) {
   const cx = (X0 + X1) / 2, id = o.id || 'veu', beamTo = o.beamTo ?? H - 20, gapMax = o.gapMax ?? 150;
-  let s = `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#FFF6DF"/>`;
+  let s = `<rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="${o.fundo || '#FFF6DF'}"/>`; // o.fundo: o que aparece no rasgo
   const q = prog(p, 0.75, 1);
   if (q > 0) s += `<path d="M ${cx - 70 * q} ${Y1} L ${cx + 70 * q} ${Y1} L ${cx + 420 * q} ${beamTo} L ${cx - 420 * q} ${beamTo} Z" fill="url(#gBeam)" opacity="${f1(q * 0.7 * 100) / 100}"/>`;
   const yf = lerp(Y0, Y1 + 30, p), r = rng(77);
