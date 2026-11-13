@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # Trilha de fundo gerada aqui, sem custo e sem direitos (AGENTS.md: trilha e efeitos saem do próprio pipeline).
 # Um "pad" lento em ré menor (i, VI, III, VII), notas com leve desafinação, troca de acorde a cada 8 s com
-# transição suave; depois o ffmpeg passa um filtro de graves e um eco curto que faz as vezes de reverb.
+# transição suave; depois o ffmpeg passa um filtro de agudos e um eco curto que faz as vezes de reverb.
+# Fica na região média (110 a 520 Hz e uma oitava acima, de leve): alto-falante de celular quase não toca grave,
+# e a 1ª versão, uma oitava abaixo, sumia no celular (Giovanni, 2026-11-13: "está muito baixo a trilha sonora").
 #
 #   python3 tools/trilha.py out/salmo-22.mp4 out/salmo-22-trilha.mp4            (mistura num vídeo pronto)
-#   python3 tools/trilha.py out/salmo-22.mp4 out/salmo-22-trilha.mp4 --nivel -24 (mais baixa; padrão -6 dB)
+#   python3 tools/trilha.py out/salmo-22.mp4 out/salmo-22-trilha.mp4 --nivel -6 (mais baixa; padrão 0 dB)
 #
 # A trilha abaixa sozinha quando a voz fala (sidechain): fica audível nas pausas e não disputa com a narração.
 # O vídeo não é recodificado (o stream de imagem é copiado); só o áudio sai de novo.
@@ -14,6 +16,7 @@ import numpy as np
 SR = 48000
 ACORDE_S = 8.0
 # ré menor, si bemol maior, fá maior, dó maior: (baixo, notas do acorde) em Hz
+OITAVA = 2  # 1 = a região grave da 1ª versão
 ACORDES = [(73.42, [146.83, 174.61, 220.00]),
            (58.27, [116.54, 146.83, 174.61]),
            (87.31, [174.61, 220.00, 261.63]),
@@ -44,7 +47,8 @@ def pad(seg):
     t = np.arange(janela) / SR
     for k, ini in enumerate(range(0, n, passo)):
         baixo, notas = ACORDES[k % len(ACORDES)]
-        bloco = nota(baixo, t, 0.55) + sum(nota(f, t, 0.35) for f in notas) + nota(notas[0] * 2, t, 0.06)
+        baixo, notas = baixo * OITAVA, [f * OITAVA for f in notas]
+        bloco = nota(baixo, t, 0.55) + sum(nota(f, t, 0.35) for f in notas) + nota(notas[0] * 2, t, 0.12)
         bloco *= env * (1 + 0.08 * np.sin(2 * np.pi * 0.1 * (t + ini / SR)))  # respiração lenta
         fim = min(n, ini + janela)
         out[ini:fim] += bloco[:fim - ini]
@@ -55,19 +59,19 @@ def pad(seg):
 def main():
     a = [x for i, x in enumerate(sys.argv[1:], 1) if not x.startswith('--') and sys.argv[i - 1] != '--nivel']
     if len(a) != 2:
-        sys.exit('uso: python3 tools/trilha.py <video.mp4> <saida.mp4> [--nivel -6]')
+        sys.exit('uso: python3 tools/trilha.py <video.mp4> <saida.mp4> [--nivel 0]')
     entrada, saida = a
-    nivel = float(sys.argv[sys.argv.index('--nivel') + 1]) if '--nivel' in sys.argv else -6.0
+    nivel = float(sys.argv[sys.argv.index('--nivel') + 1]) if '--nivel' in sys.argv else 0.0
     seg = duracao(entrada)
     with tempfile.TemporaryDirectory() as tmp:
         wav = os.path.join(tmp, 'pad.wav')
         with wave.open(wav, 'wb') as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
             w.writeframes(pad(seg + 3).tobytes())
-        filtro = (f'[1:a]lowpass=f=1800,aecho=0.8:0.6:70|140:0.25|0.15,volume={nivel}dB,'
+        filtro = (f'[1:a]lowpass=f=3500,aecho=0.8:0.6:70|140:0.25|0.15,volume={nivel}dB,'
                   f'afade=t=in:st=0:d=3,afade=t=out:st={max(0, seg - 6):.2f}:d=6,atrim=0:{seg:.3f}[m];'
                   '[0:a]asplit=2[voz][chave];'
-                  '[m][chave]sidechaincompress=threshold=0.02:ratio=2:attack=40:release=700[mb];'
+                  '[m][chave]sidechaincompress=threshold=0.05:ratio=1.5:attack=60:release=800[mb];'
                   '[voz][mb]amix=inputs=2:duration=first:normalize=0[a]')
         subprocess.check_call(['ffmpeg', '-v', 'error', '-y', '-i', entrada, '-i', wav, '-filter_complex', filtro,
                                '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k',
