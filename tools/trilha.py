@@ -106,6 +106,8 @@ def faixas(seg, roteiro, fr):
         a, b = int(inicios[k] * SR), int(inicios[k + 1] * SR)
         ganho[a:b] = np.linspace(x['ganho'], x.get('ate', x['ganho']), max(1, b - a))[:b - a]
         acordes, dur, c_amp, p_amp, p_passo, brilho = HUMORES[x['humor']]
+        if roteiro.get('piano') is False:  # só o pad (pedido do Giovanni em 2026-11-13: "não gosto do teclado")
+            p_amp = 0
         passo = int(dur * SR)
         janela = passo + sobra
         env = np.ones(janela)
@@ -234,6 +236,37 @@ def efeito(tipo, semente=3):
         env = np.minimum(1, t / 0.3) * np.minimum(1, (t[-1] - t) / 0.6)
         return (ruido(len(t), 80, 700, semente) * (0.6 + 0.4 * np.sin(2 * np.pi * 11 * t) ** 2)
                 + 0.15 * ruido(len(t), 1000, 4000, semente + 1) * (r.random(len(t)) > 0.7)) * env
+    if tipo == 'pop':  # um cartão ou um número entrando na tela: bolha curta que sobe
+        t = dur(0.12)
+        return np.sin(2 * np.pi * np.cumsum(np.linspace(520, 900, len(t))) / SR) * np.sin(np.pi * t / t[-1]) ** 2
+    if tipo == 'tique':  # destaque de palavra
+        t = dur(0.05)
+        return np.sin(2 * np.pi * 1500 * t) * np.exp(-t / 0.012)
+    if tipo == 'madeira':  # a cruz assentando: batida seca de madeira
+        t = dur(0.4)
+        return ((np.sin(2 * np.pi * 180 * t) + 0.6 * np.sin(2 * np.pi * 355 * t) + 0.3 * np.sin(2 * np.pi * 710 * t))
+                * np.exp(-t / 0.07) * np.minimum(1, t / 0.002))
+    if tipo == 'brilho':  # luz que aparece: acorde agudo que entra devagar e se apaga
+        t = dur(2.2)
+        return sum(np.sin(2 * np.pi * f * t) for f in (1174.66, 1479.98, 1760.0, 2349.32)) / 4 \
+            * np.minimum(1, t / 0.35) * np.exp(-t / 0.9)
+    if tipo == 'anel':  # os anéis do grito se abrindo: tom grave que pulsa e some
+        t = dur(1.8)
+        return (np.sin(2 * np.pi * 146.83 * t) + 0.5 * np.sin(2 * np.pi * 293.66 * t)) \
+            * (0.6 + 0.4 * np.sin(2 * np.pi * 5 * t)) * np.exp(-t / 0.6) * np.minimum(1, t / 0.03)
+    if tipo == 'passaros':  # só os pássaros, sem vento
+        t = dur(3.5)
+        out = np.zeros(len(t))
+        t0 = 0.2
+        while t0 < 3.0:
+            for q in range(r.integers(2, 4)):
+                f0, f1, d = r.uniform(2800, 3600), r.uniform(3800, 4800), r.uniform(0.07, 0.13)
+                c = dur(d)
+                pio = np.sin(2 * np.pi * np.cumsum(np.linspace(f0, f1, len(c))) / SR) * np.sin(np.pi * c / d)
+                i0 = int((t0 + q * 0.16) * SR)
+                out[i0:i0 + len(pio)] += pio[:max(0, len(t) - i0)]
+            t0 += r.uniform(0.8, 1.4)
+        return out
     raise ValueError(f'efeito desconhecido: {tipo}')
 
 

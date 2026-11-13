@@ -112,100 +112,319 @@
       "ganho": 0.35
     }
   ],
-  "ambiente_volume": 0.25,
-  "efeitos_volume": 0.5,
-  "ambientes": [
-    {
-      "de": 0,
-      "ate": 8,
-      "tipo": "noite",
-      "ganho": 0.5
-    },
-    {
-      "de": 8,
-      "ate": 17,
-      "tipo": "vento",
-      "ganho": 0.8
-    },
-    {
-      "de": 9,
-      "ate": 17,
-      "tipo": "multidao",
-      "ganho": 0.6
-    },
-    {
-      "de": 17,
-      "ate": 21,
-      "tipo": "interior",
-      "ganho": 0.6
-    },
-    {
-      "de": 21,
-      "ate": 30,
-      "tipo": "vento",
-      "ganho": 0.8
-    },
-    {
-      "de": 30,
-      "ate": 39,
-      "tipo": "noite",
-      "ganho": 0.9
-    },
-    {
-      "de": 49,
-      "ate": 51,
-      "tipo": "amanhecer",
-      "ganho": 0.9
-    },
-    {
-      "de": 54,
-      "ate": 55,
-      "tipo": "interior",
-      "ganho": 0.5
-    }
-  ],
+  "efeitos_volume": 1.0,
   "efeitos": [
     {
+      "frase": 1,
+      "tipo": "anel",
+      "ganho": 0.5,
+      "palavra": "meu"
+    },
+    {
       "frase": 2,
-      "palavra": "escrita",
       "tipo": "papel",
-      "ganho": 0.7
+      "ganho": 0.4,
+      "palavra": "escrita"
+    },
+    {
+      "frase": 3,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 5,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "palavra": "insultos"
+    },
+    {
+      "frase": 5,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "palavra": "líderes"
+    },
+    {
+      "frase": 5,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "palavra": "mãos"
+    },
+    {
+      "frase": 5,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "palavra": "roupas"
+    },
+    {
+      "frase": 7,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 8,
+      "tipo": "madeira",
+      "ganho": 0.6,
+      "palavra": "crucificado",
+      "atraso": 0.5
+    },
+    {
+      "frase": 8,
+      "tipo": "madeira",
+      "ganho": 0.5,
+      "palavra": "ladrões",
+      "atraso": 0.5
+    },
+    {
+      "frase": 8,
+      "tipo": "madeira",
+      "ganho": 0.5,
+      "palavra": "ladrões",
+      "atraso": 0.75
+    },
+    {
+      "frase": 9,
+      "tipo": "pop",
+      "ganho": 0.6
+    },
+    {
+      "frase": 12,
+      "tipo": "pop",
+      "ganho": 0.6
+    },
+    {
+      "frase": 17,
+      "tipo": "pop",
+      "ganho": 0.6
+    },
+    {
+      "frase": 21,
+      "tipo": "pop",
+      "ganho": 0.6
+    },
+    {
+      "frase": 9,
+      "tipo": "tique",
+      "ganho": 0.4,
+      "palavra": "balançando"
+    },
+    {
+      "frase": 16,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 18,
+      "tipo": "pop",
+      "ganho": 0.35,
+      "atraso": 0.1
+    },
+    {
+      "frase": 18,
+      "tipo": "pop",
+      "ganho": 0.35,
+      "atraso": 0.30000000000000004
+    },
+    {
+      "frase": 18,
+      "tipo": "pop",
+      "ganho": 0.35,
+      "atraso": 0.5
+    },
+    {
+      "frase": 18,
+      "tipo": "pop",
+      "ganho": 0.35,
+      "atraso": 0.7000000000000001
+    },
+    {
+      "frase": 20,
+      "tipo": "brilho",
+      "ganho": 0.6,
+      "palavra": "ressuscitado"
+    },
+    {
+      "frase": 22,
+      "tipo": "tique",
+      "ganho": 0.35,
+      "palavra": "quatro"
+    },
+    {
+      "frase": 22,
+      "tipo": "tique",
+      "ganho": 0.35,
+      "palavra": "quatro",
+      "atraso": 0.25
+    },
+    {
+      "frase": 22,
+      "tipo": "tique",
+      "ganho": 0.35,
+      "palavra": "quatro",
+      "atraso": 0.5
+    },
+    {
+      "frase": 22,
+      "tipo": "tique",
+      "ganho": 0.35,
+      "palavra": "quatro",
+      "atraso": 0.75
+    },
+    {
+      "frase": 24,
+      "tipo": "brilho",
+      "ganho": 0.5,
+      "palavra": "alto"
     },
     {
       "frase": 26,
-      "palavra": "sorteio",
       "tipo": "dados",
-      "ganho": 0.8
+      "ganho": 0.7,
+      "palavra": "sorteio"
+    },
+    {
+      "frase": 27,
+      "tipo": "pop",
+      "ganho": 0.5
     },
     {
       "frase": 29,
-      "palavra": "rasgou",
       "tipo": "rasgo",
-      "ganho": 0.8
+      "ganho": 0.7,
+      "palavra": "rasgou"
     },
     {
       "frase": 30,
-      "palavra": "grito",
-      "tipo": "trovao",
-      "ganho": 0.8
+      "tipo": "anel",
+      "ganho": 0.6,
+      "palavra": "grito"
     },
     {
       "frase": 31,
-      "palavra": "abandonou",
       "tipo": "coracao",
-      "ganho": 0.6
+      "ganho": 0.6,
+      "palavra": "abandonou"
+    },
+    {
+      "frase": 35,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 37,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 38,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 39,
+      "tipo": "tique",
+      "ganho": 0.5,
+      "palavra": "meu"
+    },
+    {
+      "frase": 40,
+      "tipo": "tique",
+      "ganho": 0.4,
+      "palavra": "duas"
+    },
+    {
+      "frase": 40,
+      "tipo": "tique",
+      "ganho": 0.4,
+      "palavra": "vezes"
+    },
+    {
+      "frase": 41,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 42,
+      "tipo": "papel",
+      "ganho": 0.3
+    },
+    {
+      "frase": 44,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 45,
+      "tipo": "pop",
+      "ganho": 0.4
+    },
+    {
+      "frase": 46,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 48,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 49,
+      "tipo": "pop",
+      "ganho": 0.5
     },
     {
       "frase": 50,
-      "palavra": "túmulo",
       "tipo": "pedra",
-      "ganho": 0.6
+      "ganho": 0.4,
+      "palavra": "túmulo"
+    },
+    {
+      "frase": 50,
+      "tipo": "passaros",
+      "ganho": 0.4,
+      "atraso": -0.3
     },
     {
       "frase": 51,
-      "palavra": "abandonou",
       "tipo": "coracao",
-      "ganho": 0.45
+      "ganho": 0.45,
+      "palavra": "abandonou"
+    },
+    {
+      "frase": 53,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 55,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "palavra": "procura"
+    },
+    {
+      "frase": 56,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.30000000000000004
+    },
+    {
+      "frase": 56,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.4
+    },
+    {
+      "frase": 56,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.5
+    },
+    {
+      "frase": 56,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.6000000000000001
     }
-  ]
+  ],
+  "piano": false
 }
