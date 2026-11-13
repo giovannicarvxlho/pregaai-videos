@@ -1,7 +1,8 @@
 # Monta a pasta de entrega de um episódio, uma subpasta por rede social, pronta para subir no Drive:
 #   python3 tools/pacote.py <ep>
-# Cada pasta (youtube/, tiktok/, instagram/) leva os vídeos e as capas daquela rede e um texto .txt só dela
-# (publicacao-<rede>.txt), para copiar e colar nos apps (pedido do Giovanni em 11/11/2026, no lugar do .docx).
+# Cada pasta (youtube/, tiktok/, instagram/) leva os vídeos e as capas daquela rede; os textos das três redes vão
+# num arquivo só, publicacao.txt, na raiz do pacote, para copiar e colar nos apps (pedido do Giovanni em 13/11/2026:
+# "compilar tudo em um arquivo apenas"; antes, de 11/11, era um .txt por rede, e antes disso um .docx).
 # Gera também um .zip para subir tudo de uma vez. Não renderiza nada: rode antes o build.sh e o capa.cjs.
 #
 # O zip abre numa pasta só: dentro dele ficam direto youtube/, tiktok/ e instagram/, sem repetir o nome do
@@ -150,23 +151,23 @@ for origem, rel in copias:
     shutil.copy2(origem, os.path.join(dest, rel))
     print('  ', rel)
 
-# ---------------------------------------------------------------- um texto por rede
+# ---------------------------------------------------------------- um texto só, com as três redes
 texto = open(pub, encoding='utf-8').read()
 texto_limpo = re.sub(r'<!--.*?-->', '', texto, flags=re.S)
 cabecalho = re.split(r'^## ', texto_limpo, maxsplit=1, flags=re.M)[0]
 secoes = {m.group(1).strip(): m.group(2) for m in re.finditer(r'^## ([^\n]+)\n(.*?)(?=^## |\Z)', texto_limpo, flags=re.M | re.S)}
 avisos = []
+partes = [cabecalho.rstrip()]
 for pasta, titulo in REDES.items():
     corpo = next((v for k, v in secoes.items() if k.lower().startswith(titulo.lower())), None)
     if corpo is None:
         avisos.append(f'o publicacao.md não tem a seção "## {titulo}"')
         continue
-    os.makedirs(os.path.join(dest, pasta), exist_ok=True)
-    txt = os.path.join(dest, pasta, f'publicacao-{pasta}.txt')
-    # utf-8 com BOM: o visualizador do Drive e o Bloco de Notas acertam os acentos e os emojis
-    with open(txt, 'w', encoding='utf-8-sig', newline='\n') as f:
-        f.write(para_txt(cabecalho.rstrip() + f'\n\n## {titulo}\n' + corpo))
-    print(f'   {pasta}/publicacao-{pasta}.txt')
+    partes.append(f'## {titulo}\n' + corpo.rstrip())
+# utf-8 com BOM: o visualizador do Drive e o Bloco de Notas acertam os acentos e os emojis
+with open(os.path.join(dest, 'publicacao.txt'), 'w', encoding='utf-8-sig', newline='\n') as f:
+    f.write(para_txt('\n\n'.join(partes) + '\n'))
+print('   publicacao.txt')
 
 # ---------------------------------------------------------------- conferência
 if '<!--' in texto or re.search(r'<[^<>\n]{1,60}>', texto_limpo):
