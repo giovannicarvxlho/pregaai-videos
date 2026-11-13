@@ -128,7 +128,8 @@ function golgota(t, o = {}) {
 const golgotaLonge = (t, x, y, sc, o = {}) => `<g transform="translate(${x} ${y}) scale(${sc}) translate(-960 -560)">${golgota(t, o)}</g>`;
 // A cruz do meio de perto, em silhueta, no escuro. o.light: brilho atrás da cabeça; o.peso: a sombra que desce.
 function cruzPerto(t, o = {}) {
-  let s = bgDark(t);
+  // o céu passa das bordas do quadro: a abertura começa perto da cabeça e desce a câmera
+  let s = `<rect x="-600" y="-900" width="${W + 1200}" height="${H + 1800}" fill="#101419"/>` + bgDark(t);
   if (o.light) s += `<circle cx="960" cy="240" r="520" fill="url(#gWhite)" opacity="${f1(o.light * 100) / 100}"/>`;
   s += hill(960, 880, 1300, '#1B1E22', '#060708');
   s += crossFig(960, 905, 1.5, { plaque: true, fill: '#050505', rim: RIM, bow: o.bow || 0 });
@@ -174,8 +175,8 @@ function lamparinaMesa(x, y, t) {
 }
 const ROLO = { x0: 120, x1: 3000, y: 560, h: 440 };
 function mesaRolo(t, o = {}) {
-  let s = `<rect x="-300" y="-300" width="${W + 2000}" height="${H + 600}" fill="#231D19"/>`;
-  s += `<rect x="-300" y="820" width="${W + 2000}" height="600" fill="#3A2C22"/><line x1="-300" y1="820" x2="${W + 1700}" y2="820" stroke="${NIGHT_OL}" stroke-width="6"/>`;
+  let s = `<rect x="-1000" y="-300" width="${W + 2700}" height="${H + 600}" fill="#231D19"/>`;
+  s += `<rect x="-1000" y="820" width="${W + 2700}" height="600" fill="#3A2C22"/><line x1="-1000" y1="820" x2="${W + 1700}" y2="820" stroke="${NIGHT_OL}" stroke-width="6"/>`;
   s += rolo({ ...ROLO, destaque: o.destaque || 0, fimLuz: o.fimLuz || 0 });
   s += lamparinaMesa(o.lx ?? 1500, 300, t);
   return s;
