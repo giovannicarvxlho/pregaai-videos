@@ -77,7 +77,7 @@ def frases(data_js):
         if not m:
             continue
         tempos = [float(x) for x in re.findall(r'[\d.]+', linha[linha.rfind('[') + 1:linha.rfind(']')])]
-        palavras = re.sub(r'[|!*]', ' ', m.group(2)).split()
+        palavras = re.sub(r'(^|\s)[!*]', r'\1', m.group(2).replace('|', ' ')).split()  # ! e * só marcam o começo
         out.append((float(m.group(1)), list(zip(palavras, tempos)) if len(palavras) == len(tempos) else []))
     return out
 
@@ -305,6 +305,32 @@ def efeito(tipo, semente=3):
         t = dur(1.8)
         return (np.sin(2 * np.pi * 146.83 * t) + 0.5 * np.sin(2 * np.pi * 293.66 * t)) \
             * (0.6 + 0.4 * np.sin(2 * np.pi * 5 * t)) * np.exp(-t / 0.6) * np.minimum(1, t / 0.03)
+    if tipo == 'passo':  # pé no chão de terra: batida surda e curta, com um estalo leve
+        t = dur(0.15)
+        f0 = r.uniform(85, 110)
+        return ((np.sin(2 * np.pi * f0 * t) + 0.5 * np.sin(2 * np.pi * 2 * f0 * t) + 0.25 * np.sin(2 * np.pi * 4.3 * f0 * t))
+                * np.exp(-t / 0.045) + 0.2 * np.sin(2 * np.pi * 1500 * t) * np.exp(-t / 0.006)) * np.minimum(1, t / 0.002)
+    if tipo in ('voz', 'vozes'):  # alguém fala: um "hã" de voz, sem palavra (formantes de vogal sobre uma nota)
+        def hum(f0, d):
+            t = dur(d)
+            f = f0 * (1 + 0.04 * np.sin(2 * np.pi * 4 * t)) * (1 - 0.08 * t / d)
+            fase = 2 * np.pi * np.cumsum(f) / SR
+            s = sum(np.sin(h * fase) * (np.exp(-((h * f0 - 650) / 220) ** 2) + 0.6 * np.exp(-((h * f0 - 1150) / 260) ** 2) + 0.15)
+                    for h in range(1, 12))
+            return s * np.sin(np.pi * t / d) ** 0.7
+        if tipo == 'voz':
+            return hum(r.uniform(150, 210), 0.28)
+        t = dur(0.8)
+        out = np.zeros(len(t))
+        for k in range(4):
+            h = hum(r.uniform(130, 240), r.uniform(0.2, 0.35))
+            i0 = int(r.uniform(0, 0.4) * SR)
+            out[i0:i0 + len(h)] += h[:len(out) - i0]
+        return out
+    if tipo == 'risco':  # marca-texto passando: rangido tonal curto que sobe
+        t = dur(0.35)
+        return (np.sin(2 * np.pi * np.cumsum(np.linspace(900, 1400, len(t))) / SR)
+                * (0.55 + 0.45 * np.sin(2 * np.pi * 40 * t)) * np.sin(np.pi * t / t[-1]))
     if tipo == 'swish':  # passagem de uma parte para outra: varrida tonal que desce (sem chiado)
         t = dur(0.4)
         return np.sin(2 * np.pi * np.cumsum(np.linspace(1300, 280, len(t))) / SR) * np.sin(np.pi * t / t[-1]) ** 1.5
@@ -346,8 +372,17 @@ def sons(seg, roteiro, fr):
         env[:r] = np.linspace(0, 1, r)
         env[-r:] = np.linspace(1, 0, r)
         amb[a:b] += s * env * x.get('ganho', 1.0)
-    for k, x in enumerate(roteiro.get('efeitos', [])):
-        i0 = int((quando(fr, x['frase'], x.get('palavra')) + x.get('atraso', 0)) * SR)
+    efeitos = list(roteiro.get('efeitos', []))
+    ev_arq = roteiro.get('_eventos')
+    if ev_arq and os.path.exists(ev_arq):  # momentos tirados da animação: passos, falas, grifos, cartões
+        ev = json.load(open(ev_arq, encoding='utf-8'))
+        som = {'passos': 'passo', 'voz': 'voz', 'grifa': 'risco', 'cartao': 'pop'}
+        for chave, tipo in som.items():
+            g = roteiro.get('eventos', {}).get(chave, 0)
+            efeitos += [{'t': t, 'tipo': tipo, 'ganho': g} for t in ev.get(chave, []) if g]
+    for k, x in enumerate(efeitos):
+        t0 = x['t'] if 't' in x else quando(fr, x['frase'], x.get('palavra'))
+        i0 = int((t0 + x.get('atraso', 0)) * SR)
         s = efeito(x['tipo'], 200 + k)
         s = s / (np.max(np.abs(s)) or 1) * x.get('ganho', 1.0)
         m = max(0, min(len(s), n - i0))
@@ -423,6 +458,8 @@ def main():
     nivel = float(valor('--nivel', 0))
     rot_arq = valor('--roteiro', None)
     roteiro = json.load(open(rot_arq, encoding='utf-8')) if rot_arq else {'secoes': CONSTANTE}
+    if rot_arq:
+        roteiro['_eventos'] = os.path.join(os.path.dirname(rot_arq), 'eventos.json')  # node tools/eventos.cjs <ep>
     fr = frases(os.path.join(os.path.dirname(rot_arq), 'data.js')) if rot_arq else []
     trechos = [json.load(open(c, encoding='utf-8'))['trechos'] for c in cortes] or [None] * len(pares)
     segs = [duracao(e) for e, _ in pares]
