@@ -1,95 +1,94 @@
 {
-  "volume": 0.245,
+  "volume": 0,
   "secoes": [
     {
       "frase": 0,
-      "humor": "misterio",
-      "ganho": 0.45,
-      "ate": 0.65
+      "humor": "suspense",
+      "ganho": 0.6,
+      "ate": 0.8
     },
     {
       "frase": 6,
-      "humor": "esperanca",
-      "ganho": 0.6
+      "humor": "suspense",
+      "ganho": 0.75
     },
     {
       "frase": 8,
-      "humor": "menor",
-      "ganho": 0.5
-    },
-    {
-      "frase": 17,
-      "humor": "escuro",
-      "ganho": 0.5
-    },
-    {
-      "frase": 20,
-      "humor": "esperanca",
+      "humor": "suspense",
       "ganho": 0.55
     },
     {
+      "frase": 12,
+      "humor": "suspense",
+      "ganho": 0.6
+    },
+    {
+      "frase": 17,
+      "humor": "suspense",
+      "ganho": 0.55
+    },
+    {
+      "frase": 20,
+      "humor": "emocao",
+      "ganho": 0.6
+    },
+    {
       "frase": 21,
-      "humor": "menor",
-      "ganho": 0.45,
-      "ate": 0.6
+      "humor": "tensao",
+      "ganho": 0.5,
+      "ate": 0.8
     },
     {
       "frase": 28,
-      "humor": "escuro",
-      "ganho": 0.65,
-      "ate": 0.9
+      "humor": "tensao",
+      "ganho": 0.8,
+      "ate": 0.95
     },
     {
       "frase": 30,
       "humor": "escuro",
-      "ganho": 0.25,
-      "ate": 0.35
+      "ganho": 0.35,
+      "ate": 0.45
     },
     {
       "frase": 33,
-      "humor": "escuro",
-      "ganho": 0.4,
-      "ate": 0.75
+      "humor": "emocao_menor",
+      "ganho": 0.5,
+      "ate": 0.8
     },
     {
       "frase": 39,
       "humor": "terno",
-      "ganho": 0.35
+      "ganho": 0.45
     },
     {
       "frase": 42,
-      "humor": "esperanca",
-      "ganho": 0.45,
-      "ate": 0.7
+      "humor": "emocao",
+      "ganho": 0.55,
+      "ate": 0.85
     },
     {
       "frase": 48,
       "humor": "luz",
-      "ganho": 0.75,
-      "ate": 0.9
+      "ganho": 0.85,
+      "ate": 0.95
     },
     {
       "frase": 50,
       "humor": "luz",
-      "ganho": 1.0,
+      "ganho": 0.8,
       "ate": 0.7
     },
     {
       "frase": 51,
-      "humor": "terno",
-      "ganho": 0.45
-    },
-    {
-      "frase": 52,
-      "humor": "luz",
-      "ganho": 0.55,
-      "ate": 0.7
+      "humor": "emocao",
+      "ganho": 0.6,
+      "ate": 0.8
     },
     {
       "frase": 55,
       "humor": "terno",
-      "ganho": 0.6,
-      "ate": 0.6
+      "ganho": 0.6
     }
   ],
   "impactos": [
@@ -97,22 +96,22 @@
       "frase": 29,
       "palavra": "rasgou",
       "tipo": "escuro",
-      "ganho": 0.35
+      "ganho": 1.0
     },
     {
       "frase": 30,
       "palavra": "grito",
       "tipo": "escuro",
-      "ganho": 0.35
+      "ganho": 1.0
     },
     {
       "frase": 50,
       "palavra": "vazio",
       "tipo": "luz",
-      "ganho": 0.35
+      "ganho": 0.7
     }
   ],
-  "efeitos_volume": 1.0,
+  "efeitos_volume": 4.0,
   "efeitos": [
     {
       "frase": 1,
@@ -124,12 +123,7 @@
       "frase": 2,
       "tipo": "papel",
       "ganho": 0.4,
-      "palavra": "escrita"
-    },
-    {
-      "frase": 3,
-      "tipo": "pop",
-      "ganho": 0.5
+      "atraso": -0.33
     },
     {
       "frase": 5,
@@ -202,17 +196,6 @@
       "ganho": 0.6
     },
     {
-      "frase": 9,
-      "tipo": "tique",
-      "ganho": 0.4,
-      "palavra": "balançando"
-    },
-    {
-      "frase": 16,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
       "frase": 18,
       "tipo": "pop",
       "ganho": 0.35,
@@ -279,12 +262,8 @@
       "frase": 26,
       "tipo": "dados",
       "ganho": 0.7,
-      "palavra": "sorteio"
-    },
-    {
-      "frase": 27,
-      "tipo": "pop",
-      "ganho": 0.5
+      "palavra": "sorteio",
+      "atraso": 0.85
     },
     {
       "frase": 29,
@@ -305,83 +284,14 @@
       "palavra": "abandonou"
     },
     {
-      "frase": 35,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
-      "frase": 37,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
-      "frase": 38,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
-      "frase": 39,
-      "tipo": "tique",
-      "ganho": 0.5,
-      "palavra": "meu"
-    },
-    {
-      "frase": 40,
-      "tipo": "tique",
-      "ganho": 0.4,
-      "palavra": "duas"
-    },
-    {
-      "frase": 40,
-      "tipo": "tique",
-      "ganho": 0.4,
-      "palavra": "vezes"
-    },
-    {
-      "frase": 41,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
       "frase": 42,
       "tipo": "papel",
       "ganho": 0.3
     },
     {
-      "frase": 44,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
-      "frase": 45,
-      "tipo": "pop",
-      "ganho": 0.4
-    },
-    {
-      "frase": 46,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
-      "frase": 48,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
-      "frase": 49,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
-      "frase": 50,
-      "tipo": "pedra",
-      "ganho": 0.4,
-      "palavra": "túmulo"
-    },
-    {
       "frase": 50,
       "tipo": "passaros",
-      "ganho": 0.4,
+      "ganho": 0.25,
       "atraso": -0.3
     },
     {
@@ -389,11 +299,6 @@
       "tipo": "coracao",
       "ganho": 0.45,
       "palavra": "abandonou"
-    },
-    {
-      "frase": 53,
-      "tipo": "pop",
-      "ganho": 0.5
     },
     {
       "frase": 55,
@@ -438,26 +343,125 @@
       "palavra": "gritou"
     },
     {
-      "frase": 59,
-      "tipo": "pop",
-      "ganho": 0.5
-    },
-    {
       "frase": 60,
       "tipo": "anel",
       "ganho": 0.5,
       "palavra": "gritou"
     },
     {
-      "frase": 61,
-      "tipo": "pop",
-      "ganho": 0.5
+      "frase": 8,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
     },
     {
-      "frase": 62,
-      "tipo": "tique",
-      "ganho": 0.4
+      "frase": 12,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 17,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 21,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 30,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 39,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 42,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 51,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 55,
+      "tipo": "swish",
+      "ganho": 0.45,
+      "atraso": -0.3
+    },
+    {
+      "frase": 34,
+      "tipo": "peso",
+      "ganho": 0.6,
+      "palavra": "carregava"
+    },
+    {
+      "frase": 25,
+      "tipo": "estica",
+      "ganho": 0.5,
+      "atraso": -0.2
+    },
+    {
+      "frase": 52,
+      "tipo": "brilho",
+      "ganho": 0.5,
+      "palavra": "mas"
+    },
+    {
+      "frase": 11,
+      "palavra": "desça",
+      "tipo": "vozes",
+      "ganho": 0.45
+    },
+    {
+      "frase": 14,
+      "palavra": "ele",
+      "tipo": "vozes",
+      "ganho": 0.45
+    },
+    {
+      "frase": 19,
+      "palavra": "marcas",
+      "tipo": "voz",
+      "ganho": 0.45
+    },
+    {
+      "frase": 20,
+      "palavra": "vejam",
+      "tipo": "voz",
+      "ganho": 0.45
+    },
+    {
+      "frase": 25,
+      "palavra": "não",
+      "tipo": "voz",
+      "ganho": 0.45
+    },
+    {
+      "frase": 26,
+      "palavra": "vamos",
+      "tipo": "vozes",
+      "ganho": 0.45
     }
   ],
-  "piano": false
+  "piano": false,
+  "eventos": {
+    "passos": 0.3,
+    "voz": 0.45,
+    "grifa": 0.35,
+    "cartao": 0.45
+  }
 }

@@ -6,6 +6,7 @@
 #   --nivel -3   (ganho final em dB; padrão 0)
 #   --corte out/<nome>.corte.json   (curtos e cortes: a trilha segue os trechos que o tools/corte.cjs juntou)
 #   --so-fundo   (sai só a trilha, sem a voz, ainda abaixando onde a voz fala: para medir o nível)
+#   --medir      (além do vídeo, grava <saida>-fundo.mp4 só com a trilha, para medir)
 #
 # Com --roteiro, a trilha acompanha a história (pedido do Giovanni em 2026-11-13: "momentos emocionantes,
 # impactantes, gostaria que a trilha sonora respeitasse isso"). O trilha.json do episódio diz, por frase do
@@ -40,6 +41,24 @@ HUMORES = {
     'terno':     ([F, Bb, F, C], 8.0, 0.35, 0.9, 1.5, 0.08),
     'luz':       ([D, G, D, A], 6.0, 1.0, 1.0, 0.75, 0.18),
 }
+HUMORES.update({
+    # pedido do Giovanni em 2026-11-13: "no começo iremos gerar curiosidade, então trilha de suspense; parte final
+    # emoção, logo trilha emocional". Sem piano: a melodia é de cordas.
+    'suspense':      ([Dm, Bb, Dm, A], 8.0, 0.7, 0.0, 0.0, 0.02),
+    'tensao':        ([Dm, Bb, Gm, A], 6.0, 0.9, 0.0, 0.0, 0.04),
+    'emocao':        ([F, C, Dm, Bb], 7.0, 1.0, 0.0, 0.0, 0.10),
+    'emocao_menor':  ([Dm, Bb, F, A], 8.0, 1.0, 0.0, 0.0, 0.06),
+})
+# o que cada humor tem além do pad: pulso (batidas por minuto, volume), melodia de cordas (volume) e um par de
+# notas agudas a meio tom de distância, bem baixo, que dá a sensação de suspense (volume)
+EXTRAS = {
+    'suspense':     {'pulso': (84, 0.55), 'agudo': 0.06},
+    'tensao':       {'pulso': (104, 0.75), 'agudo': 0.08},
+    'emocao':       {'melodia': 0.6},
+    'emocao_menor': {'melodia': 0.5},
+    'terno':        {'melodia': 0.35},
+    'luz':          {'melodia': 0.6},
+}
 CONSTANTE = [{'frase': 0, 'humor': 'pad', 'ganho': 1.0}]
 
 
@@ -58,7 +77,7 @@ def frases(data_js):
         if not m:
             continue
         tempos = [float(x) for x in re.findall(r'[\d.]+', linha[linha.rfind('[') + 1:linha.rfind(']')])]
-        palavras = re.sub(r'[|!*]', ' ', m.group(2)).split()
+        palavras = re.sub(r'(^|\s)[!*]', r'\1', m.group(2).replace('|', ' ')).split()  # ! e * só marcam o começo
         out.append((float(m.group(1)), list(zip(palavras, tempos)) if len(palavras) == len(tempos) else []))
     return out
 
@@ -82,6 +101,20 @@ def piano(f, amp):
     s = sum(a * np.exp(-t / q) * np.sin(2 * np.pi * f * h * (1 + 0.0004 * h) * t)
             for h, a, q in ((1, 1.0, 1.6), (2, 0.5, 1.0), (3, 0.25, 0.6), (4, 0.12, 0.4)))
     return amp * s * np.minimum(1, t / 0.005)
+
+
+def staccato(f, amp):  # corda tocada curta, para o pulso do suspense
+    t = np.arange(int(0.35 * SR)) / SR
+    s = np.sin(2 * np.pi * f * t) + 0.6 * np.sin(2 * np.pi * f * 1.002 * t + 1.1) + 0.3 * np.sin(2 * np.pi * 2 * f * t)
+    return amp * s / 1.9 * np.minimum(1, t / 0.006) * np.exp(-t / 0.13)
+
+
+def violino(f, dur, amp):  # nota longa de cordas com vibrato, para a melodia da emoção
+    t = np.arange(int(dur * SR)) / SR
+    fase = 2 * np.pi * np.cumsum(f * (1 + 0.003 * np.sin(2 * np.pi * 5.5 * t))) / SR
+    s = np.sin(fase) + 0.3 * np.sin(2 * fase) + 0.15 * np.sin(3 * fase)
+    env = np.minimum(1, t / 0.45) * np.minimum(1, (t[-1] - t) / 0.6 + 0.001)
+    return amp * s / 1.45 * env
 
 
 def impacto(tipo):
@@ -125,6 +158,23 @@ def faixas(seg, roteiro, fr):
                 for q, ti in enumerate(np.arange(0, dur, p_passo)):
                     nt = piano(seq[q % len(seq)], 0.22 * p_amp)
                     i0 = int(ti * SR)
+                    m = min(len(nt), janela - i0)
+                    bloco[i0:i0 + m] += nt[:m]
+            ex = EXTRAS.get(x['humor'], {})
+            if 'pulso' in ex:  # colcheias alternando o baixo e a quinta do acorde
+                bpm, amp = ex['pulso']
+                for q, ti in enumerate(np.arange(0, dur, 30.0 / bpm)):
+                    nt = staccato(baixo if q % 2 == 0 else notas[2], 0.5 * amp * (1.0 if q % 4 == 0 else 0.7))
+                    i0 = int(ti * SR)
+                    m = min(len(nt), janela - i0)
+                    bloco[i0:i0 + m] += nt[:m]
+            if 'agudo' in ex:  # ré e mi bemol agudos, batendo entre si
+                bloco += ex['agudo'] * (np.sin(2 * np.pi * 1174.66 * t) + np.sin(2 * np.pi * 1244.51 * t)) / 2
+            if 'melodia' in ex:  # duas notas longas por acorde: a de cima do acorde e a do meio, uma oitava acima
+                meio = dur / 2
+                for q, nota_m in enumerate((notas[2] * 2, notas[1] * 2)):
+                    nt = violino(nota_m, meio + 1.0, 0.45 * ex['melodia'])
+                    i0 = int(q * meio * SR)
                     m = min(len(nt), janela - i0)
                     bloco[i0:i0 + m] += nt[:m]
             bloco *= env * (1 + 0.06 * np.sin(2 * np.pi * 0.1 * (t + ini / SR)))
@@ -255,6 +305,43 @@ def efeito(tipo, semente=3):
         t = dur(1.8)
         return (np.sin(2 * np.pi * 146.83 * t) + 0.5 * np.sin(2 * np.pi * 293.66 * t)) \
             * (0.6 + 0.4 * np.sin(2 * np.pi * 5 * t)) * np.exp(-t / 0.6) * np.minimum(1, t / 0.03)
+    if tipo == 'passo':  # pé no chão de terra: batida surda e curta, com um estalo leve
+        t = dur(0.15)
+        f0 = r.uniform(85, 110)
+        return ((np.sin(2 * np.pi * f0 * t) + 0.5 * np.sin(2 * np.pi * 2 * f0 * t) + 0.25 * np.sin(2 * np.pi * 4.3 * f0 * t))
+                * np.exp(-t / 0.045) + 0.2 * np.sin(2 * np.pi * 1500 * t) * np.exp(-t / 0.006)) * np.minimum(1, t / 0.002)
+    if tipo in ('voz', 'vozes'):  # alguém fala: um "hã" de voz, sem palavra (formantes de vogal sobre uma nota)
+        def hum(f0, d):
+            t = dur(d)
+            f = f0 * (1 + 0.04 * np.sin(2 * np.pi * 4 * t)) * (1 - 0.08 * t / d)
+            fase = 2 * np.pi * np.cumsum(f) / SR
+            s = sum(np.sin(h * fase) * (np.exp(-((h * f0 - 650) / 220) ** 2) + 0.6 * np.exp(-((h * f0 - 1150) / 260) ** 2) + 0.15)
+                    for h in range(1, 12))
+            return s * np.sin(np.pi * t / d) ** 0.7
+        if tipo == 'voz':
+            return hum(r.uniform(150, 210), 0.28)
+        t = dur(0.8)
+        out = np.zeros(len(t))
+        for k in range(4):
+            h = hum(r.uniform(130, 240), r.uniform(0.2, 0.35))
+            i0 = int(r.uniform(0, 0.4) * SR)
+            out[i0:i0 + len(h)] += h[:len(out) - i0]
+        return out
+    if tipo == 'risco':  # marca-texto passando: rangido tonal curto que sobe
+        t = dur(0.35)
+        return (np.sin(2 * np.pi * np.cumsum(np.linspace(900, 1400, len(t))) / SR)
+                * (0.55 + 0.45 * np.sin(2 * np.pi * 40 * t)) * np.sin(np.pi * t / t[-1]))
+    if tipo == 'swish':  # passagem de uma parte para outra: varrida tonal que desce (sem chiado)
+        t = dur(0.4)
+        return np.sin(2 * np.pi * np.cumsum(np.linspace(1300, 280, len(t))) / SR) * np.sin(np.pi * t / t[-1]) ** 1.5
+    if tipo == 'peso':  # algo pesado caindo sobre os ombros
+        t = dur(0.6)
+        return ((np.sin(2 * np.pi * 110 * t) + 0.6 * np.sin(2 * np.pi * 220 * t) + 0.25 * np.sin(2 * np.pi * 440 * t))
+                * np.exp(-t / 0.18) * np.minimum(1, t / 0.003))
+    if tipo == 'estica':  # pano esticado entre duas mãos: rangido tonal
+        t = dur(0.7)
+        return (np.sin(2 * np.pi * np.cumsum(np.linspace(290, 345, len(t))) / SR)
+                * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 28 * t))) * np.sin(np.pi * t / t[-1]))
     if tipo == 'passaros':  # só os pássaros, sem vento
         t = dur(3.5)
         out = np.zeros(len(t))
@@ -285,8 +372,17 @@ def sons(seg, roteiro, fr):
         env[:r] = np.linspace(0, 1, r)
         env[-r:] = np.linspace(1, 0, r)
         amb[a:b] += s * env * x.get('ganho', 1.0)
-    for k, x in enumerate(roteiro.get('efeitos', [])):
-        i0 = int((quando(fr, x['frase'], x.get('palavra')) + x.get('atraso', 0)) * SR)
+    efeitos = list(roteiro.get('efeitos', []))
+    ev_arq = roteiro.get('_eventos')
+    if ev_arq and os.path.exists(ev_arq):  # momentos tirados da animação: passos, falas, grifos, cartões
+        ev = json.load(open(ev_arq, encoding='utf-8'))
+        som = {'passos': 'passo', 'voz': 'voz', 'grifa': 'risco', 'cartao': 'pop'}
+        for chave, tipo in som.items():
+            g = roteiro.get('eventos', {}).get(chave, 0)
+            efeitos += [{'t': t, 'tipo': tipo, 'ganho': g} for t in ev.get(chave, []) if g]
+    for k, x in enumerate(efeitos):
+        t0 = x['t'] if 't' in x else quando(fr, x['frase'], x.get('palavra'))
+        i0 = int((t0 + x.get('atraso', 0)) * SR)
         s = efeito(x['tipo'], 200 + k)
         s = s / (np.max(np.abs(s)) or 1) * x.get('ganho', 1.0)
         m = max(0, min(len(s), n - i0))
@@ -302,11 +398,14 @@ def grava(arq, x):
 
 def prepara(roteiro, fr, total):
     """Música, impactos, ambiente e efeitos na linha do tempo da narração, já no volume do roteiro."""
-    referencia, _ = faixas(total, {'secoes': CONSTANTE}, [])  # o pad constante, que a escala de volume usa
-    musica, golpes = faixas(total, roteiro, fr)
+    referencia, _ = faixas(min(total, 40), {'secoes': CONSTANTE}, [])  # o pad constante, que a escala de volume usa
+    if roteiro.get('volume', 1.0) == 0:  # só efeitos, sem música de fundo (Giovanni, 2026-11-13)
+        musica, golpes = faixas(total, {**roteiro, 'secoes': []}, fr)
+    else:
+        musica, golpes = faixas(total, roteiro, fr)
     rms = lambda x: np.sqrt(np.mean(x ** 2)) or 1
     escala = 0.9 / np.max(np.abs(referencia))  # o pad constante sai com pico de 0,9
-    musica *= escala * roteiro.get('volume', 1.0) * rms(referencia) / rms(musica)
+    musica *= escala * roteiro.get('volume', 1.0) * rms(referencia) / rms(musica) if roteiro.get('volume', 1.0) else 0
     golpes *= escala * rms(referencia) * 1.4
     amb, efs = sons(total, roteiro, fr)
     amb *= escala * rms(referencia) * roteiro.get('ambiente_volume', 0.0)
@@ -341,7 +440,7 @@ def mistura(entrada, saida, faixas4, seg, nivel, so_fundo=False):
                   f'[4:a]aecho=0.8:0.4:60:0.2,volume={nivel}dB,{cauda}[ef];'
                   '[m][am]amix=inputs=2:normalize=0[fundo];'
                   '[0:a]asplit=2[voz][chave];'
-                  '[fundo][chave]sidechaincompress=threshold=0.05:ratio=1.5:attack=60:release=800[mb];'
+                  '[fundo][chave]sidechaincompress=threshold=0.08:ratio=1.3:attack=80:release=900[mb];'
                   + ('[voz]anullsink;[mb][g][ef]amix=inputs=3:normalize=0[a]' if so_fundo else  # para medir
                      '[voz][mb][g][ef]amix=inputs=4:duration=first:normalize=0,alimiter=limit=0.9:level=disabled[a]'))
         subprocess.check_call(['ffmpeg', '-v', 'error', '-y', '-i', entrada, '-i', wm, '-i', wg, '-i', wa, '-i', we,
@@ -362,6 +461,8 @@ def main():
     nivel = float(valor('--nivel', 0))
     rot_arq = valor('--roteiro', None)
     roteiro = json.load(open(rot_arq, encoding='utf-8')) if rot_arq else {'secoes': CONSTANTE}
+    if rot_arq:
+        roteiro['_eventos'] = os.path.join(os.path.dirname(rot_arq), 'eventos.json')  # node tools/eventos.cjs <ep>
     fr = frases(os.path.join(os.path.dirname(rot_arq), 'data.js')) if rot_arq else []
     trechos = [json.load(open(c, encoding='utf-8'))['trechos'] for c in cortes] or [None] * len(pares)
     segs = [duracao(e) for e, _ in pares]
@@ -371,6 +472,8 @@ def main():
     for (entrada, saida), t, seg in zip(pares, trechos, segs):
         f4 = [recorta(x, t, seg) for x in faixas4] if t else [x[:int((seg + 3) * SR)] for x in faixas4]
         mistura(entrada, saida, f4, seg, nivel, '--so-fundo' in args)
+        if '--medir' in args:  # também <saida>-fundo.mp4, só a trilha (abaixando sob a voz), para medir
+            mistura(entrada, saida.replace('.mp4', '-fundo.mp4'), f4, seg, nivel, True)
         print(f'{saida}: trilha {"pelo roteiro" if rot_arq else "constante"}, {nivel:g} dB, {seg:.1f} s')
 
 
