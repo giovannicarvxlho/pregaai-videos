@@ -187,7 +187,7 @@ const SCENES = [
   },
   // 14. "Ouçam! Ele está chamando Elias." e, na mesma hora, um deles sai correndo (Mateus 27:47-48).
   {
-    a: FB(14) + 0.35, b: FA(16) - 0.15, cut: true, dark: true,
+    a: FB(14) + 0.35, b: FA(16) - 0.15, cut: true, dark: true, ref: 'Marcos 15:35 · Mateus 27:48',
     f: (t) => {
       const corre = E.in(prog(t, FB(15) + 0.05, FA(16)));
       const frente = pe(P.HOM1, 520 + corre * 700, 1880 - Math.abs(Math.sin(t * 14)) * 14 * (corre > 0 ? 1 : 0), 0.56, { t, humor: 'espanto', look: [-0.4, -0.8], boca: bocaDe('HOMEM1', t), alvoD: corre > 0 ? [120, -500] : [110, -790] });

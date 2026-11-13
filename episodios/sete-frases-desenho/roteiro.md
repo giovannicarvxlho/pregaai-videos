@@ -43,18 +43,21 @@ Os soldados acabam de crucificar Jesus no lugar chamado Caveira, com um criminos
 _Tela: 1ª frase · Lucas 23:34_
 
 ### 2. A túnica (João 19:23-24)
+_Tela: João 19:23-24_
 Ao pé da cruz, os soldados seguram a túnica de Jesus, inteira, sem costura.
 **Soldado:** "Não a rasguemos."
 **Outro soldado:** "Vamos decidir por sorteio quem ficará com ela."
 Eles tiram a sorte (como sortearam o texto não diz; o desenho mostra pedrinhas).
 
 ### 3. A zombaria (Mateus 27:39-42; Lucas 23:36-37)
+_Tela: Mateus 27:39-42 · Lucas 23:36-37_
 Quem passa por ali balança a cabeça. Os chefes dos sacerdotes olham de baixo. Um soldado ergue o vinagre.
 **Homem que passa:** "Desça da cruz, se é Filho de Deus!"
 **Chefe dos sacerdotes:** "Salvou os outros, mas não é capaz de salvar a si mesmo!"
 **Soldado:** "Se você é o rei dos judeus, salve-se a si mesmo."
 
 ### 4. Os dois criminosos (Lucas 23:39-43)
+_Tela: Lucas 23:39-43_
 A câmera sobe para as cruzes dos lados.
 **Criminoso:** "Você não é o Cristo? Salve-se a si mesmo e a nós!"
 **O outro criminoso:** "Você não teme a Deus, nem estando sob a mesma sentença? Nós estamos sendo punidos com justiça, porque estamos recebendo o que os nossos atos merecem. Mas este homem não cometeu nenhum mal."
@@ -77,15 +80,18 @@ _Tela: Do meio-dia às três da tarde · Mateus 27:45_
 
 ### 7. O grito (Mateus 27:46-47; Marcos 15:34-35)
 **Jesus** (em alta voz): "Eloí, Eloí, lamá sabactâni?"
-_Tradução na tela, quase do tamanho da legenda, até o fim da fala seguinte: "que significa: Meu Deus! Meu Deus! Por que me abandonaste?" (a tradução do próprio evangelho; as mesmas palavras abrem o Salmo 22:1, que aparece pequeno ao lado)_
+_Tradução na tela, quase do tamanho da legenda, até o fim da fala seguinte: "que significa: Meu Deus! Meu Deus! Por que me abandonaste?" (a tradução do próprio evangelho); embaixo, pequeno: "as mesmas palavras do Salmo 22:1"_
 _Tela: 4ª frase · Mateus 27:46 · Marcos 15:34_
 **Homem na multidão:** "Ouçam! Ele está chamando Elias."
+_Tela: Marcos 15:35 · Mateus 27:48_
 Na mesma hora, um deles sai correndo.
 
 ### 8. A sede (João 19:28-29; Mateus 27:48-49)
 **Jesus:** "Tenho sede."
 _Tela: 5ª frase · João 19:28_
+_Tela: João 19:29 · Mateus 27:48_
 O homem molha uma esponja na vasilha de vinagre, põe na ponta de uma vara e leva até a boca de Jesus.
+_Tela: Mateus 27:49_
 **Outro homem:** "Deixem-no. Vejamos se Elias vem salvá-lo."
 
 ### 9. O fim (João 19:30; Lucas 23:46)
@@ -96,9 +102,11 @@ _Tela: 7ª frase · Lucas 23:46_
 Ele curva a cabeça devagar (João 19:30: "curvou a cabeça e entregou o espírito"). Daqui em diante o desenho dele fica parado.
 
 ### 10. O véu (Mateus 27:51)
+_Tela: Mateus 27:51_
 Sem fala. Corte para o templo: o véu do santuário se rasga em duas partes, de alto a baixo. A terra treme e as rochas se partem.
 
 ### 11. O centurião (Mateus 27:54)
+_Tela: Mateus 27:54_
 O centurião e os que com ele vigiavam Jesus veem o terremoto e ficam aterrorizados.
 **Centurião** (com os soldados ao lado): "Verdadeiramente este era o Filho de Deus!"
 O céu começa a clarear, de leve (as trevas iam até as três da tarde, Mateus 27:45; só imagem).
