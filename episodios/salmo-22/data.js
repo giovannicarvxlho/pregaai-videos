@@ -2,7 +2,7 @@
 // confira os blocos "|" da legenda (até ~28 letras) e marque "!" ou "*" onde precisar.
 const FORMAT = 'wide';
 // Índice da primeira frase de cada parte do roteiro.
-const PARTS = [0, 8, 12, 17, 21, 30, 39, 42, 51, 55, 57, 58, 60];
+const PARTS = [0, 8, 12, 17, 21, 30, 39, 42, 51, 55, 57, 58, 60, 63];
 const SEGS = [
   [0.00, 1.92, 'Deus abandonou Jesus na cruz?', [[0.0, 1.92]], [0.0, 0.32, 0.96, 1.36, 1.52]],
   [2.56, 8.80, 'Na cruz, o próprio Jesus | perguntou: "Meu Deus! Meu Deus! | Por que me abandonaste?"', [[2.56, 4.16], [4.24, 7.12], [7.44, 8.8]], [2.56, 2.72, 3.32, 3.44, 4.0, 4.24, 5.28, 5.68, 6.32, 6.64, 7.44, 7.76, 7.92, 8.04]],
@@ -61,14 +61,15 @@ const SEGS = [
   [269.52, 272.64, 'É por isso que esse grito | importa pra você até hoje.', [[269.52, 270.72], [270.92, 272.64]], [269.52, 269.76, 269.92, 270.16, 270.32, 270.48, 270.92, 271.28, 271.4, 271.84, 272.24]],
   [273.60, 278.96, 'Se você quer ler | o Salmo 22 inteiro, | um pouco por dia, | procura PregaAI na Google Play.', [[273.6, 274.29], [274.32, 275.84], [276.0, 276.8], [277.28, 278.96]], [273.6, 273.76, 274.0, 274.16, 274.32, 274.44, 274.72, 275.28, 276.0, 276.16, 276.4, 276.56, 277.28, 277.76, 278.36, 278.48, 278.72]],
   [279.68, 284.72, 'Das quatro cenas | que o salmo descreve, | qual mais te surpreendeu? | Me conta aqui embaixo.', [[279.68, 280.64], [280.68, 281.76], [282.2, 283.36], [283.84, 284.72]], [279.68, 279.92, 280.32, 280.68, 280.76, 280.88, 281.24, 282.2, 282.4, 282.64, 282.84, 283.84, 284.0, 284.16, 284.32]],
-  [285.68, 290.48, 'Quatro soldados dividiram | as roupas de um condenado. | E sobrou uma peça.', [[285.68, 287.2], [287.28, 288.64], [289.12, 290.48]], [285.68, 286.0, 286.8, 287.28, 287.44, 287.8, 287.92, 288.0, 289.12, 289.28, 289.84, 290.08]],
-  [291.52, 298.00, 'Se Jesus sabia que ia | ressuscitar, por que gritou | "Meu Deus! Meu Deus! | Por que me abandonaste?"', [[291.52, 292.48], [292.56, 294.64], [294.88, 296.48], [296.8, 298.0]], [291.52, 291.68, 292.0, 292.2, 292.32, 292.56, 293.92, 294.04, 294.16, 294.88, 295.2, 295.84, 296.08, 296.8, 296.96, 297.12, 297.24]],
-  [298.64, 301.44, 'A frase é a primeira | linha do Salmo 22.', [[298.64, 300.0], [300.08, 301.44]], [298.64, 298.8, 299.36, 299.44, 299.52, 300.08, 300.32, 300.48, 300.8]],
-  [302.48, 306.88, 'Jesus gritou na cruz, | e alguns disseram que ele | estava chamando Elias.', [[302.48, 304.08], [304.4, 305.52], [305.6, 306.88]], [302.48, 302.96, 303.44, 303.6, 304.4, 304.56, 304.92, 305.4, 305.48, 305.6, 305.92, 306.32]],
-  [307.52, 313.76, 'Mateus e Marcos guardaram | até o som das palavras: | "Eloí, Eloí, lamá sabactâni?"', [[307.52, 308.88], [308.96, 310.4], [310.96, 313.76]], [307.52, 307.92, 308.0, 308.48, 308.96, 309.24, 309.44, 309.68, 309.84, 310.96, 311.72, 312.56, 313.0]],
-  [314.32, 318.80, 'Que significa: | "Meu Deus! Meu Deus! | Por que me abandonaste?"', [[314.32, 315.12], [315.6, 317.2], [317.52, 318.8]], [314.32, 314.48, 315.6, 315.84, 316.48, 316.72, 317.52, 317.76, 317.96, 318.08]],
+  [285.68, 291.28, 'Jesus, um Filho | abandonado pelo Pai? | É o que a frase dele | na cruz parece dizer.', [[285.68, 287.16], [287.2, 288.4], [288.96, 289.92], [290.0, 291.28]], [285.68, 286.72, 286.96, 287.2, 287.84, 288.08, 288.96, 289.08, 289.16, 289.24, 289.36, 289.68, 290.0, 290.16, 290.6, 290.88]],
+  [292.32, 298.80, 'Se Jesus sabia que ia | ressuscitar, por que gritou | "Meu Deus! Meu Deus! | Por que me abandonaste?"', [[292.32, 293.28], [293.36, 295.44], [295.68, 297.28], [297.6, 298.8]], [292.32, 292.48, 292.8, 293.0, 293.12, 293.36, 294.72, 294.84, 294.96, 295.68, 296.0, 296.64, 296.88, 297.6, 297.76, 297.92, 298.04]],
+  [299.44, 302.24, 'A frase é a primeira | linha do Salmo 22.', [[299.44, 300.8], [300.88, 302.24]], [299.44, 299.6, 300.16, 300.24, 300.32, 300.88, 301.12, 301.28, 301.6]],
+  [303.28, 307.68, 'Jesus gritou na cruz, | e alguns disseram que ele | estava chamando Elias.', [[303.28, 304.88], [305.2, 306.32], [306.4, 307.68]], [303.28, 303.76, 304.24, 304.4, 305.2, 305.36, 305.72, 306.2, 306.28, 306.4, 306.72, 307.12]],
+  [308.32, 314.56, 'Mateus e Marcos guardaram | até o som das palavras: | "Eloí, Eloí, lamá sabactâni?"', [[308.32, 309.68], [309.76, 311.2], [311.76, 314.56]], [308.32, 308.72, 308.8, 309.28, 309.76, 310.04, 310.24, 310.48, 310.64, 311.76, 312.52, 313.36, 313.8]],
+  [315.12, 319.60, 'Que significa: | "Meu Deus! Meu Deus! | Por que me abandonaste?"', [[315.12, 315.92], [316.4, 318.0], [318.32, 319.6]], [315.12, 315.28, 316.4, 316.64, 317.28, 317.52, 318.32, 318.56, 318.76, 318.88]],
+  [320.72, 329.28, 'Você já se sentiu | abandonado por Deus? | Na cruz, Jesus gritou: | "Meu Deus! Meu Deus! | Por que me abandonaste?"', [[320.72, 321.68], [321.76, 323.04], [323.68, 325.28], [325.84, 327.6], [327.92, 329.28]], [320.72, 321.04, 321.2, 321.4, 321.76, 322.48, 322.64, 323.68, 323.92, 324.64, 324.84, 325.84, 326.16, 326.88, 327.2, 327.92, 328.16, 328.36, 328.48]],
 ];
 const AUDIO_END = 284.72; // fim da fala do longo (frase 56); as frases 57 a 62 são só das aberturas dos curtos
-const CARTAO_INICIO = 319.60; // na origem, o cartão final vem depois das aberturas dos curtos (corte.json: cartao_inicio)
-const DURATION = 329.60; // origem: fala + aberturas + 10 s de cartão. O longo publicado sai do corte.json: 285,3 s de fala + 10 s = 4:55
+const CARTAO_INICIO = 330.32; // na origem, o cartão final vem depois das aberturas dos curtos (corte.json: cartao_inicio)
+const DURATION = 340.32; // origem: fala + aberturas + 10 s de cartão. O longo publicado sai do corte.json: 285,3 s de fala + 10 s = 4:55
 const SPEED = 1;
