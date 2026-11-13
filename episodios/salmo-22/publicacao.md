@@ -29,6 +29,8 @@ Calendário (sugestão; o Giovanni decide; horário de Brasília): o longo sai n
 
 ### Vídeo longo: `youtube/longo.mp4`
 
+**Trilha:** o longo já sai com trilha de fundo, gerada no pipeline (`tools/trilha.py`, sem direitos; decisão do Giovanni em 2026-11-13). Não acrescente música do app.
+
 **Título** (64 caracteres; começa pela busca "deus abandonou jesus na cruz", que está no autocompletar do YouTube, e o "Salmo 22" fica no fim, para quem busca o salmo)
 > DEUS ABANDONOU JESUS NA CRUZ? O QUE A BÍBLIA RESPONDE (SALMO 22)
 
@@ -165,6 +167,8 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 **Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto (o vídeo pode ficar fora do Programa de Recompensas). Rótulo de IA opcional, porque a animação não é realista. Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
 
 ### Longo: `tiktok/longo.mp4`
+
+**Trilha:** o longo já sai com trilha de fundo, gerada no pipeline (`tools/trilha.py`, sem direitos; decisão do Giovanni em 2026-11-13). Não acrescente música do app.
 
 **Legenda**
 ```
