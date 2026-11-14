@@ -20,7 +20,8 @@ Regras que valem para todas as redes:
   Instagram e YouTube ainda não têm dado próprio por hora. O longo sai primeiro; os curtos levam para ele.
 - Regras da análise de 07/11/2026 (o Giovanni decidiu seguir as recomendações; dados no MARK1, projetos/pregaai-canais.md):
   - TikTok: os curtos saem a partir de 24 h depois do longo, nunca no mesmo dia, e sem "parte N" no título (teste:
-    depois do viral, os vídeos vão quase só para quem já segue, e tudo no mesmo dia vai para o mesmo público).
+    depois do viral, os vídeos vão quase só para quem já segue, e tudo no mesmo dia vai para o mesmo público). Suspensa em 14 e 15/11/2026, como teste (decisão do Giovanni em 14/11:
+    a regra nunca foi medida); a leitura de 48 h, no MARK1 (`projetos/pregaai-calendario.md`), diz se ela sai ou volta.
   - TikTok: o vídeo termina na última fala, sem cartão final e sem pedido falado depois dela (com cartão, 1,8% a 5,3%
     assistiram inteiro; sem, 10,5% e 12,5%).
   - Cada curto abre com a própria frase de gancho e tem o próprio título fixo; nenhum curto começa no meio da narração.

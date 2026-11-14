@@ -2,7 +2,7 @@
 
 **Episódio:** salmo-22 (longo com 4:45 de fala e 4:55 com o cartão final do YouTube; 3 curtos recortados da narração, cada um com a própria abertura, aprovada com o roteiro em 2026-11-13; as dos curtos 1 e 3 foram refeitas e aprovadas pelo Giovanni no mesmo dia) · **Palavra-chave principal:** deus abandonou jesus na cruz (está no autocompletar do YouTube, conferido em 2026-11-13, junto com "porque deus abandonou jesus na cruz") · **Outras buscas:** meu deus meu deus por que me abandonaste, salmo 22, eloí eloí lamá sabactâni, túnica de jesus · **Base bíblica:** Salmo 22:1, 7-8, 10, 16, 18, 21-22, 24, 31; Mateus 16:21; 27:39-47, 51; Marcos 15:25, 27, 34; Lucas 24:1-3, 39; João 19:23-24; 20:25; 2 Coríntios 5:21; Isaías 53:6; Romanos 8:32; Hebreus 2:12; 5:7
 
-Calendário (sugestão; o Giovanni decide; horário de Brasília): o longo sai no domingo, 15/11, às 19:00, no YouTube e no TikTok. Os curtos saem de segunda, 16/11, em diante, um por dia em cada rede: no TikTok às 19:00 (sempre 24 h ou mais depois do longo), no YouTube Shorts às 12:00 e no Instagram às 19:00.
+Calendário (decisão do Giovanni em 14/11/2026; horário de Brasília): tudo no sábado, 14/11, com a regra das 24 h do TikTok suspensa como teste. TikTok: longo às 17:30 e curtos 1, 2 e 3 às 19:00, 20:30 e 22:00. YouTube: longo às 19:00 e Shorts 1, 2 e 3 às 18:00, 20:00 e 22:00. Instagram: curtos 1, 2 e 3 às 18:00, 20:00 e 22:00.
 
 **Duas regras de texto para este episódio** (seção "Copy fora do roteiro" do `roteiro.md`):
 - Nunca escrever "pregaram os pés" (na legenda nem nas respostas): os evangelhos falam das marcas dos pregos nas mãos (João 20:25) e de Jesus mostrando as mãos e os pés (Lucas 24:39-40). O Salmo 22:16 diz "Perfuraram minhas mãos e meus pés".
