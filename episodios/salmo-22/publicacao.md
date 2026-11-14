@@ -22,7 +22,7 @@ Calendário (decisão do Giovanni em 14/11/2026; horário de Brasília): tudo no
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-14 16:00 | `youtube/longo.mp4` (4:55, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
+| 2026-11-14 16:00 | `youtube/longo.mp4` (4:55, com o cartão final) | `youtube/miniatura-a.jpg` (sem Testar e comparar) |
 | 2026-11-14 18:00 | `youtube/curto-01.mp4` (Shorts, 1:20) | quadro de ~2 s, escolhido no app |
 | 2026-11-14 20:00 | `youtube/curto-02.mp4` (Shorts, 1:28) | quadro de ~2 s, escolhido no app |
 | 2026-11-14 22:00 | `youtube/curto-03.mp4` (Shorts, 1:00) | quadro de ~1 s, escolhido no app |
@@ -34,7 +34,7 @@ Calendário (decisão do Giovanni em 14/11/2026; horário de Brasília): tudo no
 **Título** (64 caracteres; começa pela busca "deus abandonou jesus na cruz", que está no autocompletar do YouTube, e o "Salmo 22" fica no fim, para quem busca o salmo)
 > DEUS ABANDONOU JESUS NA CRUZ? O QUE A BÍBLIA RESPONDE (SALMO 22)
 
-**Miniaturas para o "Testar e comparar"** (2560×1440; sobem nesta ordem, e a primeira fica se não houver vencedora)
+**Miniatura** (2560×1440): só a A, sem "Testar e comparar" (decisão do Giovanni em 2026-11-14: "sem teste ab"). A B e a C ficam no repositório, sem uso.
 
 | Ordem | Arquivo | Texto | Motivo para clicar |
 |---|---|---|---|
@@ -207,7 +207,7 @@ Qual dessas cenas você não conhecia? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `tiktok/curto-01-capa.jpg` ("FILHO / ABANDONADO?"). **Resposta ao primeiro comentário:** "Salmo 22 (21 em algumas Bíblias católicas). O vídeo completo está no perfil: as quatro cenas daquele dia que o salmo descreve e a resposta à pergunta."
+**Capa:** `tiktok/curto-01-capa.jpg` ("DEUS / ABANDONOU / JESUS?", a mesma capa nos três curtos, decisão do Giovanni em 2026-11-14). **Resposta ao primeiro comentário:** "Salmo 22 (21 em algumas Bíblias católicas). O vídeo completo está no perfil: as quatro cenas daquele dia que o salmo descreve e a resposta à pergunta."
 
 ### Curto 2: `tiktok/curto-02.mp4`
 
@@ -226,7 +226,7 @@ Você já tinha pensado nessa pergunta? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `tiktok/curto-02-capa.jpg` ("JESUS / POR QUE GRITOU?"). **Resposta ao primeiro comentário:** "Salmo 22 (21 em algumas Bíblias católicas). O vídeo completo está no perfil, com as quatro cenas daquele dia que o salmo descreve."
+**Capa:** `tiktok/curto-02-capa.jpg` ("DEUS / ABANDONOU / JESUS?", a mesma capa nos três curtos, decisão do Giovanni em 2026-11-14). **Resposta ao primeiro comentário:** "Salmo 22 (21 em algumas Bíblias católicas). O vídeo completo está no perfil, com as quatro cenas daquele dia que o salmo descreve."
 
 ### Curto 3: `tiktok/curto-03.mp4`
 
@@ -245,7 +245,7 @@ Você conhecia o fim desse salmo? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `tiktok/curto-03-capa.jpg` ("DEUS / ME ABANDONOU?"). **Resposta ao primeiro comentário:** "Salmo 22 (21 em algumas Bíblias católicas). O vídeo completo está no perfil, com as quatro cenas daquele dia que o salmo descreve."
+**Capa:** `tiktok/curto-03-capa.jpg` ("DEUS / ABANDONOU / JESUS?", a mesma capa nos três curtos, decisão do Giovanni em 2026-11-14). **Resposta ao primeiro comentário:** "Salmo 22 (21 em algumas Bíblias católicas). O vídeo completo está no perfil, com as quatro cenas daquele dia que o salmo descreve."
 
 ## Instagram
 
@@ -282,7 +282,7 @@ Qual dessas cenas você não conhecia? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `instagram/curto-01-capa.jpg` ("FILHO / ABANDONADO?").
+**Capa:** `instagram/curto-01-capa.jpg` ("DEUS / ABANDONOU / JESUS?", a mesma capa nos três curtos, decisão do Giovanni em 2026-11-14).
 
 ### Curto 2: `instagram/curto-02.mp4`
 
@@ -301,7 +301,7 @@ Você já tinha pensado nessa pergunta? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `instagram/curto-02-capa.jpg` ("JESUS / POR QUE GRITOU?").
+**Capa:** `instagram/curto-02-capa.jpg` ("DEUS / ABANDONOU / JESUS?", a mesma capa nos três curtos, decisão do Giovanni em 2026-11-14).
 
 ### Curto 3: `instagram/curto-03.mp4`
 
@@ -320,7 +320,7 @@ Você conhecia o fim desse salmo? 👇
 Google Play e o logotipo do Google Play são marcas da Google LLC.
 ```
 
-**Capa:** `instagram/curto-03-capa.jpg` ("DEUS / ME ABANDONOU?").
+**Capa:** `instagram/curto-03-capa.jpg` ("DEUS / ABANDONOU / JESUS?", a mesma capa nos três curtos, decisão do Giovanni em 2026-11-14).
 
 ## Conferência na NVI
 
