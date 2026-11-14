@@ -22,10 +22,10 @@ Calendário (decisão do Giovanni em 14/11/2026; horário de Brasília): tudo no
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-15 19:00 | `youtube/longo.mp4` (4:55, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
-| 2026-11-16 12:00 | `youtube/curto-01.mp4` (Shorts, 1:20) | quadro de ~2 s, escolhido no app |
-| 2026-11-17 12:00 | `youtube/curto-02.mp4` (Shorts, 1:28) | quadro de ~2 s, escolhido no app |
-| 2026-11-18 12:00 | `youtube/curto-03.mp4` (Shorts, 1:00) | quadro de ~1 s, escolhido no app |
+| 2026-11-14 16:00 | `youtube/longo.mp4` (4:55, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
+| 2026-11-14 18:00 | `youtube/curto-01.mp4` (Shorts, 1:20) | quadro de ~2 s, escolhido no app |
+| 2026-11-14 20:00 | `youtube/curto-02.mp4` (Shorts, 1:28) | quadro de ~2 s, escolhido no app |
+| 2026-11-14 22:00 | `youtube/curto-03.mp4` (Shorts, 1:00) | quadro de ~1 s, escolhido no app |
 
 ### Vídeo longo: `youtube/longo.mp4`
 
@@ -90,7 +90,7 @@ Das quatro cenas que o salmo descreve, qual mais te surpreendeu? Me conta aqui e
 ```
 Jesus, um Filho abandonado pelo Pai? É o que a frase dele na cruz parece dizer.
 
-Mateus e Marcos guardaram até o som das palavras: "Eloí, Eloí, lamá sabactâni?", que significa "Meu Deus! Meu Deus! Por que me abandonaste?". É a primeira linha do Salmo 22 (21 em algumas Bíblias católicas). E o mesmo salmo descreve cenas daquele dia: os insultos de quem passava balançando a cabeça, uma frase muito parecida com a que os líderes disseram na cruz e "Perfuraram minhas mãos e meus pés".
+Mateus e Marcos guardaram até o som das palavras: "Eloí, Eloí, lamá sabactâni?", que significa "Meu Deus! Meu Deus! Por que me abandonaste?". É a primeira linha do Salmo 22 (21 em algumas Bíblias católicas). E o mesmo salmo descreve cenas daquele dia: os insultos de quem passava balançando a cabeça, uma frase muito parecida com a que os líderes disseram diante da cruz e "Perfuraram minhas mãos e meus pés".
 
 Depois, Jesus ressuscitado disse aos discípulos: "Vejam as minhas mãos e os meus pés. Sou eu mesmo!"
 
@@ -157,12 +157,12 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-15 19:00 | `tiktok/longo.mp4` (4:45, vertical, com o título fixo e o texto "DEUS ABANDONOU JESUS?" no 1º quadro; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
-| 2026-11-16 19:00 | `tiktok/curto-01.mp4` (1:20) | `tiktok/curto-01-capa.jpg` |
-| 2026-11-17 19:00 | `tiktok/curto-02.mp4` (1:28) | `tiktok/curto-02-capa.jpg` |
-| 2026-11-18 19:00 | `tiktok/curto-03.mp4` (1:00) | `tiktok/curto-03-capa.jpg` |
+| 2026-11-14 16:00 | `tiktok/longo.mp4` (4:45, vertical, com o título fixo e o texto "DEUS ABANDONOU JESUS?" no 1º quadro; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
+| 2026-11-14 18:00 | `tiktok/curto-01.mp4` (1:20) | `tiktok/curto-01-capa.jpg` |
+| 2026-11-14 20:00 | `tiktok/curto-02.mp4` (1:28) | `tiktok/curto-02-capa.jpg` |
+| 2026-11-14 22:00 | `tiktok/curto-03.mp4` (1:00) | `tiktok/curto-03-capa.jpg` |
 
-**Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto (o vídeo pode ficar fora do Programa de Recompensas). Rótulo de IA opcional, porque a animação não é realista. Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
+**Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto (o vídeo pode ficar fora do Programa de Recompensas). Rótulo de conteúdo gerado por IA ligado: a narração é voz sintética realista (o mesmo motivo do Instagram e do YouTube; revisão de 2026-11-14). Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
 
 ### Longo: `tiktok/longo.mp4`
 
@@ -255,9 +255,9 @@ Os três curtos vão compostos na vertical, com enquadramento por cena (layout "
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-16 19:00 | `instagram/curto-01.mp4` (1:20) | `instagram/curto-01-capa.jpg` |
-| 2026-11-17 19:00 | `instagram/curto-02.mp4` (1:28) | `instagram/curto-02-capa.jpg` |
-| 2026-11-18 19:00 | `instagram/curto-03.mp4` (1:00) | `instagram/curto-03-capa.jpg` |
+| 2026-11-14 18:00 | `instagram/curto-01.mp4` (1:20) | `instagram/curto-01-capa.jpg` |
+| 2026-11-14 20:00 | `instagram/curto-02.mp4` (1:28) | `instagram/curto-02-capa.jpg` |
+| 2026-11-14 22:00 | `instagram/curto-03.mp4` (1:00) | `instagram/curto-03-capa.jpg` |
 
 **Configurações de todos:**
 - Capa personalizada: a imagem da pasta. Não dá para trocar depois de publicar.
