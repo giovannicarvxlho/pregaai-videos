@@ -2,7 +2,7 @@
 
 **Episódio:** salmo-22 (longo com 4:45 de fala e 4:55 com o cartão final do YouTube; 3 curtos recortados da narração, cada um com a própria abertura, aprovada com o roteiro em 2026-11-13; as dos curtos 1 e 3 foram refeitas e aprovadas pelo Giovanni no mesmo dia) · **Palavra-chave principal:** deus abandonou jesus na cruz (está no autocompletar do YouTube, conferido em 2026-11-13, junto com "porque deus abandonou jesus na cruz") · **Outras buscas:** meu deus meu deus por que me abandonaste, salmo 22, eloí eloí lamá sabactâni, túnica de jesus · **Base bíblica:** Salmo 22:1, 7-8, 10, 16, 18, 21-22, 24, 31; Mateus 16:21; 27:39-47, 51; Marcos 15:25, 27, 34; Lucas 24:1-3, 39; João 19:23-24; 20:25; 2 Coríntios 5:21; Isaías 53:6; Romanos 8:32; Hebreus 2:12; 5:7
 
-Calendário (decisão do Giovanni em 14/11/2026; horário de Brasília): tudo no sábado, 14/11, com a regra das 24 h do TikTok suspensa como teste. TikTok: longo às 17:30 e curtos 1, 2 e 3 às 19:00, 20:30 e 22:00. YouTube: longo às 19:00 e Shorts 1, 2 e 3 às 18:00, 20:00 e 22:00. Instagram: curtos 1, 2 e 3 às 18:00, 20:00 e 22:00.
+Calendário (decisão do Giovanni em 14/11/2026; horário de Brasília): tudo no sábado, 14/11, com a regra das 24 h do TikTok suspensa como teste. Longo às 16:00 no TikTok e no YouTube; curtos 1, 2 e 3 às 18:00, 20:00 e 22:00 no TikTok, no YouTube Shorts e no Instagram (grade fechada pelo Giovanni em 14/11).
 
 **Duas regras de texto para este episódio** (seção "Copy fora do roteiro" do `roteiro.md`):
 - Nunca escrever "pregaram os pés" (na legenda nem nas respostas): os evangelhos falam das marcas dos pregos nas mãos (João 20:25) e de Jesus mostrando as mãos e os pés (Lucas 24:39-40). O Salmo 22:16 diz "Perfuraram minhas mãos e meus pés".
@@ -22,10 +22,10 @@ Calendário (decisão do Giovanni em 14/11/2026; horário de Brasília): tudo no
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-15 19:00 | `youtube/longo.mp4` (4:55, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
-| 2026-11-16 12:00 | `youtube/curto-01.mp4` (Shorts, 1:20) | quadro de ~2 s, escolhido no app |
-| 2026-11-17 12:00 | `youtube/curto-02.mp4` (Shorts, 1:28) | quadro de ~2 s, escolhido no app |
-| 2026-11-18 12:00 | `youtube/curto-03.mp4` (Shorts, 1:00) | quadro de ~1 s, escolhido no app |
+| 2026-11-14 16:00 | `youtube/longo.mp4` (4:55, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
+| 2026-11-14 18:00 | `youtube/curto-01.mp4` (Shorts, 1:20) | quadro de ~2 s, escolhido no app |
+| 2026-11-14 20:00 | `youtube/curto-02.mp4` (Shorts, 1:28) | quadro de ~2 s, escolhido no app |
+| 2026-11-14 22:00 | `youtube/curto-03.mp4` (Shorts, 1:00) | quadro de ~1 s, escolhido no app |
 
 ### Vídeo longo: `youtube/longo.mp4`
 
@@ -90,7 +90,7 @@ Das quatro cenas que o salmo descreve, qual mais te surpreendeu? Me conta aqui e
 ```
 Jesus, um Filho abandonado pelo Pai? É o que a frase dele na cruz parece dizer.
 
-Mateus e Marcos guardaram até o som das palavras: "Eloí, Eloí, lamá sabactâni?", que significa "Meu Deus! Meu Deus! Por que me abandonaste?". É a primeira linha do Salmo 22 (21 em algumas Bíblias católicas). E o mesmo salmo descreve cenas daquele dia: os insultos de quem passava balançando a cabeça, uma frase muito parecida com a que os líderes disseram na cruz e "Perfuraram minhas mãos e meus pés".
+Mateus e Marcos guardaram até o som das palavras: "Eloí, Eloí, lamá sabactâni?", que significa "Meu Deus! Meu Deus! Por que me abandonaste?". É a primeira linha do Salmo 22 (21 em algumas Bíblias católicas). E o mesmo salmo descreve cenas daquele dia: os insultos de quem passava balançando a cabeça, uma frase muito parecida com a que os líderes disseram diante da cruz e "Perfuraram minhas mãos e meus pés".
 
 Depois, Jesus ressuscitado disse aos discípulos: "Vejam as minhas mãos e os meus pés. Sou eu mesmo!"
 
@@ -157,12 +157,12 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-15 19:00 | `tiktok/longo.mp4` (4:45, vertical, com o título fixo e o texto "DEUS ABANDONOU JESUS?" no 1º quadro; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
-| 2026-11-16 19:00 | `tiktok/curto-01.mp4` (1:20) | `tiktok/curto-01-capa.jpg` |
-| 2026-11-17 19:00 | `tiktok/curto-02.mp4` (1:28) | `tiktok/curto-02-capa.jpg` |
-| 2026-11-18 19:00 | `tiktok/curto-03.mp4` (1:00) | `tiktok/curto-03-capa.jpg` |
+| 2026-11-14 16:00 | `tiktok/longo.mp4` (4:45, vertical, com o título fixo e o texto "DEUS ABANDONOU JESUS?" no 1º quadro; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
+| 2026-11-14 18:00 | `tiktok/curto-01.mp4` (1:20) | `tiktok/curto-01-capa.jpg` |
+| 2026-11-14 20:00 | `tiktok/curto-02.mp4` (1:28) | `tiktok/curto-02-capa.jpg` |
+| 2026-11-14 22:00 | `tiktok/curto-03.mp4` (1:00) | `tiktok/curto-03-capa.jpg` |
 
-**Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto (o vídeo pode ficar fora do Programa de Recompensas). Rótulo de IA opcional, porque a animação não é realista. Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
+**Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto (o vídeo pode ficar fora do Programa de Recompensas). Rótulo de conteúdo gerado por IA ligado: a narração é voz sintética realista (o mesmo motivo do Instagram e do YouTube; revisão de 2026-11-14). Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
 
 ### Longo: `tiktok/longo.mp4`
 
@@ -255,9 +255,9 @@ Os três curtos vão compostos na vertical, com enquadramento por cena (layout "
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-16 19:00 | `instagram/curto-01.mp4` (1:20) | `instagram/curto-01-capa.jpg` |
-| 2026-11-17 19:00 | `instagram/curto-02.mp4` (1:28) | `instagram/curto-02-capa.jpg` |
-| 2026-11-18 19:00 | `instagram/curto-03.mp4` (1:00) | `instagram/curto-03-capa.jpg` |
+| 2026-11-14 18:00 | `instagram/curto-01.mp4` (1:20) | `instagram/curto-01-capa.jpg` |
+| 2026-11-14 20:00 | `instagram/curto-02.mp4` (1:28) | `instagram/curto-02-capa.jpg` |
+| 2026-11-14 22:00 | `instagram/curto-03.mp4` (1:00) | `instagram/curto-03-capa.jpg` |
 
 **Configurações de todos:**
 - Capa personalizada: a imagem da pasta. Não dá para trocar depois de publicar.
