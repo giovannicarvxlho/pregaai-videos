@@ -76,7 +76,16 @@ def frases(data_js):
         m = re.match(r"\s*\[([\d.]+),\s*[\d.]+,\s*'((?:[^'\\]|\\.)*)'", linha)
         if not m:
             continue
-        tempos = [float(x) for x in re.findall(r'[\d.]+', linha[linha.rfind('[') + 1:linha.rfind(']')])]
+        # O que vem depois do texto: os blocos da legenda ([[início, fim], ...]) e, nas narrações com tempo por
+        # palavra, a lista plana com o início de cada palavra. Narração antiga (sem essa lista) fica sem tempos.
+        resto = linha[m.end():].strip().rstrip(',').rstrip()
+        resto = resto[:-1] if resto.endswith(']') else resto
+        try:
+            extras = json.loads('[' + resto.lstrip(',') + ']')
+        except ValueError:
+            extras = []
+        tempos = next((x for x in extras if isinstance(x, list) and x
+                       and all(isinstance(v, (int, float)) for v in x)), [])
         palavras = re.sub(r'(^|\s)[!*]', r'\1', m.group(2).replace('|', ' ')).split()  # ! e * só marcam o começo
         out.append((float(m.group(1)), list(zip(palavras, tempos)) if len(palavras) == len(tempos) else []))
     return out
@@ -379,7 +388,7 @@ def sons(seg, roteiro, fr):
         som = {'passos': 'passo', 'voz': 'voz', 'grifa': 'risco', 'cartao': 'pop'}
         for chave, tipo in som.items():
             g = roteiro.get('eventos', {}).get(chave, 0)
-            efeitos += [{'t': t, 'tipo': tipo, 'ganho': g} for t in ev.get(chave, []) if g]
+            efeitos += [{'t': t / roteiro.get('_speed', 1), 'tipo': tipo, 'ganho': g} for t in ev.get(chave, []) if g]
     for k, x in enumerate(efeitos):
         t0 = x['t'] if 't' in x else quando(fr, x['frase'], x.get('palavra'))
         i0 = int((t0 + x.get('atraso', 0)) * SR)
@@ -465,6 +474,16 @@ def main():
         roteiro['_eventos'] = os.path.join(os.path.dirname(rot_arq), 'eventos.json')  # node tools/eventos.cjs <ep>
     fr = frases(os.path.join(os.path.dirname(rot_arq), 'data.js')) if rot_arq else []
     trechos = [json.load(open(c, encoding='utf-8'))['trechos'] for c in cortes] or [None] * len(pares)
+    # Vídeo acelerado pelo build.sh (SPEED no data.js, ex.: 1.25 nos curtos): a animação e a narração andam
+    # SPEED vezes mais rápido no vídeo, então os momentos dos efeitos são divididos por SPEED. Os cortes do
+    # corte.cjs saem na velocidade da origem e usam os tempos como estão.
+    if rot_arq and not cortes:
+        m = re.search(r'const\s+SPEED\s*=\s*([\d.]+)', open(os.path.join(os.path.dirname(rot_arq), 'data.js'),
+                                                          encoding='utf-8').read())
+        speed = float(m.group(1)) if m else 1.0
+        if speed != 1:
+            roteiro['_speed'] = speed
+            fr = [(a / speed, [(p, t / speed) for p, t in pals]) for a, pals in fr]
     segs = [duracao(e) for e, _ in pares]
     # a trilha é calculada uma vez, na linha do tempo da narração, e recortada para cada vídeo
     total = max(max(b for _, b in t) if t else s for t, s in zip(trechos, segs)) + 3

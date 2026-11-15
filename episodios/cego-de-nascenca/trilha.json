@@ -1,0 +1,27 @@
+{
+  "volume": 0,
+  "secoes": [
+    {
+      "frase": 0,
+      "humor": "suspense",
+      "ganho": 0.6
+    }
+  ],
+  "impactos": [],
+  "efeitos_volume": 4.0,
+  "efeitos": [
+    {
+      "frase": 18,
+      "tipo": "brilho",
+      "ganho": 0.5,
+      "atraso": 3.1
+    }
+  ],
+  "piano": false,
+  "eventos": {
+    "passos": 0.3,
+    "voz": 0.45,
+    "grifa": 0.35,
+    "cartao": 0.45
+  }
+}
