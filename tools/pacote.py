@@ -11,6 +11,8 @@
 # Drive no computador: com PACOTE_DRIVE=<pasta> no ambiente ou no .env.local da raiz (fora do git), o pacote
 # também é copiado para <pasta>/<AAAA-MM-DD>-<ep>/. Use uma pasta sincronizada pelo Google Drive para computador
 # (ex.: PACOTE_DRIVE=G:\Meu Drive\PregaAI\Pacotes), e o Drive sobe sozinho.
+# Drive na nuvem: com DRIVE_ENTREGA_CHAVE (a chave do Vault, ver tools/drive_entrega.py), o pacote sobe direto para
+# o Drive do Giovanni, em "Entregas do Mark"/<DD/MM/AA>/<AAAA-MM-DD>-<ep>/.
 #
 # O que ele procura (os nomes que o build.sh e o capa.cjs geram):
 #   out/<ep>.mp4                    o longo. Se o episódio for um curto, é o curto 01.
@@ -243,6 +245,14 @@ if drive:
         print(f'drive: {destino}')
     else:
         avisos.append(f'PACOTE_DRIVE aponta para {drive}, que não existe: o pacote não foi copiado para o Drive')
+chave_drive = config('DRIVE_ENTREGA_CHAVE')
+if chave_drive:  # na nuvem: o pacote sobe direto para o Drive do Giovanni (tools/drive_entrega.py)
+    from drive_entrega import subir
+    try:
+        caminho_drive, pasta_drive = subir(dest, chave_drive)
+        print(f'drive: {caminho_drive} (pasta {pasta_drive})')
+    except Exception as e:
+        avisos.append(f'o pacote não subiu para o Drive: {e}')
 for a in avisos:
     print('! ' + a)
 sys.exit(1 if avisos else 0)
