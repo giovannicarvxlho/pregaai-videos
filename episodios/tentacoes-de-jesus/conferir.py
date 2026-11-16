@@ -18,7 +18,7 @@ def verso(ref):
     cap, v = ref.split(':')
     return next(x['t'] for x in NVI[cap] if x['v'] == int(v))
 
-NOTAS = ['mc.1:12', 'mc.1:13', 'dt.6:13', 'mt.4:10', 'tg.1:13', 'hb.4:16', 'hb.5:7', 'mt.27:46', 'mt.26:39', 'mc.9:24', 'mt.6:11']
+NOTAS = ['mc.1:12', 'mc.1:13', 'dt.6:13', 'mt.4:10', 'hb.4:16', 'hb.5:7', 'mt.27:46', 'mc.9:24', 'mt.6:11']
 rot = open(os.path.join(AQUI, 'roteiro.md'), encoding='utf-8').read()
 notas = rot[rot.index('## Notas'):rot.index('## Revisões')]
 qn = re.findall(r'"([^"]+)"', notas)
