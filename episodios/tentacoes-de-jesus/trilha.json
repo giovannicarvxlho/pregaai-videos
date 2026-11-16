@@ -1,0 +1,350 @@
+{
+  "volume": 0,
+  "piano": false,
+  "secoes": [
+    {
+      "frase": 0,
+      "humor": "suspense",
+      "ganho": 0.5
+    },
+    {
+      "frase": 19,
+      "humor": "luz",
+      "ganho": 0.6
+    },
+    {
+      "frase": 22,
+      "humor": "suspense",
+      "ganho": 0.5
+    },
+    {
+      "frase": 30,
+      "humor": "emocao",
+      "ganho": 0.55
+    }
+  ],
+  "impactos": [
+    {
+      "frase": 19,
+      "palavra": "retire",
+      "tipo": "luz",
+      "ganho": 0.8
+    },
+    {
+      "frase": 29,
+      "palavra": "jesus",
+      "tipo": "luz",
+      "ganho": 0.7
+    }
+  ],
+  "efeitos_volume": 4.0,
+  "efeitos": [
+    {
+      "frase": 0,
+      "tipo": "brilho",
+      "ganho": 0.4,
+      "palavra": "espírito"
+    },
+    {
+      "frase": 1,
+      "tipo": "passaros",
+      "ganho": 0.35,
+      "palavra": "batismo"
+    },
+    {
+      "frase": 1,
+      "tipo": "brilho",
+      "ganho": 0.5,
+      "palavra": "disse"
+    },
+    {
+      "frase": 2,
+      "tipo": "anel",
+      "ganho": 0.4,
+      "palavra": "diabo"
+    },
+    {
+      "frase": 4,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "atraso": 0.05
+    },
+    {
+      "frase": 4,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "atraso": 0.65
+    },
+    {
+      "frase": 4,
+      "tipo": "pop",
+      "ganho": 0.5,
+      "atraso": 1.25
+    },
+    {
+      "frase": 4,
+      "tipo": "papel",
+      "ganho": 0.4,
+      "palavra": "respondeu",
+      "atraso": -0.2
+    },
+    {
+      "frase": 6,
+      "tipo": "risco",
+      "ganho": 0.5,
+      "palavra": "quarenta",
+      "atraso": -0.4
+    },
+    {
+      "frase": 7,
+      "tipo": "swish",
+      "ganho": 0.4
+    },
+    {
+      "frase": 8,
+      "tipo": "pedra",
+      "ganho": 0.45,
+      "palavra": "pedras"
+    },
+    {
+      "frase": 8,
+      "tipo": "pop",
+      "ganho": 0.45,
+      "palavra": "pães",
+      "atraso": -0.3
+    },
+    {
+      "frase": 9,
+      "tipo": "papel",
+      "ganho": 0.45,
+      "palavra": "escrito",
+      "atraso": -0.3
+    },
+    {
+      "frase": 10,
+      "tipo": "brilho",
+      "ganho": 0.45,
+      "palavra": "pôs"
+    },
+    {
+      "frase": 11,
+      "tipo": "swish",
+      "ganho": 0.4
+    },
+    {
+      "frase": 12,
+      "tipo": "anel",
+      "ganho": 0.35,
+      "palavra": "jogue"
+    },
+    {
+      "frase": 13,
+      "tipo": "papel",
+      "ganho": 0.35,
+      "palavra": "citou"
+    },
+    {
+      "frase": 13,
+      "tipo": "brilho",
+      "ganho": 0.35,
+      "palavra": "anjos"
+    },
+    {
+      "frase": 14,
+      "tipo": "papel",
+      "ganho": 0.45,
+      "palavra": "escrito",
+      "atraso": -0.3
+    },
+    {
+      "frase": 15,
+      "tipo": "brilho",
+      "ganho": 0.45,
+      "palavra": "estava"
+    },
+    {
+      "frase": 16,
+      "tipo": "swish",
+      "ganho": 0.4
+    },
+    {
+      "frase": 16,
+      "tipo": "brilho",
+      "ganho": 0.45,
+      "palavra": "mostrou"
+    },
+    {
+      "frase": 17,
+      "tipo": "pop",
+      "ganho": 0.45,
+      "palavra": "darei",
+      "atraso": 0
+    },
+    {
+      "frase": 17,
+      "tipo": "pop",
+      "ganho": 0.45,
+      "palavra": "darei",
+      "atraso": 0.2
+    },
+    {
+      "frase": 17,
+      "tipo": "pop",
+      "ganho": 0.45,
+      "palavra": "darei",
+      "atraso": 0.4
+    },
+    {
+      "frase": 17,
+      "tipo": "pop",
+      "ganho": 0.45,
+      "palavra": "darei",
+      "atraso": 0.6
+    },
+    {
+      "frase": 18,
+      "tipo": "peso",
+      "ganho": 0.5,
+      "palavra": "adoração"
+    },
+    {
+      "frase": 19,
+      "tipo": "papel",
+      "ganho": 0.45,
+      "palavra": "escrito",
+      "atraso": -0.3
+    },
+    {
+      "frase": 20,
+      "tipo": "brilho",
+      "ganho": 0.5,
+      "palavra": "anjos"
+    },
+    {
+      "frase": 21,
+      "tipo": "swish",
+      "ganho": 0.4,
+      "palavra": "fim",
+      "atraso": -0.2
+    },
+    {
+      "frase": 22,
+      "tipo": "pop",
+      "ganho": 0.5
+    },
+    {
+      "frase": 23,
+      "tipo": "papel",
+      "ganho": 0.45,
+      "atraso": 0.1
+    },
+    {
+      "frase": 23,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.6
+    },
+    {
+      "frase": 23,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.95
+    },
+    {
+      "frase": 23,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 1.3
+    },
+    {
+      "frase": 26,
+      "tipo": "anel",
+      "ganho": 0.3,
+      "palavra": "tentado"
+    },
+    {
+      "frase": 27,
+      "tipo": "pedra",
+      "ganho": 0.45,
+      "palavra": "prova"
+    },
+    {
+      "frase": 27,
+      "tipo": "peso",
+      "ganho": 0.45,
+      "palavra": "bezerro"
+    },
+    {
+      "frase": 28,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.4
+    },
+    {
+      "frase": 28,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 0.9
+    },
+    {
+      "frase": 28,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "atraso": 1.4
+    },
+    {
+      "frase": 31,
+      "tipo": "pop",
+      "ganho": 0.4,
+      "palavra": "irmãos"
+    },
+    {
+      "frase": 32,
+      "tipo": "brilho",
+      "ganho": 0.45,
+      "palavra": "sem"
+    },
+    {
+      "frase": 33,
+      "tipo": "coracao",
+      "ganho": 0.4,
+      "palavra": "socorrer"
+    },
+    {
+      "frase": 34,
+      "tipo": "brilho",
+      "ganho": 0.5,
+      "palavra": "hebreus"
+    },
+    {
+      "frase": 35,
+      "tipo": "coracao",
+      "ganho": 0.35,
+      "palavra": "socorrer"
+    },
+    {
+      "frase": 36,
+      "tipo": "tique",
+      "ganho": 0.5,
+      "palavra": "pão"
+    },
+    {
+      "frase": 36,
+      "tipo": "tique",
+      "ganho": 0.5,
+      "palavra": "cobrar"
+    },
+    {
+      "frase": 36,
+      "tipo": "tique",
+      "ganho": 0.5,
+      "palavra": "trocar"
+    }
+  ],
+  "eventos": {
+    "passos": 0.3,
+    "voz": 0.45,
+    "grifa": 0.35,
+    "cartao": 0.45
+  }
+}
