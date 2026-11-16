@@ -5,9 +5,9 @@ import json, os, re, sys, unicodedata
 AQUI = os.path.dirname(os.path.abspath(__file__))
 CAMINHOS = [os.path.join(AQUI, '..', '..', '..', 'pregaai', 'assets', 'bible', 'nvi.json'), '/home/user/pregaai/assets/bible/nvi.json']
 NVI = json.load(open(next(c for c in CAMINHOS if os.path.exists(c)), encoding='utf-8'))
-REFS = ['mt.3:17', 'mt.4:3', 'mt.4:2', 'mt.4:3', 'mt.4:4', 'mt.4:6', 'mt.4:7', 'mt.4:9', 'mt.4:10', 'mt.4:11',
-        'dt.8:2', 'hb.2:17', 'hb.4:15', 'hb.2:18']
-ALSO = {'mt.4:4': 'dt.8:3', 'mt.4:6': 'sl.91:11', 'mt.4:7': 'dt.6:16', 'mt.4:10': 'dt.6:13'}
+REFS = ['mt.3:17', 'mt.4:3', 'mt.4:2', 'mt.4:3', 'mt.4:4', 'mt.4:6', 'mt.4:6', 'mt.4:7', 'mt.4:9', 'mt.4:10', 'mt.4:11',
+        'dt.8:2', 'hb.2:17', 'hb.4:15', 'hb.2:18', 'mt.4:3', 'hb.4:14']
+ALSO = {'mt.4:4': 'dt.8:3', 'mt.4:7': 'dt.6:16', 'mt.4:10': 'dt.6:13'}
 
 def norm(s):
     s = unicodedata.normalize('NFC', s).replace('’', "'").replace('‘', "'")
