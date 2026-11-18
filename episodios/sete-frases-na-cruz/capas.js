@@ -43,8 +43,11 @@ function artN1(o = {}) {
   m += sfVeu(MX, MY, MS, MARIA.cover, 1);
   s += sfContorno(m, 'sf1k', '#FF8A5C', 1, 14);
   s += capaVinheta(0.55, '58%', '42%', '82%');
-  s += capaTexto([{ t: '7', size: 500, fill: 'ouro', traco: 0.07 }], { x: 876, y: 566 });
-  s += capaTexto([{ t: 'ÚLTIMAS', w: 690 }, { t: 'FRASES', w: 690, fill: 'ouro' }], { x: 1156, y: 640, gap: 0.1 });
+  // o.texto === false: só a arte (capa vertical do curto, com o texto no HTML)
+  if (o.texto !== false) {
+    s += capaTexto([{ t: '7', size: 500, fill: 'ouro', traco: 0.07 }], { x: 876, y: 566 });
+    s += capaTexto([{ t: 'ÚLTIMAS', w: 690 }, { t: 'FRASES', w: 690, fill: 'ouro' }], { x: 1156, y: 640, gap: 0.1 });
+  }
   return s;
 }
 // N2 (confronto): o criminoso que pediu "lembra-te de mim" ouve a 2ª frase, "Hoje você estará comigo no paraíso"
@@ -79,6 +82,6 @@ function artN3(o = {}) {
   s += crossFig(CX, 1130, 1.42, { plaque: true, fill: '#030207', rim: '#E08CFF', bow: 1 });
   s += capaMotas(200, 380, 1500, 500, 30, 44, '#F3C9FF', 0.6);
   s += capaVinheta(0.6, '50%', '60%', '80%');
-  s += capaTexto([{ t: 'POR QUE ME', w: 900 }, { t: 'ABANDONASTE?', w: 1760, fill: 'ouro' }], { x: 960, y: 34, anchor: 'middle', gap: 0.08 });
+  if (o.texto !== false) s += capaTexto([{ t: 'POR QUE ME', w: 900 }, { t: 'ABANDONASTE?', w: 1760, fill: 'ouro' }], { x: 960, y: 34, anchor: 'middle', gap: 0.08 });
   return s;
 }
