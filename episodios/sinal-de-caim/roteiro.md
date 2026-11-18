@@ -61,8 +61,10 @@ Caim matou o próprio irmão. E Deus colocou nele um sinal, pra ninguém matar C
 - Respostas prontas para comentários:
   - "Com quem Caim se casou?": a Bíblia não diz quem era; diz que Adão "gerou outros filhos e filhas" (Gn 5:4).
   - "Caim foi perdoado?": o texto não diz.
+  - "Setenta e sete não é setenta vezes sete": na NVI, Gn 4:24 diz "setenta e sete" e Mt 18:22, "setenta vezes sete"; na Septuaginta (a tradução grega do Antigo Testamento), Gn 4:24 usa a mesma expressão grega de Mt 18:22. O vídeo não diz que Jesus falava de Lameque.
   - "Por que Deus não aceitou a oferta de Caim?": Hebreus diz que "Pela fé Abel ofereceu a Deus um sacrifício superior ao de Caim" (Hb 11:4), e João, que as obras de Caim "eram más" (1 Jo 3:12); Gênesis não explica mais que isso.
   - Comentário sobre violência em casa: perdoar não é continuar exposto ao perigo; em risco, 190 (polícia) ou 180 (Central de Atendimento à Mulher). Crise ou ideia de suicídio: CVV, 188.
 
 ## Revisões
 - Rodada 1 (2026-11-18): NVI com 3 erros e 3 pontos menores; teologia com 4 problemas; todos corrigidos (`revisoes/r1.md`).
+- Rodada 2 (2026-11-18): NVI com 1 erro ("se gabar", intenção que o texto não escreve), corrigido; teologia sem erro (`revisoes/r2.md`).
