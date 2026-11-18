@@ -24,7 +24,7 @@ Um filho pegou a parte dele da herança, gastou tudo, voltou e ganhou uma festa.
 
 **1. A ovelha.** A primeira: Jesus pergunta a eles quem, com cem ovelhas e perdendo uma, não deixaria "as noventa e nove no campo" pra ir atrás da perdida. Quando acha, ele "coloca-a alegremente sobre os ombros" e chama os vizinhos pra comemorar.
 
-**2. A moeda.** A segunda é outra pergunta: que mulher, com dez moedas, perde uma e não procura? Ela "acende uma candeia, varre a casa e procura atentamente". Quando acha, chama as vizinhas. Nas duas, Jesus termina falando da alegria "por um pecador que se arrepende".
+**2. A moeda.** A segunda é outra pergunta: que mulher, com dez moedas, perde uma e não procura? Ela "acende uma candeia, varre a casa e procura atentamente". Quando acha, chama as vizinhas. Na primeira, Jesus fala de "mais alegria no céu". Na segunda, de alegria "na presença dos anjos de Deus". Nas duas, "por um pecador que se arrepende".
 
 **3. Os dois filhos.** A terceira: "Um homem tinha dois filhos". O mais novo pediu a parte dele da herança, foi pra longe e gastou tudo. Veio a fome, e ele foi cuidar de porcos. Queria comer o que os porcos comiam, e ninguém lhe dava nada. Então resolveu voltar e dizer: "Pai, pequei contra o céu e contra ti". "Estando ainda longe, seu pai o viu e, cheio de compaixão, correu para seu filho". A melhor roupa, um anel no dedo, calçados nos pés e uma festa. Porque "este meu filho estava morto e voltou à vida; estava perdido e foi achado". Mas o mais velho chegou do campo, ouviu a música, "encheu-se de ira, e não quis entrar". O pai saiu e insistiu com ele. E ele respondeu: "todos esses anos tenho trabalhado como um escravo ao teu serviço e nunca desobedeci às tuas ordens. Mas tu nunca me deste nem um cabrito para eu festejar com os meus amigos". E chamou o irmão de "esse seu filho". O pai disse: "Meu filho, você está sempre comigo, e tudo o que tenho é seu". E chamou o mais novo de "este seu irmão": "nós tínhamos que comemorar e alegrar-nos, porque este seu irmão estava morto e voltou à vida".
 
@@ -55,7 +55,7 @@ Um filho pegou a parte dele da herança, gastou tudo, voltou e ganhou uma festa.
 10. Fim: paga o gancho (o paralelo e o fim aberto) e termina numa pergunta de escolha com as frases do próprio vídeo.
 
 ## Notas
-- ~2.520 caracteres de narração, ~183 s de fala na velocidade 1,0 e ~146 s de vídeo com `SPEED = 1.25` (13,8 caracteres por segundo, medidos nas narrações de `salmo-22` e `eu-sou`). Acima de 1 min (Recompensas do TikTok) e abaixo de 3 min (Short e Reel).
+- ~2.590 caracteres de narração, ~188 s de fala na velocidade 1,0 e ~150 s de vídeo com `SPEED = 1.25` (13,8 caracteres por segundo, medidos nas narrações de `salmo-22` e `eu-sou`). Acima de 1 min (Recompensas do TikTok) e abaixo de 3 min (Short e Reel).
 - Base bíblica para a descrição: Lucas 15:1-32.
 - Produção: as duas primeiras histórias como perguntas de Jesus para a roda dos fariseus (Jesus falando, a cena aparece num balão ou num quadro dentro da cena). Os porcos de longe, sem close. O pai correndo é o momento do vídeo. O fim com o mais velho do lado de fora e o pai saindo pela porta, sem mostrar se ele entra.
 - Respostas prontas para comentários:
@@ -67,3 +67,4 @@ Um filho pegou a parte dele da herança, gastou tudo, voltou e ganhou uma festa.
 - Rodada 1 (2026-11-18): NVI com 1 erro; teologia com 3; corrigidos (`revisoes/r1.md`).
 - Rodada 2 (2026-11-18): NVI com 1 erro; teologia com 1; corrigidos (`revisoes/r2.md`).
 - Rodada 3: NVI com 2 erros, teologia com 1; corrigidos. Rodadas 4, 5 e 6: sem erro; depois, o "esse seu filho" entrou na fala do mais velho e a contagem recomeçou (`revisoes/r3-r6.md`).
+- Rodadas 7, 8 e 9: NVI sem erro (7 e 8; a 9 parou no limite de uso); teologia sem erro (8 e 9) e 1 erro leve na 7: a alegria das duas primeiras ficava sem dono. Agora: "mais alegria no céu" (15:7) e "na presença dos anjos de Deus" (15:10). Rodadas 10 a 12 com revisor único de NVI e teologia, para poupar o limite.
