@@ -26,7 +26,7 @@ Caim matou o próprio irmão. E Deus colocou nele um sinal, pra ninguém matar C
 
 **2. O sinal não tirou o castigo.** Deus perguntou: "Onde está seu irmão Abel?" Caim respondeu: "Não sei; sou eu o responsável por meu irmão?" E Deus disse: "Da terra o sangue do seu irmão está clamando". O castigo ficou: ele seria "um fugitivo errante pelo mundo". Caim disse que quem o encontrasse ia matá-lo. E Deus respondeu: "se alguém matar Caim, sofrerá sete vezes a vingança". O sinal veio daí. Guarda esse sete.
 
-**3. Cinco gerações depois.** Lameque, um descendente de Caim, contou às mulheres dele que tinha matado um homem que o feriu. E disse: "Se Caim é vingado sete vezes, Lameque o será setenta e sete". Deus usou o sete pra ninguém matar Caim. Lameque usou o sete pra se gabar.
+**3. Cinco gerações depois.** Lameque, um descendente de Caim, contou às mulheres dele que tinha matado um homem que o feriu. E disse: "Se Caim é vingado sete vezes, Lameque o será setenta e sete". Deus usou o sete pra ninguém matar Caim. Lameque usou o sete pra aumentar a vingança.
 
 **Fim.** Muito tempo depois, Pedro perguntou a Jesus quantas vezes devia perdoar o irmão que pecasse contra ele. "Até sete vezes?" E Jesus respondeu: "não até sete, mas até setenta vezes sete". Lameque multiplicou a vingança. Jesus multiplicou o perdão. Qual das três te surpreendeu mais: o aviso antes do crime, o sinal que não tirou o castigo, ou o sete de Lameque?
 
@@ -50,7 +50,7 @@ Caim matou o próprio irmão. E Deus colocou nele um sinal, pra ninguém matar C
 5. Itens numerados: a primeira, a segunda, a terceira.
 6. Detalhe de estudo: o aviso de Gn 4:7; o sete de Gn 4:15; as cinco gerações até Lameque (Enoque, Irade, Meujael, Metusael, Lameque, Gn 4:17-18); o setenta e sete de Gn 4:24; o "Até sete vezes?" de Pedro.
 7. Cena com diálogo: Deus e Caim, antes e depois do crime.
-8. Frase de virada por item: "Mesmo assim, Caim chamou o irmão"; "O castigo ficou"; "Deus usou o sete pra ninguém matar Caim. Lameque usou o sete pra se gabar."; "Lameque multiplicou a vingança. Jesus multiplicou o perdão."
+8. Frase de virada por item: "Mesmo assim, Caim chamou o irmão"; "O castigo ficou"; "Deus usou o sete pra ninguém matar Caim. Lameque usou o sete pra aumentar a vingança."; "Lameque multiplicou a vingança. Jesus multiplicou o perdão."
 9. Pedido falado: nenhum. O app fica no banner.
 10. Fim: pergunta de escolha com as frases do próprio vídeo.
 
