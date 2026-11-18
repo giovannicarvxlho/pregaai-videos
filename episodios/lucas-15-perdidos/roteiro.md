@@ -1,6 +1,6 @@
 # Por que o filho mais velho não quis entrar? (Lucas 15)
 
-**Status: aguardando validação do Giovanni.** Escrito em 2026-11-18. Curto escrito do zero, vertical, ~2 min, uma peça só nas três redes (TikTok, Instagram e Shorts). Tema indicado pelo Mark em 2026-11-18 como o melhor para as três redes, depois que o Giovanni recusou o Caim ("não gostei muito do tema") e pediu "o melhor tema para o próximo vídeo em todas as plataformas".
+**Status: aguardando validação do Giovanni.** Revisões de NVI e de teologia fechadas em 2026-11-18, com 3 rodadas seguidas sem erro (a 10, a 11 e a 12). Escrito em 2026-11-18. Curto escrito do zero, vertical, ~2 min, uma peça só nas três redes (TikTok, Instagram e Shorts). Tema indicado pelo Mark em 2026-11-18 como o melhor para as três redes, depois que o Giovanni recusou o Caim ("não gostei muito do tema") e pediu "o melhor tema para o próximo vídeo em todas as plataformas".
 
 **Por que este tema:** (1) nos dados do canal, o que passou da base nas três redes foi Jesus contado em lista (as 7 frases; as 3 tentações com 4.269 views no TikTok, 2.903 nos Shorts e 1.388 no Instagram em menos de um dia, coletor e Windsor em 18/11); (2) no garimpo do MARK1 (rodada de 2026-11-18), a ovelha perdida fez 366 mil views no TikTok, 130 vezes a mediana do perfil (https://www.tiktok.com/@sagrad0_trech0/video/7706176608683461894); (3) Lucas 15 já é uma lista fechada de três, sem disputa entre igrejas, e o pai que corre é o tipo de cena que se manda a alguém. Do post de fora se aproveita só a história; o texto, o gancho e a arte são nossos.
 
@@ -67,4 +67,4 @@ Um filho pegou a parte dele da herança, gastou tudo, voltou e ganhou uma festa.
 - Rodada 1 (2026-11-18): NVI com 1 erro; teologia com 3; corrigidos (`revisoes/r1.md`).
 - Rodada 2 (2026-11-18): NVI com 1 erro; teologia com 1; corrigidos (`revisoes/r2.md`).
 - Rodada 3: NVI com 2 erros, teologia com 1; corrigidos. Rodadas 4, 5 e 6: sem erro; depois, o "esse seu filho" entrou na fala do mais velho e a contagem recomeçou (`revisoes/r3-r6.md`).
-- Rodadas 7, 8 e 9: NVI sem erro (7 e 8; a 9 parou no limite de uso); teologia sem erro (8 e 9) e 1 erro leve na 7: a alegria das duas primeiras ficava sem dono. Agora: "mais alegria no céu" (15:7) e "na presença dos anjos de Deus" (15:10). Rodadas 10 a 12 com revisor único de NVI e teologia, para poupar o limite.
+- Rodadas 7, 8 e 9: NVI sem erro (7 e 8; a 9 parou no limite de uso); teologia sem erro (8 e 9) e 1 erro leve na 7: a alegria das duas primeiras ficava sem dono. Agora: "mais alegria no céu" (15:7) e "na presença dos anjos de Deus" (15:10). Rodadas 10, 11 e 12, com um revisor por rodada cobrindo NVI e teologia: sem erro nas três (`revisoes/r7-r12.md`).
