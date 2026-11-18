@@ -1,6 +1,6 @@
 # Por que Deus protegeu Caim? (Gênesis 4; Mateus 18:21-22)
 
-**Status: aguardando validação do Giovanni.** Escrito em 2026-11-18. Curto escrito do zero, vertical, uma peça só nas três redes (TikTok, Instagram e Shorts). É o primeiro no padrão do garimpo que o Giovanni mandou seguir em 2026-11-18 ("vamos seguir ele, às vezes funciona"): pergunta ou paradoxo no título e no 1º quadro, lista contada com número, Antigo Testamento. Publicação sugerida: hoje, 18/11, entre 19h e 21h, se o texto for aprovado a tempo.
+**Status: aguardando validação do Giovanni.** Revisões de NVI e de teologia fechadas em 2026-11-18, com 3 rodadas seguidas sem erro (a 3, a 4 e a 5). Escrito em 2026-11-18. Curto escrito do zero, vertical, uma peça só nas três redes (TikTok, Instagram e Shorts). É o primeiro no padrão do garimpo que o Giovanni mandou seguir em 2026-11-18 ("vamos seguir ele, às vezes funciona"): pergunta ou paradoxo no título e no 1º quadro, lista contada com número, Antigo Testamento. Publicação sugerida: hoje, 18/11, entre 19h e 21h, se o texto for aprovado a tempo.
 
 **Por que este tema:** é o 2º do garimpo do MARK1 (`projetos/pregaai-dados/garimpo.csv`, rodada de 2026-11-18), com 3 perfis: "Com quem Caim se casou?" no TikTok (651 mil views, 124,6 vezes a mediana do perfil; https://www.tiktok.com/@pesquisateocratica/video/7702132533814676756), "Por que Deus colocou uma marca em Caim" nos Shorts (322 mil; https://www.youtube.com/shorts/LIw_fk9exAo) e "Com quem Caim se casou?" nos Shorts (73 mil, 6,9 vezes; https://www.youtube.com/shorts/m47Wy_pL3jA). Dos posts de fora se aproveita só a pergunta; o texto, o gancho, o ângulo (o sete de Gn 4:15, de Lameque e de Mateus 18) e a arte são nossos.
 
@@ -61,6 +61,8 @@ Caim matou o próprio irmão. E Deus colocou nele um sinal, pra ninguém matar C
 - Respostas prontas para comentários:
   - "Com quem Caim se casou?": a Bíblia não diz quem era; diz que Adão "gerou outros filhos e filhas" (Gn 5:4).
   - "Caim foi perdoado?": o texto não diz.
+  - "Caim não viveu errante, fundou uma cidade": Gn 4:16-17 (foi viver em Node e fundou uma cidade); o vídeo diz só a sentença (4:12) e que o sinal não a tirou.
+  - "E a justiça para Abel?": Hb 12:24 (o sangue de Jesus "fala melhor do que o sangue de Abel").
   - "Setenta e sete não é setenta vezes sete": na NVI, Gn 4:24 diz "setenta e sete" e Mt 18:22, "setenta vezes sete"; na Septuaginta (a tradução grega do Antigo Testamento), Gn 4:24 usa a mesma expressão grega de Mt 18:22. O vídeo não diz que Jesus falava de Lameque.
   - "Por que Deus não aceitou a oferta de Caim?": Hebreus diz que "Pela fé Abel ofereceu a Deus um sacrifício superior ao de Caim" (Hb 11:4), e João, que as obras de Caim "eram más" (1 Jo 3:12); Gênesis não explica mais que isso.
   - Comentário sobre violência em casa: perdoar não é continuar exposto ao perigo; em risco, 190 (polícia) ou 180 (Central de Atendimento à Mulher). Crise ou ideia de suicídio: CVV, 188.
@@ -68,3 +70,4 @@ Caim matou o próprio irmão. E Deus colocou nele um sinal, pra ninguém matar C
 ## Revisões
 - Rodada 1 (2026-11-18): NVI com 3 erros e 3 pontos menores; teologia com 4 problemas; todos corrigidos (`revisoes/r1.md`).
 - Rodada 2 (2026-11-18): NVI com 1 erro ("se gabar", intenção que o texto não escreve), corrigido; teologia sem erro (`revisoes/r2.md`).
+- Rodadas 3, 4 e 5 (2026-11-18): NVI e teologia sem erro nas três, sobre o texto congelado (`revisoes/r3-r5.md`).
