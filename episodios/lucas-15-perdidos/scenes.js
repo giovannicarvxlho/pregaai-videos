@@ -204,7 +204,7 @@ const NOITE = (t) => campo(t, { sky: 'skyNight', seed: 21 });
 
 // A casa da festa à noite, à esquerda, com as notas saindo.
 function casaFesta(t, o = {}) {
-  let s = NOITE(t);
+  let s = o.lua === false ? campo(t, { sky: 'skyNight', seed: 21, lua: false }) : NOITE(t);
   s += casa(o.cx ?? 300, o.base ?? 1120, o.s ?? 1.05, t, { luz: o.luz ?? 1, noite: true });
   s += notas((o.cx ?? 300) + 10, (o.base ?? 1120) - 270, t, (o.luz ?? 1) * (o.notas ?? 1), 5);
   return s;
@@ -212,8 +212,8 @@ function casaFesta(t, o = {}) {
 
 // ---------------------------------------------------------------- 0. gancho: a festa e quem ficou de fora
 function scGancho(t) {
-  // As notas da festa só entram depois que o texto do gancho sai (2,6 a 3,0 s), para não passarem por trás dele.
-  let s = casaFesta(t, { notas: prog(t, 3.0, 3.6) });
+  // As notas da festa só entram depois que o texto do gancho sai (2,6 a 3,0 s), e a lua fica de fora, para nada passar por trás dele.
+  let s = casaFesta(t, { notas: prog(t, 3.0, 3.6), lua: false });
   s += person({ ...PAI, x: 210, y: 1250, s: 1.2, look: 0.7, mood: 'happy', armR: 72, rim: C.a300 });
   s += person({ ...FESTA, x: 370, y: 1250, s: 1.15, look: -0.6, mood: 'happy', armL: 64, armR: 30, flip: true, rim: C.a300 });
   s += person({ ...VELHO, x: 820, y: 1245, s: 1.22, look: -0.8, mood: 'angry', ...CRUZA, rim: C.p400, flip: true });
