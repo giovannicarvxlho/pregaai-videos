@@ -8,7 +8,7 @@
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-22 19:00 | `youtube/curto-01.mp4` (Shorts) | quadro de ~2 s (o texto do gancho na tela), escolhido no app |
+| 2026-11-19 19:00 | `youtube/curto-01.mp4` (Shorts) | quadro de ~2 s (o texto do gancho na tela), escolhido no app |
 
 ### Shorts
 
@@ -49,7 +49,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-22 19:00 | `tiktok/curto-01.mp4` | `tiktok/curto-01-capa.jpg` |
+| 2026-11-19 19:00 | `tiktok/curto-01.mp4` | `tiktok/curto-01-capa.jpg` |
 
 ### Curto 1: `tiktok/curto-01.mp4`
 
@@ -90,7 +90,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-22 19:00 | `instagram/curto-01.mp4` | `instagram/curto-01-capa.jpg` |
+| 2026-11-19 19:00 | `instagram/curto-01.mp4` | `instagram/curto-01-capa.jpg` |
 
 ### Curto 1: `instagram/curto-01.mp4`
 
