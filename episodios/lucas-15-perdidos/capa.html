@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Capa: por que o filho mais velho não quis entrar?</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #111; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+svg { position: absolute; inset: 0; }
+/* Capa do TikTok e do Instagram (a mesma nas duas redes). O nome da história no terço de cima, com letra de 190 px,
+   na mesma posição da série; o herói (o filho mais velho de braços cruzados, do lado de fora) grande, no miolo 3:4
+   (y 240 a 1680); a casa da festa acesa atrás, em ouro, sobre a noite; o canto de baixo à esquerda livre. */
+.hook { position: absolute; left: 0; right: 0; top: 250px; display: flex; flex-direction: column; align-items: center; }
+.l { font: 400 190px/0.95 'Gasoek One'; color: #FFE45C; white-space: nowrap;
+  text-shadow: -7px -7px 0 #181614, 7px -7px 0 #181614, -7px 7px 0 #181614, 7px 7px 0 #181614, 0 -8px 0 #181614, 0 8px 0 #181614, -8px 0 0 #181614, 8px 0 0 #181614, 0 17px 0 #181614; }
+.w { font: 400 150px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; margin: 0 0 6px;
+  text-shadow: -6px -6px 0 #181614, 6px -6px 0 #181614, -6px 6px 0 #181614, 6px 6px 0 #181614, 0 -7px 0 #181614, 0 7px 0 #181614, -7px 0 0 #181614, 7px 0 0 #181614, 0 14px 0 #181614; }
+.chip { padding: 6px 34px 22px; background: #2383E2; border: 8px solid #181614; border-radius: 32px; box-shadow: 0 14px 0 0 #181614; font: 400 96px/1 'Gasoek One'; color: #FFFFFF; white-space: nowrap; transform: rotate(-3deg); margin: 26px 0 0; }
+</style>
+</head>
+<body>
+<div id="root"><svg id="art" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+  <div class="hook"><div class="w">FILHO</div><div class="l">PRÓDIGO</div><div class="chip">O OUTRO</div></div>
+</div>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="scenes.js"></script>
+<script>
+(function () {
+  let s = campo(0, { sky: 'skyNight', seed: 21, lua: false });
+  s += `<rect width="${W}" height="${H}" fill="#000" opacity="0.2"/>`;
+  s += casa(330, 1380, 1.75, 0, { luz: 1, noite: true }) + notas(340, 960, 0.4, 1, 5);
+  s += `<circle cx="330" cy="1150" r="700" fill="url(#gAmber)" opacity="0.6"/>`;
+  s += person({ ...VELHO, x: 740, y: 1665, s: 3.05, look: -0.9, mood: 'angry', flip: true, ...CRUZA, rim: C.a300 });
+  document.getElementById('art').innerHTML = DEFS + s;
+})();
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
