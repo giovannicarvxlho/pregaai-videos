@@ -254,6 +254,24 @@
    "ganho": 0.4,
    "palavra": "lázaro",
    "atraso": -0.15
+  },
+  {
+   "frase": 26,
+   "tipo": "swish",
+   "ganho": 0.35,
+   "atraso": -0.9
+  },
+  {
+   "frase": 26,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "atraso": 0.4
+  },
+  {
+   "frase": 26,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "atraso": 0.75
   }
  ]
 }
