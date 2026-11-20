@@ -1,0 +1,259 @@
+{
+ "volume": 0,
+ "piano": false,
+ "secoes": [
+  {
+   "frase": 0,
+   "humor": "suspense",
+   "ganho": 0.5
+  },
+  {
+   "frase": 14,
+   "humor": "luz",
+   "ganho": 0.5
+  },
+  {
+   "frase": 19,
+   "humor": "emocao",
+   "ganho": 0.55
+  }
+ ],
+ "impactos": [
+  {
+   "frase": 20,
+   "palavra": "creu",
+   "tipo": "luz",
+   "ganho": 0.7
+  },
+  {
+   "frase": 23,
+   "palavra": "viu",
+   "tipo": "luz",
+   "ganho": 0.6
+  }
+ ],
+ "efeitos_volume": 4.0,
+ "eventos": {
+  "passos": 0.3,
+  "voz": 0.45,
+  "grifa": 0.35,
+  "cartao": 0.45
+ },
+ "efeitos": [
+  {
+   "frase": 0,
+   "tipo": "brilho",
+   "ganho": 0.4,
+   "palavra": "dobrado"
+  },
+  {
+   "frase": 2,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "três",
+   "atraso": -0.1
+  },
+  {
+   "frase": 2,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "três",
+   "atraso": 0.18
+  },
+  {
+   "frase": 2,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "três",
+   "atraso": 0.46
+  },
+  {
+   "frase": 4,
+   "tipo": "pop",
+   "ganho": 0.5,
+   "atraso": 0.1
+  },
+  {
+   "frase": 4,
+   "tipo": "swish",
+   "ganho": 0.35,
+   "atraso": 0.45
+  },
+  {
+   "frase": 6,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "trinta",
+   "atraso": -0.1
+  },
+  {
+   "frase": 6,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "trinta",
+   "atraso": 0.12
+  },
+  {
+   "frase": 6,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "trinta",
+   "atraso": 0.34
+  },
+  {
+   "frase": 6,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "trinta",
+   "atraso": 0.56
+  },
+  {
+   "frase": 7,
+   "tipo": "pedra",
+   "ganho": 0.4,
+   "palavra": "pedra"
+  },
+  {
+   "frase": 9,
+   "tipo": "brilho",
+   "ganho": 0.4,
+   "palavra": "faixas",
+   "atraso": -0.2
+  },
+  {
+   "frase": 10,
+   "tipo": "pop",
+   "ganho": 0.5,
+   "atraso": 0.1
+  },
+  {
+   "frase": 10,
+   "tipo": "swish",
+   "ganho": 0.35,
+   "atraso": 0.45
+  },
+  {
+   "frase": 11,
+   "tipo": "brilho",
+   "ganho": 0.35,
+   "palavra": "lenço",
+   "atraso": -0.2
+  },
+  {
+   "frase": 12,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "dobrado",
+   "atraso": -0.2
+  },
+  {
+   "frase": 13,
+   "tipo": "swish",
+   "ganho": 0.35,
+   "atraso": 0.3
+  },
+  {
+   "frase": 14,
+   "tipo": "pop",
+   "ganho": 0.5,
+   "atraso": 0.1
+  },
+  {
+   "frase": 14,
+   "tipo": "swish",
+   "ganho": 0.35,
+   "atraso": 0.45
+  },
+  {
+   "frase": 15,
+   "tipo": "pedra",
+   "ganho": 0.3,
+   "palavra": "saiu",
+   "atraso": -0.3
+  },
+  {
+   "frase": 17,
+   "tipo": "papel",
+   "ganho": 0.4,
+   "palavra": "mandou"
+  },
+  {
+   "frase": 18,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "atraso": 0.1
+  },
+  {
+   "frase": 18,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "atraso": 0.35
+  },
+  {
+   "frase": 18,
+   "tipo": "brilho",
+   "ganho": 0.35,
+   "palavra": "lenço",
+   "atraso": -0.2
+  },
+  {
+   "frase": 22,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "creu",
+   "atraso": -0.15
+  },
+  {
+   "frase": 24,
+   "tipo": "papel",
+   "ganho": 0.45,
+   "atraso": 0.1
+  },
+  {
+   "frase": 24,
+   "tipo": "brilho",
+   "ganho": 0.4,
+   "palavra": "creiam",
+   "atraso": -0.3
+  },
+  {
+   "frase": 25,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "atraso": 0.2
+  },
+  {
+   "frase": 25,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "atraso": 0.5
+  },
+  {
+   "frase": 25,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "atraso": 0.8
+  },
+  {
+   "frase": 25,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "faixas",
+   "atraso": -0.15
+  },
+  {
+   "frase": 25,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "lenço",
+   "atraso": -0.15
+  },
+  {
+   "frase": 25,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "lázaro",
+   "atraso": -0.15
+  }
+ ]
+}
