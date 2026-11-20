@@ -883,12 +883,13 @@ function endCard(t, t0, refs, o = {}) {
       <svg class="fish" viewBox="0 0 400 200" style="transform:translateX(${f1(fx)}px) rotate(${f1(wig)}deg)">${fishGlyph(C.b500, C.paper)}</svg>
       <svg class="wm" viewBox="0 0 651 100" preserveAspectRatio="none" style="opacity:${wm};transform:translateX(${f1((1 - wm) * 40)}px)">${wordmark(C.ink)}</svg>
     </div>
-    <div class="end-head" style="${up(hd)}">${o.semApp ? 'Leia essa história na Bíblia' : 'Leia essa história no app'}</div>
+    <div class="end-head" style="${up(hd)}">${o.head || (o.semApp ? 'Leia essa história na Bíblia' : 'Leia essa história no app')}</div>
     <div class="end-refs" style="${up(rf)}">${refs.map((r) => `<span>${r}</span>`).join('')}</div>
     ${o.semApp ? '' : `<div class="app" style="opacity:${f1(clamp(card) * 100) / 100};transform:scale(${f1(card * 100) / 100})">
       <div class="app-row"><img class="app-icon" src="assets/icon.png"><div><div class="app-name">PregaAI</div><div class="app-desc">Plano de leitura bíblica com IA</div></div></div>
       <img class="play" src="assets/google-play-badge.png" style="opacity:${f1(clamp(badgeIn) * 100) / 100};transform:scale(${f1(badgeIn * 100) / 100})">
     </div>`}
+    ${o.web ? `<div class="end-web" style="${up(E.out(prog(lt, 1.9, 2.3)))}">No iPhone e na web: <b>${o.web}</b></div>` : ''}
     <div class="follow" style="${up(fol)}">Siga para a próxima história</div>
   </div>
   ${o.semApp ? '' : `<div class="legal" style="opacity:${legal}">Google Play e o logotipo do Google Play são marcas da Google LLC.</div>`}`;

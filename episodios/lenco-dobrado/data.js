@@ -29,7 +29,7 @@ const SEGS = [
   [152.96, 160.96, 'Qual desses detalhes você | nunca tinha reparado: | as faixas que ficaram, | o lenço dobrado, | ou Lázaro saindo ainda enrolado?', [[152.96, 154.16], [154.32, 155.36], [155.92, 157.12], [157.52, 158.48], [158.88, 160.96]], [152.96, 153.12, 153.48, 153.96, 154.32, 154.64, 154.88, 155.92, 156.08, 156.52, 156.64, 157.52, 157.6, 158.04, 158.88, 159.04, 159.52, 160.08, 160.44]],
 ];
 const AUDIO_END = 160.96;
-const DURATION = 162.16; // fala + 1,2 s na última imagem (sem cartão final: no TikTok, fim na última fala)
+const DURATION = 168.0; // PROVISÓRIO: fala + cartão final (ajustar com a narração do CTA)
 // Acelera o vídeo inteiro no fim do build (a voz mantém o tom).
 const SPEED = 1.25;
 // Texto do gancho no 1º quadro (some aos 3 s) e banner do app a cada 30 s.
