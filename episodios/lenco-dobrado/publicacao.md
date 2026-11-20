@@ -1,6 +1,6 @@
 # Publicação: O lenço dobrado no túmulo de Jesus
 
-**Episódio:** lenco-dobrado (curto vertical escrito do zero, ~2:10, a mesma peça nas três redes) · **Palavra-chave principal:** lenço dobrado no túmulo de Jesus · **Base bíblica:** João 19:38-42; 20:1-18, 30-31; 11:38-44 (NVI)
+**Episódio:** lenco-dobrado (curto vertical escrito do zero, ~2:16, a mesma peça nas três redes) · **Palavra-chave principal:** lenço dobrado no túmulo de Jesus · **Base bíblica:** João 19:38-42; 20:1-18, 30-31; 11:38-44 (NVI)
 
 ## YouTube
 
@@ -80,7 +80,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 João termina o capítulo dizendo pra que essas coisas foram escritas: "para que vocês creiam que Jesus é o Cristo, o Filho de Deus e, crendo, tenham vida em seu nome" (João 20:31).
 ```
 
-**Configurações:** divulgação de conteúdo comercial LIGADA (o vídeo tem o banner do app a cada 30 s); rótulo de IA opcional (a animação não é realista); comentários, dueto e costura ligados. O vídeo termina na última fala, sem cartão final. **Neste dia, só este vídeo no TikTok** (nos dados do canal, o vídeo que sai sozinho no dia chega mais a quem não segue; hipótese).
+**Configurações:** divulgação de conteúdo comercial LIGADA (o vídeo tem o banner do app a cada 30 s); rótulo de IA opcional (a animação não é realista); comentários, dueto e costura ligados. O vídeo termina com o CTA falado e o cartão final do app (Google Play e app.pregaai.com), pedido do Giovanni em 2026-11-20. **Neste dia, só este vídeo no TikTok** (nos dados do canal, o vídeo que sai sozinho no dia chega mais a quem não segue; hipótese).
 
 ## Instagram
 

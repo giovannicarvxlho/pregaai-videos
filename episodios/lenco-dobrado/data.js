@@ -27,9 +27,10 @@ const SEGS = [
   [129.48, 139.36, 'E Maria Madalena, | que tinha corrido pra avisar, | ficou ali, chorando. | Ela viu Jesus. E é ela quem | vai aos discípulos dizendo: | "Eu vi o Senhor!".', [[129.48, 130.4], [130.52, 131.84], [132.24, 133.76], [134.24, 136.56], [136.6, 137.92], [138.32, 139.36]], [129.48, 129.6, 129.84, 130.52, 130.64, 130.96, 131.36, 131.6, 132.24, 132.56, 133.2, 134.24, 134.56, 134.88, 135.84, 136.0, 136.2, 136.4, 136.6, 136.8, 137.0, 137.48, 138.32, 138.64, 138.84, 138.96]],
   [139.96, 152.40, 'No fim do capítulo, João | fala dos sinais de Jesus que | registrou no livro. E diz que | foram escritos "para que vocês | creiam que Jesus é o Cristo, | o Filho de Deus e, crendo, | tenham vida em seu nome".', [[139.96, 141.44], [141.52, 143.04], [143.12, 144.88], [144.96, 146.8], [146.88, 148.56], [148.84, 150.8], [151.12, 152.4]], [139.96, 140.16, 140.32, 140.4, 141.2, 141.52, 141.76, 141.92, 142.4, 142.48, 142.96, 143.12, 143.6, 143.76, 144.48, 144.64, 144.84, 144.96, 145.2, 146.08, 146.32, 146.4, 146.88, 147.36, 147.52, 148.0, 148.05, 148.16, 148.84, 149.04, 149.32, 149.44, 150.16, 150.44, 151.12, 151.52, 151.8, 151.92, 152.08]],
   [152.96, 160.96, 'Qual desses detalhes você | nunca tinha reparado: | as faixas que ficaram, | o lenço dobrado, | ou Lázaro saindo ainda enrolado?', [[152.96, 154.16], [154.32, 155.36], [155.92, 157.12], [157.52, 158.48], [158.88, 160.96]], [152.96, 153.12, 153.48, 153.96, 154.32, 154.64, 154.88, 155.92, 156.08, 156.52, 156.64, 157.52, 157.6, 158.04, 158.88, 159.04, 159.52, 160.08, 160.44]],
+  [161.60, 168.16, '!E se você quer um plano | de leitura da Bíblia | feito pra você, | procura PregaAI | na Google Play, | ou acessa pelo site.', [[161.6, 162.64], [162.72, 163.6], [163.68, 164.64], [165.04, 166.04], [166.08, 166.72], [167.08, 168.16]], [161.6, 161.68, 161.76, 162.0, 162.24, 162.44, 162.72, 162.8, 163.2, 163.36, 163.68, 164.0, 164.16, 165.04, 165.52, 166.08, 166.24, 166.48, 167.08, 167.2, 167.56, 167.96]],
 ];
-const AUDIO_END = 160.96;
-const DURATION = 162.16; // fala + 1,2 s na última imagem (sem cartão final: no TikTok, fim na última fala)
+const AUDIO_END = 168.16;
+const DURATION = 169.6; // fala + cartão final (Google Play e web), com 1,2 s depois da última palavra
 // Acelera o vídeo inteiro no fim do build (a voz mantém o tom).
 const SPEED = 1.25;
 // Texto do gancho no 1º quadro (some aos 3 s) e banner do app a cada 30 s.

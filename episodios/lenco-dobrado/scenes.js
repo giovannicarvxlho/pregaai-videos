@@ -313,6 +313,12 @@ function scQual(t) {
   return { svg: s, html: '' };
 }
 
+// ---------------------------------------------------------------- 26. cartão final: o app na Google Play e na web (pedido do Giovanni em 2026-11-20)
+const FIM_T = SEGS[25][1] + 0.35;
+function scFim(t) {
+  return endCard(t, FIM_T, ['João 20', 'João 11'], { head: 'Seu plano de leitura da Bíblia', web: 'app.pregaai.com' });
+}
+
 // ---------------------------------------------------------------- linha do tempo
 const SCENES = [
   { a: 0, b: at(1), f: scGancho, ref: null, dark: true },
@@ -340,5 +346,6 @@ const SCENES = [
   { a: at(22), b: at(23), f: scViuCreu, ref: null, dark: true },
   { a: at(23), b: at(24), f: scMaria, ref: 'João 20:11-18' },
   { a: at(24), b: at(25), f: scEscritos, ref: 'João 20:30-31' },
-  { a: at(25), b: DURATION + 1, f: scQual, ref: null },
+  { a: at(25), b: FIM_T, f: scQual, ref: null },
+  { a: FIM_T, b: DURATION + 1, f: scFim, ref: null, end: true },
 ];
