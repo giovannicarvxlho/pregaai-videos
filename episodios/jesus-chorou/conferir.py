@@ -6,7 +6,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 CAMINHOS = [os.path.join(AQUI, '..', '..', '..', 'pregaai', 'assets', 'bible', 'nvi.json'), '/home/user/pregaai/assets/bible/nvi.json']
 NVI = json.load(open(next(c for c in CAMINHOS if os.path.exists(c)), encoding='utf-8'))
 REFS = ['jo.11:11', 'jo.11:32', 'jo.11:33', 'jo.11:34', 'jo.11:34', 'jo.11:35', 'jo.11:36', 'jo.11:37', 'jo.11:43', 'jo.11:44',
-        'lc.19:38', 'lc.19:41', 'lc.19:42', 'hb.5:7', 'jo.11:5', '1ts.4:13', '1ts.4:14', 'ap.21:4']
+        'lc.19:38', 'lc.19:41', 'lc.19:42', 'hb.5:7', 'jo.11:5', '1ts.4:13', '1ts.4:14', '1ts.4:14', 'ap.21:4']
 NOTAS = []
 
 def norm(s):
