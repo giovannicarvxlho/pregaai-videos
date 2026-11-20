@@ -11,12 +11,12 @@
 - **Previsão (TikTok, 48 h):** 3 s 57% (50 a 64) · 10 s 37% (30 a 43) · 30 s 27% (20 a 33) · tempo médio 32 s (22 a 45) · views 3.000 (1.000 a 15.000) · views de quem não segue 2.000 (500 a 12.000) · terminou 12% (6 a 18) · compartilhamentos 0,4% por view (0,15 a 0,9). Confiança: baixa. Base: as 3 tentações (55/36/26, 5.214 views, 24% de seguidores) e o curto 2 do Salmo 22 (58/38/26); o teto é mais alto porque o tema é o da cruz e tem prova de fora, mas viral não se prevê num vídeo só.
 - **Previsão (curtos, 48 h):** Instagram, pulo 40% (33 a 50) · Shorts, continuaram 62% (54 a 68)
 - **Curtos:** não há recortes; é uma peça só, a mesma nas três redes.
-- **Momento para mandar a alguém:** "Maria olhou a pedra e pensou que tinham levado o corpo. O discípulo olhou os panos, e creu."
+- **Momento para mandar a alguém:** "O corpo não estava. As faixas, sim." e "O discípulo entrou, viu, e creu."
 - **Se errar, o que isso ensina:** 3 s abaixo de 50%: o objeto sem contexto prende menos que o paradoxo com Jesus na 1ª frase; retenção na faixa e menos de 800 views de quem não segue: o tema chegou tarde (os posts de fora são de outubro); acima de 10 mil de quem não segue: "o detalhe do túmulo" abre uma série da ressurreição.
 
 ## Copy fora do roteiro (sugestão do Mark, pelo molde)
-- **Texto no 1º quadro:** "Nunca entendi por que João contou que o lenço estava *dobrado*. Até ler o capítulo 11."
-- **Título (YouTube Shorts):** "Por que o lenço de Jesus estava dobrado no túmulo? O que João 20 conta". **1ª linha da legenda (TikTok e Instagram), a lacuna:** "João parou pra contar onde estava cada pano no túmulo de Jesus. A pista está no túmulo de Lázaro."
+- **Texto no 1º quadro:** "Nunca tinha reparado no lenço *dobrado* no túmulo de Jesus. Nem no que João conta no capítulo 11."
+- **Título (YouTube Shorts):** "O lenço dobrado no túmulo de Jesus: o que João 20 conta (e o que não conta)". **1ª linha da legenda (TikTok e Instagram), a lacuna:** "João parou pra contar onde estava cada pano no túmulo de Jesus. E tem um detalhe parecido no túmulo de Lázaro."
 - **Capa (TikTok e Instagram, 1080×1920):** "O LENÇO DOBRADO", com o interior do sepulcro, as faixas de um lado e o lenço dobrado à parte, luz quente entrando pela porta. Sem Jesus na capa.
 
 ## Aberturas candidatas (10; nota de 0 a 3 pela rubrica: (a) a coisa estranha ou a ação nas duas primeiras palavras, (b) a 2ª frase continua a cena, (c) promete explicar algo que o público não entende)
@@ -34,38 +34,40 @@
 ## Checklist do molde
 1. Gancho: o objeto estranho nas duas primeiras palavras; a 2ª frase continua no mesmo objeto.
 2. Lacuna até ~0:15, sem frase de índice: João podia ter escrito só que o corpo não estava lá, e o terceiro detalhe está nove capítulos antes, em outro túmulo.
-3. Promessa amarrada ao gancho, paga no fim: "Por quê?", pago com "Ele viu e creu".
+3. Promessa amarrada ao gancho, paga no fim: "Por quê?", pago com João 20:8 e com o motivo que o próprio João dá para o livro (20:31).
 4. Laço: "o terceiro tá nove capítulos antes, em outro túmulo", pago em ~1:10 com Lázaro.
 5. Itens numerados: o primeiro, o segundo, o terceiro detalhe.
 6. Detalhe de estudo: os 34 quilos de mirra e aloés; quem chegou primeiro e quem entrou primeiro; o lenço separado das faixas; Lázaro saindo enrolado; João 20:9.
 7. Cena com diálogo: a fala de Maria Madalena e as duas falas no túmulo de Lázaro.
-8. Frase de virada por item: "O corpo não estava. As faixas, sim."; "Estava dobrado, num lugar só dele."; "Alguém teve que tirar as faixas dele."; "Maria olhou a pedra e pensou que tinham levado o corpo. O discípulo olhou os panos, e creu."
+8. Frase de virada por item: "O corpo não estava. As faixas, sim."; "Estava dobrado, à parte."; "Jesus mandou tirar as faixas dele."; "O discípulo entrou, viu, e creu."
 9. Pedido falado: nenhum na narração. Opção para o Giovanni decidir: uma frase de envio depois da pergunta final (compartilhamento é o número que falta ao canal: 0,36% nas tentações contra 0,91% no viral).
 10. Fim: paga o gancho com o que o texto diz (João 20:8-9), sem dar ao pano um significado que João não dá, e termina numa pergunta de escolha.
 
 ## Notas
 Nesta seção, aspas duplas só para texto da NVI, conferido pelo `conferir.py` junto com a narração.
-- Base bíblica para a descrição: João 19:38-42; 20:1-10; 11:43-44; Lucas 24:12.
+- Base bíblica para a descrição: João 19:38-42; 20:1-18, 30-31; 11:38-44.
+- A palavra dobrado é a da NVI, a tradução do app; outras traduções trazem enrolado (a conferir nas edições; só a NVI está no repo). Resposta pronta se alguém comentar: as duas dizem que o lenço estava arrumado e separado das faixas.
 - A explicação popular do guardanapo dobrado à mesa (o senhor que dobra o guardanapo avisa que vai voltar) não está na Bíblia e não entra no vídeo, nem para ser negada. Resposta pronta para comentários que a citarem, sem confronto: o vídeo fica só com o que João escreveu, e o que ele escreveu já basta (João 20:7-8).
 - João não diz o que o lenço significa, nem como Jesus saiu das faixas, nem por que o discípulo creu ao ver. O vídeo não afirma nenhuma das três coisas.
 - O outro discípulo é chamado assim pelo texto (João 20:2-8); o vídeo não o identifica.
-- Produção: o sepulcro por dentro, com as faixas de um lado e o lenço dobrado à parte; sem mostrar as faixas em formato de corpo nem flutuando (o texto não descreve a forma); Lázaro saindo com as faixas e o rosto coberto; Jesus ressuscitado não aparece.
+- Produção: o sepulcro por dentro, com as faixas de um lado e o lenço dobrado à parte; sem mostrar as faixas em formato de corpo nem flutuando (o texto não descreve a forma); Lázaro saindo de uma gruta com as faixas e o rosto coberto (João 11:38, 44); a cena de Maria ainda no escuro e sem anjos (eles só aparecem em 20:12); Jesus ressuscitado não aparece.
 
 ## Revisões (até três rodadas seguidas sem erro; revisores novos a cada rodada; relatórios em `revisoes/`)
+- **Rodada 1 (2026-11-20):** NVI, 2 erros e 6 observações; teologia, 2 erros (os mesmos) e 6 observações; 10 de 10 citações idênticas. Erros: "o pano do rosto, dobrado à parte" (João 20:7 diz o lenço sobre a cabeça; pano e rosto são de Lázaro, 11:44); o texto do 1º quadro prometia que o capítulo 11 explica a dobra, o que o texto não faz. Correções: "o lenço da cabeça"; 1º quadro, título e legenda sem prometer o porquê; "Jesus disse" e "Jesus mandou tirar as faixas dele" (o texto só registra a ordem); "Estava dobrado, à parte."; "O discípulo entrou, viu, e creu." (não dizer que foram os panos); Maria deixa de ser contraexemplo e entra João 20:18; a resposta ao "por quê" passa a ser o motivo que João dá para o livro (20:31); Lucas 24:12 sai da base bíblica. A contagem de três rodadas sem erro começa na rodada 2.
 
 ## Para ler
 
 **1. O pano**
-Um pano dobrado. Foi isso que João fez questão de contar sobre o túmulo vazio de Jesus. Ele podia ter escrito só que o corpo não estava lá. Mas parou pra dizer onde estava cada pano. Por quê? João não explica. Mas o evangelho dele deixa três detalhes. E o terceiro tá nove capítulos antes, em outro túmulo.
+Um pano dobrado. Foi isso que João fez questão de contar sobre o túmulo vazio de Jesus. Ele podia ter escrito só que o corpo não estava lá. Mas parou pra dizer onde estava cada pano. Por quê? João não explica o pano. Mas o evangelho dele deixa três detalhes. E o terceiro tá nove capítulos antes, em outro túmulo.
 
 **2. O primeiro detalhe: as faixas**
 O primeiro detalhe: as faixas ficaram. Na sexta, José de Arimateia e Nicodemos pegaram o corpo de Jesus e "o envolveram em faixas de linho, juntamente com as especiarias". Nicodemos tinha levado "cerca de trinta e quatro quilos de uma mistura de mirra e aloés". No domingo, ainda escuro, Maria Madalena viu a pedra removida e correu pra avisar: "Tiraram o Senhor do sepulcro, e não sabemos onde o colocaram!". Pedro e o outro discípulo correram até lá. O outro chegou primeiro, se curvou e "viu as faixas de linho ali". O corpo não estava. As faixas, sim.
 
 **3. O segundo detalhe: o lenço**
-O segundo detalhe: o lenço. Pedro entrou e viu também "o lenço que estivera sobre a cabeça de Jesus". E João descreve: "Ele estava dobrado à parte, separado das faixas de linho". Não estava junto com as faixas. Estava dobrado, num lugar só dele.
+O segundo detalhe: o lenço. Pedro entrou e viu também "o lenço que estivera sobre a cabeça de Jesus". E João descreve: "Ele estava dobrado à parte, separado das faixas de linho". Não estava junto com as faixas. Estava dobrado, à parte.
 
 **4. O terceiro detalhe: Lázaro**
-O terceiro detalhe tá no capítulo onze, no túmulo de Lázaro. Quando Jesus chamou, "O morto saiu, com as mãos e os pés envolvidos em faixas de linho, e o rosto envolto num pano". E Jesus precisou dizer: "Tirem as faixas dele e deixem-no ir". Lázaro saiu do túmulo ainda enrolado. Alguém teve que tirar as faixas dele. No túmulo de Jesus, as faixas ficaram pra trás. E o pano do rosto, dobrado à parte.
+O terceiro detalhe tá no capítulo onze, no túmulo de Lázaro. Quando Jesus chamou, "O morto saiu, com as mãos e os pés envolvidos em faixas de linho, e o rosto envolto num pano". E Jesus disse: "Tirem as faixas dele e deixem-no ir". Lázaro saiu do túmulo ainda enrolado. Jesus mandou tirar as faixas dele. No túmulo de Jesus, as faixas ficaram pra trás. E o lenço da cabeça, dobrado à parte.
 
 **5. A resposta**
-Então, por que João contou tudo isso? Ele não diz o que o pano significa. Diz o que aconteceu com quem entrou depois de Pedro: "Ele viu e creu". E João ainda avisa que eles "ainda não haviam compreendido que, conforme a Escritura, era necessário que Jesus ressuscitasse dos mortos". Maria olhou a pedra e pensou que tinham levado o corpo. O discípulo olhou os panos, e creu. Qual desses detalhes você nunca tinha reparado: as faixas que ficaram, o lenço dobrado, ou Lázaro saindo ainda enrolado?
+Então, por que João contou tudo isso? Ele não diz o que o pano significa. Diz o que aconteceu com quem entrou depois de Pedro: "Ele viu e creu". E João completa: os dois "ainda não haviam compreendido que, conforme a Escritura, era necessário que Jesus ressuscitasse dos mortos". Maria viu a pedra e correu pra avisar. O discípulo entrou, viu, e creu. E, logo depois, é Maria quem volta dizendo: "Eu vi o Senhor!". No fim do capítulo, João diz por que escreveu o livro: "para que vocês creiam que Jesus é o Cristo, o Filho de Deus". Qual desses detalhes você nunca tinha reparado: as faixas que ficaram, o lenço dobrado, ou Lázaro saindo ainda enrolado?

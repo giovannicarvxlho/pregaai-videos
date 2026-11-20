@@ -5,7 +5,7 @@ import json, os, re, sys, unicodedata
 AQUI = os.path.dirname(os.path.abspath(__file__))
 CAMINHOS = [os.path.join(AQUI, '..', '..', '..', 'pregaai', 'assets', 'bible', 'nvi.json'), '/home/user/pregaai/assets/bible/nvi.json']
 NVI = json.load(open(next(c for c in CAMINHOS if os.path.exists(c)), encoding='utf-8'))
-REFS = ['jo.19:40', 'jo.19:39', 'jo.20:2', 'jo.20:5', 'jo.20:7', 'jo.20:7', 'jo.11:44', 'jo.11:44', 'jo.20:8', 'jo.20:9']
+REFS = ['jo.19:40', 'jo.19:39', 'jo.20:2', 'jo.20:5', 'jo.20:7', 'jo.20:7', 'jo.11:44', 'jo.11:44', 'jo.20:8', 'jo.20:9', 'jo.20:18', 'jo.20:31']
 NOTAS = []
 
 def norm(s):
