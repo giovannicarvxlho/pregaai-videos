@@ -1,0 +1,484 @@
+{
+ "volume": 0,
+ "efeitos_volume": 4,
+ "piano": false,
+ "eventos": {
+  "passos": 0.3,
+  "voz": 0.45,
+  "grifa": 0.35,
+  "cartao": 0.45
+ },
+ "secoes": [
+  {
+   "frase": 0,
+   "humor": "misterio",
+   "ganho": 0.6
+  },
+  {
+   "frase": 12,
+   "humor": "terno",
+   "ganho": 0.5
+  },
+  {
+   "frase": 25,
+   "humor": "tensao",
+   "ganho": 0.5
+  },
+  {
+   "frase": 30,
+   "humor": "misterio",
+   "ganho": 0.5
+  },
+  {
+   "frase": 35,
+   "humor": "terno",
+   "ganho": 0.5
+  },
+  {
+   "frase": 45,
+   "humor": "misterio",
+   "ganho": 0.5
+  },
+  {
+   "frase": 47,
+   "humor": "esperanca",
+   "ganho": 0.65
+  },
+  {
+   "frase": 57,
+   "humor": "emocao",
+   "ganho": 0.55
+  },
+  {
+   "frase": 71,
+   "humor": "suspense",
+   "ganho": 0.55
+  },
+  {
+   "frase": 83,
+   "humor": "tensao",
+   "ganho": 0.6
+  },
+  {
+   "frase": 92,
+   "humor": "emocao",
+   "ganho": 0.6
+  }
+ ],
+ "impactos": [
+  {
+   "frase": 2,
+   "palavra": "matar",
+   "tipo": "escuro",
+   "ganho": 1
+  },
+  {
+   "frase": 21,
+   "palavra": "impossível",
+   "tipo": "luz",
+   "ganho": 0.7
+  },
+  {
+   "frase": 44,
+   "palavra": "cocho",
+   "tipo": "luz",
+   "ganho": 0.7
+  },
+  {
+   "frase": 47,
+   "palavra": "glória",
+   "tipo": "luz",
+   "ganho": 0.9
+  },
+  {
+   "frase": 53,
+   "palavra": "exército",
+   "tipo": "luz",
+   "ganho": 0.9
+  },
+  {
+   "frase": 65,
+   "palavra": "bebê",
+   "tipo": "luz",
+   "ganho": 0.7
+  },
+  {
+   "frase": 70,
+   "palavra": "cordeiro",
+   "tipo": "luz",
+   "ganho": 0.8
+  },
+  {
+   "frase": 73,
+   "palavra": "perturbado",
+   "tipo": "escuro",
+   "ganho": 0.8
+  },
+  {
+   "frase": 88,
+   "palavra": "matar",
+   "tipo": "escuro",
+   "ganho": 1
+  },
+  {
+   "frase": 101,
+   "palavra": "estarei",
+   "tipo": "luz",
+   "ganho": 0.9
+  }
+ ],
+ "efeitos": [
+  {
+   "frase": 0,
+   "tipo": "brilho",
+   "ganho": 0.5
+  },
+  {
+   "frase": 1,
+   "tipo": "brilho",
+   "ganho": 0.5,
+   "palavra": "parou"
+  },
+  {
+   "frase": 4,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "sete"
+  },
+  {
+   "frase": 6,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "mateus"
+  },
+  {
+   "frase": 7,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "lucas"
+  },
+  {
+   "frase": 8,
+   "tipo": "brilho",
+   "ganho": 0.35,
+   "palavra": "estrela"
+  },
+  {
+   "frase": 9,
+   "tipo": "madeira",
+   "ganho": 0.35,
+   "palavra": "manjedoura"
+  },
+  {
+   "frase": 10,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "juntando"
+  },
+  {
+   "frase": 11,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "três"
+  },
+  {
+   "frase": 11,
+   "tipo": "madeira",
+   "ganho": 0.5,
+   "palavra": "cruz"
+  },
+  {
+   "frase": 12,
+   "tipo": "swish",
+   "ganho": 0.35
+  },
+  {
+   "frase": 25,
+   "tipo": "swish",
+   "ganho": 0.35
+  },
+  {
+   "frase": 35,
+   "tipo": "swish",
+   "ganho": 0.35
+  },
+  {
+   "frase": 45,
+   "tipo": "swish",
+   "ganho": 0.35
+  },
+  {
+   "frase": 57,
+   "tipo": "swish",
+   "ganho": 0.35
+  },
+  {
+   "frase": 71,
+   "tipo": "swish",
+   "ganho": 0.35
+  },
+  {
+   "frase": 83,
+   "tipo": "swish",
+   "ganho": 0.35
+  },
+  {
+   "frase": 13,
+   "tipo": "brilho",
+   "ganho": 0.5,
+   "palavra": "gabriel"
+  },
+  {
+   "frase": 17,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "altíssimo"
+  },
+  {
+   "frase": 18,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "reino"
+  },
+  {
+   "frase": 20,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "espírito"
+  },
+  {
+   "frase": 29,
+   "tipo": "vozes",
+   "ganho": 0.3,
+   "palavra": "pública"
+  },
+  {
+   "frase": 30,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "anjo"
+  },
+  {
+   "frase": 32,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "emanuel"
+  },
+  {
+   "frase": 32,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "deus"
+  },
+  {
+   "frase": 33,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "guarda"
+  },
+  {
+   "frase": 36,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "mateus"
+  },
+  {
+   "frase": 36,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "lucas"
+  },
+  {
+   "frase": 36,
+   "tipo": "madeira",
+   "ganho": 0.35,
+   "palavra": "manjedoura"
+  },
+  {
+   "frase": 37,
+   "tipo": "papel",
+   "ganho": 0.4,
+   "palavra": "recenseamento"
+  },
+  {
+   "frase": 39,
+   "tipo": "coracao",
+   "ganho": 0.45,
+   "palavra": "primogênito"
+  },
+  {
+   "frase": 40,
+   "tipo": "madeira",
+   "ganho": 0.35,
+   "palavra": "manjedoura"
+  },
+  {
+   "frase": 47,
+   "tipo": "brilho",
+   "ganho": 0.55,
+   "palavra": "anjo"
+  },
+  {
+   "frase": 51,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "sinal"
+  },
+  {
+   "frase": 52,
+   "tipo": "brilho",
+   "ganho": 0.5,
+   "palavra": "multidão"
+  },
+  {
+   "frase": 58,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "revelação"
+  },
+  {
+   "frase": 61,
+   "tipo": "coracao",
+   "ganho": 0.4,
+   "palavra": "braços"
+  },
+  {
+   "frase": 68,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "rolinhas"
+  },
+  {
+   "frase": 69,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "cordeiro"
+  },
+  {
+   "frase": 71,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "bíblia"
+  },
+  {
+   "frase": 75,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "estrela"
+  },
+  {
+   "frase": 76,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "guarda"
+  },
+  {
+   "frase": 78,
+   "tipo": "brilho",
+   "ganho": 0.5,
+   "palavra": "parou"
+  },
+  {
+   "frase": 80,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "ouro"
+  },
+  {
+   "frase": 80,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "incenso"
+  },
+  {
+   "frase": 80,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "mirra"
+  },
+  {
+   "frase": 81,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "manjedoura"
+  },
+  {
+   "frase": 81,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "casa"
+  },
+  {
+   "frase": 84,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "anjo"
+  },
+  {
+   "frase": 89,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "dois"
+  },
+  {
+   "frase": 90,
+   "tipo": "risco",
+   "ganho": 0.4,
+   "palavra": "morto"
+  },
+  {
+   "frase": 92,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "rei"
+  },
+  {
+   "frase": 93,
+   "tipo": "madeira",
+   "ganho": 0.45,
+   "palavra": "morreu"
+  },
+  {
+   "frase": 95,
+   "tipo": "vozes",
+   "ganho": 0.3,
+   "palavra": "salve"
+  },
+  {
+   "frase": 96,
+   "tipo": "madeira",
+   "ganho": 0.5,
+   "palavra": "cruz"
+  },
+  {
+   "frase": 96,
+   "tipo": "risco",
+   "ganho": 0.35,
+   "palavra": "acusação"
+  },
+  {
+   "frase": 98,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "adorar"
+  },
+  {
+   "frase": 98,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "zombar"
+  },
+  {
+   "frase": 99,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "emanuel"
+  },
+  {
+   "frase": 102,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "qual"
+  }
+ ]
+}

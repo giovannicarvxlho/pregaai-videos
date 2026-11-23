@@ -1,6 +1,6 @@
 # O nascimento de Jesus em 7 cenas (Mateus 1 e 2, Lucas 1 e 2)
 
-**Status: aguardando validação do Giovanni.** Versão 1 (2026-11-23). Longo 16:9 no tamanho do viral das 7 frases: ~7.200 caracteres de narração, ~8:45 de fala (o viral: 6.855 caracteres, 8:17 de fala, 8:38 com o cartão, que foi o arquivo do TikTok). No TikTok, termina na última fala, sem cartão, e fica com o tamanho do arquivo do viral; no YouTube, leva o cartão final (~9:00). Fonte: NVI.
+**Status: aprovado pelo Giovanni em 2026-11-23, na versão 1 ("aprovado, pode produzir").** Versão 1 (2026-11-23). Longo 16:9 no tamanho do viral das 7 frases: ~7.200 caracteres de narração, ~8:45 de fala (o viral: 6.855 caracteres, 8:17 de fala, 8:38 com o cartão, que foi o arquivo do TikTok). No TikTok, termina na última fala, sem cartão, e fica com o tamanho do arquivo do viral; no YouTube, leva o cartão final (~9:00). Fonte: NVI.
 
 **Por que este roteiro:** pedido do Giovanni em 2026-11-23: um vídeo longo do mesmo tamanho do viral e os primeiros 30 s "muito parecidos, só que para outro tema". Ele escolheu o nascimento entre 3 opções (as outras: os 7 selos do Apocalipse, do garimpo, e as 10 pragas do Egito). Substitui, para este teste, o longo de 4:33 aprovado em 2026-11-09 (`episodios/nascimento-de-jesus`), que nunca foi narrado: se este não for aprovado a tempo, aquele continua de reserva para a mesma data. Exceção à regra de 5 min (06/11), um teste só, como a Paixão.
 
@@ -98,6 +98,8 @@ Todos em `layout: "foco"`, com o texto do gancho no 1º quadro e terminando na f
 3. **Revelação adiada: "Simeão"** (~1:00; se o corte der menos de 61 s, fica fora das Recompensas do TikTok, mas vale no Instagram e nos Shorts). Abre em "Em Jerusalém, um homem tinha recebido uma revelação do Espírito Santo: ele não ia morrer antes de ver o Cristo." e segue a quinta cena até o fim (Ana, a oferta e o Cordeiro de Deus). Texto do 1º quadro: "Ele não ia *morrer* antes".
 
 Os três ganchos são frases do próprio longo, então entram na validação junto com o texto.
+
+**Longo no TikTok** (produção, 2026-11-23): vertical, com o título fixo "O nascimento de Jesus em *7 cenas*" e o texto "DA ESTRELA À *CRUZ*" no 1º quadro (escolha do Mark; soma à fala, que abre pela estrela, e aponta o pagamento do fim). Termina na última fala, sem cartão. Nos curtos, as cenas de cartão (dois anos, as três palavras, os quatro evangelhos, a placa, adorar e zombar, manjedoura e casa) têm uma versão em coluna (`VERT` no `scenes.js`), para o texto não cair embaixo da legenda nem fora da janela.
 
 ## Checklist do Molde do viral
 
