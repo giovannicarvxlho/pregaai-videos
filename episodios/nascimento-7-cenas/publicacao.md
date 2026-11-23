@@ -2,7 +2,7 @@
 
 **Episódio:** nascimento-7-cenas (longo com 8:33 de fala, o tamanho do viral das 7 frases; 8:43 com o cartão final do YouTube; 3 curtos recortados da narração, com os ganchos aprovados junto com o roteiro em 2026-11-23) · **Palavra-chave principal:** nascimento de jesus (a primeira do autocompletar do YouTube na busca do episódio de 09/11) · **Outras buscas:** natal na bíblia, estrela de belém, reis magos, manjedoura, simeão, herodes e os meninos de belém · **Base bíblica:** Mateus 1:18-24; 2:1-21; 27:11, 29, 37; 28:20; Lucas 1:26-38; 2:1-16, 24-38; Levítico 12:8; João 1:29
 
-Calendário (sugestão do Mark; o Giovanni decide; horário de Brasília): o longo no domingo, 29/11, 19:00, 1º domingo do Advento, no TikTok e no YouTube, como a aposta da semana e sozinho no TikTok no dia. Os curtos a partir de segunda, 30/11, um por dia: no Instagram às 12:00 e nos Shorts às 18:00; no TikTok, nos dias de longo com curtos da grade (ter 01/12, qui 03/12 e sáb 05/12, às 18:00).
+Calendário (horário de Brasília): hoje, segunda, 23/11, decisão do Giovanni ("gostaria de um longo e curto no youtube, tiktok pode ser somente o longo, instagram um curto"): o longo às 19:00 no YouTube e no TikTok (só o longo no TikTok), o curto 1 às 19:00 no Instagram e às 21:00 nos Shorts, ligado ao longo. Os outros curtos (sugestão do Mark): curto 2 na terça, 24/11, e curto 3 na quarta, 25/11, no Instagram às 12:00 e nos Shorts às 18:00; no TikTok, os três nos dias de longo com curtos da grade (qui 26/11, sáb 28/11 e ter 01/12, às 18:00).
 
 **Regras de texto para este episódio** (revisão bíblica e de teologia do `roteiro.md`):
 - Nunca escrever, na legenda, na descrição, no comentário ou na tela: "três reis", "os reis magos não eram reis", "os magos não estavam na manjedoura", "não era estábulo", "Jesus tinha dois anos", "a família era pobre", "o cordeiro que faltou". O texto diz só o que Mateus e Lucas contam.
@@ -22,10 +22,10 @@ Calendário (sugestão do Mark; o Giovanni decide; horário de Brasília): o lon
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-29 19:00 | `youtube/longo.mp4` (8:43, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
-| 2026-11-30 18:00 | `youtube/curto-01.mp4` (Shorts, ~2:36) | quadro de ~1 s, escolhido no app |
-| 2026-12-01 18:00 | `youtube/curto-02.mp4` (Shorts, ~1:06) | quadro de ~2 s, escolhido no app |
-| 2026-12-02 18:00 | `youtube/curto-03.mp4` (Shorts, ~1:08) | quadro de ~5 s, escolhido no app |
+| 2026-11-23 19:00 | `youtube/longo.mp4` (8:43, com o cartão final) | `youtube/miniatura-a.jpg` (b e c no Testar e comparar) |
+| 2026-11-23 21:00 | `youtube/curto-01.mp4` (Shorts, 2:36) | quadro de ~1 s, escolhido no app |
+| 2026-11-24 18:00 | `youtube/curto-02.mp4` (Shorts, 1:05) | quadro de ~2 s, escolhido no app |
+| 2026-11-25 18:00 | `youtube/curto-03.mp4` (Shorts, 1:07) | quadro de ~5 s, escolhido no app |
 
 ### Vídeo longo: `youtube/longo.mp4`
 
@@ -61,7 +61,7 @@ O vídeo junta os dois relatos, cena por cena: o anjo Gabriel e Maria, o sonho d
 06:42 7. Herodes e o Egito
 07:31 Rei dos judeus: do nascimento à cruz
 
-📱 Quer ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, neste Advento? Baixe o PregaAI: pregaai.com/?utm_source=youtube&utm_medium=descricao
+📱 Quer ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, até o Natal? Baixe o PregaAI: pregaai.com/?utm_source=youtube&utm_medium=descricao
 No iPhone: app.pregaai.com
 
 #históriasbíblicas #nascimentodejesus #natal
@@ -76,7 +76,7 @@ nascimento de jesus, o nascimento de jesus, natal na bíblia, história do natal
 
 **Comentário fixado**
 ```
-Qual dessas sete cenas você não conhecia? Me conta aqui embaixo 👇 Se quiser ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, neste Advento, o PregaAI monta um plano de leitura pra você: pregaai.com/?utm_source=youtube&utm_medium=comentario (no iPhone: app.pregaai.com)
+Qual dessas sete cenas você não conhecia? Me conta aqui embaixo 👇 Se quiser ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, até o Natal, o PregaAI monta um plano de leitura pra você: pregaai.com/?utm_source=youtube&utm_medium=comentario (no iPhone: app.pregaai.com)
 ```
 
 ### Shorts
@@ -153,10 +153,10 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-29 19:00 | `tiktok/longo.mp4` (8:33, vertical, com o título fixo e o texto "DA ESTRELA À CRUZ" no 1º quadro; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
-| 2026-12-01 18:00 | `tiktok/curto-01.mp4` (~2:36) | `tiktok/curto-01-capa.jpg` |
-| 2026-12-03 18:00 | `tiktok/curto-02.mp4` (~1:06) | `tiktok/curto-02-capa.jpg` |
-| 2026-12-05 18:00 | `tiktok/curto-03.mp4` (~1:08) | `tiktok/curto-03-capa.jpg` |
+| 2026-11-23 19:00 | `tiktok/longo.mp4` (8:33, vertical, com o título fixo e o texto "DA ESTRELA À CRUZ" no 1º quadro; termina em "Me conta aqui embaixo", sem cartão final) | `tiktok/longo-capa.jpg` |
+| 2026-11-26 18:00 | `tiktok/curto-01.mp4` (2:36) | `tiktok/curto-01-capa.jpg` |
+| 2026-11-28 18:00 | `tiktok/curto-02.mp4` (1:05) | `tiktok/curto-02-capa.jpg` |
+| 2026-12-01 18:00 | `tiktok/curto-03.mp4` (1:07) | `tiktok/curto-03-capa.jpg` |
 
 **Configurações de todos:** divulgação de conteúdo comercial **ligada**, porque o banner do app aparece no vídeo e a regra oficial vale para conteúdo que promove produto (o vídeo pode ficar fora do Programa de Recompensas). Rótulo de conteúdo gerado por IA ligado: a narração é voz sintética realista. Comentários, dueto e costura ligados. O TikTok não deixa mais fixar comentário, então o texto do app vai como **resposta do perfil ao primeiro comentário**.
 
@@ -183,7 +183,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 **Resposta do perfil ao primeiro comentário**
 ```
-📱 Quer ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, neste Advento? O PregaAI monta um plano de leitura pra você e tem um devocional curto pra cada dia. Na Google Play: procure PregaAI. No iPhone: app.pregaai.com (link na bio).
+📱 Quer ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, até o Natal? O PregaAI monta um plano de leitura pra você e tem um devocional curto pra cada dia. Na Google Play: procure PregaAI. No iPhone: app.pregaai.com (link na bio).
 ```
 
 ### Curto 1: `tiktok/curto-01.mp4`
@@ -249,9 +249,9 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 
 | Quando | Vídeo | Capa |
 |---|---|---|
-| 2026-11-30 12:00 | `instagram/curto-01.mp4` (~2:36) | `instagram/curto-01-capa.jpg` |
-| 2026-12-01 12:00 | `instagram/curto-02.mp4` (~1:06) | `instagram/curto-02-capa.jpg` |
-| 2026-12-02 12:00 | `instagram/curto-03.mp4` (~1:08) | `instagram/curto-03-capa.jpg` |
+| 2026-11-23 19:00 | `instagram/curto-01.mp4` (2:36) | `instagram/curto-01-capa.jpg` |
+| 2026-11-24 12:00 | `instagram/curto-02.mp4` (1:05) | `instagram/curto-02-capa.jpg` |
+| 2026-11-25 12:00 | `instagram/curto-03.mp4` (1:07) | `instagram/curto-03-capa.jpg` |
 
 **Configurações de todos:** capa personalizada pelo arquivo (não dá para trocar depois); "Rótulo de IA" ligado (narração sintética); parceria paga desligada (o banner é do próprio app). Comentário fixado com o texto do app.
 
@@ -302,7 +302,7 @@ Você conhecia essa história? 👇
 
 **Comentário fixado (os três)**
 ```
-📱 Quer ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, neste Advento? O PregaAI monta um plano de leitura pra você. Na Google Play: procure PregaAI. No iPhone: app.pregaai.com (link na bio).
+📱 Quer ler o nascimento de Jesus em Mateus e Lucas, um pouco por dia, até o Natal? O PregaAI monta um plano de leitura pra você. Na Google Play: procure PregaAI. No iPhone: app.pregaai.com (link na bio).
 ```
 
 ## Conferência na NVI
