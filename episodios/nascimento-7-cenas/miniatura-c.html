@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Miniatura C: do berço à cruz</title>
+<style>
+@font-face { font-family: 'Gasoek One'; src: url(../../node_modules/@expo-google-fonts/gasoek-one/400Regular/GasoekOne_400Regular.ttf); }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #111; }
+svg { position: absolute; inset: 0; -webkit-font-smoothing: antialiased; }
+/* C (curiosidade): a manjedoura acesa e a cruz com a placa (Mateus 2:2; 27:37). Texto à esquerda, no alto; o canto de baixo à direita fica livre (a duração). */
+</style>
+</head>
+<body>
+<svg id="art" viewBox="0 0 1920 1080" width="1280" height="720" preserveAspectRatio="xMidYMid slice"></svg>
+<script src="data.js"></script>
+<script src="../../lib.js"></script>
+<script src="../../capa-lib.js"></script>
+<script src="scenes.js"></script>
+<script src="capas.js"></script>
+<script>
+window.SIZE = [1280, 720];
+window.ready = document.fonts.load("100px 'Gasoek One'").then(() => { document.getElementById('art').innerHTML = DEFS + artC(); return document.fonts.ready; });
+</script>
+</body>
+</html>
