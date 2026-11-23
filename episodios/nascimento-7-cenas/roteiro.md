@@ -8,13 +8,13 @@
 
 | Viral (as 7 frases) | Este |
 |---|---|
-| Três coisas impossíveis em escada, sem nome nem contexto: o sol, o escuro, o véu. Fecha seco: "De cima pra baixo." | A estrela que anda, a estrela que para sobre um menino, o rei que, procurando esse menino, manda matar os meninos. Fecha seco: "De dois anos pra baixo." |
-| "Antes disso, pregado numa cruz, ele falou sete frases." | "Essas são duas das sete cenas do nascimento de Jesus que estão neste vídeo." |
-| "E tem um detalhe que quase ninguém percebe: nenhum evangelho registra as sete." Mateus e Marcos 1, Lucas 3, João 3. | "E tem um detalhe que quase ninguém percebe: nenhum evangelho conta as sete." "Dessas sete, Mateus conta três. Lucas conta quatro. E nenhuma das sete é contada pelos dois." |
-| "É juntando os quatro relatos que a gente escuta a cruz inteira." | "Só juntando os dois dá pra ver as sete." |
+| Três coisas impossíveis em escada, sem nome nem contexto: o sol, o escuro, o véu. Fecha seco: "De cima pra baixo." | A estrela que anda, a estrela que para sobre um menino, o rei que, procurando esse menino, manda matar os meninos de Belém e arredores. Fecha seco: "De dois anos pra baixo." |
+| "Antes disso, pregado numa cruz, ele falou sete frases." | "Essas são duas das sete cenas do nascimento de Jesus que eu escolhi pra este vídeo." |
+| "E tem um detalhe que quase ninguém percebe: nenhum evangelho registra as sete." Mateus e Marcos 1, Lucas 3, João 3. | "E tem um detalhe que quase ninguém percebe: nenhuma dessas sete está em mais de um evangelho." "Mateus conta três. Lucas conta quatro." |
+| "É juntando os quatro relatos que a gente escuta a cruz inteira." | "Só juntando Mateus e Lucas dá pra ver essas sete." |
 | "E vai entender por que aquele véu rasgado importa até hoje." (pago aos 7:00, Hebreus) | "E, no fim, você vai entender o que três palavras daqueles viajantes têm a ver com a cruz." (pago no fim: "rei dos judeus", Mateus 2:2 e 27:37; nos quatro evangelhos, depois dos magos, essas palavras só voltam no dia em que Jesus morreu) |
 | 7 itens contados pelo número | 7 cenas contadas pelo número, cada uma com o evangelho que a conta |
-| Laços: o Salmo 22, o véu | Laços: "Guarda esse nome" (Emanuel, pago no fim), "Guarda esse lugar" (a manjedoura, paga nos magos), "Guarda esse detalhe" (o tempo da estrela, pago nos dois anos) |
+| Laços: o Salmo 22, o véu | Laços: "Guarda esse nome" (Emanuel, pago no fim), "Guarda esse lugar" (a manjedoura, paga nos magos: "Foi lá que os pastores acharam Jesus. Os magos, Mateus conta, acharam o menino numa casa."), "Guarda esse detalhe" (o tempo da estrela, pago nos dois anos) |
 
 **O que não foi copiado (a curva do viral mostra que custou):** o "Hoje você vai ouvir cada uma dessas frases", o bloco de contexto explicado antes da história (a cruz romana, Cícero), o pedido no meio (aos 5:00), a recapitulação item por item e o pedido de inscrição no fim.
 
@@ -70,9 +70,9 @@ Os três ganchos são frases do próprio longo, então entram na validação jun
 3. Promessa amarrada ao gancho, paga só no fim: sim (as três palavras dos viajantes, pagas no fechamento).
 4. Um laço aberto por minuto: quase. As três palavras (0:45 → 7:45), Emanuel (~2:25 → fim), a manjedoura (~4:20 → ~6:30), o tempo da estrela (~5:55 → ~7:00). Entre 2:30 e 4:20 não há laço novo; a numeração das cenas segura o trecho.
 5. Itens numerados: sim, as 7 cenas, cada uma com o evangelho que a conta.
-6. Detalhe de estudo a cada 20 a 40 s: sim (Mateus e Lucas sem cena em comum; Lucas não descreve o lugar; "exército"; Ana com 84 anos; a oferta das rolinhas na lei; Mateus chama Herodes de rei e os magos chamam o menino; casa, não manjedoura; o tempo da estrela e os dois anos; "rei dos judeus" só volta no dia da cruz; a última frase de Mateus).
+6. Detalhe de estudo a cada 20 a 40 s: sim (as sete cenas divididas entre Mateus e Lucas, nenhuma nos dois; Lucas não descreve o lugar; "Um exército."; Ana, viúva até os 84 anos; a oferta das rolinhas na lei, depois de um parto; Mateus chama Herodes de rei e os magos chamam o menino; casa, não manjedoura; o tempo da estrela e os dois anos; "rei dos judeus" só volta no dia da cruz; a última frase de Mateus).
 7. Cena com diálogo no lugar de explicação: sim (Gabriel e Maria, o anjo e José, o anjo e os pastores, Simeão, os magos e Herodes).
-8. Uma frase de virada por cena: sim ("Um Reino que não vai ter fim. Anunciado a uma moça prometida em casamento."; "O homem justo que ia anular o casamento acordou e obedeceu."; "O primeiro berço do Filho de Deus foi um cocho."; "O sinal do Salvador era um bebê num cocho."; "A promessa era ver o Cristo. E o Cristo era um bebê no colo dele."; "Os pastores acharam Jesus numa manjedoura. Os magos, numa casa."; "O rei que dizia que ia adorar o menino queria ver o menino morto.").
+8. Uma frase de virada por cena: sim ("Um Reino que não vai ter fim. Anunciado a uma moça prometida em casamento."; "O homem justo que ia anular o casamento acordou e obedeceu."; "O primeiro berço do Filho de Deus foi um cocho."; "O sinal do Salvador era um bebê num cocho."; "A promessa era ver o Cristo. E o Cristo era um bebê no colo dele."; "Foi lá que os pastores acharam Jesus. Os magos, Mateus conta, acharam o menino numa casa."; "O rei que dizia que ia adorar o menino queria ver o menino morto.").
 9. Pedido só no fim, numa frase: sim; sem chamada falada do app (o banner com o selo da Google Play a cada 30 s faz esse papel). Se quiser o CTA falado do lenço dobrado, entra depois da pergunta final.
 10. Termina pagando o gancho e numa pergunta de escolha: sim ("Qual dessas sete cenas você não conhecia? Me conta aqui embaixo.").
 
