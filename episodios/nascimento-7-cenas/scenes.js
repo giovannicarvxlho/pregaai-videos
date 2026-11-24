@@ -1080,5 +1080,5 @@ const SCENES = [
   { a: at(L(9, 5)), b: at(L(9, 7)), f: scMesmoTitulo, ref: 'Mateus 2:11; 27:29' },
   { a: at(L(9, 7)), b: at(L(9, 10)), f: scEmanuelFim, ref: [[at(L(9, 7)), 'Mateus 1:23'], [at(L(9, 9)), 'Mateus 28:20']] },
   { a: at(L(9, 10)), b: AUDIO_END + 0.25, f: scPergunta, ref: null },
-  { a: AUDIO_END + 0.25, b: DURATION + 1, f: scFim, ref: null, end: true },
+  { a: AUDIO_END + 0.25, b: DURATION + 1, f: scFim, ref: null, end: true, cut: true },
 ];

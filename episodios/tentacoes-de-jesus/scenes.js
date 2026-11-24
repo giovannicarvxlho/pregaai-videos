@@ -632,6 +632,9 @@ function scPergunta(t) {
 }
 
 // ---------------------------------------------------------------- linha do tempo
+// Cartão final com o app na Google Play (Giovanni, 24/11/2026: todo curto termina com a chamada do app).
+const scFim = (t) => endCard(t, AUDIO_END + 0.2, ['Mateus 4', 'Hebreus 4'], { web: 'app.pregaai.com' });
+
 const SCENES = [
   { a: 0, b: at(1), f: scGancho, ref: 'Mateus 4:1' },
   { a: at(1), b: at(2), f: scBatismo, ref: 'Mateus 3:16-17' },
@@ -669,5 +672,6 @@ const SCENES = [
   { a: at(33), b: at(34), f: scSocorrer, ref: 'Hebreus 2:18' },
   { a: at(34), b: at(35), f: scSemSe, ref: 'Hebreus 4:14' },
   { a: at(35), b: at(36), f: scSeuDeserto, ref: null },
-  { a: at(36), b: DURATION + 1, f: scPergunta, ref: null },
+  { a: at(36), b: AUDIO_END + 0.2, f: scPergunta, ref: null },
+  { a: AUDIO_END + 0.2, b: DURATION + 1, f: scFim, ref: null, end: true },
 ];

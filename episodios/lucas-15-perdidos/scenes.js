@@ -658,6 +658,9 @@ function scQual(t) {
 }
 
 // ---------------------------------------------------------------- linha do tempo
+// Cartão final com o app na Google Play (Giovanni, 24/11/2026: todo curto termina com a chamada do app).
+const scFim = (t) => endCard(t, AUDIO_END + 0.2, ['Lucas 15'], { web: 'app.pregaai.com' });
+
 const SCENES = [
   { a: 0, b: at(1), f: scGancho, ref: 'Lucas 15:11-32', dark: true },
   { a: at(1), b: at(2), f: scFora, ref: null, dark: true },
@@ -686,5 +689,6 @@ const SCENES = [
   { a: at(24), b: at(25), f: scEncontro, ref: [[at(24), 'Lucas 15:20'], [wseg(24, 'saiu') - 0.1, 'Lucas 15:28']], dark: (t) => t > wordTime(24, 'saiu') },
   { a: at(25), b: at(26), f: scParalelo, ref: [[at(25), 'Lucas 15:2'], [wseg(25, 'última') - 0.15, 'Lucas 15:28-30']], dark: (t) => t > wordTime(25, 'última') },
   { a: at(26), b: at(27), f: scPorta, ref: null, dark: true },
-  { a: at(27), b: DURATION + 1, f: scQual, ref: null },
+  { a: at(27), b: AUDIO_END + 0.2, f: scQual, ref: null },
+  { a: AUDIO_END + 0.2, b: DURATION + 1, f: scFim, ref: null, end: true },
 ];

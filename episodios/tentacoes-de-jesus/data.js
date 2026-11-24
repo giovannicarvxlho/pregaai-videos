@@ -40,7 +40,7 @@ const SEGS = [
   [195.84, 205.68, 'Das três tentações, | qual parece mais com a sua hoje: | pôr o pão na frente | da palavra de Deus, | cobrar de Deus uma prova, | ou trocar a adoração por poder?', [[195.84, 197.04], [197.36, 199.12], [199.56, 200.48], [200.56, 201.6], [201.92, 203.44], [203.76, 205.68]], [195.84, 196.08, 196.32, 197.36, 197.52, 197.92, 198.24, 198.36, 198.48, 198.8, 199.56, 199.76, 199.88, 200.16, 200.28, 200.56, 200.72, 201.04, 201.2, 201.92, 202.36, 202.56, 202.8, 203.04, 203.76, 203.92, 204.4, 204.56, 205.12, 205.28]],
 ];
 const AUDIO_END = 205.68;
-const DURATION = 206.90; // fala + 1,2 s na última imagem (sem cartão final: no TikTok, fim na última fala)
+const DURATION = 211.38; // fala + cartão final (Google Play e web), como no morte-de-acabe
 // Acelera o vídeo inteiro no fim do build (a voz mantém o tom).
 const SPEED = 1.25;
 // Texto do gancho no 1º quadro (some aos 3 s) e banner do app a cada 30 s.
