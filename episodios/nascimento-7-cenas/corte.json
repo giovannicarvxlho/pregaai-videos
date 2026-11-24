@@ -116,7 +116,7 @@
    "nome": "nascimento-7-cenas-tiktok",
    "layout": "vertical",
    "titulo": "O nascimento de Jesus em *7 cenas*",
-   "gancho": "DA ESTRELA \u00c0 *CRUZ*",
+   "gancho": "DA ESTRELA À *CRUZ*",
    "cta": true,
    "frases": [
     0,
@@ -227,8 +227,8 @@
   {
    "nome": "nascimento-7-cenas-curto-1-ig",
    "layout": "foco",
-   "titulo": "Rei dos judeus: da estrela \u00e0 *cruz*",
-   "gancho": "*REI DOS JUDEUS*: DO NASCIMENTO \u00c0 CRUZ",
+   "titulo": "Rei dos judeus: da estrela à *cruz*",
+   "gancho": "*REI DOS JUDEUS*: DO NASCIMENTO À CRUZ",
    "cta": true,
    "frases": [
     72,
@@ -353,7 +353,12 @@
       }
      }
     }
-   }
+   },
+   "cartao": 5,
+   "refs": [
+    "Mateus 2",
+    "Mateus 27"
+   ]
   },
   {
    "nome": "nascimento-7-cenas-curto-2-ig",
@@ -419,13 +424,17 @@
       }
      }
     }
-   }
+   },
+   "cartao": 5,
+   "refs": [
+    "Lucas 2"
+   ]
   },
   {
    "nome": "nascimento-7-cenas-curto-3-ig",
    "layout": "foco",
-   "titulo": "A promessa de *Sime\u00e3o*",
-   "gancho": "ELE N\u00c3O IA *MORRER* ANTES",
+   "titulo": "A promessa de *Simeão*",
+   "gancho": "ELE NÃO IA *MORRER* ANTES",
    "cta": true,
    "frases": [
     58,
@@ -486,7 +495,11 @@
       }
      }
     }
-   }
+   },
+   "cartao": 5,
+   "refs": [
+    "Lucas 2"
+   ]
   }
  ]
 }

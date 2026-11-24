@@ -31,7 +31,7 @@ const SEGS = [
   [177.12, 184.64, 'Qual das três te tocou mais: | a ovelha nos ombros, | a moeda achada, ou o pai que foi | ao encontro dos dois filhos?', [[177.12, 178.88], [179.32, 180.48], [180.84, 183.12], [183.16, 184.64]], [177.12, 177.36, 177.6, 178.0, 178.16, 178.48, 179.32, 179.44, 179.88, 180.12, 180.84, 180.96, 181.4, 182.24, 182.36, 182.56, 182.8, 182.96, 183.16, 183.28, 183.76, 183.96, 184.24]],
 ];
 const AUDIO_END = 184.64;
-const DURATION = 185.84; // fala + 1,2 s na última imagem (sem cartão final: no TikTok, fim na última fala)
+const DURATION = 190.34; // fala + cartão final (Google Play e web), como no morte-de-acabe
 // Acelera o vídeo inteiro no fim do build (a voz mantém o tom).
 const SPEED = 1.25;
 // Texto do gancho no 1º quadro (some aos 3 s) e banner do app a cada 30 s.

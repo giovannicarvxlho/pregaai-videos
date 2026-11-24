@@ -7,6 +7,8 @@
 // 3. O corte.json aponta para frases que existem, com layout conhecido e título nos curtos.
 // 4. Nenhum corte começa no meio da fala: mede o áudio logo no início de cada trecho (defeito dos curtos do
 //    eu-sou, corrigido em 11/11/2026).
+// 5. Todo vídeo termina com o cartão final do app (Giovanni, 24/11/2026): o episódio tem uma cena com end: true,
+//    e todo curto recortado (layout foco) tem "cartao". A versão vertical do longo para o TikTok (layout vertical) fica de fora, por decisão.
 // Sai com código 1 se algo falhar, e diz o quê.
 const { spawnSync } = require('child_process');
 const fs = require('fs');
@@ -19,6 +21,9 @@ const TELA = [['Prega aí', 'PregaAI']];
 const MIN_TEXTO = 0.9;      // fração mínima das palavras do narracao.txt achadas em ordem no data.js
 const MIN_LINHA = 0.6;      // e de cada frase com 4 palavras ou mais
 const VOZ_DB = -35;         // pico acima disto nos primeiros 60 ms do trecho = começou na fala
+
+// Vídeos sem cartão final de antes da regra de 24/11/2026 (já publicados ou fora de uso). Não cresce: vídeo novo leva o cartão.
+const SEM_CARTAO = new Set(['depois-da-cruz-tiktok', 'sete-frases-desenho', 'salmo-22', 'sete-frases-na-cruz']);
 
 const falhas = [];
 const falha = (ep, msg) => falhas.push(`${ep}: ${msg}`);
@@ -90,6 +95,7 @@ function cortes(ep) {
     if (s.layout && s.layout !== 'foco' && !s.titulo) falha(ep, `corte ${nome}: curto sem título`);
     // layout foco (12/11/2026): todo curto leva o texto do gancho no 1º quadro, e o enquadramento só cita cenas e frases que existem
     if (s.layout === 'foco' && !s.gancho) falha(ep, `corte ${nome}: curto sem "gancho" (o texto do 1º quadro é obrigatório desde 12/11/2026)`);
+    if (s.layout === 'foco' && !(s.cartao > 0) && !SEM_CARTAO.has(ep)) falha(ep, `corte ${nome}: curto sem "cartao" (todo curto termina com o cartão final do app desde 24/11/2026; 5 s bastam)`);
     if (s.foco) {
       const nCenas = NCENAS[cfg.fonte]; // contado no desenho das cenas, que roda antes
       for (const [k, r] of Object.entries(s.foco.cena || {})) if (nCenas !== undefined && !(Number(k) >= 0 && Number(k) < nCenas)) falha(ep, `corte ${nome}: foco da cena ${k}, que não existe (${nCenas} cenas)`);
@@ -138,8 +144,9 @@ async function cenas(browser, ep) {
     };
     let quadros = 0;
     for (let t = 0; t < DURATION; t += 1) { window.renderFrame(t); quadros++; }
-    return { quadros, falta: [...falta], nCenas: SCENES.length };
+    return { quadros, falta: [...falta], nCenas: SCENES.length, fim: SCENES.some((s) => s.end) };
   });
+  if (!r.fim && !SEM_CARTAO.has(ep)) falha(ep, 'sem cartão final: nenhuma cena com end: true (todo vídeo termina com o cartão do app desde 24/11/2026; ver o morte-de-acabe)');
   NCENAS[ep] = r.nCenas;
   await page.close();
   for (const e of [...new Set(erros)].slice(0, 5)) falha(ep, `erro ao desenhar: ${e}`);

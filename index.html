@@ -151,6 +151,11 @@ html.recorte, .recorte body, .recorte #root { width: 1080px; height: 1920px; bac
 .foco #stage { top: 0; left: 0; width: 1080px; height: 1920px; }
 .foco #scene { top: 0; left: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
 .foco #chrome { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0, rgba(0, 0, 0, 0.18) 40%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0) 85%, rgba(0, 0, 0, 0.35) 100%); }
+/* cartão final no curto foco: o mesmo do curto nativo (1080×1920), sem o degradê */
+.foco.fim #scene { width: 1080px; height: 1920px; }
+.foco.fim #chrome { background: none; }
+.foco.fim .end { left: 0; right: 0; top: 400px; width: auto; }
+.foco.fim .legal { top: 1478px; bottom: auto; left: 0; right: 0; width: auto; }
 .foco .titulo, .foco .gancho { text-shadow: 0 4px 18px rgba(0, 0, 0, 0.6); }
 /* com a cena cheia, os personagens ficam na metade de baixo (o chão da cena 16:9): a legenda sobe para a faixa do céu,
    logo abaixo do título, e nunca cobre rosto; a referência fica entre os dois */
@@ -285,9 +290,12 @@ window.renderFrame = (t, tv = t) => {
   $scene.innerHTML = html;
   if (FOCO && list.length) {
     const top = list[list.length - 1], cur = top.op >= 0.5 || list.length === 1 ? top.sc : list[0].sc;
-    const j = janelaFoco(t, cur, SCENES.indexOf(cur));
+    // Cartão final num curto (campo cartao do corte.json): sai em pé, como o do curto nativo, e não pela janela da cena 16:9.
+    const fim = !!cur.end;
+    document.documentElement.classList.toggle('fim', fim);
+    const j = fim ? { x0: 0, y0: 0, w: 607.5, h: 1080, k: 1 } : janelaFoco(t, cur, SCENES.indexOf(cur));
     $stage.setAttribute('viewBox', `${f1(j.x0)} ${f1(j.y0)} ${f1(j.w)} ${f1(j.h)}`);
-    $scene.style.transform = `scale(${j.k.toFixed(5)}) translate(${f1(-j.x0)}px, ${f1(-j.y0)}px)`;
+    $scene.style.transform = fim ? 'none' : `scale(${j.k.toFixed(5)}) translate(${f1(-j.x0)}px, ${f1(-j.y0)}px)`;
   }
   const ch = chromeHTML(t, list);
   $chrome.className = 'layer' + (ch.dark ? ' dark' : '');
@@ -299,7 +307,7 @@ window.renderFrame = (t, tv = t) => {
   const gop = ganchoOp(tv);
   const tituloOp = f1((cta ? 1 - cta.titulo : 1) * (1 - Math.min(1, gop * 2)) * 100) / 100;
   const gancho = gop > 0 ? `<div class="gancho" style="opacity:${f1(gop * 100) / 100}"><div>${esc(GANCHO_TXT).replace(/\*(.+?)\*/g, '<span>$1</span>')}</div></div>` : '';
-  const titulo = RECORTE && TITULO && tituloOp > 0
+  const titulo = RECORTE && TITULO && tituloOp > 0 && !ch.end
     ? `<div class="titulo" style="opacity:${tituloOp}"><div>${esc(TITULO).replace(/\*(.+?)\*/g, '<span>$1</span>')}</div></div>` : '';
   $chrome.innerHTML = gancho + titulo + ch.html + (cta ? ctaBanner(tv) : '');
 };

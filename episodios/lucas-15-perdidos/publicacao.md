@@ -82,7 +82,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 "E o mais velho entrou?" Jesus não conta. A última fala da história é do pai: "Meu filho, você está sempre comigo, e tudo o que tenho é seu" (Lucas 15:31).
 ```
 
-**Configurações:** divulgação de conteúdo comercial LIGADA (o vídeo tem o banner do app a cada 30 s); rótulo de IA opcional (a animação não é realista); comentários, dueto e costura ligados. O vídeo termina na última fala, sem cartão final.
+**Configurações:** divulgação de conteúdo comercial LIGADA (o vídeo tem o banner do app a cada 30 s); rótulo de IA opcional (a animação não é realista); comentários, dueto e costura ligados. O vídeo termina com o cartão final do app (Google Play e app.pregaai.com), refeito em 24/11/2026.
 
 ## Instagram
 
