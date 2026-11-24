@@ -82,7 +82,7 @@ Google Play e o logotipo do Google Play são marcas da Google LLC.
 Na dor, Jesus também orou "em alta voz e com lágrimas" (Hebreus 5:7) e bradou na cruz, com as palavras do Salmo 22, "Meu Deus! Meu Deus! Por que me abandonaste?" (Mateus 27:46). E, quando um pai disse "Creio, ajuda-me a vencer a minha incredulidade!", Jesus o atendeu (Marcos 9:24-27).
 ```
 
-**Configurações:** divulgação de conteúdo comercial LIGADA (o vídeo tem o banner do app a cada 30 s); rótulo de IA opcional (a animação não é realista); comentários, dueto e costura ligados. O vídeo termina na última fala, sem cartão final.
+**Configurações:** divulgação de conteúdo comercial LIGADA (o vídeo tem o banner do app a cada 30 s); rótulo de IA opcional (a animação não é realista); comentários, dueto e costura ligados. O vídeo termina com o cartão final do app (Google Play e app.pregaai.com), refeito em 24/11/2026.
 
 ## Instagram
 
