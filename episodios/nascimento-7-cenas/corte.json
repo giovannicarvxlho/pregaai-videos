@@ -500,6 +500,59 @@
    "refs": [
     "Lucas 2"
    ]
+  },
+  {
+   "nome": "nascimento-7-cenas-curto-4-ig",
+   "layout": "foco",
+   "titulo": "O sonho de *José*",
+   "gancho": "JOSÉ IA *ANULAR* O CASAMENTO",
+   "cta": true,
+   "frases": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    34
+   ],
+   "foco": {
+    "padrao": {
+     "cx": 960
+    },
+    "cena": {
+     "15": {
+      "cx": 480,
+      "ate": {
+       "cx": 1080
+      }
+     }
+    },
+    "frase": {
+     "26": {
+      "cx": 560
+     },
+     "27": {
+      "cx": 1260
+     },
+     "28": {
+      "cx": 1260
+     },
+     "29": {
+      "cx": 1260
+     },
+     "30": {
+      "cx": 880
+     },
+     "31": {
+      "cx": 1300
+     }
+    }
+   },
+   "cartao": 5,
+   "refs": [
+    "Mateus 1"
+   ]
   }
  ]
 }
