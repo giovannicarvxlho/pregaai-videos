@@ -1,6 +1,6 @@
 # Os reis magos eram reis? (Mateus 2:1-16; Lucas 2:16)
 
-**Status: aguardando validação do Giovanni.** Versão 3 (2026-11-25), reescrita a pedido dele depois da análise de virais (leitura 31 do MARK1). Substitui a versão 2 de 2026-11-09, que nunca foi ao ar. 1.114 caracteres, **~80 s de fala** (pela proporção da v2: 911 caracteres, ~67 s) e ~86 s com o cartão final. Curto escrito do zero, vertical, a mesma peça nas três redes, com o cartão final do app (regra de 24/11).
+**Status: aprovado pelo Giovanni em 2026-11-25 ("aprovado, pode produzir para domingo"); publicação dom 29/11.** Versão 3 (2026-11-25), reescrita a pedido dele depois da análise de virais (leitura 31 do MARK1). Substitui a versão 2 de 2026-11-09, que nunca foi ao ar. 1.114 caracteres, 82 s de narração, que viram **~66 s de fala** com o `SPEED = 1.25` de todo curto, e **1:10** com o cartão final (medido no vídeo pronto). Curto escrito do zero, vertical, a mesma peça nas três redes, com o cartão final do app (regra de 24/11).
 
 ## Aposta
 - **Gancho:** "Três reis diante da manjedoura. Mateus não conta nenhuma dessas três coisas." (tipo: contradição de crença; o primeiro do banco a ir ao ar)
