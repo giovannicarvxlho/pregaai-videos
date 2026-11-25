@@ -1,0 +1,216 @@
+{
+ "volume": 0,
+ "piano": false,
+ "secoes": [
+  {
+   "frase": 0,
+   "humor": "suspense",
+   "ganho": 0.5
+  },
+  {
+   "frase": 9,
+   "humor": "tensao",
+   "ganho": 0.5
+  },
+  {
+   "frase": 13,
+   "humor": "luz",
+   "ganho": 0.55
+  }
+ ],
+ "impactos": [
+  {
+   "frase": 11,
+   "palavra": "matar",
+   "tipo": "escuro",
+   "ganho": 0.6
+  },
+  {
+   "frase": 14,
+   "palavra": "adoraram",
+   "tipo": "luz",
+   "ganho": 0.7
+  }
+ ],
+ "efeitos_volume": 4.0,
+ "eventos": {
+  "passos": 0.3,
+  "voz": 0.45,
+  "grifa": 0.35,
+  "cartao": 0.45
+ },
+ "efeitos": [
+  {
+   "frase": 0,
+   "tipo": "brilho",
+   "ganho": 0.35,
+   "palavra": "três"
+  },
+  {
+   "frase": 0,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "nenhuma",
+   "atraso": -0.1
+  },
+  {
+   "frase": 0,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "nenhuma",
+   "atraso": 0.22
+  },
+  {
+   "frase": 0,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "nenhuma",
+   "atraso": 0.54
+  },
+  {
+   "frase": 1,
+   "tipo": "brilho",
+   "ganho": 0.4,
+   "palavra": "pista"
+  },
+  {
+   "frase": 2,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "primeiro",
+   "atraso": -0.15
+  },
+  {
+   "frase": 2,
+   "tipo": "tique",
+   "ganho": 0.4,
+   "palavra": "magos",
+   "atraso": -0.15
+  },
+  {
+   "frase": 4,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "herodes",
+   "atraso": -0.2
+  },
+  {
+   "frase": 4,
+   "tipo": "brilho",
+   "ganho": 0.4,
+   "palavra": "menino",
+   "atraso": -0.25
+  },
+  {
+   "frase": 5,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "segundo",
+   "atraso": -0.15
+  },
+  {
+   "frase": 5,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "mateus",
+   "atraso": -0.1
+  },
+  {
+   "frase": 5,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "ouro",
+   "atraso": -0.2
+  },
+  {
+   "frase": 5,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "incenso",
+   "atraso": -0.2
+  },
+  {
+   "frase": 5,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "mirra",
+   "atraso": -0.2
+  },
+  {
+   "frase": 6,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "três",
+   "atraso": -0.15
+  },
+  {
+   "frase": 6,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "quantas",
+   "atraso": -0.2
+  },
+  {
+   "frase": 7,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "terceiro",
+   "atraso": -0.15
+  },
+  {
+   "frase": 7,
+   "tipo": "brilho",
+   "ganho": 0.35,
+   "palavra": "casa",
+   "atraso": -0.2
+  },
+  {
+   "frase": 8,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "numa",
+   "atraso": -0.15
+  },
+  {
+   "frase": 8,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "manjedoura",
+   "atraso": -0.2
+  },
+  {
+   "frase": 9,
+   "tipo": "brilho",
+   "ganho": 0.45,
+   "palavra": "pista"
+  },
+  {
+   "frase": 10,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "estrela",
+   "atraso": -0.2
+  },
+  {
+   "frase": 11,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "dois",
+   "atraso": -0.2
+  },
+  {
+   "frase": 12,
+   "tipo": "pop",
+   "ganho": 0.45,
+   "palavra": "conta",
+   "atraso": -0.2
+  },
+  {
+   "frase": 12,
+   "tipo": "pop",
+   "ganho": 0.4,
+   "palavra": "noite",
+   "atraso": -0.25
+  }
+ ]
+}
