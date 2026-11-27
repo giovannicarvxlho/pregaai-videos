@@ -12,7 +12,7 @@
 # do Supabase na hora e passa só para o comando. Nunca grave a chave em arquivo versionado.
 import json, mimetypes, os, sys, urllib.error, urllib.request
 
-FUNCAO = 'https://gywcwlurgoccfrnkvnpz.supabase.co/functions/v1/drive-entrega'
+FUNCAO = 'https://bxemdgjuviwbdxsrdvzc.supabase.co/functions/v1/drive-entrega'
 
 
 def pasta_do_dia(nome):
