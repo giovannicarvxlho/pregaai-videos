@@ -190,13 +190,23 @@ function mouthOn(x, y, s, kind, tk = 0) {
 
 // Braço de perto: manga do ombro à mão, mão redonda e, se apontar, o dedo.
 function armTo(x0, y0, x1, y1, sleeve, skin, o = {}) {
-  const w = o.w || 70, ang = Math.atan2(y1 - y0, x1 - x0), L = Math.hypot(x1 - x0, y1 - y0), hx = x0 + Math.cos(ang) * (L - w * 0.35), hy = y0 + Math.sin(ang) * (L - w * 0.35);
-  let s = `<line x1="${f1(x0)}" y1="${f1(y0)}" x2="${f1(hx)}" y2="${f1(hy)}" stroke="${OL}" stroke-width="${w + 14}" stroke-linecap="round"/><line x1="${f1(x0)}" y1="${f1(y0)}" x2="${f1(hx)}" y2="${f1(hy)}" stroke="${sleeve}" stroke-width="${w}" stroke-linecap="round"/>`;
-  s += `<path d="M ${f1(hx - Math.cos(ang + 1.57) * w * 0.42)} ${f1(hy - Math.sin(ang + 1.57) * w * 0.42)} L ${f1(hx + Math.cos(ang + 1.57) * w * 0.42)} ${f1(hy + Math.sin(ang + 1.57) * w * 0.42)}" stroke="${shade(sleeve, 0.75)}" stroke-width="16" stroke-linecap="round"/>`;
-  s += `<circle cx="${f1(x1)}" cy="${f1(y1)}" r="${f1(w * 0.48)}" fill="${skin}" ${st(6)}/>`;
-  if (o.point) { const fx = x1 + Math.cos(ang) * w * 0.95, fy = y1 + Math.sin(ang) * w * 0.95; s += `<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(fx)}" y2="${f1(fy)}" stroke="${OL}" stroke-width="${f1(w * 0.36)}" stroke-linecap="round"/><line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(fx)}" y2="${f1(fy)}" stroke="${skin}" stroke-width="${f1(w * 0.36 - 11)}" stroke-linecap="round"/><circle cx="${f1(x1)}" cy="${f1(y1)}" r="${f1(w * 0.48 - 3)}" fill="${skin}"/>`; }
-  if (o.tool) s += o.tool(x1, y1, ang);
+  // ombro -> cotovelo -> mão; o cotovelo sai para o lado (bend) para o braço não virar vara
+  const w = o.w || 84, L = Math.hypot(x1 - x0, y1 - y0), ang = Math.atan2(y1 - y0, x1 - x0);
+  const bend = (o.bend ?? 0.22) * L, px = -Math.sin(ang), py = Math.cos(ang);
+  const ex = (x0 + x1) / 2 + px * bend, ey = (y0 + y1) / 2 + py * bend;
+  const fa = Math.atan2(y1 - ey, x1 - ex), hx = x1 - Math.cos(fa) * w * 0.35, hy = y1 - Math.sin(fa) * w * 0.35;
+  const seg = (ax, ay, bx, by, c, ww) => `<line x1="${f1(ax)}" y1="${f1(ay)}" x2="${f1(bx)}" y2="${f1(by)}" stroke="${c}" stroke-width="${f1(ww)}" stroke-linecap="round"/>`;
+  let s = seg(x0, y0, ex, ey, OL, w + 14) + seg(ex, ey, hx, hy, OL, w * 0.86 + 14) + seg(x0, y0, ex, ey, sleeve, w) + seg(ex, ey, hx, hy, sleeve, w * 0.86);
+  s += `<path d="M ${f1(hx - px * 0 - Math.sin(fa) * w * 0.4)} ${f1(hy + Math.cos(fa) * w * 0.4)} L ${f1(hx + Math.sin(fa) * w * 0.4)} ${f1(hy - Math.cos(fa) * w * 0.4)}" stroke="${shade(sleeve, 0.72)}" stroke-width="14" stroke-linecap="round"/>`;
+  s += `<circle cx="${f1(x1)}" cy="${f1(y1)}" r="${f1(w * 0.46)}" fill="${skin}" ${st(6)}/>`;
+  if (o.point) { const fx = x1 + Math.cos(fa) * w * 0.95, fy = y1 + Math.sin(fa) * w * 0.95; s += seg(x1, y1, fx, fy, OL, w * 0.34) + seg(x1, y1, fx, fy, skin, w * 0.34 - 11) + `<circle cx="${f1(x1)}" cy="${f1(y1)}" r="${f1(w * 0.46 - 3)}" fill="${skin}"/>`; }
+  if (o.tool) s += o.tool(x1, y1, fa);
   return s;
+}
+// poeira macia (sem contorno), para não virar bolinha
+function puff(x, y, r, op, t, i) {
+  const c = '#EAD8BE';
+  return `<g opacity="${f1(op * 100) / 100}"><circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(r)}" fill="${c}"/><circle cx="${f1(x - r * 0.55 + Math.sin(t * 2 + i) * 4)}" cy="${f1(y + r * 0.2)}" r="${f1(r * 0.7)}" fill="${shade(c, 1.03)}"/><circle cx="${f1(x + r * 0.5)}" cy="${f1(y - r * 0.25)}" r="${f1(r * 0.6)}" fill="${shade(c, 0.96)}"/></g>`;
 }
 
 // ------------------------------------------------------------------ 1. Jeú chegando (plano aberto)
@@ -221,7 +231,7 @@ function scChegando(t) {
   const x = lerp(1180, 640, u), y = lerp(1250, 1040, u), sc = lerp(0.78, 0.4, u);
   for (let i = 0; i < 9; i++) {
     const k = i / 9, px = x + (180 + k * 380) * sc, py = y - 20 * sc - k * 50 * sc;
-    s += `<circle cx="${f1(px + Math.sin(t * 3 + i) * 10)}" cy="${f1(py)}" r="${f1((40 + k * 90) * sc)}" fill="#E6CFAE" opacity="${f1((0.75 - k * 0.6) * 100) / 100}" ${st(3)}/>`;
+    s += puff(px + Math.sin(t * 3 + i) * 10, py, (40 + k * 90) * sc, 0.8 - k * 0.65, t, i);
   }
   const rider = person({ x: -20, y: -90, s: 0.9, robe: JEU.robe, skin: JEU.skin, hair: JEU.hair, beard: true, mood: 'angry', armR: 100, gear: { helmet: 'isr' }, noShadow: true });
   s += chariot(x, y, sc, { horse: true, flip: true, gallop: t * 11, spin: -t * 6, rider, fill: '#9A7B57' });
@@ -294,11 +304,11 @@ function scJorao(t) {
   for (let r = 0; r < 3; r++) for (let c = 0; c < 7; c++) { const x = c * 180 - r * 60 + 40, y = GROUND + 40 + r * 70, k = 0.5 + r * 0.25; s += `<line x1="${x}" y1="${y}" x2="${x}" y2="${y - 70 * k}" stroke="#2A1814" stroke-width="${6 * k}"/><circle cx="${x - 14 * k}" cy="${y - 70 * k}" r="${22 * k}" fill="#3E5A2E" stroke="#1E140F" stroke-width="3"/><circle cx="${x + 16 * k}" cy="${y - 64 * k}" r="${18 * k}" fill="#355028" stroke="#1E140F" stroke-width="3"/>`; }
   // o carro tombado, a roda solta e a flecha na terra
   s += `<g transform="rotate(-24 800 1150)">${chariot(800, 1150, 0.75, { fill: '#7B5D45', ol: '#1E140F' })}</g>`;
-  s += `<g transform="translate(420 1230) rotate(${f1(-t * 30)})"><circle r="56" fill="#6E5440" stroke="#1E140F" stroke-width="6"/><circle r="44" fill="none" stroke="#4A3526" stroke-width="7"/>${[0, 1, 2].map((k) => `<line x1="${f1(Math.cos(k) * -42)}" y1="${f1(Math.sin(k) * -42)}" x2="${f1(Math.cos(k) * 42)}" y2="${f1(Math.sin(k) * 42)}" stroke="#4A3526" stroke-width="6"/>`).join('')}</g>`;
+  s += `<g transform="translate(420 1230) rotate(${f1(30 + Math.sin(t * 2) * 3)})"><circle r="56" fill="#6E5440" stroke="#1E140F" stroke-width="6"/><circle r="44" fill="none" stroke="#4A3526" stroke-width="7"/>${[0, 1, 2].map((k) => `<line x1="${f1(Math.cos(k) * -42)}" y1="${f1(Math.sin(k) * -42)}" x2="${f1(Math.cos(k) * 42)}" y2="${f1(Math.sin(k) * 42)}" stroke="#4A3526" stroke-width="6"/>`).join('')}</g>`;
   s += crown(560, 1200, 1.7, -16, C.a400, 0.4 + 0.4 * Math.sin(t * 4));
   s += arrow(700, 1228, 64, 1.2, '#1E140F');
   s += birds(t, 4, 420, 21, '#1E140F');
-  return out(cam(s, 560, 1150, 1.0 + 0.1 * E.sine(u)), { vig: 1.2 });
+  return out(cam(s, 600, 1170, 1.35 + 0.12 * E.sine(u)), { vig: 1.2 });
 }
 
 // ------------------------------------------------------------------ 4. a janela do palácio (plano aberto)
@@ -334,7 +344,7 @@ function scPortao(t) {
   const cx = lerp(1260, 640, pass);
   const rider = person({ x: -20, y: -90, s: 0.95, robe: JEU.robe, skin: JEU.skin, hair: JEU.hair, beard: true, mood: 'angry', gear: { helmet: 'isr' }, noShadow: true, look: pass > 0.95 ? 1 : 0 });
   s += chariot(cx, 1270, 0.95, { horse: true, flip: true, gallop: pass < 1 ? t * 10 : null, spin: -t * 5 * (pass < 1 ? 1 : 0), rider, fill: '#9A7B57' });
-  if (pass < 1) for (let i = 0; i < 5; i++) s += `<circle cx="${f1(cx + 220 + i * 60)}" cy="${f1(1250 - i * 6)}" r="${30 + i * 12}" fill="#E6CFAE" opacity="${f1((0.6 - i * 0.1) * 100) / 100}" ${st(3)}/>`;
+  if (pass < 1) for (let i = 0; i < 5; i++) s += puff(cx + 230 + i * 60, 1245 - i * 6, 34 + i * 12, (0.7 - i * 0.12) * (1 - pass * 0.6), t, i);
   return out(cam(s, 640, 800, 1.0 + 0.04 * prog(t, a0, seg(4))));
 }
 // close dela na janela: "Como vai, assassino?"
@@ -361,8 +371,8 @@ function jeuClose(t, o) {
 }
 function scJeu(t) {
   const [q1, q2] = SEGS[5][3];
-  const grita = t > q2[0] + 0.55;
-  const tk = grita ? talk(t, q2[0] + 0.5, SEGS[6][1] + 0.1) : 0;
+  const grita = t > wordTime(5, 'gritou') - 0.08;
+  const tk = grita ? talk(t, wordTime(5, 'gritou') - 0.1, SEGS[6][1] + 0.1) : 0;
   const s = jeuClose(t, { look: -0.4, lookY: -1, mouth: grita ? 'shout' : 'flat', talk: tk, brow: grita ? [[1, 0], [1, 0]] : [[0.4, 0], [-0.5, 0.8]], blink: blink(t, 1) && !grita });
   // braço erguido quando grita
   let arm = '';
@@ -407,7 +417,7 @@ function scJogaram(t) {
   s += `<clipPath id="jzwj"><path d="${d}"/></clipPath><g clip-path="url(#jzwj)">${g_(540 + shake, 830, 1.9, inner)}</g><path d="${d}" fill="none" stroke="${OL}" stroke-width="12"/>`;
   // as mãos dos funcionários entrando pelos lados
   const h = E.out(prog(t, seg(9) - 0.1, seg(9) + 0.25));
-  if (h > 0) s += [[-1, 120], [1, 960]].map(([sd, x0]) => { const x = x0 - sd * 160 * h; return `<line x1="${x0 + sd * 200}" y1="1140" x2="${f1(x)}" y2="1110" stroke="${OL}" stroke-width="86" stroke-linecap="round"/><line x1="${x0 + sd * 200}" y1="1140" x2="${f1(x)}" y2="1110" stroke="#B5A399" stroke-width="72" stroke-linecap="round"/><circle cx="${f1(x)}" cy="1110" r="40" fill="#A86B3C" ${st(6)}/>`; }).join('');
+  if (h > 0) s += armTo(-40, 1420, lerp(60, 330, h), lerp(1400, 1150, h), '#B5A399', '#A86B3C', { w: 80, bend: -0.25 }) + armTo(1120, 1420, lerp(1020, 750, h), lerp(1400, 1150, h), '#9C8268', '#8D5524', { w: 80, bend: 0.25 });
   s += `<rect x="140" y="1220" width="800" height="60" rx="12" fill="#C9B194" ${st(8)}/>`;
   // a coroa cai em câmera lenta e a cena corta para preto
   const f = prog(t, tJ, tJ + 0.6);
@@ -429,7 +439,7 @@ function scPatio(t) {
   const tl = (x, seed, flip) => person({ ...man(seed), x, y: 1200, s: 1.3, mood: 'sad', look: flip ? -0.6 : 0.6, armR: flip ? 14 : 150, noShadow: true, flip });
   s += `<circle cx="300" cy="960" r="230" fill="url(#jzGlow)" opacity="${f1((0.55 + 0.1 * Math.sin(t * 13)) * 100) / 100}"/>`;
   s += tl(230, 610, false) + tl(890, 611, true);
-  s += `<line x1="300" y1="1000" x2="300" y2="880" stroke="${OL}" stroke-width="12" stroke-linecap="round"/>` + `<path d="M 300 870 C 280 840 300 810 300 ${f1(780 + Math.sin(t * 15) * 8)} C 316 820 324 850 300 870 Z" fill="#FFB43C" ${st(4)}/>`;
+  { const hx = 230 + (34 + 86 * Math.sin(150 * Math.PI / 180)) * 1.3, hy = 1200 + (-154 + 86 * Math.cos(150 * Math.PI / 180)) * 1.3; s += `<line x1="${f1(hx)}" y1="${f1(hy + 70)}" x2="${f1(hx)}" y2="${f1(hy - 70)}" stroke="${OL}" stroke-width="16" stroke-linecap="round"/><line x1="${f1(hx)}" y1="${f1(hy + 70)}" x2="${f1(hx)}" y2="${f1(hy - 70)}" stroke="${C.wood}" stroke-width="8" stroke-linecap="round"/><circle cx="${f1(hx)}" cy="${f1(hy)}" r="14" fill="#E0AC69" ${st(4)}/><path d="M ${f1(hx)} ${f1(hy - 72)} C ${f1(hx - 22)} ${f1(hy - 100)} ${f1(hx)} ${f1(hy - 130)} ${f1(hx)} ${f1(hy - 160 + Math.sin(t * 15) * 8)} C ${f1(hx + 18)} ${f1(hy - 120)} ${f1(hx + 24)} ${f1(hy - 96)} ${f1(hx)} ${f1(hy - 72)} Z" fill="#FFB43C" ${st(4)}/>`; s = s.replace('cx="300" cy="960" r="230"', `cx="${f1(hx)}" cy="${f1(hy - 100)}" r="230"`); }
   // cães ao longe, saindo de cena
   s += dog(lerp(1000, 1250, u), 1010, 0.6, '#0E0A08', t) + dog(lerp(860, 1120, u), 1030, 0.5, '#0E0A08', t + 1);
   return out(cam(s, 560, 1050, 1.0 + 0.05 * E.sine(u)), { vig: 1.3 });
